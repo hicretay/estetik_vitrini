@@ -7,7 +7,7 @@ import 'package:ev_mobil/widgets/headerWidget.dart';
 import 'package:ev_mobil/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 
 class FavoritePage extends StatefulWidget {
   static const route = "/favoritePage";
@@ -228,12 +228,7 @@ class _FavoritePageState extends State<FavoritePage> {
         minWidth: 150.0, //Buton minimum genişliği
         onPressed: () {
           setState(() {
-            pushNewScreen(
-              context,
-              screen: MakeAppointmentPage(),
-              withNavBar: false,
-              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            );
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentPage()));
           });
           //Buton tıklandığında randevu al sayfasına yönlendirilecek
         },
