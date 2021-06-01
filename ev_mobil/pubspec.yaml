@@ -28,7 +28,6 @@ dependencies:
   flutter_svg: null
   intl: null
   line_icons: null
-  persistent_bottom_nav_bar: null
   table_calendar: null
   provider: null
 
