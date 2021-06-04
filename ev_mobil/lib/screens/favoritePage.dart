@@ -13,8 +13,7 @@ class FavoritePage extends StatefulWidget {
   static const route = "/favoritePage";
   final BuildContext homeScreenContext;
   FavoritePage(
-      {Key key, this.homeScreenContext, BuildContext favoriteScreenContext})
-      : super(key: key);
+      {Key key, this.homeScreenContext, BuildContext favoriteScreenContext}): super(key: key);
 
   @override
   _FavoritePageState createState() => _FavoritePageState(homeScreenContext);
@@ -39,7 +38,7 @@ class _FavoritePageState extends State<FavoritePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(defaultPadding),
-                //--------------------Header Kısmı -----------------------------
+                //-------------------- Header Kısmı -----------------------------
                 child: HeaderWidget(
                   primaryIcon: Icon(
                     // birincil iconu geri tuşu

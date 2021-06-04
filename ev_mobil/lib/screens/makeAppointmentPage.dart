@@ -21,9 +21,9 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
       child: Scaffold(
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(
-              left: defaultPadding,
-              right: defaultPadding,
-              bottom: defaultPadding),
+            left: defaultPadding,
+            right: defaultPadding,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -134,9 +134,6 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
                         calendarSelected
                             ? MakeReservationWidget()
                             : ReservationCalendarWidget(),
-                        SizedBox(
-                          height: minSpace,
-                        ),
                       ],
                     ),
                   ),

@@ -14,7 +14,6 @@ class ReservationCalendarWidget extends StatefulWidget {
 }
 
 class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
-  
   var gridChildren = <Widget>[
     GridViewChildWidget(
       time: "08.00",
@@ -80,32 +79,35 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-              right: defaultPadding, left: defaultPadding),
-          child: TableCalendarWidget(),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: defaultPadding, left: defaultPadding),
+              child: TableCalendarWidget(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: defaultPadding, right: defaultPadding),
+              child: Divider(
+                color: primaryColor,
+                height: 2,
+                thickness: 1.5,
+              ),
+            ),
+            SizedBox(height: minSpace),
+            GridView.count(
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 5,
+              childAspectRatio: (1 / .4),
+              shrinkWrap: true,
+              children: gridChildren,
+            ),
+          ],
         ),
-        Padding(
-          padding:
-              const EdgeInsets.only(left: defaultPadding,right: defaultPadding),
-          child: Divider(
-            color: primaryColor,
-            height: 2,
-            thickness: 1.5,
-          ),
-        ),
-        SizedBox(height: minSpace),
-        GridView.count(
-          scrollDirection: Axis.vertical,
-          crossAxisCount: 5,
-          childAspectRatio: (1 / .4),
-          shrinkWrap: true,
-          children: gridChildren,
-        ),
-      ],
+      ),
     );
   }
 }
-

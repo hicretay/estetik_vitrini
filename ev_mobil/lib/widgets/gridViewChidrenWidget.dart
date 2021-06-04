@@ -14,23 +14,25 @@ class GridViewChildWidget extends StatefulWidget {
 }
 
 class _GridViewChildWidgetState extends State<GridViewChildWidget> {
-  Map<String, bool> pressed = {"variable": false};
+  //Map<String, bool> pressed = {"variable": false};
+  bool isPressed = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: pressed.values.first ? secondaryColor : Colors.white,
+      color: isPressed ? secondaryColor : Colors.white,
       child: TextButton(
         child: Text(
           widget.time,
           style: TextStyle(
-            color: pressed.values.first ? Colors.white : primaryColor,
+            color: isPressed ? Colors.white : primaryColor,
           ),
         ),
         onPressed: () {
-          setState(() {});
+          setState(() {
+            isPressed = !isPressed;
+          });
           //butona basıldığında değeri günceller
-          pressed.updateAll((key, value) => !value);
         },
       ),
     );
