@@ -3,10 +3,14 @@ import 'package:ev_mobil/screens/homePage.dart';
 import 'package:ev_mobil/screens/locationPage.dart';
 import 'package:ev_mobil/screens/reservationPage.dart';
 import 'package:ev_mobil/screens/settingsPage.dart';
+import 'package:ev_mobil/screens/splashScreen.dart';
 import 'package:ev_mobil/settings/root.dart';
 import 'package:ev_mobil/settings/screenProviderModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+
+import 'consts.dart';
 
 const HOME_PAGE = 0;
 const FAVORITE_PAGE = 1;
@@ -24,6 +28,21 @@ class NavigationProvider extends ChangeNotifier {
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case SplashPage.route:
+        return MaterialPageRoute(builder: (_) => SplashPage());
+
+      case LocationPage.route:
+        return MaterialPageRoute(builder: (_) => LocationPage());
+
+      case FavoritePage.route:
+        return MaterialPageRoute(builder: (_) => FavoritePage());
+
+      case ReservationPage.route:
+        return MaterialPageRoute(builder: (_) => ReservationPage());
+
+      case SettingsPage.route:
+        return MaterialPageRoute(builder: (_) => SettingsPage());
+
       case HomePage.route:
         return MaterialPageRoute(builder: (_) => HomePage());
       default:
@@ -34,6 +53,12 @@ class NavigationProvider extends ChangeNotifier {
   final Map<int, Screen> _screens = {
     HOME_PAGE: Screen(
       child: HomePage(),
+      title: "",
+      icon: SvgPicture.asset("assets/icons/ev.svg"),
+      activeIcon: CircleAvatar(
+              backgroundColor: secondaryColor,
+              child: SvgPicture.asset("assets/icons/ev.svg"),
+            ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (settings) {
@@ -44,6 +69,12 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     FAVORITE_PAGE: Screen(
+      icon: SvgPicture.asset("assets/icons/kalp.svg"),
+      title: "",
+      activeIcon: CircleAvatar(
+              backgroundColor: secondaryColor,
+              child: SvgPicture.asset("assets/icons/kalp.svg"),
+            ),
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -55,6 +86,12 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     RESERVATION_PAGE: Screen(
+      icon: SvgPicture.asset("assets/icons/takvim.svg"),
+      title: "",
+      activeIcon: CircleAvatar(
+              backgroundColor: secondaryColor,
+              child: SvgPicture.asset("assets/icons/takvim.svg"),
+            ),
       child: ReservationPage(),
       initialRoute: ReservationPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -66,6 +103,12 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     LOCATION_PAGE: Screen(
+      icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
+      title: "",
+      activeIcon: CircleAvatar(
+              backgroundColor: secondaryColor,
+              child: SvgPicture.asset("assets/icons/haritanoktası.svg"),
+            ),
       child: LocationPage(),
       initialRoute: LocationPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -77,6 +120,12 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     SETTINGS_PAGE: Screen(
+      icon: SvgPicture.asset("assets/icons/ayarlar.svg"),
+      title: "",
+      activeIcon: CircleAvatar(
+              backgroundColor: secondaryColor,
+              child: SvgPicture.asset("assets/icons/ayarlar.svg"),
+            ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
       navigatorState: GlobalKey<NavigatorState>(),

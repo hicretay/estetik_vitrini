@@ -14,11 +14,14 @@ void main() {
 class App extends StatelessWidget {
   final ThemeData theme =
       new ThemeData(fontFamily: "futura_medium_bt").copyWith();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(
+          create: (_) => NavigationProvider(),
+        ),
       ],
       child: Builder(
         builder: (context) {
@@ -26,6 +29,8 @@ class App extends StatelessWidget {
             theme: theme,
             onGenerateRoute: NavigationProvider.of(context).onGenerateRoute,
             debugShowCheckedModeBanner: false,
+            initialRoute:"/splashPage",
+            
           );
         },
       ),

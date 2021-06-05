@@ -1,9 +1,6 @@
 import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-
-import 'consts.dart';
 
 class Root extends StatelessWidget {
   static const route = '/';
@@ -13,49 +10,16 @@ class Root extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<NavigationProvider>(
       builder: (context, provider, child) {
-        final bottomNavigationBarItems = [
-          //------------------Bottom Bar itemları görünümleri----------------
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/ev.svg"),
-            label: "",
-            activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/ev.svg"),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/kalp.svg"),
-            label: "",
-            activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/kalp.svg"),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/takvim.svg"),
-            label: "",
-            activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/takvim.svg"),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
-            label: "",
-            activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/haritanoktası.svg"),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icons/ayarlar.svg"),
-            label: "",
-            activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/ayarlar.svg"),
-            ),
-          ),
-        ];
+        //------------------Bottom Bar itemları görünümleri----------------
+        final bottomNavigationBarItems = provider.screens
+            .map(
+              (screen) => BottomNavigationBarItem(
+                icon: screen.icon,
+                activeIcon: screen.activeIcon,
+                label: screen.title,
+              ),
+            )
+            .toList();
         //------------------------------------------------------------
 
         // Her ekran için Navigatorı başlatır
