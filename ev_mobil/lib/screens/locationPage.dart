@@ -1,6 +1,7 @@
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
 import 'package:ev_mobil/widgets/headerWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../settings/consts.dart';
 
@@ -38,11 +39,8 @@ class _LocationPageState extends State<LocationPage> {
                   color: primaryColor,
                 ),
                 onPressedPrimary: () {}, // arama iconu olayı
-                secondaryIcon: Icon(
-                  // sağda yer alan icon: konum
-                  Icons.location_on_rounded,
-                  color: primaryColor,
-                ),
+                secondaryIcon:
+                    SvgPicture.asset("assets/icons/haritanoktası.svg"),
                 onPressedSecondary: () {}, //konum iconu olayı
               ),
               //---------------------------------------------------
