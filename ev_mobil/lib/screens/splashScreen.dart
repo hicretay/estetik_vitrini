@@ -17,8 +17,7 @@ class _SplashPageState extends State<SplashPage> {
       setState(() {
         Navigator.of(context).pop();
         Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (context) => Root()), (route) => false);
-        print("time ok");
+            MaterialPageRoute(builder: (context) => Root()), (route) => false);      
       });
     });
   }

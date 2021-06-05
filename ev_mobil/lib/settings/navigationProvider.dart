@@ -30,21 +30,6 @@ class NavigationProvider extends ChangeNotifier {
     switch (settings.name) {
       case SplashPage.route:
         return MaterialPageRoute(builder: (_) => SplashPage());
-
-      case LocationPage.route:
-        return MaterialPageRoute(builder: (_) => LocationPage());
-
-      case FavoritePage.route:
-        return MaterialPageRoute(builder: (_) => FavoritePage());
-
-      case ReservationPage.route:
-        return MaterialPageRoute(builder: (_) => ReservationPage());
-
-      case SettingsPage.route:
-        return MaterialPageRoute(builder: (_) => SettingsPage());
-
-      case HomePage.route:
-        return MaterialPageRoute(builder: (_) => HomePage());
       default:
         return MaterialPageRoute(builder: (_) => Root());
     }

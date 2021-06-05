@@ -17,7 +17,6 @@ dependencies:
   intl: null
   line_icons: null
   provider: null
-  splashscreen: ^1.3.5
   table_calendar: null
 
 dev_dependencies:

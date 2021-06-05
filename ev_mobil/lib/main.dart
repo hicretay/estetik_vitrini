@@ -1,3 +1,4 @@
+import 'package:ev_mobil/screens/splashScreen.dart';
 import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -29,8 +30,7 @@ class App extends StatelessWidget {
             theme: theme,
             onGenerateRoute: NavigationProvider.of(context).onGenerateRoute,
             debugShowCheckedModeBanner: false,
-            initialRoute:"/splashPage",
-            
+            home: SplashPage(),
           );
         },
       ),
