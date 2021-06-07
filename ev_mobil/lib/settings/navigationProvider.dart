@@ -27,12 +27,10 @@ class NavigationProvider extends ChangeNotifier {
   int get currentTabIndex => _currentScreenIndex;
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case SplashPage.route:
-        return MaterialPageRoute(builder: (_) => SplashPage());
-      default:
-        return MaterialPageRoute(builder: (_) => Root());
-    }
+    if (settings.name == SplashPage.route) {
+      return MaterialPageRoute(builder: (_) => SplashPage());
+    } else
+      return MaterialPageRoute(builder: (_) => Root());
   }
 
   final Map<int, Screen> _screens = {
@@ -41,9 +39,9 @@ class NavigationProvider extends ChangeNotifier {
       title: "",
       icon: SvgPicture.asset("assets/icons/ev.svg"),
       activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/ev.svg"),
-            ),
+        backgroundColor: secondaryColor,
+        child: SvgPicture.asset("assets/icons/ev.svg"),
+      ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (settings) {
@@ -57,9 +55,9 @@ class NavigationProvider extends ChangeNotifier {
       icon: SvgPicture.asset("assets/icons/kalp.svg"),
       title: "",
       activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/kalp.svg"),
-            ),
+        backgroundColor: secondaryColor,
+        child: SvgPicture.asset("assets/icons/kalp.svg"),
+      ),
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -74,9 +72,9 @@ class NavigationProvider extends ChangeNotifier {
       icon: SvgPicture.asset("assets/icons/takvim.svg"),
       title: "",
       activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/takvim.svg"),
-            ),
+        backgroundColor: secondaryColor,
+        child: SvgPicture.asset("assets/icons/takvim.svg"),
+      ),
       child: ReservationPage(),
       initialRoute: ReservationPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -91,9 +89,9 @@ class NavigationProvider extends ChangeNotifier {
       icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
       title: "",
       activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/haritanoktası.svg"),
-            ),
+        backgroundColor: secondaryColor,
+        child: SvgPicture.asset("assets/icons/haritanoktası.svg"),
+      ),
       child: LocationPage(),
       initialRoute: LocationPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -108,9 +106,9 @@ class NavigationProvider extends ChangeNotifier {
       icon: SvgPicture.asset("assets/icons/ayarlar.svg"),
       title: "",
       activeIcon: CircleAvatar(
-              backgroundColor: secondaryColor,
-              child: SvgPicture.asset("assets/icons/ayarlar.svg"),
-            ),
+        backgroundColor: secondaryColor,
+        child: SvgPicture.asset("assets/icons/ayarlar.svg"),
+      ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
