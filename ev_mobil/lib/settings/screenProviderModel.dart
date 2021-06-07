@@ -16,7 +16,7 @@ class Screen {
   //BottomNavigationBar'da gösterilecek olan ikon
   final Widget icon;
 
-  //Aktfi icon tasarımı
+  //Aktif icon tasarımı
   final Widget activeIcon;
 
   //Ekranların navigator state'i

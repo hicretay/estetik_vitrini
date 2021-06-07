@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Root extends StatelessWidget {
-  static const route = '/';
-  //Uygulama için navigasyon başlangıc noktası
+  static const route = '/rootPage';
+  //Uygulama için bottombar başlangıc noktası
 
   @override
   Widget build(BuildContext context) {

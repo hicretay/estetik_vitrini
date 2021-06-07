@@ -3,7 +3,7 @@ import 'package:ev_mobil/screens/homePage.dart';
 import 'package:ev_mobil/screens/locationPage.dart';
 import 'package:ev_mobil/screens/reservationPage.dart';
 import 'package:ev_mobil/screens/settingsPage.dart';
-import 'package:ev_mobil/screens/splashScreen.dart';
+import 'package:ev_mobil/screens/splashPage.dart';
 import 'package:ev_mobil/settings/root.dart';
 import 'package:ev_mobil/settings/screenProviderModel.dart';
 import 'package:flutter/material.dart';

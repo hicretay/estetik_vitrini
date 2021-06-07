@@ -82,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                     imgNumber: 3,
                     nameNumber: 3,
                   ),
+                  SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
                 ],
               ),
             ),

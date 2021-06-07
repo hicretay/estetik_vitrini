@@ -1,4 +1,4 @@
-import 'package:ev_mobil/screens/splashScreen.dart';
+import 'package:ev_mobil/screens/splashPage.dart';
 import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
