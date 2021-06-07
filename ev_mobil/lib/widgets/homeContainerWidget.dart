@@ -48,7 +48,8 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
               Expanded(
                 //resim containerının yalnızca sağ ve sol boşluk veren paddingi
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(maxSpace, 0, maxSpace, 0),
+                  padding:
+                      const EdgeInsets.only(left: maxSpace, right: maxSpace),
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: Container(
                     width: double.infinity, //genişlik: container genişliği

@@ -23,10 +23,10 @@ class _HomePageState extends State<HomePage> {
         color: Colors.white,
         child: Column(
           children: [
-            //-------------------Header----------------------
+            //-----------------------------Header-------------------------------
             // Bir arama Textfield'ı içerir
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
               child: TextField(
                 controller: teSearch, //search TextEditingControllerı
                 cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            //------------------------------------------------
+            //------------------------------------------------------------------
 
             //----------------Story Paneli---------------
             //StoryWidget kullanıldı
@@ -82,46 +82,41 @@ class _HomePageState extends State<HomePage> {
                     imgNumber: 3,
                     nameNumber: 3,
                   ),
-                  SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
+                  SizedBox(
+                      width: defaultPadding), //Son storynin kırpılasını önler
                 ],
               ),
             ),
-            //-------------------------------------------
-
+            //-------------------------------------------         
+            SizedBox(height: defaultPadding),  //Storyler - Postlar arası boşluk
             //------------------------------------Anasayfa Postları----------------------------------------
             //HomeContainerWidget ile oluşturuldu
             Flexible(
-              child: ListView(
-                children: [
-                  Column(
-                    children: [
-                      HomeContainerWidget(
-                          iconNumber: 0,
-                          imgNumber: 0,
-                          cardText: "Kendin için bir\nşeyler yap...",
-                          onPressed: () {
-                            //"Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
-                            NavigationProvider.of(context)
-                                .setTab(FAVORITE_PAGE);
-                          }),
-
-                      HomeContainerWidget(
-                        iconNumber: 1,
-                        imgNumber: 2,
-                        cardText: "",
-                        onPressed: () {
-                          // "Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
-                          setState(() {
-                            NavigationProvider.of(context)
-                                .setTab(FAVORITE_PAGE);
-                          });
-                        },
-                      ),
-                      //HomeContainerWidget(),
-                    ],
-                  ),
-                  //-------------------------------------------------------------------------------------------------
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    HomeContainerWidget(
+                      iconNumber: 0,
+                      imgNumber: 0,
+                      cardText: "Kendin için bir\nşeyler yap...",
+                      onPressed: () {
+                        //"Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
+                        NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                      },
+                    ),
+                    HomeContainerWidget(
+                      iconNumber: 1,
+                      imgNumber: 2,
+                      cardText: "",
+                      onPressed: () {
+                        // "Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
+                        NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                      },
+                    ),
+                    //HomeContainerWidget(),
+                  ],
+                ),
+                //-------------------------------------------------------------------------------------------------
               ),
             ),
           ],
