@@ -1,7 +1,7 @@
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:flutter/material.dart';
 
-class InformationRowWidget extends StatelessWidget {
+class InformationRowWidget extends StatefulWidget {
   final String operationName;
   final double width;
   final double height;
@@ -12,6 +12,11 @@ class InformationRowWidget extends StatelessWidget {
       {Key key, this.operationName, this.width, this.height, this.child, this.containerColor});
 
   @override
+  _InformationRowWidgetState createState() => _InformationRowWidgetState();
+}
+
+class _InformationRowWidgetState extends State<InformationRowWidget> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -19,20 +24,20 @@ class InformationRowWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "$operationName:",
+              "${widget.operationName}:",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Container(
-              width: width,
-              height: height,
+              width: widget.width,
+              height: widget.height,
               decoration: BoxDecoration(
-                color: containerColor,
+                color: widget.containerColor,
                 borderRadius: BorderRadius.all(
                   Radius.circular(5.0),
                 ),
               ),
               child: Center(
-                child: child,
+                child: widget.child,
               ),
             ),
           ],

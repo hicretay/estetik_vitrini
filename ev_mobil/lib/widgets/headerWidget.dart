@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../settings/consts.dart';
 
 //Sayfa başlığında yer alan circle içindeki icon, "Estetik Vitrini" texti ve bir child içerir.
-class HeaderWidget extends StatelessWidget {
+class HeaderWidget extends StatefulWidget {
   final Widget primaryIcon; //Circle içinde yer alacak ikon
   final Widget secondaryIcon;
   final VoidCallback
@@ -18,6 +18,11 @@ class HeaderWidget extends StatelessWidget {
       this.onPressedSecondary});
 
   @override
+  _HeaderWidgetState createState() => _HeaderWidgetState();
+}
+
+class _HeaderWidgetState extends State<HeaderWidget> {
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,8 +35,8 @@ class HeaderWidget extends StatelessWidget {
               backgroundColor: Colors.white,
               child: IconButton(
                 iconSize: iconSize,
-                icon: primaryIcon,
-                onPressed: onPressedPrimary,
+                icon: widget.primaryIcon,
+                onPressed: widget.onPressedPrimary,
               ),
             ),
             SizedBox(
@@ -52,8 +57,8 @@ class HeaderWidget extends StatelessWidget {
             backgroundColor: Colors.white,
             child: IconButton(
               iconSize: iconSize,
-              icon: secondaryIcon,
-              onPressed: onPressedSecondary,
+              icon: widget.secondaryIcon,
+              onPressed: widget.onPressedSecondary,
             ),
           ),
         ),

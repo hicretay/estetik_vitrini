@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../settings/consts.dart';
 
-class StoryWidget extends StatelessWidget {
+class StoryWidget extends StatefulWidget {
   //homePage sayfasında story görünümü oluşturulmasında kullanıldı
   final int
       imgNumber; //stories listesinden indexe göre alınacak resim(arkada kalan)
@@ -12,6 +12,11 @@ class StoryWidget extends StatelessWidget {
   const StoryWidget({Key key, this.imgNumber, this.iconNumber, this.nameNumber})
       : super(key: key);
 
+  @override
+  _StoryWidgetState createState() => _StoryWidgetState();
+}
+
+class _StoryWidgetState extends State<StoryWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +36,7 @@ class StoryWidget extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover, // resim containerı kaplasın
                   image: NetworkImage(
-                    stories[imgNumber]["img"], //image indexi
+                    stories[widget.imgNumber]["img"], //image indexi
                   ),
                 ),
               ),
@@ -70,7 +75,7 @@ class StoryWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: NetworkImage(
-                          stories[iconNumber]["icon"],
+                          stories[widget.iconNumber]["icon"],
                         ),
                       ),
                     ),
@@ -84,7 +89,7 @@ class StoryWidget extends StatelessWidget {
         SizedBox(
             height: minSpace), //story resmi - story adı arası boşluğu sağlar
         Text(
-          stories[nameNumber]["name"], // Story nin ait olduğu firma adı
+          stories[widget.nameNumber]["name"], // Story nin ait olduğu firma adı
         ),
         SizedBox(width: 110), //storyler arası boşluğu sağlar
       ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../settings/consts.dart';
 
-class LeadingRowWidget extends StatelessWidget {
+class LeadingRowWidget extends StatefulWidget {
   //homePage ve favoritePage sayfalarında kullanıldı
   final int iconNumber; // icon resmi indexi
   final VoidCallback onPressed; //more iconu olayı
@@ -10,6 +10,11 @@ class LeadingRowWidget extends StatelessWidget {
   const LeadingRowWidget({Key key, this.iconNumber, this.onPressed})
       : super(key: key);
 
+  @override
+  _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
+}
+
+class _LeadingRowWidgetState extends State<LeadingRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,7 +31,7 @@ class LeadingRowWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: NetworkImage(
-                    stories[iconNumber]
+                    stories[widget.iconNumber]
                         ["icon"], //stories listesinden icon indexi çekme
                   ),
                 ),
@@ -46,7 +51,7 @@ class LeadingRowWidget extends StatelessWidget {
           icon: Icon(
             Icons.more_horiz,
           ),
-          onPressed: onPressed, // olayı parametre alındı
+          onPressed: widget.onPressed, // olayı parametre alındı
         ),
       ],
     );
