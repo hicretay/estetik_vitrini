@@ -79,35 +79,50 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  right: defaultPadding, left: defaultPadding),
-              child: TableCalendarWidget(),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: defaultPadding, right: defaultPadding),
-              child: Divider(
-                color: primaryColor,
-                height: 2,
-                thickness: 1.5,
-              ),
-            ),
-            SizedBox(height: minSpace),
-            GridView.count(
-              scrollDirection: Axis.vertical,
-              crossAxisCount: 5,
-              childAspectRatio: (1 / .4),
-              shrinkWrap: true,
-              children: gridChildren,
-            ),
-          ],
+    return Column(
+      children: [
+        //-------------------------Takvim sayfası-------------------------------
+        Padding(
+          padding: const EdgeInsets.only(
+              right: defaultPadding, left: defaultPadding),
+          child: TableCalendarWidget(),
         ),
-      ),
+        //----------------------------------------------------------------------
+        //--------------------Takvim - Saatler arası çizgi----------------------
+        Padding(
+          padding: const EdgeInsets.only(
+              left: defaultPadding, right: defaultPadding),
+          child: Divider(
+            color: primaryColor,
+            height: 1,
+            thickness: 1.5,
+          ),
+        ),
+        //----------------------------------------------------------------------
+        SizedBox(height: minSpace), //Saat uyarı metni - takvim arası boşluk
+
+        //------------------------Saat uyarı metni------------------------------
+        Padding(
+          padding: const EdgeInsets.only(left: defaultPadding),
+          child: Align(
+              alignment: Alignment.topLeft,
+              child: Text("*Lütfen bir saat seçiniz")),
+        ),
+        SizedBox(height: minSpace), // Saat uyarı metni - saatler arası boşluk
+        //----------------------------------------------------------------------
+        //----------------------Saat Widgetlarının Tablosu----------------------
+        GridView.custom(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: (1 / .4), //saatler arası hizalama
+            crossAxisCount: 5, // satırdaki widget sayısı
+          ),
+          childrenDelegate: SliverChildListDelegate(gridChildren),
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: EdgeInsets.all(0.1),
+          scrollDirection: Axis.vertical,
+        ),
+      ],
     );
   }
 }

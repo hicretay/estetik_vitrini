@@ -86,11 +86,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             //-------------------------------------------
-            // SizedBox(height: 1 // Storyler ile postlar arasındaki boşluk
-            //     ),
+
             //------------------------------------Anasayfa Postları----------------------------------------
             //HomeContainerWidget ile oluşturuldu
-            Expanded(
+            Flexible(
               child: ListView(
                 children: [
                   Column(
@@ -100,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                           imgNumber: 0,
                           cardText: "Kendin için bir\nşeyler yap...",
                           onPressed: () {
-                            //"Detaylı Bilgi İçin" butouna basıldığında Favori Sayfalara yönlendirecek
+                            //"Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
                             NavigationProvider.of(context)
                                 .setTab(FAVORITE_PAGE);
                           }),
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                         imgNumber: 2,
                         cardText: "",
                         onPressed: () {
-                          // "Detaylı Bilgi İçin" butouna basıldığında Favori Sayfalara yönlendirecek
+                          // "Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
                           setState(() {
                             NavigationProvider.of(context)
                                 .setTab(FAVORITE_PAGE);

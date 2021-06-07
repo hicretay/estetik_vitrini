@@ -31,8 +31,8 @@ class _GridViewChildWidgetState extends State<GridViewChildWidget> {
         onPressed: () {
           setState(() {
             isPressed = !isPressed;
+            //butona basıldığında değeri günceller
           });
-          //butona basıldığında değeri günceller
         },
       ),
     );
