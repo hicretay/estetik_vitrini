@@ -88,6 +88,7 @@ class _LocationPageState extends State<LocationPage> {
                     top: Radius.circular(maxSpace),
                   ),
                 ),
+                //-----------------------Itamların Listelenmesi----------------------------
                 child: ListView.separated(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical, //dikeyde kaydırılabilir

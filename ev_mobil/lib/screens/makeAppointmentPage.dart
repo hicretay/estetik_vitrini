@@ -22,6 +22,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
         padding: const EdgeInsets.only(
           left: defaultPadding,
           right: defaultPadding,
+          bottom: minSpace,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

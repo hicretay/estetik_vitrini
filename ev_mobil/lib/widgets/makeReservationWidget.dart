@@ -116,7 +116,8 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
             height: 100,
             operationName: "Özel Not",
             child: TextField(
-              controller: teName,
+              keyboardType: TextInputType.multiline,
+              controller: teNote,
               cursorColor: primaryColor,
               style: TextStyle(color: primaryColor, fontSize: 20),
               decoration: InputDecoration(

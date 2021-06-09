@@ -23,6 +23,7 @@ class Screen {
   final GlobalKey<NavigatorState> navigatorState;
 
   Screen({
+    //@required verilmesi zorunlu parametreler
     @required this.activeIcon,
     @required this.title,
     @required this.icon,

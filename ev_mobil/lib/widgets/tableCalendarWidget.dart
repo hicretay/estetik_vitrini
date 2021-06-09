@@ -10,17 +10,15 @@ class TableCalendarWidget extends StatefulWidget {
 }
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
-
-    DateTime _selectedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   Map<DateTime, List<Event>> selectedEvents;
-
-  
 
   List<Event> _getEventsForDay(DateTime date) {
     return selectedEvents[date] ?? [];
   }
-@override
+
+  @override
   void initState() {
     selectedEvents = {};
     super.initState();

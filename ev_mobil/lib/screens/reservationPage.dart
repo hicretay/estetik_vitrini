@@ -2,10 +2,10 @@ import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
 import 'package:ev_mobil/widgets/headerWidget.dart';
+import 'package:ev_mobil/widgets/reservationResultWidget.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
 
 class ReservationPage extends StatefulWidget {
   static const route = "reservationPage";
@@ -71,73 +71,7 @@ class _ReservationPageState extends State<ReservationPage> {
                         padding: const EdgeInsets.all(defaultPadding),
                         child: TableCalendarWidget(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            DateFormat.yMMMEd('tr_TR').format(
-                              DateTime.now(),
-                            ),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        color: lightWhite,
-                        width: double.infinity,
-                        //height: 100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(25),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          "Epilady Güzellik Salonu",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          "Cilt Bakımı",
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child: Text(
-                                          "10:00",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.clear,
-                                        size: 18,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                      ResevationResultWidget(),
                     ],
                   ),
                 ),
@@ -149,3 +83,5 @@ class _ReservationPageState extends State<ReservationPage> {
     );
   }
 }
+
+

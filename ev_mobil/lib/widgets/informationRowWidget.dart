@@ -33,7 +33,7 @@ class _InformationRowWidgetState extends State<InformationRowWidget> {
               decoration: BoxDecoration(
                 color: widget.containerColor,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(5.0),
+                  Radius.circular(minSpace),
                 ),
               ),
               child: Center(

@@ -1,7 +1,7 @@
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
-import 'gridViewChidrenWidget.dart';
+import 'gridViewChildWidget.dart';
 
 class ReservationCalendarWidget extends StatefulWidget {
   const ReservationCalendarWidget({
@@ -108,8 +108,8 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
               alignment: Alignment.topLeft,
               child: Text("*Lütfen bir saat seçiniz")),
         ),
-        SizedBox(height: minSpace), // Saat uyarı metni - saatler arası boşluk
         //----------------------------------------------------------------------
+
         //----------------------Saat Widgetlarının Tablosu----------------------
         GridView.custom(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
