@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ResevationResultWidget extends StatelessWidget {
+  final String companyName;
+  final String operation;
+  
   const ResevationResultWidget({
-    Key key,
+    Key key, this.companyName, this.operation,
   }) : super(key: key);
 
   @override
@@ -34,21 +37,18 @@ class ResevationResultWidget extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Epilady Güzellik Salonu",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold),
+                          companyName,
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: minSpace),
                         Text(
-                          "Cilt Bakımı",
+                          operation,
                           style: TextStyle(fontSize: 18),
                           textAlign: TextAlign.left,
                         ),
@@ -79,6 +79,7 @@ class ResevationResultWidget extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: defaultPadding),
       ],
     );
   }

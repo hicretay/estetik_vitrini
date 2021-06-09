@@ -71,7 +71,12 @@ class _ReservationPageState extends State<ReservationPage> {
                         padding: const EdgeInsets.all(defaultPadding),
                         child: TableCalendarWidget(),
                       ),
-                      ResevationResultWidget(),
+                      ResevationResultWidget(
+                          companyName: "Epilady Güzellik Salonu",
+                          operation: "Cilt Bakımı"),
+                      ResevationResultWidget(
+                          companyName: "Estecool Güzellik Merkezi",
+                          operation: "Lazer Epilasyon"),
                     ],
                   ),
                 ),
@@ -83,5 +88,3 @@ class _ReservationPageState extends State<ReservationPage> {
     );
   }
 }
-
-
