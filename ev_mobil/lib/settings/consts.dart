@@ -19,7 +19,14 @@ const backGroundColor3 = [darkWhite, darkWhite];
 
 const leadingFont = "nouvelle_vague_final";
 const contentFont = "futura_medium_bt";
-//const textStyle = TextStyle(color: primaryColor);
+
+deviceHeight(BuildContext context)=>
+ MediaQuery.of(context).size.width;
+// Cihaz ekran yüksekliği
+
+deviceWidth(BuildContext context)=>
+ MediaQuery.of(context).size.width; 
+//Cihaz ekran genişliği
 
 const defaultPadding = 16.0;
 const cardCurved = 20.0;

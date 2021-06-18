@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage> {
                     size: 35,
                   ),
                   hintText: "Estetik Vitrini",
-                  hintStyle: TextStyle(
-                      color: primaryColor,
-                      fontFamily: leadingFont,
-                      fontSize: 35),
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(color: primaryColor, fontFamily: leadingFont),
                   focusColor: primaryColor,
                   hoverColor: primaryColor,
                   //border textField'ı çevreleyen yapı
@@ -87,8 +87,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            //-------------------------------------------         
-            SizedBox(height: defaultPadding),  //Storyler - Postlar arası boşluk
+            //-------------------------------------------
+            SizedBox(height: defaultPadding), //Storyler - Postlar arası boşluk
             //------------------------------------Anasayfa Postları----------------------------------------
             //HomeContainerWidget ile oluşturuldu
             Flexible(

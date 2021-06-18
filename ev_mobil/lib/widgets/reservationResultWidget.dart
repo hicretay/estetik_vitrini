@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 class ResevationResultWidget extends StatelessWidget {
   final String companyName;
   final String operation;
-  
+  final String time;
+
   const ResevationResultWidget({
-    Key key, this.companyName, this.operation,
+    Key key, this.companyName, this.operation, this.time,
   }) : super(key: key);
 
   @override
@@ -62,7 +63,7 @@ class ResevationResultWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.topRight,
                           child: Text(
-                            "10:00",
+                            time,
                             style: TextStyle(fontSize: 20),
                           ),
                         ),

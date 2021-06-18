@@ -96,7 +96,8 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                             borderRadius: BorderRadius.circular(minSpace),
                           ),
                           width: double.infinity, // genişlik: container kadar
-                          height: 40.0, //container yüksekliği: 40
+                          height: MediaQuery.of(context).size.width * 0.12,
+                          //container yüksekliği: 40
                           child: Row(
                             children: [
                               Expanded(
@@ -136,10 +137,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                   children: [
                                     Text(
                                       "Detaylı Bilgi İçin",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: primaryColor,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          .copyWith(color: primaryColor),
                                     ),
                                     SizedBox(
                                         width:

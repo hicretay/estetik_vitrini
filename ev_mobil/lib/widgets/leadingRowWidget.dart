@@ -38,16 +38,17 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
               ),
             ),
             //-----------------------------------------------------
-            SizedBox(width: 5),//başlık iconu - texti arası boşluk
+            SizedBox(width: 5), //başlık iconu - texti arası boşluk
 
             Text(
               //"Estecool Güzellik Merkezi" metni
               leading,
-              style: TextStyle(fontSize: 19),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),
-        IconButton(// daha fazla icon buttonu
+        IconButton(
+          // daha fazla icon buttonu
           icon: Icon(
             Icons.more_horiz,
           ),

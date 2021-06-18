@@ -48,11 +48,10 @@ class _ReservationPageState extends State<ReservationPage> {
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Randevularım",
-                  style: TextStyle(
-                    fontFamily: leadingFont,
-                    color: Colors.white,
-                    fontSize: 45,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline4
+                      .copyWith(color: white, fontFamily: leadingFont),
                 ),
               ),
             ),
@@ -72,11 +71,15 @@ class _ReservationPageState extends State<ReservationPage> {
                         child: TableCalendarWidget(),
                       ),
                       ResevationResultWidget(
-                          companyName: "Epilady Güzellik Salonu",
-                          operation: "Cilt Bakımı"),
+                        companyName: "Epilady Güzellik Salonu",
+                        operation: "Cilt Bakımı",
+                        time: "10:00",
+                      ),
                       ResevationResultWidget(
-                          companyName: "Estecool Güzellik Merkezi",
-                          operation: "Lazer Epilasyon"),
+                        companyName: "Estecool Güzellik Merkezi",
+                        operation: "Lazer Epilasyon",
+                        time: "16:30",
+                      ),
                     ],
                   ),
                 ),

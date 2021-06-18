@@ -54,11 +54,10 @@ class _LocationPageState extends State<LocationPage> {
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Favori\nBölgeler", //Büyük Başlık
-                      style: TextStyle(
-                        fontFamily: leadingFont,
-                        color: Colors.white,
-                        fontSize: 55,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline3
+                          .copyWith(color: white, fontFamily: leadingFont),
                       maxLines: 2,
                     ),
                   ),
@@ -66,10 +65,10 @@ class _LocationPageState extends State<LocationPage> {
                     alignment: Alignment.bottomLeft,
                     child: Text(
                       "Lütfen en az bir tane bölge seçiniz.", // Alt Başlık
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle1
+                          .copyWith(color: white),
                     ),
                   ),
                 ],
@@ -111,7 +110,7 @@ class _LocationPageState extends State<LocationPage> {
                         },
                         child: Container(
                           //locationların listeleneceği card genişliği
-                          height: 80,
+                          height: deviceHeight(context) * 0.2,
                           decoration: BoxDecoration(
                             // Container rengi gradient ile verildi
                             gradient: LinearGradient(

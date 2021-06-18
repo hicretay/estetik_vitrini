@@ -58,11 +58,10 @@ class _FavoritePageState extends State<FavoritePage> {
                 alignment: Alignment.topLeft, // başlık sola bitişik
                 child: Text(
                   "Favori\nSalonlar",
-                  style: TextStyle(
-                    fontFamily: leadingFont,
-                    color: Colors.white,
-                    fontSize: 55,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2
+                      .copyWith(color: white, fontFamily: leadingFont),
                 ),
               ),
             ),
@@ -100,69 +99,76 @@ class _FavoritePageState extends State<FavoritePage> {
                             child: SizedBox(
                               width:
                                   double.infinity, //genişlik: container kadar
-                              height: 250, //yükseklik: 250
+                              height: deviceHeight(context) * 0.6,
+                              //yükseklik
                               child: buildCarousel(), //Carousel fonksiyonu
                             ),
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          //-----------------Alt Header-----------------------
-                          Row(
+                      Center(
+                        child: Container(
+                          //width: deviceWidth(context) * 0.7,
+                          height: deviceHeight(context) * 0.15,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              CircleAvatar(
-                                //Beğeni butonunu kaplayan circleAvatar yapısı
-                                maxRadius: 22.5,
-                                backgroundColor: _checked
-                                    ? primaryColor
-                                    : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                child: IconButton(
-                                  iconSize: iconSize,
-                                  icon: Icon(
-                                    LineIcons.heart,
-                                    color: _checked
-                                        ? Colors.white //Seçili ise açık,
-                                        : primaryColor, //değilse koyu renk verildi
+                              //-----------------Alt Header-----------------------
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    //Beğeni butonunu kaplayan circleAvatar yapısı
+                                    maxRadius: 22.5,
+                                    backgroundColor: _checked
+                                        ? primaryColor
+                                        : lightWhite, // seçili ise koyu, değilse açık renk verildi
+                                    child: IconButton(
+                                      iconSize: iconSize,
+                                      icon: Icon(
+                                        LineIcons.heart,
+                                        color: _checked
+                                            ? Colors.white //Seçili ise açık,
+                                            : primaryColor, //değilse koyu renk verildi
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _checked =
+                                              !_checked; //tıklandığında bool değeri tersler
+                                          _checked
+                                              ? counter++
+                                              : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
+                                        });
+                                      },
+                                    ),
                                   ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _checked =
-                                          !_checked; //tıklandığında bool değeri tersler
-                                      _checked
-                                          ? counter++
-                                          : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                    });
-                                  },
-                                ),
+                                  IconButton(
+                                      // İletişim iconButton'ı
+                                      icon: Icon(
+                                        LineIcons.phone,
+                                        color: primaryColor,
+                                        size: iconSize,
+                                      ),
+                                      onPressed: () {}),
+                                  IconButton(
+                                      //Paylaşım iconButton'ı
+                                      icon: Icon(
+                                        Icons.share_outlined,
+                                        color: primaryColor,
+                                        size: iconSize,
+                                      ),
+                                      onPressed: () {}),
+                                ],
                               ),
-                              IconButton(
-                                  // İletişim iconButton'ı
-                                  icon: Icon(
-                                    LineIcons.phone,
-                                    color: primaryColor,
-                                    size: iconSize,
-                                  ),
-                                  onPressed: () {}),
-                              IconButton(
-                                  //Paylaşım iconButton'ı
-                                  icon: Icon(
-                                    Icons.share_outlined,
-                                    color: primaryColor,
-                                    size: iconSize,
-                                  ),
-                                  onPressed: () {}),
+                              buildReservationButton(), //Rezervasyon MaterialButton'ı
                             ],
                           ),
-                          buildReservationButton(), //Rezervasyon MaterialButton'ı
-                        ],
+                        ),
                       ),
                       SizedBox(
                           height:
                               maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
                       Padding(
-                        padding: const EdgeInsets.only(left: 35),
+                        padding: const EdgeInsets.only(left: 20),
                         child: Row(
                           children: [
                             Icon(
@@ -214,7 +220,7 @@ class _FavoritePageState extends State<FavoritePage> {
       color: primaryColor,
       borderRadius: BorderRadius.circular(30.0),
       child: MaterialButton(
-        minWidth: 150.0, //Buton minimum genişliği
+        minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
         onPressed: () {
           setState(() {
             Navigator.push(context,
@@ -227,10 +233,7 @@ class _FavoritePageState extends State<FavoritePage> {
             //-------------Buton Metni-------------
             Text(
               "Randevu Al",
-              style: TextStyle(
-                fontSize: 18,
-                color: lightWhite,
-              ),
+              style: Theme.of(context).textTheme.button.copyWith(color: white),
             ),
             //-------------------------------------
             SizedBox(width: 10), //butondaki Text ve icon arası boşluk
