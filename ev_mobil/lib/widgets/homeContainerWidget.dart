@@ -38,11 +38,14 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
             children: [
               //Yalnızca alt ve üst boşluk paddingi
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+                padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
                 //Leading Widgetı
-                child: LeadingRowWidget(
-                  iconNumber: widget.iconNumber, // icon resmi indexi
-                  onPressed: () {}, // more iconu olayı
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: LeadingRowWidget(
+                    iconNumber: widget.iconNumber, // icon resmi indexi
+                    onPressed: () {}, // more iconu olayı
+                  ),
                 ),
               ),
               Expanded(

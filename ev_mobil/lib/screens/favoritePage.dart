@@ -82,12 +82,9 @@ class _FavoritePageState extends State<FavoritePage> {
                       SizedBox(
                         height: defaultPadding,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: defaultPadding),
-                        child: LeadingRowWidget(
-                          //leading widgetı
-                          iconNumber: 0,
-                        ),
+                      LeadingRowWidget(
+                        //leading widgetı
+                        iconNumber: 0,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
@@ -106,63 +103,59 @@ class _FavoritePageState extends State<FavoritePage> {
                           ),
                         ),
                       ),
-                      Center(
-                        child: Container(
-                          //width: deviceWidth(context) * 0.7,
-                          height: deviceHeight(context) * 0.15,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          //-----------------Alt Header-----------------------
+                          Row(
                             children: [
-                              //-----------------Alt Header-----------------------
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    //Beğeni butonunu kaplayan circleAvatar yapısı
-                                    maxRadius: 22.5,
-                                    backgroundColor: _checked
-                                        ? primaryColor
-                                        : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                    child: IconButton(
-                                      iconSize: iconSize,
-                                      icon: Icon(
-                                        LineIcons.heart,
-                                        color: _checked
-                                            ? Colors.white //Seçili ise açık,
-                                            : primaryColor, //değilse koyu renk verildi
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          _checked =
-                                              !_checked; //tıklandığında bool değeri tersler
-                                          _checked
-                                              ? counter++
-                                              : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                        });
-                                      },
-                                    ),
+                              CircleAvatar(
+                                //Beğeni butonunu kaplayan circleAvatar yapısı
+                                maxRadius: 22.5,
+                                backgroundColor: _checked
+                                    ? primaryColor
+                                    : lightWhite, // seçili ise koyu, değilse açık renk verildi
+                                child: IconButton(
+                                  iconSize: iconSize,
+                                  icon: Icon(
+                                    LineIcons.heart,
+                                    color: _checked
+                                        ? Colors.white //Seçili ise açık,
+                                        : primaryColor, //değilse koyu renk verildi
                                   ),
-                                  IconButton(
-                                      // İletişim iconButton'ı
-                                      icon: Icon(
-                                        LineIcons.phone,
-                                        color: primaryColor,
-                                        size: iconSize,
-                                      ),
-                                      onPressed: () {}),
-                                  IconButton(
-                                      //Paylaşım iconButton'ı
-                                      icon: Icon(
-                                        Icons.share_outlined,
-                                        color: primaryColor,
-                                        size: iconSize,
-                                      ),
-                                      onPressed: () {}),
-                                ],
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        _checked =
+                                            !_checked; //tıklandığında bool değeri tersler
+                                        _checked
+                                            ? counter++
+                                            : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
-                              buildReservationButton(), //Rezervasyon MaterialButton'ı
+                              IconButton(
+                                  // İletişim iconButton'ı
+                                  icon: Icon(
+                                    LineIcons.phone,
+                                    color: primaryColor,
+                                    size: iconSize,
+                                  ),
+                                  onPressed: () {}),
+                              IconButton(
+                                  //Paylaşım iconButton'ı
+                                  icon: Icon(
+                                    Icons.share_outlined,
+                                    color: primaryColor,
+                                    size: iconSize,
+                                  ),
+                                  onPressed: () {}),
                             ],
                           ),
-                        ),
+                          buildReservationButton(), //Rezervasyon MaterialButton'ı
+                        ],
                       ),
                       SizedBox(
                           height:

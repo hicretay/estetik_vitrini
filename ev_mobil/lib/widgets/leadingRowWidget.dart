@@ -43,7 +43,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
             Text(
               //"Estecool Güzellik Merkezi" metni
               leading,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
           ],
         ),
