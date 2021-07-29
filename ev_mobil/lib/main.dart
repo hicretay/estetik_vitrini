@@ -13,8 +13,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-  final ThemeData theme =
-      new ThemeData(fontFamily: "futura_medium_bt").copyWith();
+  final ThemeData theme = new ThemeData(fontFamily: "futura_medium_bt").copyWith();
 
   @override
   Widget build(BuildContext context) {

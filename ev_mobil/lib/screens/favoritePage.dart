@@ -80,7 +80,7 @@ class _FavoritePageState extends State<FavoritePage> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: defaultPadding,
+                        height: maxSpace,
                       ),
                       LeadingRowWidget(
                         //leading widgetı

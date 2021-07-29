@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'informationRowWidget.dart';
 
 class MakeReservationWidget extends StatefulWidget {
-  MakeReservationWidget({Key key}) : super(key: key);
+  final DateTime reservationDate;
+  final String reservationTime;
+  MakeReservationWidget({Key key, this.reservationDate, this.reservationTime}) : super(key: key);
 
   @override
   _MakeReservationWidgetState createState() => _MakeReservationWidgetState();

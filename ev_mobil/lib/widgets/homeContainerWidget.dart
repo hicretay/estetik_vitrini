@@ -40,12 +40,9 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
               Padding(
                 padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
                 //Leading Widgetı
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: LeadingRowWidget(
-                    iconNumber: widget.iconNumber, // icon resmi indexi
-                    onPressed: () {}, // more iconu olayı
-                  ),
+                child: LeadingRowWidget(
+                  iconNumber: widget.iconNumber, // icon resmi indexi
+                  onPressed: () {}, // more iconu olayı
                 ),
               ),
               Expanded(
@@ -99,7 +96,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                             borderRadius: BorderRadius.circular(minSpace),
                           ),
                           width: double.infinity, // genişlik: container kadar
-                          height: MediaQuery.of(context).size.width * 0.12,
+                          height: deviceWidth(context) * 0.12,
                           //container yüksekliği: 40
                           child: Row(
                             children: [
@@ -145,9 +142,8 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                           .bodyText1
                                           .copyWith(color: primaryColor),
                                     ),
-                                    SizedBox(
-                                        width:
-                                            minSpace), //Buton texti - icon arası boşluk
+                                    SizedBox(width: minSpace),
+                                    //Buton texti - icon arası boşluk
                                     Icon(
                                       LineIcons.arrowRight, // sağa ok ikonu
                                       color: primaryColor,
