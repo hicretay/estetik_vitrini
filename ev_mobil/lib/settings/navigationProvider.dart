@@ -19,8 +19,7 @@ const LOCATION_PAGE = 3;
 const SETTINGS_PAGE = 4;
 
 class NavigationProvider extends ChangeNotifier {
-  static NavigationProvider of(BuildContext context) =>
-      Provider.of<NavigationProvider>(context, listen: false);
+  static NavigationProvider of(BuildContext context) => Provider.of<NavigationProvider>(context, listen: false);
 
   int _currentScreenIndex = LOCATION_PAGE; // Başlangıç sayfası locationPage
 

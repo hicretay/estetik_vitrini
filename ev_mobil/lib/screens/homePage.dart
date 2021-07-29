@@ -82,8 +82,12 @@ class _HomePageState extends State<HomePage> {
                     imgNumber: 3,
                     nameNumber: 3,
                   ),
-                  SizedBox(
-                      width: defaultPadding), //Son storynin kırpılasını önler
+                  StoryWidget(
+                    iconNumber: 2,
+                    imgNumber: 2,
+                    nameNumber: 2,
+                  ),
+                  SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
                 ],
               ),
             ),

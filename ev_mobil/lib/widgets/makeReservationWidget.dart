@@ -35,7 +35,7 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
               "20 Mayıs 2021",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -48,7 +48,7 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
               "16.30",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -60,7 +60,7 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
             child: TextField(
               controller: teName,
               cursorColor: primaryColor,
-              style: TextStyle(color: primaryColor, fontSize: 20),
+              style: TextStyle(color: primaryColor, fontSize: 18),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -79,28 +79,28 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
             child: DropdownButton(
               hint: Text(
                 "İşlem seçiniz:",
-                style: TextStyle(color: primaryColor, fontSize: 20),
+                style: TextStyle(color: primaryColor, fontSize: 18),
               ),
               value: teOperation,
               items: [
                 DropdownMenuItem(
                   child: Text(
                     "Cilt Bakımı",
-                    style: TextStyle(color: primaryColor, fontSize: 20),
+                    style: TextStyle(color: primaryColor, fontSize: 18),
                   ),
                   value: "Cilt Bakımı",
                 ),
                 DropdownMenuItem(
                   child: Text(
                     "Lazer Epilasyon",
-                    style: TextStyle(color: primaryColor, fontSize: 20),
+                    style: TextStyle(color: primaryColor, fontSize: 18),
                   ),
                   value: "Lazer Epilasyon",
                 ),
                 DropdownMenuItem(
                   child: Text(
                     "Medikal Estetik",
-                    style: TextStyle(color: primaryColor, fontSize: 20),
+                    style: TextStyle(color: primaryColor, fontSize: 18),
                   ),
                   value: "Medikal Estetik",
                 )
@@ -121,7 +121,7 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
               keyboardType: TextInputType.multiline,
               controller: teNote,
               cursorColor: primaryColor,
-              style: TextStyle(color: primaryColor, fontSize: 20),
+              style: TextStyle(color: primaryColor, fontSize: 18),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -155,7 +155,7 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
                       style: TextStyle(
                           fontFamily: leadingFont,
                           color: Colors.white,
-                          fontSize: 25),
+                          fontSize: 22),
                     ),
                     onPressed: () {
                       setState(() {

@@ -25,7 +25,7 @@ class _InformationRowWidgetState extends State<InformationRowWidget> {
           children: [
             Text(
               "${widget.operationName}:",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Container(
               width: widget.width,
@@ -42,7 +42,7 @@ class _InformationRowWidgetState extends State<InformationRowWidget> {
             ),
           ],
         ),
-        SizedBox(height: defaultPadding),
+        SizedBox(height: maxSpace),
       ],
     );
   }
