@@ -18,112 +18,114 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            //-----------------------------Header-------------------------------
-            // Bir arama Textfield'ı içerir
-            Padding(
-              padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
-              child: TextField(
-                controller: teSearch, //search TextEditingControllerı
-                cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
-                decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: primaryColor,
-                    size: 35,
-                  ),
-                  hintText: "Estetik Vitrini",
-                  hintStyle: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(color: primaryColor, fontFamily: leadingFont),
-                  focusColor: primaryColor,
-                  hoverColor: primaryColor,
-                  //border textField'ı çevreleyen yapı
-                  //width:0 ve none verilerek kaldırıldı
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              //-----------------------------Header-------------------------------
+              // Bir arama Textfield'ı içerir
+              Padding(
+                padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
+                child: TextField(
+                  controller: teSearch, //search TextEditingControllerı
+                  cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.search,
+                      color: primaryColor,
+                      size: 35,
+                    ),
+                    hintText: "Estetik Vitrini",
+                    hintStyle: Theme.of(context)
+                        .textTheme
+                        .headline5
+                        .copyWith(color: primaryColor, fontFamily: leadingFont),
+                    focusColor: primaryColor,
+                    hoverColor: primaryColor,
+                    //border textField'ı çevreleyen yapı
+                    //width:0 ve none verilerek kaldırıldı
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            //------------------------------------------------------------------
+              //------------------------------------------------------------------
 
-            //----------------Story Paneli---------------
-            //StoryWidget kullanıldı
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  StoryWidget(
-                    iconNumber: 0,
-                    imgNumber: 0,
-                    nameNumber: 0,
-                  ),
-                  StoryWidget(
-                    iconNumber: 1,
-                    imgNumber: 1,
-                    nameNumber: 1,
-                  ),
-                  StoryWidget(
-                    iconNumber: 2,
-                    imgNumber: 2,
-                    nameNumber: 2,
-                  ),
-                  StoryWidget(
-                    iconNumber: 3,
-                    imgNumber: 3,
-                    nameNumber: 3,
-                  ),
-                  StoryWidget(
-                    iconNumber: 2,
-                    imgNumber: 2,
-                    nameNumber: 2,
-                  ),
-                  SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
-                ],
-              ),
-            ),
-            //-------------------------------------------
-            SizedBox(height: defaultPadding), //Storyler - Postlar arası boşluk
-            //------------------------------------Anasayfa Postları----------------------------------------
-            //HomeContainerWidget ile oluşturuldu
-            Flexible(
-              child: SingleChildScrollView(
-                child: Column(
+              //----------------Story Paneli---------------
+              //StoryWidget kullanıldı
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
                   children: [
-                    HomeContainerWidget(
+                    StoryWidget(
                       iconNumber: 0,
                       imgNumber: 0,
-                      cardText: "Kendin için bir\nşeyler yap...",
-                      onPressed: () {
-                        //"Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
-                        NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                      },
+                      nameNumber: 0,
                     ),
-                    HomeContainerWidget(
+                    StoryWidget(
                       iconNumber: 1,
-                      imgNumber: 2,
-                      cardText: "",
-                      onPressed: () {
-                        // "Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
-                        NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                      },
+                      imgNumber: 1,
+                      nameNumber: 1,
                     ),
-                    //HomeContainerWidget(),
+                    StoryWidget(
+                      iconNumber: 2,
+                      imgNumber: 2,
+                      nameNumber: 2,
+                    ),
+                    StoryWidget(
+                      iconNumber: 3,
+                      imgNumber: 3,
+                      nameNumber: 3,
+                    ),
+                    StoryWidget(
+                      iconNumber: 2,
+                      imgNumber: 2,
+                      nameNumber: 2,
+                    ),
+                    SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
                   ],
                 ),
-                //-------------------------------------------------------------------------------------------------
               ),
-            ),
-          ],
+              //-------------------------------------------
+              SizedBox(height: defaultPadding), //Storyler - Postlar arası boşluk
+              //------------------------------------Anasayfa Postları----------------------------------------
+              //HomeContainerWidget ile oluşturuldu
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      HomeContainerWidget(
+                        iconNumber: 0,
+                        imgNumber: 0,
+                        cardText: "Kendin için bir\nşeyler yap...",
+                        onPressed: () {
+                          //"Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
+                          NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                        },
+                      ),
+                      HomeContainerWidget(
+                        iconNumber: 1,
+                        imgNumber: 2,
+                        cardText: "",
+                        onPressed: () {
+                          // "Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
+                          NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                        },
+                      ),
+                      //HomeContainerWidget(),
+                    ],
+                  ),
+                  //-------------------------------------------------------------------------------------------------
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

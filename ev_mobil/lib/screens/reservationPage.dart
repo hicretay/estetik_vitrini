@@ -20,72 +20,74 @@ class _ReservationPageState extends State<ReservationPage> {
   Map<CalendarFormat, String> days = {};
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BackGroundContainer(
-        colors: backGroundColor2,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(defaultPadding),
-              child: HeaderWidget(
-                primaryIcon: Icon(
-                  Icons.arrow_back,
-                  color: primaryColor,
-                ),
-                secondaryIcon: Icon(
-                  Icons.search,
-                  color: primaryColor,
-                ),
-                onPressedPrimary: () {
-                  NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                },
-                onPressedSecondary: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Randevularım",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4
-                      .copyWith(color: white, fontFamily: leadingFont),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(cardCurved),
+    return SafeArea(
+      child: Scaffold(
+        body: BackGroundContainer(
+          colors: backGroundColor2,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(defaultPadding),
+                child: HeaderWidget(
+                  primaryIcon: Icon(
+                    Icons.arrow_back,
+                    color: primaryColor,
                   ),
+                  secondaryIcon: Icon(
+                    Icons.search,
+                    color: primaryColor,
+                  ),
+                  onPressedPrimary: () {
+                    NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                  },
+                  onPressedSecondary: () {},
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(defaultPadding),
-                        child: TableCalendarWidget(),
-                      ),
-                      ResevationResultWidget(
-                        companyName: "Epilady Güzellik Salonu",
-                        operation: "Cilt Bakımı",
-                        time: "10:00",
-                      ),
-                      ResevationResultWidget(
-                        companyName: "Estecool Güzellik Merkezi",
-                        operation: "Lazer Epilasyon",
-                        time: "16:30",
-                      ),
-                    ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Randevularım",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .copyWith(color: white, fontFamily: leadingFont),
                   ),
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(cardCurved),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(defaultPadding),
+                          child: TableCalendarWidget(),
+                        ),
+                        ResevationResultWidget(
+                          companyName: "Epilady Güzellik Salonu",
+                          operation: "Cilt Bakımı",
+                          time: "10:00",
+                        ),
+                        ResevationResultWidget(
+                          companyName: "Estecool Güzellik Merkezi",
+                          operation: "Lazer Epilasyon",
+                          time: "16:30",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:ev_mobil/screens/loginPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController txtUsername = TextEditingController();
+  TextEditingController txtEMail = TextEditingController();
+  TextEditingController txtTelephone = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
+  TextEditingController txtPasswordAgain = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,60 +47,61 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(height: deviceHeight(context) * 0.1),
                         SingleChildScrollView(
                           reverse: true,
-                          child: Column(children: [
-                                //--------------------Email textField'ı---------------------
-                                Padding(padding: const EdgeInsets.only(top: defaultPadding,right: defaultPadding,left: defaultPadding),
-                                  child       : TextFieldWidget(textEditingController: txtUsername,
-                                  keyboardType: TextInputType.name,
-                                  hintText    : "E-Posta", //ipucu metni
-                                  obscureText : false, // yazılanlar gizlenmesin
+                          child: Padding(padding: const EdgeInsets.all(minSpace),
+                            child: Column(children: [
+                                  //--------------------Email textField'ı---------------------
+                                  Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+                                    child       : TextFieldWidget(textEditingController: txtEMail,
+                                    keyboardType: TextInputType.name,
+                                    hintText    : "E-Posta", //ipucu metni
+                                    obscureText : false, // yazılanlar gizlenmesin
+                                  ),
+                              ),
+                              //--------------------Telefon textField'ı---------------------
+                                  Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+                                    child       : TextFieldWidget(textEditingController: txtTelephone,
+                                    keyboardType: TextInputType.name,
+                                    hintText    : "Telefon", //ipucu metni
+                                    obscureText : false, // yazılanlar gizlenmesin
+                                  ),
+                              ),
+                              //-------------------------Şifre textField'ı------------------------
+                                Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+                                    child: TextFieldWidget(
+                                    textEditingController: txtPassword,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    obscureText : true, // yazılanlar gizlensin
+                                    hintText    : "Şifre", //ipucu metni
+                                  ),
                                 ),
-                            ),
-                            //--------------------Telefon textField'ı---------------------
-                                Padding(padding: const EdgeInsets.only(top: defaultPadding,right: defaultPadding,left: defaultPadding),
-                                  child       : TextFieldWidget(textEditingController: txtUsername,
-                                  keyboardType: TextInputType.name,
-                                  hintText    : "Telefon", //ipucu metni
-                                  obscureText : false, // yazılanlar gizlenmesin
+                                  //-------------------------Şifre tekrar textField'ı------------------------
+                                Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+                                    child: TextFieldWidget(
+                                    textEditingController: txtPasswordAgain,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    obscureText : true, // yazılanlar gizlensin
+                                    hintText    : "Şifre tekrar", //ipucu metni
+                                  ),
                                 ),
-                            ),
-                            //-------------------------Şifre textField'ı------------------------
-                          Padding(padding: const EdgeInsets.only(top: defaultPadding,right: defaultPadding,left: defaultPadding),
-                              child: TextFieldWidget(
-                              textEditingController: txtPassword,
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText : true, // yazılanlar gizlensin
-                              hintText    : "Şifre", //ipucu metni
-                            ),
+                                //------------------------------------------------------------------
+                                SizedBox(height: deviceHeight(context)*0.1),
+                                Material(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  child: MaterialButton(
+                                    minWidth: deviceWidth(context) * 0.5, //Buton minimum genişliği
+                                    child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
+                                    onPressed: (){
+                                      final progressUHD = ProgressHUD.of(context);
+                                      progressUHD.show(); 
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage()));    
+                                      progressUHD.dismiss(); 
+                                  }),
+                                ),
+                               
+                                  
+                                ],),
                           ),
-                            //-------------------------Şifre tekrar textField'ı------------------------
-                          Padding(padding: const EdgeInsets.only(top: defaultPadding,right: defaultPadding,left: defaultPadding),
-                              child: TextFieldWidget(
-                              textEditingController: txtPassword,
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText : true, // yazılanlar gizlensin
-                              hintText    : "Şifre tekrar", //ipucu metni
-                            ),
-                          ),
-                          //------------------------------------------------------------------
-                          SizedBox(height: deviceHeight(context)*0.1),
-                          Material(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: MaterialButton(
-                              minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                              child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
-                              onPressed: (){
-                                final progressUHD = ProgressHUD.of(context);
-                                progressUHD.show(); 
-                                //Navigator.pushAndRemoveUntil(context,
-                                //MaterialPageRoute(builder: (context) => Root()), (route) => false);    
-                                progressUHD.dismiss(); 
-                            }),
-                          ),
-                         
-                            
-                          ],),
                         )
                 ],),
               ),

@@ -81,7 +81,7 @@ class _LocationPageState extends State<LocationPage> {
                     SizedBox(height: deviceHeight(context)*0.05),
                     Center(
                       child: Container(
-                        height: deviceHeight(context)*0.2,
+                        height: deviceHeight(context)*0.16,
                         width: deviceWidth(context)*0.9,
                         decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
                         gradient: LinearGradient(
@@ -89,25 +89,42 @@ class _LocationPageState extends State<LocationPage> {
                                   end: Alignment.topRight,
                                   colors: backGroundColor1
                                 ),),
-                        child: Row(children:[
-                                  SizedBox(width: deviceWidth(context)*0.05),
-                                  SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor),
-                                  SizedBox(width: deviceWidth(context)*0.25),
-                                  DropdownButton(
-                                dropdownColor: Colors.transparent,
-                                value: city,
-                                items: [
-                                  DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
-                                  DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
-                                ],
-                                onChanged: (value) {
-                                 setState(() {
-                                   city = value;
-                                 });
-                                 },
-                                ),
-                              ],
-                        ),
+                          child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.075),
+                          title: Center(
+                            child: DropdownButton(
+                                  dropdownColor: Colors.transparent,
+                                  value: city,
+                                  items: [
+                                    DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
+                                    DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
+                                  ],
+                                  onChanged: (value) {
+                                   setState(() {
+                                     city = value;
+                                   });
+                                   },
+                                  ),
+                          ),
+                          trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.08)),
+                        // Row(children:[
+                        //           SizedBox(width: deviceWidth(context)*0.05),
+                        //           SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor),
+                        //           SizedBox(width: deviceWidth(context)*0.25),
+                        //           DropdownButton(
+                        //         dropdownColor: Colors.transparent,
+                        //         value: city,
+                        //         items: [
+                        //           DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
+                        //           DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
+                        //         ],
+                        //         onChanged: (value) {
+                        //          setState(() {
+                        //            city = value;
+                        //          });
+                        //          },
+                        //         ),
+                        //       ],
+                        // ),
                       ),
                     ),
                     SizedBox(height: deviceHeight(context)*0.05),
