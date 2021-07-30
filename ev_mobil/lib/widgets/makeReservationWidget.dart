@@ -25,14 +25,12 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
       padding: const EdgeInsets.all(defaultPadding),
       child: Column(
         children: [
-          SizedBox(height: defaultPadding),
           InformationRowWidget(
             containerColor: secondaryColor,
             operationName: "Tarih",
             width: 250,
             height: 50,
-            child: Text(
-              "20 Mayıs 2021",
+            child: Text("20 Mayıs 2021",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,

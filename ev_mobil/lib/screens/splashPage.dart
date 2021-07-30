@@ -1,5 +1,5 @@
+import 'package:ev_mobil/screens/loginPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/settings/root.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
       setState(() {
         Navigator.of(context).pop();
         Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (context) => Root()), (route) => false);      
+            MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);  
       });
     });
   }

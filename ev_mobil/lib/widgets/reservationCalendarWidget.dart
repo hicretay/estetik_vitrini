@@ -84,17 +84,14 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
       children: [
         //-------------------------Takvim sayfası-------------------------------
         Padding(
-          padding: const EdgeInsets.only(
-              right: defaultPadding, left: defaultPadding),
-          child: TableCalendarWidget(),
+          padding: const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
+          child  : TableCalendarWidget(), // takvim
         ),
         //----------------------------------------------------------------------
         //--------------------Takvim - Saatler arası çizgi----------------------
-        Padding(
-          padding: const EdgeInsets.only(
-              left: defaultPadding, right: defaultPadding),
+        Padding(padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
           child: Divider(
-            color: primaryColor,
+            color : primaryColor,
             height: 1,
             thickness: 1.5,
           ),
@@ -103,19 +100,17 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
         SizedBox(height: minSpace), //Saat uyarı metni - takvim arası boşluk
 
         //------------------------Saat uyarı metni------------------------------
-        Padding(
-          padding: const EdgeInsets.only(left: defaultPadding),
-          child: Align(
-              alignment: Alignment.topLeft,
-              child: Text("*Lütfen bir saat seçiniz")),
+        Padding(padding: const EdgeInsets.only(left: defaultPadding),
+          child: Align(alignment: Alignment.topLeft,
+          child: Text("*Lütfen bir saat seçiniz")),
         ),
         //----------------------------------------------------------------------
 
         //----------------------Saat Widgetlarının Tablosu----------------------
         GridView.custom(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate    : SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: (1 / .4), //saatler arası hizalama
-            crossAxisCount: 5, // satırdaki widget sayısı
+            crossAxisCount  : 5, // satırdaki widget sayısı
           ),
           childrenDelegate: SliverChildListDelegate(gridChildren),
           physics: NeverScrollableScrollPhysics(),
@@ -123,6 +118,7 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
           padding: EdgeInsets.all(0.1),
           scrollDirection: Axis.vertical,
         ),
+        //----------------------------------------------------------------------
       ],
     );
   }

@@ -11,26 +11,21 @@ class Root extends StatelessWidget {
     return Consumer<NavigationProvider>(
       builder: (context, provider, child) {
         //------------------Bottom Bar itemları görünümleri----------------
-        final bottomNavigationBarItems = provider.screens
-            .map(
-              (screen) => BottomNavigationBarItem(
+        final bottomNavigationBarItems = provider.screens.map((screen) =>
+          BottomNavigationBarItem(
                 icon: screen.icon,
                 activeIcon: screen.activeIcon,
                 label: screen.title,
               ),
-            )
-            .toList();
+            ).toList();
         //------------------------------------------------------------
 
         // Her ekran için Navigatorı başlatır
-        final screens = provider.screens
-            .map(
-              (screen) => Navigator(
+        final screens = provider.screens.map((screen) => Navigator(
                 key: screen.navigatorState,
                 onGenerateRoute: screen.onGenerateRoute,
               ),
-            )
-            .toList();
+            ).toList();
 
         return Scaffold(
           body: IndexedStack(

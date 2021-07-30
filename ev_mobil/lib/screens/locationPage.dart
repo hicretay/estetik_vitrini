@@ -26,20 +26,15 @@ class _LocationPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: BackGroundContainer(
-          colors: backGroundColor1,
-          child: Column(
+        child : Scaffold(
+        body  : BackGroundContainer(
+        colors: backGroundColor1,
+        child : Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+              Padding(padding: const EdgeInsets.all(defaultPadding),
                 //--------------Scaffold Görünümlü header--------------
                 child: HeaderWidget(
-                  primaryIcon: Icon(
-                    // solda yer alan icon: arama
-                    Icons.search,
-                    color: primaryColor,
-                  ),
+                  primaryIcon: Icon( Icons.search,color: primaryColor), // solda yer alan icon: arama
                   onPressedPrimary: () {}, // arama iconu olayı
                   secondaryIcon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
                   onPressedSecondary: () {}, //konum iconu olayı
@@ -47,14 +42,11 @@ class _LocationPageState extends State<LocationPage> {
                 //---------------------------------------------------
               ),
               //------------------Sayfa Başlığı-----------------------
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
+              Padding(padding: const EdgeInsets.only(left: 20),
                 child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Favori\nBölgeler", //Büyük Başlık
+                    Align(alignment: Alignment.topLeft,
+                      child: Text("Favori\nBölgeler", //Büyük Başlık
                         style: Theme.of(context)
                             .textTheme
                             .headline3
@@ -62,10 +54,8 @@ class _LocationPageState extends State<LocationPage> {
                         maxLines: 2,
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text(
-                        "Lütfen en az bir tane bölge seçiniz.", // Alt Başlık
+                    Align(alignment: Alignment.bottomLeft,
+                      child: Text("Lütfen en az bir tane bölge seçiniz.", // Alt Başlık
                         style: Theme.of(context)
                             .textTheme
                             .subtitle1
@@ -77,16 +67,13 @@ class _LocationPageState extends State<LocationPage> {
               ),
               //-----------------------------------------------------
               Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.only(top: defaultPadding),
+                child: Padding(padding: const EdgeInsets.only(top: defaultPadding),
                 child: Container(
                   // arkaplan containerı
                   decoration: BoxDecoration(
                     color: lightWhite,
-                    borderRadius: BorderRadius.vertical(
+                    borderRadius: BorderRadius.vertical( top: Radius.circular(maxSpace)),
                       //dikeyde yuvarlatılmış
-                      top: Radius.circular(maxSpace),
-                    ),
                   ),
                   //-----------------------Itamların Listelenmesi----------------------------
                   child: ListView(
@@ -102,20 +89,24 @@ class _LocationPageState extends State<LocationPage> {
                                   end: Alignment.topRight,
                                   colors: backGroundColor1
                                 ),),
-                        child: Center(
-                          child: DropdownButton(
-                              dropdownColor: Colors.transparent,
-                              value: city,
-                              items: [
-                                DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
-                                DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Konya"),
+                        child: Row(children:[
+                                  SizedBox(width: deviceWidth(context)*0.05),
+                                  SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor),
+                                  SizedBox(width: deviceWidth(context)*0.25),
+                                  DropdownButton(
+                                dropdownColor: Colors.transparent,
+                                value: city,
+                                items: [
+                                  DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
+                                  DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
+                                ],
+                                onChanged: (value) {
+                                 setState(() {
+                                   city = value;
+                                 });
+                                 },
+                                ),
                               ],
-                              onChanged: (value) {
-                               setState(() {
-                                 city = value;
-                               });
-                               },
-                              ),
                         ),
                       ),
                     ),

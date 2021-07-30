@@ -1,6 +1,8 @@
 import 'package:ev_mobil/screens/favoritePage.dart';
 import 'package:ev_mobil/screens/homePage.dart';
 import 'package:ev_mobil/screens/locationPage.dart';
+import 'package:ev_mobil/screens/loginPage.dart';
+import 'package:ev_mobil/screens/registerPage.dart';
 import 'package:ev_mobil/screens/reservationPage.dart';
 import 'package:ev_mobil/screens/settingsPage.dart';
 import 'package:ev_mobil/screens/splashPage.dart';
@@ -28,8 +30,16 @@ class NavigationProvider extends ChangeNotifier {
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     if (settings.name == SplashPage.route) {
       return MaterialPageRoute(builder: (_) => SplashPage());
-    } else
+    } 
+    else if(settings.name == LoginPage.route){
+      return MaterialPageRoute(builder: (_) => LoginPage());
+    }
+    else if(settings.name == RegisterPage.route){
+      return MaterialPageRoute(builder: (_) => RegisterPage());
+    }
+    else{
       return MaterialPageRoute(builder: (_) => Root());
+    }
   }
 
   final Map<int, Screen> _screens = {
