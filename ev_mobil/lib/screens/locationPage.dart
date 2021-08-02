@@ -106,25 +106,6 @@ class _LocationPageState extends State<LocationPage> {
                                   ),
                           ),
                           trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.08)),
-                        // Row(children:[
-                        //           SizedBox(width: deviceWidth(context)*0.05),
-                        //           SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor),
-                        //           SizedBox(width: deviceWidth(context)*0.25),
-                        //           DropdownButton(
-                        //         dropdownColor: Colors.transparent,
-                        //         value: city,
-                        //         items: [
-                        //           DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
-                        //           DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
-                        //         ],
-                        //         onChanged: (value) {
-                        //          setState(() {
-                        //            city = value;
-                        //          });
-                        //          },
-                        //         ),
-                        //       ],
-                        // ),
                       ),
                     ),
                     SizedBox(height: deviceHeight(context)*0.05),

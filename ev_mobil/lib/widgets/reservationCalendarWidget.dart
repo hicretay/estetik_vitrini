@@ -1,6 +1,7 @@
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'gridViewChildWidget.dart';
 
 class ReservationCalendarWidget extends StatefulWidget {
@@ -77,49 +78,65 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
       time: "17.30",
     ),
   ];
-
+   bool checked = true;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        //-------------------------Takvim sayfası-------------------------------
-        Padding(
-          padding: const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
-          child  : TableCalendarWidget(), // takvim
-        ),
-        //----------------------------------------------------------------------
-        //--------------------Takvim - Saatler arası çizgi----------------------
-        Padding(padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
-          child: Divider(
-            color : primaryColor,
-            height: 1,
-            thickness: 1.5,
+    return Container(
+      child: Column(
+        children: [          
+          //-------------------------Takvim sayfası-------------------------------
+          Padding(
+            padding: const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
+            child  : checked? TableCalendarWidget():  // takvim
+            GridView.custom(
+              gridDelegate    : SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: (1 / .4), //saatler arası hizalama
+              crossAxisCount  : 5, // satırdaki widget sayısı
+            ),
+            childrenDelegate: SliverChildListDelegate(gridChildren),
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.all(0.1),
+            scrollDirection: Axis.vertical,
           ),
-        ),
-        //----------------------------------------------------------------------
-        SizedBox(height: minSpace), //Saat uyarı metni - takvim arası boşluk
-
-        //------------------------Saat uyarı metni------------------------------
-        Padding(padding: const EdgeInsets.only(left: defaultPadding),
-          child: Align(alignment: Alignment.topLeft,
-          child: Text("*Lütfen bir saat seçiniz")),
-        ),
-        //----------------------------------------------------------------------
-
-        //----------------------Saat Widgetlarının Tablosu----------------------
-        GridView.custom(
-            gridDelegate    : SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: (1 / .4), //saatler arası hizalama
-            crossAxisCount  : 5, // satırdaki widget sayısı
           ),
-          childrenDelegate: SliverChildListDelegate(gridChildren),
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: EdgeInsets.all(0.1),
-          scrollDirection: Axis.vertical,
-        ),
-        //----------------------------------------------------------------------
-      ],
+          //----------------------------------------------------------------------
+          //--------------------Takvim - Saatler arası çizgi----------------------
+          Padding(padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+            child: Divider(
+              color : primaryColor,
+              height: 1,
+              thickness: 1.5,
+            ),
+          ),
+          TextButton(
+            style: ButtonStyle(),
+            onPressed: (){          
+           setState(() {
+              checked = !checked;
+            });
+          }, child: checked? 
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+            Text("Randevu saati seçiniz",
+            style: TextStyle(
+            color: primaryColor,
+            fontSize: 18,
+            fontFamily: contentFont)),
+            SizedBox(width: deviceWidth(context)*0.01),
+            FaIcon(FontAwesomeIcons.clock,size: 18,color: secondaryColor,)]):
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+            Text("Randevu günü seçiniz",
+            style: TextStyle(
+            fontSize: 18,
+            fontFamily: contentFont,
+            color: primaryColor)),
+            Icon(Icons.date_range_sharp,color: secondaryColor)])),
+        ],
+      ),
     );
   }
 }
