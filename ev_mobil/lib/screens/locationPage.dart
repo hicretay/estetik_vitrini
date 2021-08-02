@@ -96,7 +96,7 @@ class _LocationPageState extends State<LocationPage> {
                                   value: city,
                                   items: [
                                     DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
-                                    DropdownMenuItem(child: Text("Konya",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
+                                    DropdownMenuItem(child: Text("Ankara",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
                                   ],
                                   onChanged: (value) {
                                    setState(() {

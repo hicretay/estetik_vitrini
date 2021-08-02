@@ -17,6 +17,7 @@ dependencies:
   flutter_svg: null
   flutter_svg_provider: ^0.1.9
   flutter_swiper: ^1.1.6
+  font_awesome_flutter: ^9.1.0
   intl: null
   line_icons: null
   provider: null

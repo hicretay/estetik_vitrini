@@ -21,6 +21,7 @@ class TextFieldWidget extends StatelessWidget {
       controller: textEditingController,
       keyboardType: keyboardType,
       obscureText: obscureText,
+      cursorColor: primaryColor,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
@@ -33,6 +34,7 @@ class TextFieldWidget extends StatelessWidget {
           fontSize: 18,
           fontFamily: contentFont
         ),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
       ),
     );
   }

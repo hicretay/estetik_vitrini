@@ -5,6 +5,7 @@ import 'package:ev_mobil/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   static const route = "/loginPage";
@@ -80,34 +81,65 @@ class _LoginPageState extends State<LoginPage> {
                                 progressUHD.dismiss(); 
                             }),
                           ),
-                          SizedBox(height: deviceHeight(context)*0.01),
-                          Row(
-                            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                                SizedBox(width: deviceWidth(context)*0.2),
-                                TextButton(
-                                child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16),),
-                                onPressed: (){}, 
-                                ),
-                                SizedBox(width: deviceWidth(context)*0.05),
-                                TextButton(
-                                child: Text("Kayıt Ol",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16),),
-                                onPressed: (){
-                                  Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => RegisterPage())); 
-                                }, 
-                                ),
-                                SizedBox(width: deviceWidth(context)*0.2),
-                              ],
+                          SizedBox(height: deviceHeight(context)*0.1),
+                          TextButton(
+                          child: Text("Kayıt Ol",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
+                          onPressed: (){
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => RegisterPage())); 
+                          }, 
                           ),
-                            
-                          ],),
+                          Padding(
+                            padding: const EdgeInsets.only(left: defaultPadding*3,right: defaultPadding*3),
+                            child: Divider(height: 2,color: primaryColor,thickness: 0.8,),
+                          ),
+                          SizedBox(height: deviceHeight(context)*0.05),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+                            GestureDetector(
+                              child: CircleAvatar(
+                              backgroundColor: secondaryColor,
+                              maxRadius: deviceWidth(context)*0.06,
+                              child: FaIcon(FontAwesomeIcons.envelopeSquare,
+                              color: primaryColor,)),
+                              onTap: (){
+                                Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => RegisterPage())); 
+                              },),
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            GestureDetector(
+                              child: CircleAvatar(
+                              backgroundColor: secondaryColor,
+                              maxRadius: deviceWidth(context)*0.06,
+                              child: FaIcon(FontAwesomeIcons.google,
+                              color: primaryColor,
+                              )),
+                              onTap: (){},),
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            GestureDetector(
+                              child: CircleAvatar(
+                              backgroundColor: secondaryColor,
+                              maxRadius: deviceWidth(context)*0.06,
+                              child: FaIcon(FontAwesomeIcons.facebookF,
+                              color: primaryColor,)),
+                              onTap: (){},),
+                              ]),
+                          ]),
                         )
                 ],),
               ),
             ),
           ],
-            ),
+        ),
+        ),
+      ),
+      bottomNavigationBar:  
+      Container(
+        color: primaryColor,
+        child: TextButton(
+        child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16),),
+        onPressed: (){}, 
         ),
       ),
     );

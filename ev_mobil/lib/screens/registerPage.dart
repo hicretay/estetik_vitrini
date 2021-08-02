@@ -19,6 +19,9 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtPasswordAgain = TextEditingController();
 
+  bool checkedKVKK = false;
+  bool checkedPrivacy = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           reverse: true,
                           child: Padding(padding: const EdgeInsets.all(minSpace),
                             child: Column(children: [
-                                  //--------------------Email textField'ı---------------------
+                              //-----------------------------Email textField'ı----------------------------------------
                                   Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
                                     child       : TextFieldWidget(textEditingController: txtEMail,
                                     keyboardType: TextInputType.name,
@@ -57,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     obscureText : false, // yazılanlar gizlenmesin
                                   ),
                               ),
-                              //--------------------Telefon textField'ı---------------------
+                              //-----------------------------Telefon textField'ı--------------------------------------
                                   Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
                                     child       : TextFieldWidget(textEditingController: txtTelephone,
                                     keyboardType: TextInputType.name,
@@ -65,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     obscureText : false, // yazılanlar gizlenmesin
                                   ),
                               ),
-                              //-------------------------Şifre textField'ı------------------------
+                              //-----------------------------Şifre textField'ı----------------------------------------
                                 Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
                                     child: TextFieldWidget(
                                     textEditingController: txtPassword,
@@ -74,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     hintText    : "Şifre", //ipucu metni
                                   ),
                                 ),
-                                  //-------------------------Şifre tekrar textField'ı------------------------
+                              //----------------------------Şifre tekrar textField'ı---------------------------------
                                 Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
                                     child: TextFieldWidget(
                                     textEditingController: txtPasswordAgain,
@@ -83,8 +86,38 @@ class _RegisterPageState extends State<RegisterPage> {
                                     hintText    : "Şifre tekrar", //ipucu metni
                                   ),
                                 ),
-                                //------------------------------------------------------------------
-                                SizedBox(height: deviceHeight(context)*0.1),
+                                //-----------------------------------------------------------------------------------
+                                Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children:[
+                                      CheckboxListTile(
+                                      value: checkedKVKK, 
+                                      title: Text("KVKK Bildirimi",style: TextStyle(color: secondaryColor)),
+                                      activeColor: secondaryColor,
+                                      checkColor: primaryColor,
+                                      contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                                      controlAffinity: ListTileControlAffinity.leading,
+                                      onChanged: (value){
+                                         setState(() {
+                                              checkedKVKK=value;                                  
+                                            });
+                                          }),
+                                      CheckboxListTile(
+                                      value: checkedPrivacy, 
+                                      title: Text("Gizlilik Sözleşmesi",style: TextStyle(color: secondaryColor)),
+                                      activeColor: secondaryColor,
+                                      checkColor: primaryColor,
+                                      contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                                      controlAffinity: ListTileControlAffinity.leading,
+                                      onChanged: (value){
+                                      setState(() {
+                                          checkedPrivacy = value;
+                                        });
+                                      }),
+                                    ],
+                                  ),
+                                ),
                                 Material(
                                   color: primaryColor,
                                   borderRadius: BorderRadius.circular(30.0),
@@ -98,9 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       progressUHD.dismiss(); 
                                   }),
                                 ),
-                               
-                                  
-                                ],),
+                              ],),
                           ),
                         )
                 ],),
