@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                                 progressUHD.dismiss(); 
                             }),
                           ),
-                          SizedBox(height: deviceHeight(context)*0.1),
+                          SizedBox(height: deviceHeight(context)*0.05),
                           TextButton(
                           child: Text("Kayıt Ol",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
                           onPressed: (){

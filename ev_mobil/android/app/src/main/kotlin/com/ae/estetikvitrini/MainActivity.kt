@@ -1,4 +1,4 @@
-package com.example.ev_mobil
+package com.ae.estetikvitrini
 
 import io.flutter.embedding.android.FlutterActivity
 

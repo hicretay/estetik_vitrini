@@ -56,15 +56,15 @@ class _ReservationPageState extends State<ReservationPage> {
                   ),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(cardCurved),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(cardCurved),
+                      ),
                     ),
-                  ),
-                  child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Padding(
