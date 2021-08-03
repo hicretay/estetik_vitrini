@@ -18,59 +18,6 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: calendarSelected? Padding(
-          padding: const EdgeInsets.only(
-            left: defaultPadding,
-            right: defaultPadding,
-            bottom: minSpace,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Material(
-                color: calendarSelected ? primaryColor : darkWhite,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  minWidth: 150.0, //Buton minimum genişliği
-                  onPressed: () {
-                    setState(() {
-                      calendarSelected = false;
-                      reservationSelected = true;
-                    });
-                  },
-                  child: Text(
-                    "Randevu Takvimi",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: calendarSelected ? white : primaryColor,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: defaultPadding),
-              Material(
-                color: calendarSelected ? darkWhite : primaryColor,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  minWidth: 150.0, //Buton minimum genişliği
-                  onPressed: () {
-                    setState(() {
-                      reservationSelected = false;
-                      calendarSelected = true;
-                    });
-                  },
-                  child: Text(
-                    "Randevu Oluştur",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: reservationSelected ? white : primaryColor,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ):null,
         body: Container(
           color: secondaryColor,
           child: Column(

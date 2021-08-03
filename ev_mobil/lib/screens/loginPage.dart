@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginPage extends StatefulWidget {
   static const route = "/loginPage";
@@ -18,7 +19,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
-  
+  bool isOnline;
+  Map userObject = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +125,20 @@ class _LoginPageState extends State<LoginPage> {
                               maxRadius: deviceWidth(context)*0.06,
                               child: FaIcon(FontAwesomeIcons.facebookF,
                               color: primaryColor,)),
-                              onTap: (){},),
+                              onTap: (){
+                                FacebookAuth.instance.login(
+                                  permissions: ["public_profile","email"],
+                                ).then((value){
+                                  FacebookAuth.instance.getUserData().then((userData){
+                                    setState(() {
+                                        isOnline = true;
+                                        userObject = userData;
+                                    });
+                                  });
+
+                                });
+
+                              }),
                               ]),
                           ]),
                         )

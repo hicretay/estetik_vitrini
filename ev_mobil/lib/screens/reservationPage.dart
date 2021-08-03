@@ -70,34 +70,27 @@ class _ReservationPageState extends State<ReservationPage> {
                       top: Radius.circular(cardCurved),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(defaultPadding),
-                        child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
-                      ),
-                      Container(
-                        // child: ListView.builder(
-                        //   itemCount: reservations.length,
-                        //   itemBuilder: (BuildContext context, int index){
-                        //   return ResevationResultWidget(
-                        //   companyName: "Epilady Güzellik Salonu",
-                        //   operation: "Cilt Bakımı",
-                        //   time: "10:00",
-                        // );
-                        // }),
-                      ),
-                      ResevationResultWidget(
-                        companyName: "Epilady Güzellik Salonu",
-                        operation: "Cilt Bakımı",
-                        time: "10:00",
-                      ),
-                      ResevationResultWidget(
-                        companyName: "Estecool Güzellik Merkezi",
-                        operation: "Lazer Epilasyon",
-                        time: "16:30",
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    physics: ScrollPhysics(),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(defaultPadding),
+                          child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
+                        ),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 4,
+                          itemBuilder: (BuildContext context, int index){
+                          return ResevationResultWidget(
+                          companyName: "Epilady Güzellik Salonu",
+                          operation: "Cilt Bakımı",
+                          time: "10:00",
+                        );
+                        }),
+                      ],
+                    ),
                   ),
                 ),
               )
