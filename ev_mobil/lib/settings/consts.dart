@@ -1,3 +1,4 @@
+import 'package:ev_mobil/widgets/reservationResultWidget.dart';
 import 'package:flutter/material.dart';
 
 BoxDecoration boxDecoration = BoxDecoration(
@@ -88,4 +89,17 @@ const carouselImage = [
   "https://ankaramoonlight.com/wp-content/uploads/2017/05/hydrafacial-moonlight.jpg",
   "https://firsat.me/img/big1024/13915_58bd7db143d63_980x400.png",
   "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/flawlessskin-1589384044.png"
+];
+
+const reservations =[
+  ResevationResultWidget(
+   companyName: "Epilady Güzellik Salonu",
+   operation: "Cilt Bakımı",
+   time: "10:00",
+  ),
+  ResevationResultWidget(
+    companyName: "Estecool Güzellik Merkezi",
+    operation: "Lazer Epilasyon",
+    time: "16:30",
+  ),
 ];

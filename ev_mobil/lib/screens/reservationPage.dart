@@ -1,7 +1,6 @@
 import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
-import 'package:ev_mobil/widgets/headerWidget.dart';
 import 'package:ev_mobil/widgets/reservationResultWidget.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
@@ -26,23 +25,30 @@ class _ReservationPageState extends State<ReservationPage> {
           colors: backGroundColor2,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
-                child: HeaderWidget(
-                  primaryIcon: Icon(
-                    Icons.arrow_back,
-                    color: primaryColor,
-                  ),
-                  secondaryIcon: Icon(
-                    Icons.search,
-                    color: primaryColor,
-                  ),
-                  onPressedPrimary: () {
-                    NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                  },
-                  onPressedSecondary: () {},
+               Padding(padding: const EdgeInsets.all(defaultPadding),
+              child: Row(
+              children: [
+              CircleAvatar(
+                //iconun çevresini saran yapı tasarımı
+                maxRadius: 25,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                    iconSize: iconSize,
+                    icon: Icon(Icons.arrow_back,color: primaryColor),
+                    onPressed: (){
+                      NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                    },
                 ),
               ),
+              SizedBox(
+                width: maxSpace,
+              ),
+              Text(
+                "Estetik Vitrini",
+                style: TextStyle(
+                      fontFamily: leadingFont, fontSize: 20, color: Colors.white),
+              ),
+            ])),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Align(
@@ -56,33 +62,42 @@ class _ReservationPageState extends State<ReservationPage> {
                   ),
                 ),
               ),
-              Flexible(
-                child: SingleChildScrollView(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(cardCurved),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(cardCurved),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(defaultPadding),
+                        child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(defaultPadding),
-                          child: TableCalendarWidget(),
-                        ),
-                        ResevationResultWidget(
-                          companyName: "Epilady Güzellik Salonu",
-                          operation: "Cilt Bakımı",
-                          time: "10:00",
-                        ),
-                        ResevationResultWidget(
-                          companyName: "Estecool Güzellik Merkezi",
-                          operation: "Lazer Epilasyon",
-                          time: "16:30",
-                        ),
-                      ],
-                    ),
+                      Container(
+                        // child: ListView.builder(
+                        //   itemCount: reservations.length,
+                        //   itemBuilder: (BuildContext context, int index){
+                        //   return ResevationResultWidget(
+                        //   companyName: "Epilady Güzellik Salonu",
+                        //   operation: "Cilt Bakımı",
+                        //   time: "10:00",
+                        // );
+                        // }),
+                      ),
+                      ResevationResultWidget(
+                        companyName: "Epilady Güzellik Salonu",
+                        operation: "Cilt Bakımı",
+                        time: "10:00",
+                      ),
+                      ResevationResultWidget(
+                        companyName: "Estecool Güzellik Merkezi",
+                        operation: "Lazer Epilasyon",
+                        time: "16:30",
+                      ),
+                    ],
                   ),
                 ),
               )

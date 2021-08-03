@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TableCalendarWidget extends StatefulWidget {
-  TableCalendarWidget({Key key}) : super(key: key);
+  final CalendarFormat calendarFormat;
+  TableCalendarWidget({this.calendarFormat});
 
   @override
   _TableCalendarWidgetState createState() => _TableCalendarWidgetState();
@@ -22,7 +23,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   void initState() {
     selectedEvents = {};
     super.initState();
-  }
+  } 
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,9 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
       focusedDay: _focusedDay,
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
+      shouldFillViewport: false,
       startingDayOfWeek: StartingDayOfWeek.monday,
+      calendarFormat: widget.calendarFormat,
       calendarStyle: CalendarStyle(
         isTodayHighlighted: true,
         selectedDecoration: BoxDecoration(

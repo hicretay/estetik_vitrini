@@ -1,7 +1,6 @@
 import 'package:ev_mobil/settings/consts.dart';
 
 import 'package:ev_mobil/widgets/headerWidget.dart';
-import 'package:ev_mobil/widgets/makeReservationWidget.dart';
 import 'package:ev_mobil/widgets/reservationCalendarWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: Padding(
+        bottomNavigationBar: calendarSelected? Padding(
           padding: const EdgeInsets.only(
             left: defaultPadding,
             right: defaultPadding,
@@ -71,7 +70,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
               ),
             ],
           ),
-        ),
+        ):null,
         body: Container(
           color: secondaryColor,
           child: Column(
@@ -132,9 +131,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        calendarSelected
-                            ? MakeReservationWidget()
-                            : ReservationCalendarWidget(),
+                       ReservationCalendarWidget(),
                       ],
                     ),
                   ),

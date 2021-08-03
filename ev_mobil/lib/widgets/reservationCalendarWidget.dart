@@ -1,7 +1,10 @@
 import 'package:ev_mobil/settings/consts.dart';
+import 'package:ev_mobil/widgets/makeReservationWidget.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'gridViewChildWidget.dart';
 
 class ReservationCalendarWidget extends StatefulWidget {
@@ -87,7 +90,7 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
           //-------------------------Takvim sayfası-------------------------------
           Padding(
             padding: const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
-            child  : checked? TableCalendarWidget():  // takvim
+            child  : checked? TableCalendarWidget(calendarFormat: CalendarFormat.month):  // takvim
             Padding(
               padding:  const EdgeInsets.only(top: defaultPadding*2),
               child: GridView.custom(
@@ -112,13 +115,15 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
               thickness: 1.5,
             ),
           ),
+          checked?
           TextButton(
             style: ButtonStyle(),
             onPressed: (){          
            setState(() {
               checked = !checked;
             });
-          }, child: checked? 
+          },
+          child: 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children:[
@@ -128,16 +133,38 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
             fontSize: 18,
             fontFamily: contentFont)),
             SizedBox(width: deviceWidth(context)*0.01),
-            FaIcon(FontAwesomeIcons.clock,size: 18,color: secondaryColor,)]):
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:[
-            Text("Randevu günü seçiniz",
-            style: TextStyle(
-            fontSize: 18,
-            fontFamily: contentFont,
-            color: primaryColor)),
-            Icon(Icons.date_range_sharp,color: secondaryColor)])),
+            FaIcon(FontAwesomeIcons.clock,size: 18,color: secondaryColor,)])
+            )
+            :
+            Padding(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeReservationWidget()));
+                  });
+                  //Buton tıklandığında randevu al sayfasına yönlendirilecek
+                },
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //-------------Buton Metni-------------
+                      Text(
+                        "Randevu Bilgilerini Doldur",
+                        style: Theme.of(context).textTheme.button.copyWith(color: primaryColor,fontSize: 18),
+                      ),
+                      //-------------------------------------
+                      SizedBox(width: 10), //butondaki Text ve icon arası boşluk
+                      Icon(
+                        LineIcons.arrowRight, //ileri iconu
+                        color: secondaryColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
