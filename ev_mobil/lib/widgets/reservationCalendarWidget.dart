@@ -88,17 +88,20 @@ class _ReservationCalendarWidgetState extends State<ReservationCalendarWidget> {
           Padding(
             padding: const EdgeInsets.only(right: defaultPadding, left: defaultPadding),
             child  : checked? TableCalendarWidget():  // takvim
-            GridView.custom(
-              gridDelegate    : SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: (1 / .4), //saatler arası hizalama
-              crossAxisCount  : 5, // satırdaki widget sayısı
-            ),
-            childrenDelegate: SliverChildListDelegate(gridChildren),
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: EdgeInsets.all(0.1),
-            scrollDirection: Axis.vertical,
+            Padding(
+              padding:  const EdgeInsets.only(top: defaultPadding*2),
+              child: GridView.custom(
+                gridDelegate    : SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: (1 / .4), //saatler arası hizalama
+                crossAxisCount  : 5, // satırdaki widget sayısı
+              ),
+              childrenDelegate: SliverChildListDelegate(gridChildren),
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.all(0.1),
+              scrollDirection: Axis.vertical,
           ),
+            ),
           ),
           //----------------------------------------------------------------------
           //--------------------Takvim - Saatler arası çizgi----------------------
