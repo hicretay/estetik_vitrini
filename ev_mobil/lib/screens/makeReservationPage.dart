@@ -1,20 +1,19 @@
 import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/headerWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'informationRowWidget.dart';
+import '../widgets/informationRowWidget.dart';
 
-class MakeReservationWidget extends StatefulWidget {
+class MakeReservationPage extends StatefulWidget {
 
-  MakeReservationWidget({Key key}) : super(key: key);
+  MakeReservationPage({Key key}) : super(key: key);
 
   @override
-  _MakeReservationWidgetState createState() => _MakeReservationWidgetState();
+  _MakeReservationPageState createState() => _MakeReservationPageState();
 }
 
-class _MakeReservationWidgetState extends State<MakeReservationWidget> {
+class _MakeReservationPageState extends State<MakeReservationPage> {
   TextEditingController teName = TextEditingController();
   TextEditingController teNote = TextEditingController();
   String teOperation;
@@ -29,20 +28,36 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(defaultPadding),
-                child: HeaderWidget(
-                  primaryIcon: Icon(
-                    Icons.arrow_back,
-                    color: secondaryColor,
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        //iconun çevresini saran yapı tasarımı
+                        maxRadius: 25,
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          iconSize: iconSize,
+                          icon: Icon(
+                              Icons.arrow_back,
+                              color: secondaryColor,
+                            ),
+                          onPressed: (){ Navigator.pop(context, false);}
+                        ),
+                      ),
+                      SizedBox(
+                        width: maxSpace,
+                      ),
+                      Text(
+                        "Estetik Vitrini",
+                        style: TextStyle(
+                            fontFamily: leadingFont, fontSize: 20, color: Colors.white),
+                      ),
+                    ],
                   ),
-                  secondaryIcon: Icon(
-                    Icons.search,
-                    color: secondaryColor,
-                  ),
-                  onPressedSecondary: () {},
-                  onPressedPrimary: () {
-                    Navigator.pop(context, false);
-                  },
-                ),
+                ],
+              ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -108,66 +123,6 @@ class _MakeReservationWidgetState extends State<MakeReservationWidget> {
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
-                ),
-              ),
-              InformationRowWidget(
-                containerColor: darkWhite,
-                width: 250,
-                height: 50,
-                operationName: "Ad Soyad",
-                child: TextField(
-                  controller: teName,
-                  cursorColor: primaryColor,
-                  style: TextStyle(color: primaryColor, fontSize: 18),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 0,
-                        style: BorderStyle.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              InformationRowWidget(
-                containerColor: darkWhite,
-                operationName: "İşlem",
-                width: 250,
-                height: 50,
-                child: DropdownButton(
-                  hint: Text(
-                    "İşlem seçiniz:",
-                    style: TextStyle(color: primaryColor, fontSize: 18),
-                  ),
-                  value: teOperation,
-                  items: [
-                    DropdownMenuItem(
-                      child: Text(
-                        "Cilt Bakımı",
-                        style: TextStyle(color: primaryColor, fontSize: 18),
-                      ),
-                      value: "Cilt Bakımı",
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "Lazer Epilasyon",
-                        style: TextStyle(color: primaryColor, fontSize: 18),
-                      ),
-                      value: "Lazer Epilasyon",
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "Medikal Estetik",
-                        style: TextStyle(color: primaryColor, fontSize: 18),
-                      ),
-                      value: "Medikal Estetik",
-                    )
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      teOperation = value;
-                    });
-                  },
                 ),
               ),
               InformationRowWidget(

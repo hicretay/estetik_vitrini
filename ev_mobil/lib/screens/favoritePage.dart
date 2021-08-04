@@ -1,9 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:ev_mobil/settings/navigationProvider.dart';
-import 'package:ev_mobil/screens/makeAppointmentPage.dart';
+import 'package:ev_mobil/screens/makeAppointmentCalendarPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
-import 'package:ev_mobil/widgets/headerWidget.dart';
 import 'package:ev_mobil/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -30,31 +28,9 @@ class _FavoritePageState extends State<FavoritePage> {
           colors: backGroundColor1,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
-                //-------------------- Header Kısmı -----------------------------
-                child: HeaderWidget(
-                  primaryIcon: Icon(
-                    // birincil iconu geri tuşu
-                    Icons.arrow_back,
-                    color: primaryColor,
-                  ),
-                  onPressedPrimary: () {
-                    // geri butonuna basıldığında homePage'e yönlendirecek
-                    NavigationProvider.of(context).setTab(HOME_PAGE);
-                  },
-                  secondaryIcon: Icon(
-                    // ikincil iconu search
-                    Icons.search,
-                    color: primaryColor,
-                  ),
-                  onPressedSecondary: () {},
-                ),
-                //--------------------------------------------------------------
-              ),
               //-----------------------Sayfa Başlığı----------------------------
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 20,top: 20),
                 child: Align(
                   alignment: Alignment.topLeft, // başlık sola bitişik
                   child: Text(

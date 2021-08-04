@@ -116,14 +116,14 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                           });
                                         }),
                                     IconButton(
-                                        icon: Icon(
-                                          LineIcons.phone,
-                                          color: primaryColor,
-                                        ),
-                                        onPressed: () {}),
+                                    icon: Icon(
+                                      Icons.share_outlined,
+                                      color: primaryColor,
+                                    ),
+                                    onPressed: () {}),
                                     IconButton(
                                         icon: Icon(
-                                          Icons.share_outlined,
+                                          LineIcons.phone,
                                           color: primaryColor,
                                         ),
                                         onPressed: () {}),

@@ -1,9 +1,9 @@
-import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
 import 'package:ev_mobil/widgets/reservationResultWidget.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ReservationPage extends StatefulWidget {
@@ -19,83 +19,72 @@ class _ReservationPageState extends State<ReservationPage> {
   Map<CalendarFormat, String> days = {};
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BackGroundContainer(
-          colors: backGroundColor2,
-          child: Column(
-            children: [
-               Padding(padding: const EdgeInsets.all(defaultPadding),
+    return Scaffold(
+      body: BackGroundContainer(
+        colors: backGroundColor2,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*3,bottom: defaultPadding),
               child: Row(
-              children: [
-              CircleAvatar(
-                //iconun çevresini saran yapı tasarımı
-                maxRadius: 25,
-                backgroundColor: Colors.white,
-                child: IconButton(
-                    iconSize: iconSize,
-                    icon: Icon(Icons.arrow_back,color: primaryColor),
-                    onPressed: (){
-                      NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                    },
-                ),
-              ),
-              SizedBox(
-                width: maxSpace,
-              ),
-              Text(
-                "Estetik Vitrini",
-                style: TextStyle(
-                      fontFamily: leadingFont, fontSize: 20, color: Colors.white),
-              ),
-            ])),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   Text(
                     "Randevularım",
                     style: Theme.of(context)
-                        .textTheme
-                        .headline4
-                        .copyWith(color: white, fontFamily: leadingFont),
+                      .textTheme
+                      .headline4
+                      .copyWith(color: white, fontFamily: leadingFont),
+                  ),
+                  SizedBox(
+                    width: maxSpace,
+                  ),
+                  CircleAvatar(
+                    //iconun çevresini saran yapı tasarımı
+                    maxRadius: 25,
+                    backgroundColor: Colors.white,
+                    child: IconButton(
+                      iconSize: iconSize,
+                      icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
+                      onPressed: (){}
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(cardCurved),
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  physics: ScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(defaultPadding),
+                        child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
+                      ),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 4,
+                        itemBuilder: (BuildContext context, int index){
+                        return ResevationResultWidget(
+                        companyName: "Epilady Güzellik Salonu",
+                        operation: "Cilt Bakımı",
+                        time: "10:00",
+                      );
+                      }),
+                    ],
                   ),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(cardCurved),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    physics: ScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(defaultPadding),
-                          child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
-                        ),
-                        ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 4,
-                          itemBuilder: (BuildContext context, int index){
-                          return ResevationResultWidget(
-                          companyName: "Epilady Güzellik Salonu",
-                          operation: "Cilt Bakımı",
-                          time: "10:00",
-                        );
-                        }),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

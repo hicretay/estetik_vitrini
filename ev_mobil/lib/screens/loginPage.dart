@@ -99,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:[
+                //----------------------------EMAİL LOGİN BUTONU----------------------------------
                             GestureDetector(
                               child: CircleAvatar(
                               backgroundColor: secondaryColor,
@@ -110,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(builder: (context) => RegisterPage())); 
                               },),
                             SizedBox(width: deviceWidth(context)*0.05),
+                //-----------------------------GOOGLE LOGİN BUTONU---------------------------------
                             GestureDetector(
                               child: CircleAvatar(
                               backgroundColor: secondaryColor,
@@ -118,7 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                               color: primaryColor,
                               )),
                               onTap: (){},),
+                //----------------------------------------------------------------------------------
                             SizedBox(width: deviceWidth(context)*0.05),
+                //------------------------------FACEBOOK LOGİN BUTONU--------------------------------
                             GestureDetector(
                               child: CircleAvatar(
                               backgroundColor: secondaryColor,
@@ -126,6 +130,8 @@ class _LoginPageState extends State<LoginPage> {
                               child: FaIcon(FontAwesomeIcons.facebookF,
                               color: primaryColor,)),
                               onTap: (){
+                                final progressUHD = ProgressHUD.of(context);
+                                progressUHD.show();
                                 FacebookAuth.instance.login(
                                   permissions: ["public_profile","email"],
                                 ).then((value){
@@ -135,10 +141,12 @@ class _LoginPageState extends State<LoginPage> {
                                         userObject = userData;
                                     });
                                   });
-
+                                 Navigator.pushAndRemoveUntil(context,
+                                 MaterialPageRoute(builder: (context) => Root()), (route) => false);  
+                                 progressUHD.dismiss(); 
                                 });
-
                               }),
+                //-----------------------------------------------------------------------------------
                               ]),
                           ]),
                         )
@@ -152,10 +160,12 @@ class _LoginPageState extends State<LoginPage> {
       bottomNavigationBar:  
       Container(
         color: primaryColor,
+    //---------------------------------------ŞİFREMİ UNUTTUM BUTONU----------------------------------
         child: TextButton(
         child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16),),
         onPressed: (){}, 
         ),
+    //-----------------------------------------------------------------------------------------------
       ),
     );
   }
