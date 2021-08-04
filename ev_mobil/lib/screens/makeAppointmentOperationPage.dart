@@ -13,8 +13,8 @@ class MakeAppointmentOperationPage extends StatefulWidget {
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
     Map<String, bool> _operations = {
     "Cilt Bakımı": false,
-    "Medikal Estetik": false,
-    "Lazer Epilasyon": true,
+    "Medikal Estetik": true,
+    "Lazer Epilasyon": false,
   };
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                             },
                             child: Container(
                               //locationların listeleneceği card genişliği
-                              height: deviceHeight(context) * 0.13,
+                              height: deviceHeight(context) * 0.08,
                               width: deviceWidth(context) * 0.9,
                               decoration: BoxDecoration(
                                 // Container rengi gradient ile verildi
@@ -155,7 +155,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                   title: Text(_operations.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
                                     textAlign: TextAlign.center,
                                     style    : TextStyle(
-                                    fontSize : 22, // işlemlerin fontu
+                                    fontSize : 20, // işlemlerin fontu
                                     color: _operations.values.toList()[index]
                                           ? Colors.white // seçili ise açık text
                                           : primaryColor, // seçili değilse koyu

@@ -22,7 +22,7 @@ const leadingFont = "nouvelle_vague_final";
 const contentFont = "futura_medium_bt";
 
 deviceHeight(BuildContext context)=>
- MediaQuery.of(context).size.width;
+ MediaQuery.of(context).size.height;
 // Cihaz ekran yüksekliği
 
 deviceWidth(BuildContext context)=>

@@ -90,7 +90,7 @@ class _LocationPageState extends State<LocationPage> {
                 //SizedBox(height: deviceHeight(context)*0.05),
                 Center(
                   child: Container(
-                    height: deviceHeight(context)*0.16,
+                    height: deviceHeight(context)*0.08,
                     width: deviceWidth(context)*0.9,
                     decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
                     gradient: LinearGradient(
@@ -98,7 +98,7 @@ class _LocationPageState extends State<LocationPage> {
                               end: Alignment.topRight,
                               colors: backGroundColor1
                             ),),
-                      child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.075),
+                      child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.04),
                       title: Center(
                         child: DropdownButton(
                               dropdownColor: Colors.transparent,
@@ -137,7 +137,7 @@ class _LocationPageState extends State<LocationPage> {
                         },
                         child: Container(
                           //locationların listeleneceği card genişliği
-                          height: deviceHeight(context) * 0.16,
+                          height: deviceHeight(context) * 0.08,
                           width: deviceWidth(context) * 0.9,
                           decoration: BoxDecoration(
                             // Container rengi gradient ile verildi

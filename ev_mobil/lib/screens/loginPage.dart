@@ -42,11 +42,11 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(children: [
-                  SizedBox(height: deviceHeight(context) * 0.3), // giriş ikonu - cihaz üstü boşluk          
+                  SizedBox(height: deviceHeight(context) * 0.15), // giriş ikonu - cihaz üstü boşluk          
                        //--------------------------giriş ikonu----------------------------------
                         Center(child: SvgPicture.asset("assets/images/logobeyaz.svg")),  
                        //------------------------------------------------------------------
-                        SizedBox(height: deviceHeight(context) * 0.1),
+                        SizedBox(height: deviceHeight(context) * 0.05),
                         SingleChildScrollView(
                           reverse: true,
                           child: Column(children: [
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           //------------------------------------------------------------------
-                          SizedBox(height: deviceHeight(context)*0.1),
+                          SizedBox(height: deviceHeight(context)*0.05),
                           Material(
                             color: primaryColor,
                             borderRadius: BorderRadius.circular(30.0),

@@ -73,7 +73,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               child: SizedBox(
                                 width:
                                     double.infinity, //genişlik: container kadar
-                                height: deviceHeight(context) * 0.6,
+                                height: deviceHeight(context) * 0.25,
                                 //yükseklik
                                 child: buildCarousel(), //Carousel fonksiyonu
                               ),
