@@ -55,8 +55,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                     width: double.infinity, //genişlik: container genişliği
                     height: 250, //container yüksekliği: 250
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          maxSpace), //Resmin kenarlarının yuvarlatılması
+                      borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                       image: DecorationImage(
                         fit: BoxFit.cover, // Resim containerı kaplasın
                         image: NetworkImage(
@@ -68,17 +67,12 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
 
                     //----------------Resim üzerinde yer alacak yapılar-----------------
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment
-                          .end, //Tüm widgetlar container altına konumlandırılsın
+                      mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
                       children: [
-                        Align(
-                          alignment: Alignment
-                              .bottomLeft, // cardText'in sol alta konumlandırılması
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: maxSpace),
+                        Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
+                          child: Padding(padding: const EdgeInsets.only(left: maxSpace),
                             child: Text(
-                              widget
-                                  .cardText, //Kendin için bir şeyler yap metni
+                              widget.cardText, //Kendin için bir şeyler yap metni
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -144,8 +138,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                     ),
                                     SizedBox(width: minSpace),
                                     //Buton texti - icon arası boşluk
-                                    Icon(
-                                      LineIcons.arrowRight, // sağa ok ikonu
+                                    Icon( LineIcons.arrowRight, // sağa ok ikonu
                                       color: primaryColor,
                                     ),
                                   ],

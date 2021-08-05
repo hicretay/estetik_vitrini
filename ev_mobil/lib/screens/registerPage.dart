@@ -59,115 +59,106 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: (){Navigator.pop(context, false);},
                       ),
                     ),
-                    // SizedBox(
-                    //   width: maxSpace,
-                    // ),
-                    // Text(
-                    //   "Kayıt Ol",
-                    //   style: TextStyle(
-                    //       fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                    // ),
                   ],
                 )
               ),
-                 // SizedBox(height: deviceHeight(context) * 0.15), // giriş ikonu - cihaz üstü boşluk          
-                       //--------------------------giriş ikonu----------------------------------
-                        Center(child: SvgPicture.asset("assets/images/logobeyaz.svg")),  
-                       //------------------------------------------------------------------
-                        SizedBox(height: deviceHeight(context) * 0.05),
-                        SingleChildScrollView(
-                          reverse: true,
-                          child: Padding(padding: const EdgeInsets.all(minSpace),
-                            child: Column(children: [
-                              //-----------------------------Eposta textField'ı----------------------------------------
-                                TextFieldWidget(textEditingController: txtEMail,
-                                keyboardType: TextInputType.name,
-                                hintText    : "E-Posta", //ipucu metni
-                                obscureText : false, // yazılanlar gizlenmesin
-                                ),
-                               //-----------------------------Ad-Soyad textField'ı----------------------------------------
-                                TextFieldWidget(textEditingController: txtNameSurname,
-                                keyboardType: TextInputType.name,
-                                hintText    : "Ad Soyad", //ipucu metni
-                                obscureText : false, // yazılanlar gizlenmesin
-                                ),
-                              //-----------------------------Telefon textField'ı--------------------------------------
-                                TextFieldWidget(textEditingController: txtTelephone,
-                                keyboardType: TextInputType.name,
-                                hintText    : "Telefon", //ipucu metni
-                                obscureText : false, // yazılanlar gizlenmesin
-                                ),
-                              //-----------------------------Şifre textField'ı----------------------------------------
-                                TextFieldWidget(
-                                textEditingController: txtPassword,
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText : true, // yazılanlar gizlensin
-                                hintText    : "Şifre", //ipucu metni
-                                  ),
-                              //----------------------------Şifre tekrar textField'ı---------------------------------
-                                TextFieldWidget(
-                                textEditingController: txtPasswordAgain,
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText : true, // yazılanlar gizlensin
-                                hintText    : "Şifre tekrar", //ipucu metni
-                                  ),
-                                //-----------------------------------------------------------------------------------
-                                Column(
-                                  //mainAxisAlignment: MainAxisAlignment.center,
-                                  children:[
-                                    CheckboxListTile(
-                                    //contentPadding: EdgeInsets.all(0),
-                                    value: checkedKVKK, 
-                                    title: GestureDetector(
-                                      child: Text("KVKK Bildirimini onaylıyorum",
-                                      style: TextStyle(
-                                      color: secondaryColor,
-                                      decoration: TextDecoration.underline),
-                                      ),
-                                      onTap: (){},),//
-                                    activeColor: secondaryColor,
-                                    checkColor: primaryColor,
-                                    //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
-                                    controlAffinity: ListTileControlAffinity.leading,
-                                    onChanged: (value){
-                                       setState(() {
-                                            checkedKVKK=value;                                  
-                                          });
-                                        }),
-                                    CheckboxListTile(
-                                    value: checkedPrivacy, 
-                                    title: GestureDetector(
-                                    child: Text("Gizlilik Sözleşmesini kabul ediyorum",
-                                    style: TextStyle(color: secondaryColor,
-                                    decoration: TextDecoration.underline)),
-                                    onTap: (){},),
-                                    activeColor: secondaryColor,
-                                    checkColor: primaryColor,
-                                    //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
-                                    controlAffinity: ListTileControlAffinity.leading,
-                                    onChanged: (value){
-                                    setState(() {
-                                        checkedPrivacy = value;
-                                      });
-                                    }),
-                                  ],
-                                ),
-                                Material(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  child: MaterialButton(
-                                    minWidth: deviceWidth(context) * 0.5, //Buton minimum genişliği
-                                    child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
-                                    onPressed: (){
-                                      final progressUHD = ProgressHUD.of(context);
-                                      progressUHD.show(); 
-                                      Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage()));    
-                                      progressUHD.dismiss(); 
-                                  }),
-                                ),
-                              ],),
+               //--------------------------giriş ikonu----------------------------------
+                Center(child: SvgPicture.asset("assets/images/logobeyaz.svg")),  
+               //------------------------------------------------------------------
+                SizedBox(height: deviceHeight(context) * 0.05),
+                SingleChildScrollView(
+                  reverse: true,
+                  child: Padding(padding: const EdgeInsets.all(minSpace),
+                    child: Column(children: [
+                       //---------------------------Ad-Soyad textField'ı---------------------------------------
+                        TextFieldWidget(textEditingController: txtNameSurname,
+                        keyboardType: TextInputType.name,
+                        hintText    : "Ad Soyad", //ipucu metni
+                        obscureText : false, // yazılanlar gizlenmesin
+                        ),
+                      //-----------------------------Eposta textField'ı----------------------------------------
+                        TextFieldWidget(textEditingController: txtEMail,
+                        keyboardType: TextInputType.emailAddress,
+                        hintText    : "E-Posta", //ipucu metni
+                        obscureText : false, // yazılanlar gizlenmesin
+                        ),
+                      //-----------------------------Telefon textField'ı--------------------------------------
+                        TextFieldWidget(textEditingController: txtTelephone,
+                        keyboardType: TextInputType.phone,
+                        hintText    : "Telefon", //ipucu metni
+                        obscureText : false, // yazılanlar gizlenmesin
+                        ),
+                      //-----------------------------Şifre textField'ı----------------------------------------
+                        TextFieldWidget(
+                        textEditingController: txtPassword,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText : true, // yazılanlar gizlensin
+                        hintText    : "Şifre", //ipucu metni
                           ),
-                        )
+                      //----------------------------Şifre tekrar textField'ı---------------------------------
+                        TextFieldWidget(
+                        textEditingController: txtPasswordAgain,
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText : true, // yazılanlar gizlensin
+                        hintText    : "Şifre tekrar", //ipucu metni
+                        ),
+                        //-----------------------------------------------------------------------------------
+                        Column(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          children:[
+                            CheckboxListTile(
+                            //contentPadding: EdgeInsets.all(0),
+                            value: checkedKVKK, 
+                            title: GestureDetector(
+                              child: Text("KVKK Bildirimini onaylıyorum",
+                              style: TextStyle(
+                              color: secondaryColor,
+                              decoration: TextDecoration.underline),
+                              ),
+                              onTap: (){},),//
+                            activeColor: secondaryColor,
+                            checkColor: primaryColor,
+                            //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                            controlAffinity: ListTileControlAffinity.leading,
+                            onChanged: (value){
+                               setState(() {
+                                    checkedKVKK=value;                                  
+                                  });
+                                }),
+                            CheckboxListTile(
+                            value: checkedPrivacy, 
+                            title: GestureDetector(
+                            child: Text("Gizlilik Sözleşmesini kabul ediyorum",
+                            style: TextStyle(color: secondaryColor,
+                            decoration: TextDecoration.underline)),
+                            onTap: (){},),
+                            activeColor: secondaryColor,
+                            checkColor: primaryColor,
+                            //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                            controlAffinity: ListTileControlAffinity.leading,
+                            onChanged: (value){
+                            setState(() {
+                                checkedPrivacy = value;
+                              });
+                            }),
+                          ],
+                        ),
+                        Material(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(30.0),
+                          child: MaterialButton(
+                            minWidth: deviceWidth(context) * 0.5, //Buton minimum genişliği
+                            child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
+                            onPressed: (){
+                            final progressUHD = ProgressHUD.of(context);
+                            progressUHD.show(); 
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage()));    
+                            progressUHD.dismiss(); 
+                          }),
+                        ),
+                      ],),
+                  ),
+                )
                 ],),
               ),
             ),

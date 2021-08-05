@@ -1,4 +1,5 @@
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
+import 'package:ev_mobil/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -209,6 +210,9 @@ class _LocationPageState extends State<LocationPage> {
         ],
       ),
     ),
-      );
+    bottomNavigationBar: TextButtonWidget(
+      buttonText: "Uygula",
+      onPressed: (){}),
+   );
   }
 }

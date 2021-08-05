@@ -1,4 +1,4 @@
-import 'package:ev_mobil/settings/navigationProvider.dart';
+import 'package:ev_mobil/screens/homeDetailPage.dart';
 import 'package:ev_mobil/widgets/homeContainerWidget.dart';
 import 'package:ev_mobil/widgets/storyWidget.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+      List<Widget> homeList = [
+      HomeContainerWidget(
+       iconNumber: 0,
+       imgNumber: 0,
+       cardText: "Kendin için bir\nşeyler yap...",
+       onPressed: () {
+          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+         Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
+       },
+     ),
+     HomeContainerWidget(
+       iconNumber: 1,
+       imgNumber: 2,
+       cardText: "",
+       onPressed: () {
+         // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+         Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
+       },
+     ),
+    ];
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -59,36 +80,42 @@ class _HomePageState extends State<HomePage> {
 
               //----------------Story Paneli---------------
               //StoryWidget kullanıldı
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    StoryWidget(
-                      iconNumber: 0,
-                      imgNumber: 0,
-                      nameNumber: 0,
+              Flexible(
+                flex: 1,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  children: 
+                    [Row(
+                      children: [
+                        StoryWidget(
+                          iconNumber: 0,
+                          imgNumber: 0,
+                          nameNumber: 0,
+                        ),
+                        StoryWidget(
+                          iconNumber: 1,
+                          imgNumber: 1,
+                          nameNumber: 1,
+                        ),
+                        StoryWidget(
+                          iconNumber: 2,
+                          imgNumber: 2,
+                          nameNumber: 2,
+                        ),
+                        StoryWidget(
+                          iconNumber: 3,
+                          imgNumber: 3,
+                          nameNumber: 3,
+                        ),
+                        StoryWidget(
+                          iconNumber: 2,
+                          imgNumber: 2,
+                          nameNumber: 2,
+                        ),
+                        SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
+                      ],
                     ),
-                    StoryWidget(
-                      iconNumber: 1,
-                      imgNumber: 1,
-                      nameNumber: 1,
-                    ),
-                    StoryWidget(
-                      iconNumber: 2,
-                      imgNumber: 2,
-                      nameNumber: 2,
-                    ),
-                    StoryWidget(
-                      iconNumber: 3,
-                      imgNumber: 3,
-                      nameNumber: 3,
-                    ),
-                    StoryWidget(
-                      iconNumber: 2,
-                      imgNumber: 2,
-                      nameNumber: 2,
-                    ),
-                    SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
                   ],
                 ),
               ),
@@ -97,33 +124,13 @@ class _HomePageState extends State<HomePage> {
               //------------------------------------Anasayfa Postları----------------------------------------
               //HomeContainerWidget ile oluşturuldu
               Flexible(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      HomeContainerWidget(
-                        iconNumber: 0,
-                        imgNumber: 0,
-                        cardText: "Kendin için bir\nşeyler yap...",
-                        onPressed: () {
-                          //"Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
-                          NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                        },
-                      ),
-                      HomeContainerWidget(
-                        iconNumber: 1,
-                        imgNumber: 2,
-                        cardText: "",
-                        onPressed: () {
-                          // "Detaylı Bilgi İçin" butouna basıldığında Favori Salonlara yönlendirecek
-                          NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                        },
-                      ),
-                      //HomeContainerWidget(),
-                    ],
-                  ),
-                  //-------------------------------------------------------------------------------------------------
-                ),
-              ),
+                flex: 4,
+                child: ListView.builder(
+                  itemCount: homeList.length,
+                  itemBuilder: (BuildContext context, int index){
+                  return homeList[index];
+                }),
+              )
             ],
           ),
         ),

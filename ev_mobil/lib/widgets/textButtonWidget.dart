@@ -22,7 +22,8 @@ class TextButtonWidget extends StatelessWidget {
      fontSize  : 18,
      fontFamily: contentFont)),
      SizedBox(width: deviceWidth(context)*0.01),
-     FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: secondaryColor,)]),
+     FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: secondaryColor)
+     ]),
      onPressed : onPressed,
      ),
           ),

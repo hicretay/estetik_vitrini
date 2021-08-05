@@ -50,13 +50,13 @@ class _LoginPageState extends State<LoginPage> {
                         SingleChildScrollView(
                           reverse: true,
                           child: Column(children: [
-                                //--------------------Kullanıcı textField'ı---------------------
-                                TextFieldWidget(textEditingController: txtUsername,
-                                keyboardType: TextInputType.name,
-                                hintText    : "Telefon veya E-Posta", //ipucu metni
-                                obscureText : false, // yazılanlar gizlenmesin
-                                ),
-                            //-------------------------Şifre textField'ı------------------------
+                           //--------------------Kullanıcı textField'ı---------------------
+                           TextFieldWidget(textEditingController: txtUsername,
+                           keyboardType: TextInputType.emailAddress,
+                           hintText    : "Telefon veya E-Posta", //ipucu metni
+                           obscureText : false, // yazılanlar gizlenmesin
+                           ),
+                          //-------------------------Şifre textField'ı------------------------
                           TextFieldWidget(
                           textEditingController: txtPassword,
                           keyboardType: TextInputType.visiblePassword,
