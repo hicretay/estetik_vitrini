@@ -11,7 +11,7 @@ class MakeAppointmentTimePage extends StatefulWidget {
 }
 
 class _MakeAppointmentTimeScreenState extends State<MakeAppointmentTimePage> {
-  var gridChildren = [
+  List<String> gridChildren = [
     "08.00",
     "08.30",
     "09.00",
