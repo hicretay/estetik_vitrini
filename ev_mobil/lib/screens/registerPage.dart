@@ -80,47 +80,37 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Padding(padding: const EdgeInsets.all(minSpace),
                             child: Column(children: [
                               //-----------------------------Eposta textField'ı----------------------------------------
-                                  Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
-                                    child       : TextFieldWidget(textEditingController: txtEMail,
-                                    keyboardType: TextInputType.name,
-                                    hintText    : "E-Posta", //ipucu metni
-                                    obscureText : false, // yazılanlar gizlenmesin
-                                  ),
-                              ),
+                                TextFieldWidget(textEditingController: txtEMail,
+                                keyboardType: TextInputType.name,
+                                hintText    : "E-Posta", //ipucu metni
+                                obscureText : false, // yazılanlar gizlenmesin
+                                ),
                                //-----------------------------Ad-Soyad textField'ı----------------------------------------
-                                  Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
-                                    child       : TextFieldWidget(textEditingController: txtNameSurname,
-                                    keyboardType: TextInputType.name,
-                                    hintText    : "Ad Soyad", //ipucu metni
-                                    obscureText : false, // yazılanlar gizlenmesin
-                                  ),
-                              ),
+                                TextFieldWidget(textEditingController: txtNameSurname,
+                                keyboardType: TextInputType.name,
+                                hintText    : "Ad Soyad", //ipucu metni
+                                obscureText : false, // yazılanlar gizlenmesin
+                                ),
                               //-----------------------------Telefon textField'ı--------------------------------------
-                                  Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
-                                    child       : TextFieldWidget(textEditingController: txtTelephone,
-                                    keyboardType: TextInputType.name,
-                                    hintText    : "Telefon", //ipucu metni
-                                    obscureText : false, // yazılanlar gizlenmesin
-                                  ),
-                              ),
+                                TextFieldWidget(textEditingController: txtTelephone,
+                                keyboardType: TextInputType.name,
+                                hintText    : "Telefon", //ipucu metni
+                                obscureText : false, // yazılanlar gizlenmesin
+                                ),
                               //-----------------------------Şifre textField'ı----------------------------------------
-                                Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
-                                    child: TextFieldWidget(
-                                    textEditingController: txtPassword,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    obscureText : true, // yazılanlar gizlensin
-                                    hintText    : "Şifre", //ipucu metni
+                                TextFieldWidget(
+                                textEditingController: txtPassword,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText : true, // yazılanlar gizlensin
+                                hintText    : "Şifre", //ipucu metni
                                   ),
-                                ),
                               //----------------------------Şifre tekrar textField'ı---------------------------------
-                                Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
-                                    child: TextFieldWidget(
-                                    textEditingController: txtPasswordAgain,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    obscureText : true, // yazılanlar gizlensin
-                                    hintText    : "Şifre tekrar", //ipucu metni
+                                TextFieldWidget(
+                                textEditingController: txtPasswordAgain,
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText : true, // yazılanlar gizlensin
+                                hintText    : "Şifre tekrar", //ipucu metni
                                   ),
-                                ),
                                 //-----------------------------------------------------------------------------------
                                 Column(
                                   //mainAxisAlignment: MainAxisAlignment.center,

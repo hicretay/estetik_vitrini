@@ -17,24 +17,31 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: textEditingController,
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      cursorColor: primaryColor,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(cardCurved),
+    return Padding(
+      padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+      child: Container(
+        height: MediaQuery.of(context).size.height*0.065,
+        width: deviceWidth(context),
+        child: TextField(
+          controller: textEditingController,
+          keyboardType: keyboardType,
+          obscureText: obscureText,
+          cursorColor: primaryColor,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(cardCurved),
+            ),
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Colors.black38,
+              fontSize: 16,
+              fontFamily: contentFont
+            ),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
+          ),
         ),
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: Colors.black38,
-          fontSize: 16,
-          fontFamily: contentFont
-        ),
-        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
       ),
     );
   }

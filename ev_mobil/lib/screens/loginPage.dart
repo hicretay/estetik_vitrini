@@ -51,22 +51,18 @@ class _LoginPageState extends State<LoginPage> {
                           reverse: true,
                           child: Column(children: [
                                 //--------------------Kullanıcı textField'ı---------------------
-                                Padding(padding: const EdgeInsets.only(top: defaultPadding,right: defaultPadding,left: defaultPadding),
-                                  child       : TextFieldWidget(textEditingController: txtUsername,
-                                  keyboardType: TextInputType.name,
-                                  hintText    : "Telefon veya E-Posta", //ipucu metni
-                                  obscureText : false, // yazılanlar gizlenmesin
+                                TextFieldWidget(textEditingController: txtUsername,
+                                keyboardType: TextInputType.name,
+                                hintText    : "Telefon veya E-Posta", //ipucu metni
+                                obscureText : false, // yazılanlar gizlenmesin
                                 ),
-                            ),
                             //-------------------------Şifre textField'ı------------------------
-                          Padding(padding: const EdgeInsets.only(top: defaultPadding,right: defaultPadding,left: defaultPadding),
-                              child: TextFieldWidget(
-                              textEditingController: txtPassword,
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText : true, // yazılanlar gizlensin
-                              hintText    : "Şifre", //ipucu metni
+                          TextFieldWidget(
+                          textEditingController: txtPassword,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText : true, // yazılanlar gizlensin
+                          hintText    : "Şifre", //ipucu metni
                             ),
-                          ),
                           //------------------------------------------------------------------
                           SizedBox(height: deviceHeight(context)*0.05),
                           Material(
