@@ -18,6 +18,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController txtTelephone = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtPasswordAgain = TextEditingController();
+  TextEditingController txtNameSurname = TextEditingController();
+
 
   bool checkedKVKK = false;
   bool checkedPrivacy = false;
@@ -43,20 +45,53 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(children: [
-                  SizedBox(height: deviceHeight(context) * 0.3), // giriş ikonu - cihaz üstü boşluk          
+                Padding(
+                padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*3,bottom: defaultPadding),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      //iconun çevresini saran yapı tasarımı
+                      maxRadius: 25,
+                      backgroundColor: Colors.transparent,
+                      child: IconButton(
+                        iconSize: iconSize,
+                        icon: Icon(Icons.arrow_back,color: primaryColor,size: 35),
+                        onPressed: (){Navigator.pop(context, false);},
+                      ),
+                    ),
+                    // SizedBox(
+                    //   width: maxSpace,
+                    // ),
+                    // Text(
+                    //   "Kayıt Ol",
+                    //   style: TextStyle(
+                    //       fontFamily: leadingFont, fontSize: 25, color: Colors.white),
+                    // ),
+                  ],
+                )
+              ),
+                 // SizedBox(height: deviceHeight(context) * 0.15), // giriş ikonu - cihaz üstü boşluk          
                        //--------------------------giriş ikonu----------------------------------
                         Center(child: SvgPicture.asset("assets/images/logobeyaz.svg")),  
                        //------------------------------------------------------------------
-                        SizedBox(height: deviceHeight(context) * 0.1),
+                        SizedBox(height: deviceHeight(context) * 0.05),
                         SingleChildScrollView(
                           reverse: true,
                           child: Padding(padding: const EdgeInsets.all(minSpace),
                             child: Column(children: [
-                              //-----------------------------Email textField'ı----------------------------------------
+                              //-----------------------------Eposta textField'ı----------------------------------------
                                   Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
                                     child       : TextFieldWidget(textEditingController: txtEMail,
                                     keyboardType: TextInputType.name,
                                     hintText    : "E-Posta", //ipucu metni
+                                    obscureText : false, // yazılanlar gizlenmesin
+                                  ),
+                              ),
+                               //-----------------------------Ad-Soyad textField'ı----------------------------------------
+                                  Padding(padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+                                    child       : TextFieldWidget(textEditingController: txtNameSurname,
+                                    keyboardType: TextInputType.name,
+                                    hintText    : "Ad Soyad", //ipucu metni
                                     obscureText : false, // yazılanlar gizlenmesin
                                   ),
                               ),

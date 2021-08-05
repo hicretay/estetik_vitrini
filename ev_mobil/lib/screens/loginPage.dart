@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
         color: primaryColor,
     //---------------------------------------ŞİFREMİ UNUTTUM BUTONU----------------------------------
         child: TextButton(
-        child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16),),
+        child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 18),),
         onPressed: (){}, 
         ),
     //-----------------------------------------------------------------------------------------------

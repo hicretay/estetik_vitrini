@@ -31,7 +31,7 @@ class TextFieldWidget extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           color: Colors.black38,
-          fontSize: 18,
+          fontSize: 16,
           fontFamily: contentFont
         ),
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
