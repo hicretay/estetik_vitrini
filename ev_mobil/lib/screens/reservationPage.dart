@@ -19,72 +19,74 @@ class _ReservationPageState extends State<ReservationPage> {
   Map<CalendarFormat, String> days = {};
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BackGroundContainer(
-        colors: backGroundColor2,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*3,bottom: defaultPadding),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                   Text(
-                    "Randevularım",
-                    style: Theme.of(context)
-                      .textTheme
-                      .headline4
-                      .copyWith(color: white, fontFamily: leadingFont),
-                  ),
-                  SizedBox(
-                    width: maxSpace,
-                  ),
-                  CircleAvatar(
-                    //iconun çevresini saran yapı tasarımı
-                    maxRadius: 25,
-                    backgroundColor: Colors.white,
-                    child: IconButton(
-                      iconSize: iconSize,
-                      icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
-                      onPressed: (){}
+    return SafeArea(
+      child: Scaffold(
+        body: BackGroundContainer(
+          colors: backGroundColor2,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding,bottom: defaultPadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                     Text(
+                      "Randevularım",
+                      style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .copyWith(color: white, fontFamily: leadingFont),
+                    ),
+                    SizedBox(
+                      width: maxSpace,
+                    ),
+                    CircleAvatar(
+                      //iconun çevresini saran yapı tasarımı
+                      maxRadius: 25,
+                      backgroundColor: Colors.white,
+                      child: IconButton(
+                        iconSize: iconSize,
+                        icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
+                        onPressed: (){}
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(cardCurved),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(cardCurved),
+                  child: SingleChildScrollView(
+                    physics: ScrollPhysics(),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(defaultPadding),
+                          child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
+                        ),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 4,
+                          itemBuilder: (BuildContext context, int index){
+                          return ResevationResultWidget(
+                          companyName: "Epilady Güzellik Salonu",
+                          operation: "Cilt Bakımı",
+                          time: "10:00",
+                        );
+                        }),
+                      ],
+                    ),
                   ),
                 ),
-                child: SingleChildScrollView(
-                  physics: ScrollPhysics(),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(defaultPadding),
-                        child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
-                      ),
-                      ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 4,
-                        itemBuilder: (BuildContext context, int index){
-                        return ResevationResultWidget(
-                        companyName: "Epilady Güzellik Salonu",
-                        operation: "Cilt Bakımı",
-                        time: "10:00",
-                      );
-                      }),
-                    ],
-                  ),
-                ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
