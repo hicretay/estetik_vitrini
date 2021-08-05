@@ -122,36 +122,45 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                                 //-----------------------------------------------------------------------------------
-                                Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children:[
-                                      CheckboxListTile(
-                                      value: checkedKVKK, 
-                                      title: Text("KVKK Bildirimi",style: TextStyle(color: secondaryColor)),
-                                      activeColor: secondaryColor,
-                                      checkColor: primaryColor,
-                                      contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
-                                      controlAffinity: ListTileControlAffinity.leading,
-                                      onChanged: (value){
-                                         setState(() {
-                                              checkedKVKK=value;                                  
-                                            });
-                                          }),
-                                      CheckboxListTile(
-                                      value: checkedPrivacy, 
-                                      title: Text("Gizlilik Sözleşmesi",style: TextStyle(color: secondaryColor)),
-                                      activeColor: secondaryColor,
-                                      checkColor: primaryColor,
-                                      contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
-                                      controlAffinity: ListTileControlAffinity.leading,
-                                      onChanged: (value){
-                                      setState(() {
-                                          checkedPrivacy = value;
-                                        });
-                                      }),
-                                    ],
-                                  ),
+                                Column(
+                                  //mainAxisAlignment: MainAxisAlignment.center,
+                                  children:[
+                                    CheckboxListTile(
+                                    //contentPadding: EdgeInsets.all(0),
+                                    value: checkedKVKK, 
+                                    title: GestureDetector(
+                                      child: Text("KVKK Bildirimini onaylıyorum",
+                                      style: TextStyle(
+                                      color: secondaryColor,
+                                      decoration: TextDecoration.underline),
+                                      ),
+                                      onTap: (){},),//
+                                    activeColor: secondaryColor,
+                                    checkColor: primaryColor,
+                                    //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                                    controlAffinity: ListTileControlAffinity.leading,
+                                    onChanged: (value){
+                                       setState(() {
+                                            checkedKVKK=value;                                  
+                                          });
+                                        }),
+                                    CheckboxListTile(
+                                    value: checkedPrivacy, 
+                                    title: GestureDetector(
+                                    child: Text("Gizlilik Sözleşmesini kabul ediyorum",
+                                    style: TextStyle(color: secondaryColor,
+                                    decoration: TextDecoration.underline)),
+                                    onTap: (){},),
+                                    activeColor: secondaryColor,
+                                    checkColor: primaryColor,
+                                    //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                                    controlAffinity: ListTileControlAffinity.leading,
+                                    onChanged: (value){
+                                    setState(() {
+                                        checkedPrivacy = value;
+                                      });
+                                    }),
+                                  ],
                                 ),
                                 Material(
                                   color: primaryColor,
