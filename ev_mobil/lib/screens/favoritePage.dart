@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:ev_mobil/screens/makeAppointmentCalendarPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
+import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
 import 'package:ev_mobil/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _FavoritePageState extends State<FavoritePage> {
         body: BackGroundContainer(
           colors: backGroundColor1,
           child: Column(
+            
             children: [
               //-----------------------Sayfa Başlığı----------------------------
               Padding(
@@ -43,139 +45,110 @@ class _FavoritePageState extends State<FavoritePage> {
                 ),
               ),
               //----------------------------------------------------------------
+              //------------------------- // Arkaplan containerı------------------
               Expanded(
-                // Arkaplan containerı
                 child: Container(
-                  decoration: BoxDecoration(
+                    decoration: BoxDecoration(
                     color: lightWhite,
-                    borderRadius: BorderRadius.vertical(
-                      //Yalnızca dikeyde yuvarlatılmış
-                      top: Radius.circular(cardCurved),
-                    ),
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: maxSpace,
-                        ),
-                        LeadingRowWidget(
-                          //leading widgetı
-                          iconNumber: 0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Center(
-                            //-----------------------Carousel Containerı------------------------
-                            child: Container(
-                              decoration: BoxDecoration(
+                  child: ListView.builder(
+                    itemCount: 2,
+                    controller: NavigationProvider.of(context)
+                    .screens[FAVORITE_PAGE]
+                    .scrollController,
+                    itemBuilder: (BuildContext context, int index){
+                      return Column(
+                        children: [
+                          SizedBox(height: maxSpace),
+                          LeadingRowWidget( iconNumber: 0 ),//leading widgetı
+                          Padding(padding: const EdgeInsets.all(20.0),
+                            child: Center(
+                              //-----------------------Carousel Containerı------------------------
+                              child: Container(
+                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(maxSpace)),
-                              child: SizedBox(
-                                width:
-                                    double.infinity, //genişlik: container kadar
-                                height: deviceHeight(context) * 0.25,
-                                //yükseklik
-                                child: buildCarousel(), //Carousel fonksiyonu
+                                  child : SizedBox(
+                                  width : double.infinity, //genişlik: container kadar
+                                  height: deviceHeight(context) * 0.25,//yükseklik
+                                  child : buildCarousel(), //Carousel fonksiyonu
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            //-----------------Alt Header-----------------------
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  //Beğeni butonunu kaplayan circleAvatar yapısı
-                                  maxRadius: 22.5,
-                                  backgroundColor: _checked
-                                      ? primaryColor
-                                      : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                  child: IconButton(
-                                    iconSize: iconSize,
-                                    icon: Icon(
-                                      LineIcons.heart,
-                                      color: _checked
-                                          ? Colors.white //Seçili ise açık,
-                                          : primaryColor, //değilse koyu renk verildi
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              //-----------------Alt Header-----------------------
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    //Beğeni butonunu kaplayan circleAvatar yapısı
+                                    maxRadius: 22.5,
+                                    backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
+                                    child: IconButton(
+                                      iconSize: iconSize,
+                                      icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
+                                      ),
+                                      onPressed: () {
+                                        setState(() { 
+                                          _checked = !_checked; //tıklandığında bool değeri tersler
+                                          _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
+                                          },
+                                        );
+                                      },
                                     ),
-                                    onPressed: () {
-                                      setState(
-                                        () {
-                                          _checked =
-                                              !_checked; //tıklandığında bool değeri tersler
-                                          _checked
-                                              ? counter++
-                                              : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                        },
-                                      );
-                                    },
                                   ),
-                                ),
-                                IconButton(
-                                    // İletişim iconButton'ı
-                                    icon: Icon(
-                                      LineIcons.phone,
-                                      color: primaryColor,
-                                      size: iconSize,
-                                    ),
-                                    onPressed: () {}),
-                                IconButton(
-                                    //Paylaşım iconButton'ı
-                                    icon: Icon(
-                                      Icons.share_outlined,
-                                      color: primaryColor,
-                                      size: iconSize,
-                                    ),
-                                    onPressed: () {}),
+                          //-----------------------Paylaşım iconButton'ı------------------------------
+                                  IconButton(icon: Icon(Icons.share_outlined,
+                                        color: primaryColor,
+                                        size : iconSize,
+                                      ),
+                                      onPressed: () {}),
+                          //--------------------------------------------------------------------------
+                          //----------------------İletişim iconButton'ı-------------------------------
+                                  IconButton(icon: Icon(LineIcons.phone,
+                                        color: primaryColor,
+                                        size : iconSize,
+                                      ),
+                                      onPressed: () {}),
+                          //-------------------------------------------------------------------------
+                                ],
+                              ),
+                              buildReservationButton(), //Rezervasyon MaterialButton'ı
+                            ],
+                          ),
+                          SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
+                          Padding(padding: const EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Icon(Icons.favorite, // Beğeni İcon'ı
+                                size : iconSize,
+                                color: primaryColor),
+                                SizedBox(width: minSpace),
+                                Text("$counter kişi tarafından favorilere eklendi"),
+                                // counter ile gösterilecek beğeni sayısı
                               ],
                             ),
-                            buildReservationButton(), //Rezervasyon MaterialButton'ı
-                          ],
-                        ),
-                        SizedBox(
-                            height:
-                                maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Row(
-                            children: [
-                              Icon(
-                                // Beğeni İcon'ı
-                                Icons.favorite,
-                                size: iconSize,
-                                color: primaryColor,
-                              ),
-                              SizedBox(
-                                width: minSpace,
-                              ),
-                              Text("$counter kişi tarafından favorilere eklendi"),
-                              // counter ile gösterilecek beğeni sayısı
-                            ],
                           ),
-                        ),
-                        //------------------Açıklama Metni----------------------
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  "Kendin için bir şey yap.",
-                                  style: TextStyle(
-                                      fontSize: 22, color: primaryColor),
+                          //------------------Açıklama Metni----------------------
+                          Padding(padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child    : Text("Kendin için bir şey yap.",
+                                  style    : TextStyle(fontSize: 22, color: primaryColor),
+                                  ),
                                 ),
-                              ),
-                              Text(aboutText),
-                            ],
+                                Text(aboutText),
+                              ],
+                            ),
                           ),
-                        ),
-                        //------------------------------------------------------
-                      ],
-                    ),
-                  ),
+                          //------------------------------------------------------
+                        ],
+                      );
+                  }),
                 ),
               ),
             ],
@@ -184,9 +157,8 @@ class _FavoritePageState extends State<FavoritePage> {
       ),
     );
   }
-
+//-----------------------------MaterialButton fonksiyonu-----------------------------------
   Material buildReservationButton() {
-    //MaterialButton fonksiyonu
     return Material(
       color: primaryColor,
       borderRadius: BorderRadius.circular(30.0),
@@ -217,9 +189,9 @@ class _FavoritePageState extends State<FavoritePage> {
       ),
     );
   }
-
+//---------------------------------------------------------------------------------------
+//--------------------------------Carousel fonksiyonu------------------------------------
   Carousel buildCarousel() {
-    //Carousel fonksiyonu
     return Carousel(
       borderRadius: true,
       radius: Radius.circular(maxSpace),
@@ -242,4 +214,5 @@ class _FavoritePageState extends State<FavoritePage> {
       ],
     );
   }
+//--------------------------------------------------------------------------------------
 }

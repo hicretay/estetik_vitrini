@@ -173,7 +173,10 @@ class _MakeReservationPageState extends State<MakeReservationPage> {
                         onPressed: () {
                           setState(() {
                             Navigator.pop(context);
-                            NavigationProvider.of(context).setTab(RESERVATION_PAGE);
+                            NavigationProvider.of(context).setTab(HOME_PAGE);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.pop(context);
                           });
                         },
                       ),

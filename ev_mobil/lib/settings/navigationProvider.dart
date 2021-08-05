@@ -76,6 +76,7 @@ class NavigationProvider extends ChangeNotifier {
             return MaterialPageRoute(builder: (_) => FavoritePage());
         }
       },
+      scrollController: ScrollController(),
     ),
     RESERVATION_PAGE: Screen(
       icon: SvgPicture.asset("assets/icons/takvim.svg"),
@@ -95,7 +96,7 @@ class NavigationProvider extends ChangeNotifier {
         }
       },
     ),
-    LOCATION_PAGE: Screen(
+    LOCATION_PAGE: Screen(    
       icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
       title: "",
       activeIcon: CircleAvatar(
@@ -137,10 +138,30 @@ class NavigationProvider extends ChangeNotifier {
 
 //-----------------------Sayfa yönlendirme fonksiyonu---------------------
 //NavigationProvider.of(context).setTab(PAGENAME); şeklinde kullanılacak.
+  // void setTab(int tab) {
+  //   _currentScreenIndex = tab;
+  //   //_currentScreenIndex: başlangıç sayfası tab değerine eşitlendi
+  //   notifyListeners();
+  // }
   void setTab(int tab) {
-    _currentScreenIndex = tab;
-    //_currentScreenIndex: başlangıç sayfası tab değerine eşitlendi
-    notifyListeners();
+    if (tab == currentTabIndex) {
+      _scrollToStart();
+    } else {
+      _currentScreenIndex = tab;
+      notifyListeners();
+    }
   }
 //-----------------------------------------------------------------------
+
+ void _scrollToStart() {
+    if (currentScreen.scrollController != null) {
+      currentScreen.scrollController.animateTo(
+        0,
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 }
+
+

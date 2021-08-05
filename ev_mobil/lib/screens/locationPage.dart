@@ -87,7 +87,6 @@ class _LocationPageState extends State<LocationPage> {
               //-----------------------Itamların Listelenmesi----------------------------
               child: ListView(
                 children: [
-                //SizedBox(height: deviceHeight(context)*0.05),
                 Center(
                   child: Container(
                     height: deviceHeight(context)*0.08,
@@ -117,7 +116,7 @@ class _LocationPageState extends State<LocationPage> {
                       trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.08)),
                   ),
                 ),
-                SizedBox(height: deviceHeight(context)*0.05),
+                SizedBox(height: deviceHeight(context)*0.02),
                 ListView.separated(
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
@@ -157,8 +156,8 @@ class _LocationPageState extends State<LocationPage> {
                             child: ListTile(
                               //İç container yapısı
                               leading: Container(
-                              width  : deviceWidth(context)*0.07,
-                              height : deviceHeight(context)*0.07,
+                              width  : deviceWidth(context)*0.065,
+                              height : deviceHeight(context)*0.065,
                               decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(

@@ -22,6 +22,8 @@ class Screen {
   //Ekranların navigator state'i
   final GlobalKey<NavigatorState> navigatorState;
 
+  final ScrollController scrollController;
+
   Screen({
     //@required verilmesi zorunlu parametreler
     @required this.activeIcon,
@@ -31,5 +33,6 @@ class Screen {
     @required this.onGenerateRoute,
     @required this.initialRoute,
     @required this.navigatorState,
+    this.scrollController,
   });
 }

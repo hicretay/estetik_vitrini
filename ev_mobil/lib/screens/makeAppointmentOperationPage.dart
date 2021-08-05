@@ -13,7 +13,7 @@ class MakeAppointmentOperationPage extends StatefulWidget {
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
     Map<String, bool> _operations = {
     "Cilt Bakımı": false,
-    "Medikal Estetik": true,
+    "Medikal Estetik": false,
     "Lazer Epilasyon": false,
   };
   @override
