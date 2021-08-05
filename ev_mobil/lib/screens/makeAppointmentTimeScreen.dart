@@ -1,8 +1,7 @@
 import 'package:ev_mobil/screens/makeReservationPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
+import 'package:ev_mobil/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 class MakeAppointmentTimePage extends StatefulWidget {
   MakeAppointmentTimePage({Key key}) : super(key: key);
@@ -141,30 +140,6 @@ class _MakeAppointmentTimeScreenState extends State<MakeAppointmentTimePage> {
                         }),
                        ),
                       ),
-
-                    TextButton(
-                    onPressed: () {
-                      setState(() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeReservationPage()));
-                      });
-                      //Buton tıklandığında randevu al sayfasına yönlendirilecek
-                    },
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          //-------------Buton Metni-------------
-                          Text(
-                            "Randevuyu Tamamla",
-                            style: Theme.of(context).textTheme.button.copyWith(color: primaryColor,fontSize: 18),
-                          ),
-                          //-------------------------------------
-                          SizedBox(width: deviceWidth(context)*0.02), //butondaki Text ve icon arası boşluk
-                          FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: secondaryColor)
-                        ],
-                      ),
-                    ),
-                  ),
                       ],
                     ),
                   ),
@@ -173,6 +148,11 @@ class _MakeAppointmentTimeScreenState extends State<MakeAppointmentTimePage> {
             ],
           ),
         ),
+        bottomNavigationBar: TextButtonWidget(
+          buttonText: "Randevuyu Tamamla",
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeReservationPage()));
+          },),
       ),
     );
   }

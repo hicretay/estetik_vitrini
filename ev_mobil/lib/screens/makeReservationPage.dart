@@ -26,86 +26,73 @@ class _MakeReservationPageState extends State<MakeReservationPage> {
           color: secondaryColor,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+              Padding(padding: const EdgeInsets.all(defaultPadding),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(
-                        //iconun çevresini saran yapı tasarımı
+                      CircleAvatar(//iconun çevresini saran yapı tasarımı
                         maxRadius: 25,
                         backgroundColor: Colors.white,
                         child: IconButton(
-                          iconSize: iconSize,
-                          icon: Icon(
-                              Icons.arrow_back,
-                              color: secondaryColor,
-                            ),
-                          onPressed: (){ Navigator.pop(context, false);}
+                        iconSize: iconSize,
+                        icon: Icon(Icons.arrow_back,color: secondaryColor),
+                        onPressed: (){ Navigator.pop(context, false);}
                         ),
                       ),
-                      SizedBox(
-                        width: maxSpace,
-                      ),
-                      Text(
-                        "Estetik Vitrini",
-                        style: TextStyle(
-                            fontFamily: leadingFont, fontSize: 20, color: Colors.white),
+                      SizedBox(width: maxSpace),
+                      Text("Estetik Vitrini",
+                      style     : TextStyle(
+                      fontFamily: leadingFont, 
+                      fontSize  : 20, 
+                      color     : Colors.white),
                       ),
                     ],
                   ),
                 ],
               ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
+              Padding(padding: const EdgeInsets.only(left: 20),
                 child: Column(
                   children: [
                     Align(
                       alignment: Alignment.topLeft,
-                      child: Text(
-                        "Randevu Al",
-                        style: TextStyle(
-                          fontFamily: leadingFont,
-                          color: Colors.white,
-                          fontSize: 45,
+                      child: Text( "Randevu Al",
+                        style     : TextStyle(
+                        fontFamily: leadingFont,
+                        color     : Colors.white,
+                        fontSize  : 45,
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Estecool Güzellik Merkezi",
-                        style: TextStyle(color: Colors.white),
+                    Align(alignment: Alignment.topLeft,
+                        child: Text("Estecool Güzellik Merkezi",
+                        style: TextStyle(
+                        color: Colors.white),
                       ),
                     ),
-                    SizedBox(
-                      height: maxSpace,
-                    )
+                    SizedBox(height: maxSpace)
                   ],
                 ),
               ),
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
+                child: Container(decoration: BoxDecoration(
+                    color       : Colors.white,
                     borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(cardCurved),
+                    top         : Radius.circular(cardCurved),
                     ),
                   ),
                   child: SingleChildScrollView(
                     child: Padding(
           padding: const EdgeInsets.all(defaultPadding),
-          child: Column(
-            children: [
+          child: Column(children: [
               InformationRowWidget(
                 containerColor: secondaryColor,
                 operationName: "Tarih",
                 width: 250,
                 height: 50,
-                child: Text("20 Mayıs 2021",
+                child: Text("20 Ağustos 2021",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -119,6 +106,18 @@ class _MakeReservationPageState extends State<MakeReservationPage> {
                 operationName: "Saat",
                 child: Text(
                   "16.30",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              InformationRowWidget(
+                containerColor: secondaryColor,
+                operationName: "İşlem",
+                width: 250,
+                height: 50,
+                child: Text("Medikal Estetik",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -173,7 +172,7 @@ class _MakeReservationPageState extends State<MakeReservationPage> {
                         onPressed: () {
                           setState(() {
                             Navigator.pop(context);
-                            NavigationProvider.of(context).setTab(HOME_PAGE);
+                            NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                             Navigator.pop(context);
                             Navigator.pop(context);
                             Navigator.pop(context);

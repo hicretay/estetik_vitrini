@@ -1,7 +1,7 @@
 import 'package:ev_mobil/screens/makeAppointmentTimeScreen.dart';
 import 'package:ev_mobil/settings/consts.dart';
+import 'package:ev_mobil/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MakeAppointmentOperationPage extends StatefulWidget {
   MakeAppointmentOperationPage({Key key}) : super(key: key);
@@ -174,29 +174,6 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                       return SizedBox(height: minSpace);
                     },
                     ),
-                      TextButton(
-                    onPressed: () {
-                      setState(() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage()));
-                      });
-                      //Buton tıklandığında randevu al sayfasına yönlendirilecek
-                    },
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          //-------------Buton Metni-------------
-                          Text(
-                            "Randevu Saatini Seç",
-                            style: Theme.of(context).textTheme.button.copyWith(color: primaryColor,fontSize: 18),
-                          ),
-                          //-------------------------------------
-                          SizedBox(width: deviceWidth(context)*0.02), //butondaki Text ve icon arası boşluk
-                          FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: secondaryColor)
-                        ],
-                      ),
-                    ),
-                  ),
                      ],
                     ),
                   ),
@@ -205,6 +182,11 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
             ],
           ),
         ),
+        bottomNavigationBar: TextButtonWidget(
+          buttonText: "Randevu Saatini Seç",
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage()));
+          },),
       ),
     );
   }

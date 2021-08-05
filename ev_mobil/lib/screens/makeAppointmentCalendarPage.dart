@@ -1,8 +1,8 @@
 import 'package:ev_mobil/screens/makeAppointmentOperationPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
+import 'package:ev_mobil/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MakeAppointmentPage extends StatefulWidget {
@@ -88,22 +88,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
                     child: Column(
                       children: [
                        TableCalendarWidget(calendarFormat: CalendarFormat.month),
-                       TextButton(
-                        style: ButtonStyle(),
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage()));
-                        },
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:[
-                        Text("Randevu alınacak işlemi seçiniz",
-                        style: TextStyle(
-                        color: primaryColor,
-                        fontSize: 18,
-                        fontFamily: contentFont)),
-                        SizedBox(width: deviceWidth(context)*0.01),
-                        FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: secondaryColor,)])
-                        )
+                      
                       ],
                     ),
                   ),
@@ -112,6 +97,11 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
             ],
           ),
         ),
+        bottomNavigationBar: 
+         TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
+         onPressed: (){
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage()));
+         },)
       ),
     );
   }
