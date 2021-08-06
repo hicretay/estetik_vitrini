@@ -1,4 +1,4 @@
-import 'package:ev_mobil/screens/makeReservationPage.dart';
+import 'package:ev_mobil/screens/makeAppointmentCheckPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +7,10 @@ class MakeAppointmentTimePage extends StatefulWidget {
   MakeAppointmentTimePage({Key key}) : super(key: key);
 
   @override
-  _MakeAppointmentTimeScreenState createState() => _MakeAppointmentTimeScreenState();
+  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState();
 }
 
-class _MakeAppointmentTimeScreenState extends State<MakeAppointmentTimePage> {
+class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
   List<String> gridChildren = [
     "08.00",
     "08.30",

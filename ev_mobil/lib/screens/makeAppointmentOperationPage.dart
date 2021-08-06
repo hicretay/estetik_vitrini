@@ -1,4 +1,4 @@
-import 'package:ev_mobil/screens/makeAppointmentTimeScreen.dart';
+import 'package:ev_mobil/screens/makeAppointmentTimePage.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
