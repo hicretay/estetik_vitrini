@@ -1,4 +1,5 @@
-import 'package:ev_mobil/widgets/reservationResultWidget.dart';
+import 'package:ev_mobil/model/story.dart';
+import 'package:ev_mobil/model/users.dart';
 import 'package:flutter/material.dart';
 
 BoxDecoration boxDecoration = BoxDecoration(
@@ -42,64 +43,109 @@ const aboutText =
     "Alanında uzman, profesyonel kadrosu ile hizmet veren Estecool, kaliteli ve kişiye özel olan hizmet anlayışı ile güzelliğin adresi olan bir kuruluştur. 15 yılı aşkın tecrübesi ile “Kendin için bir şey yap!” sloganı ile hizmet vermeye devam etmektedir. Estecool’un başarısının en büyük anahtarı estetik ve güzellik uygulamalarına dair dünya çapındaki gelişmeleri takip ederek son teknolojik ekipman ve eğitimli personel kadrosu ile siz değerli müşterilerimizin hizmetindeyiz.";
 const leading = "Estecool Güzellik Merkezi";
 
-const stories = [
-  {
-    "id": 1,
-    "img":
-        "https://www.1mg.com/articles/wp-content/uploads/2020/12/skincare-woman.jpg",
-    "icon":
-        "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
-    "name": "Estecool",
-  },
-  {
-    "id": 2,
-    "img":
-        "https://www.dsm.com/personal-care/en_US/formulations/facial-skin-care/nourishing-barrier-skin-care-cream.thumb.800.480.png",
-    "icon":
-        "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
-    "name": "Epilady",
-  },
-  {
-    "id": 3,
-    "img":
-        "https://www.lynskincare.com/wp-content/uploads/2021/04/lyn-skincare-senin-en-iyi-halin.jpg",
-    "icon":
-        "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
-    "name": "Estecool",
-  },
-  {
-    "id": 4,
-    "img":
-        "https://letspepapp.com/wp-content/uploads/2021/01/Skin-Center-of-South-Miami-Facials-and-Skin-Care.jpg",
-    "icon":
-        "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
-    "name": "Epilady",
-  },
-  {
-    "id": 5,
-    "img":
-        "https://klinegroup.com/wp-content/uploads/2018/06/applying-professional-skin-care-serum.jpg",
-    "icon":
-        "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
-    "name": "Estecool",
-  },
-];
-
 const carouselImage = [
   "https://ankaramoonlight.com/wp-content/uploads/2017/05/hydrafacial-moonlight.jpg",
   "https://firsat.me/img/big1024/13915_58bd7db143d63_980x400.png",
   "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/flawlessskin-1589384044.png"
 ];
 
-const reservations =[
-  ResevationResultWidget(
-   companyName: "Epilady Güzellik Salonu",
-   operation: "Cilt Bakımı",
-   time: "10:00",
+const posts =[
+  {
+    "id" : 0,
+    "img" :"https://www.1mg.com/articles/wp-content/uploads/2020/12/skincare-woman.jpg",
+  },
+  {
+    "id" : 1,
+    "img" : "https://www.dsm.com/personal-care/en_US/formulations/facial-skin-care/nourishing-barrier-skin-care-cream.thumb.800.480.png",
+  },
+  {
+    "id" : 2,
+    "img" :   "https://www.lynskincare.com/wp-content/uploads/2021/04/lyn-skincare-senin-en-iyi-halin.jpg",
+  }
+];
+
+final story = [
+  Story(
+    mediaType: MediaType.image,
+    url:'https://images.unsplash.com/photo-1531299244174-d247dd4e5a66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=670&q=80',
+    caption: 'Salatalı göz hikayesi',
+    date: 'şimdi',
   ),
-  ResevationResultWidget(
-    companyName: "Estecool Güzellik Merkezi",
-    operation: "Lazer Epilasyon",
-    time: "16:30",
+  Story(
+    mediaType: MediaType.image,
+    url:
+        'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+    caption: 'Cilt Bakımı',
+    date:'2 saat önce',
+  ),
+  Story(
+    mediaType: MediaType.image,
+    url: 'https://media.giphy.com/media/FfjiOpMBIWlUBE6rSm/giphy.gif',
+    caption: 'Güzellik :)',
+    date: '6 saat önce',
+  ),
+  Story(
+    mediaType: MediaType.text,
+    caption: 'İzlediğiniz için teşekkürler...',
+    color: Colors.purple,
+    date: '8 saat önce',
+  ),
+];
+
+final stories2 = [
+  Story(
+    mediaType: MediaType.image,
+    url:
+        'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+    caption: 'Başlıkk',
+    date: '1 saat önce',
+  ),
+  Story(
+    mediaType: MediaType.image,
+    url:
+        'https://images.unsplash.com/photo-1531299244174-d247dd4e5a66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=670&q=80',
+    caption: 'Totally Cool',
+    date: '2 saat önce',
+  ),
+  Story(
+    mediaType: MediaType.image,
+    url: 'https://media.giphy.com/media/FfjiOpMBIWlUBE6rSm/giphy.gif',
+    caption: 'Estecool',
+    date: '2 saat önce',
+  ),
+  Story(
+    mediaType: MediaType.text,
+    caption: 'İzlediğiniz için teşekkürler...',
+    color: Colors.purple,
+    date: 'Şimdi',
+  ),
+];
+
+
+final users = [
+  User(
+    name: "Estecool",
+    imgUrl:  "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
+    stories: story,
+  ),
+  User(
+    name: "Epilady",
+    imgUrl: "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
+    stories: stories2,
+  ),
+  User(
+    name: "Estecool",
+    imgUrl: "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
+    stories: story,
+  ),
+  User(
+    name: "Epilady",
+    imgUrl: "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
+    stories: stories2,
+  ),
+    User(
+    name: "Estecool",
+    imgUrl: "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
+    stories: story,
   ),
 ];

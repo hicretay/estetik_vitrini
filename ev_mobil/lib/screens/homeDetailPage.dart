@@ -233,7 +233,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
       images: [
         //Carousel resimleri dizisi
-        NetworkImage(stories[0]["img"]),
+        NetworkImage(carouselImage[0]),
         NetworkImage(carouselImage[1]),
         NetworkImage(carouselImage[2]),
       ],

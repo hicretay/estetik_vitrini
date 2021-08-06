@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../settings/consts.dart';
 
@@ -31,8 +32,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: NetworkImage(
-                    stories[widget.iconNumber]
-                        ["icon"], //stories listesinden icon indexi çekme
+                    users[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
                   ),
                 ),
               ),
@@ -49,9 +49,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
         ),
         IconButton(
           // daha fazla icon buttonu
-          icon: Icon(
-            Icons.more_horiz,
-          ),
+          icon: Icon(FontAwesomeIcons.thumbtack,color: primaryColor,size: 20),
           onPressed: widget.onPressed, // olayı parametre alındı
         ),
       ],

@@ -1,6 +1,6 @@
 import 'package:ev_mobil/screens/homeDetailPage.dart';
+import 'package:ev_mobil/screens/storyPage.dart';
 import 'package:ev_mobil/widgets/homeContainerWidget.dart';
-import 'package:ev_mobil/widgets/storyWidget.dart';
 import 'package:flutter/material.dart';
 
 import '../settings/consts.dart';
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
      ),
      HomeContainerWidget(
        iconNumber: 1,
-       imgNumber: 2,
+       imgNumber: 1,
        cardText: "",
        onPressed: () {
          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
        },
      ),
     ];
-
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -77,59 +76,74 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //------------------------------------------------------------------
-
               //----------------Story Paneli---------------
               //StoryWidget kullanıldı
               Flexible(
-                flex: 1,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  children: 
-                    [Row(
-                      children: [
-                        StoryWidget(
-                          iconNumber: 0,
-                          imgNumber: 0,
-                          nameNumber: 0,
-                        ),
-                        StoryWidget(
-                          iconNumber: 1,
-                          imgNumber: 1,
-                          nameNumber: 1,
-                        ),
-                        StoryWidget(
-                          iconNumber: 2,
-                          imgNumber: 2,
-                          nameNumber: 2,
-                        ),
-                        StoryWidget(
-                          iconNumber: 3,
-                          imgNumber: 3,
-                          nameNumber: 3,
-                        ),
-                        StoryWidget(
-                          iconNumber: 2,
-                          imgNumber: 2,
-                          nameNumber: 2,
-                        ),
-                        SizedBox(width: defaultPadding), //Son storynin kırpılasını önler
-                      ],
-                    ),
-                  ],
-                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
+                  child: GridView.builder(
+                    itemCount: users.length,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: maxSpace,
+                    crossAxisSpacing: 0,
+                    childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height/3),
+                    crossAxisCount: 1),
+                    itemBuilder: (BuildContext context,index){
+                      return Column(children:[
+                          GestureDetector(
+                          child:  Container(
+                          //Genişlik - yükseklik eşit verilip shape circle verilerek şekillendirildi
+                          width: 92,
+                          height: 92,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              //storyColor ile mor - beyaz renkleri liste haline getirildi,
+                              //gradient ile center olarak konumlandırılıp dış çerçeve oluşturuldu
+                              colors: storyColor,
+                              begin: Alignment.center,
+                              end: Alignment.center,
+                            ),
+                          ),
+                          child: Padding(padding: const EdgeInsets.all(2.0), // mor rengin genişliğini ayaralar
+                            child: Container(
+                              width: 90,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: lightWhite,
+                                  width: 2.0, // beyaz rengin genişliğini ayarlar
+                                ),
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(users[index].imgUrl),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ),
+                      onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StoryPage(user: users[index])));
+                      },),
+                    ],
+                      );
+                    }),
+                )
               ),
               //-------------------------------------------
-              SizedBox(height: defaultPadding), //Storyler - Postlar arası boşluk
               //------------------------------------Anasayfa Postları----------------------------------------
               //HomeContainerWidget ile oluşturuldu
-              Flexible(
-                flex: 4,
-                child: ListView.builder(
-                  itemCount: homeList.length,
-                  itemBuilder: (BuildContext context, int index){
-                  return homeList[index];
-                }),
+              Container(
+                child: Flexible(
+                  flex: 4,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: homeList.length,
+                    itemBuilder: (BuildContext context, int index){
+                    return homeList[index];
+                  }),
+                ),
               )
             ],
           ),
