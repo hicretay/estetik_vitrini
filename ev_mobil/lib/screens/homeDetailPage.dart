@@ -4,6 +4,7 @@ import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
 import 'package:ev_mobil/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeDetailPage extends StatefulWidget {
@@ -79,7 +80,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                     child: Column(
                         children: [
                           SizedBox(height: maxSpace),
-                          LeadingRowWidget( iconNumber: 0 ),//leading widgetı
+                          LeadingRowWidget( 
+                            iconNumber: 0,
+                            pinColor: Colors.transparent,),//leading widgetı
                           Padding(padding: const EdgeInsets.all(20.0),
                             child: Center(
                               //-----------------------Carousel Containerı------------------------

@@ -6,6 +6,7 @@ import 'package:ev_mobil/widgets/backgroundContainer.dart';
 import 'package:ev_mobil/widgets/homeContainerWidget.dart';
 import 'package:ev_mobil/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -62,6 +63,11 @@ class _FavoritePageState extends State<FavoritePage> {
                           iconNumber: 0,
                           imgNumber: 1,
                           cardText: "",
+                          child: IconButton(
+                             // pin butonu
+                             icon: Icon(FontAwesomeIcons.thumbtack,color: primaryColor,size: 20),
+                             onPressed: (){}, // olayı parametre alındı
+                           ),
                           onPressed: () {
                              // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                             Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
@@ -71,6 +77,11 @@ class _FavoritePageState extends State<FavoritePage> {
                           iconNumber: 1,
                           imgNumber: 2,
                           cardText: "Kendin için bir\nşeyler yap...",
+                          child: IconButton(
+                             // pin butonu
+                             icon: Icon(FontAwesomeIcons.thumbtack,color: primaryColor,size: 20),
+                             onPressed: (){}, // olayı parametre alındı
+                           ),
                           onPressed: () {
                              // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                             Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));

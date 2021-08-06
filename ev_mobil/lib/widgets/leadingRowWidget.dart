@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../settings/consts.dart';
 
 class LeadingRowWidget extends StatefulWidget {
   //homePage ve favoritePage sayfalarında kullanıldı
-  final int iconNumber; // icon resmi indexi
-  final VoidCallback onPressed; //more iconu olayı
+ @required final int iconNumber; // icon resmi indexi
+ @required final Color pinColor;
 
-  const LeadingRowWidget({Key key, this.iconNumber, this.onPressed})
-      : super(key: key);
+  const LeadingRowWidget({Key key, this.iconNumber, this.pinColor});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -19,8 +17,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment
-          .spaceAround, // Row içindeki widgetların yayılmasını sağlar
+      mainAxisAlignment: MainAxisAlignment.spaceAround, // Row içindeki widgetların yayılmasını sağlar
       children: [
         Row(
           children: [
@@ -48,9 +45,9 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
           ],
         ),
         IconButton(
-          // daha fazla icon buttonu
-          icon: Icon(FontAwesomeIcons.thumbtack,color: primaryColor,size: 20),
-          onPressed: widget.onPressed, // olayı parametre alındı
+          // pin butonu
+          icon: Icon(FontAwesomeIcons.thumbtack,color: widget.pinColor,size: 20),
+          onPressed: (){}, // olayı parametre alındı
         ),
       ],
     );

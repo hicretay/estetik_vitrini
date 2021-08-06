@@ -10,9 +10,11 @@ class HomeContainerWidget extends StatefulWidget {
   final int imgNumber; // post resmi indexi
   final String cardText; // resimde yer alacak metin
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
+  final Widget child;
+  final Color pinColor;
 
   const HomeContainerWidget(
-      {Key key, this.iconNumber, this.imgNumber, this.cardText, this.onPressed})
+      {Key key, this.iconNumber, this.imgNumber, this.cardText, this.onPressed, this.child, this.pinColor})
       : super(key: key);
 
   @override
@@ -42,7 +44,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                 //Leading Widgetı
                 child: LeadingRowWidget(
                   iconNumber: widget.iconNumber, // icon resmi indexi
-                  onPressed: () {}, // more iconu olayı
+                  pinColor: widget.pinColor,
                 ),
               ),
               Expanded(

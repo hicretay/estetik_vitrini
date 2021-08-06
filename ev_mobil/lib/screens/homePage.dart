@@ -2,6 +2,7 @@ import 'package:ev_mobil/screens/homeDetailPage.dart';
 import 'package:ev_mobil/screens/storyPage.dart';
 import 'package:ev_mobil/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../settings/consts.dart';
 
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
        iconNumber: 0,
        imgNumber: 0,
        cardText: "Kendin için bir\nşeyler yap...",
+       pinColor: primaryColor,
        onPressed: () {
           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
@@ -32,6 +34,7 @@ class _HomePageState extends State<HomePage> {
        iconNumber: 1,
        imgNumber: 1,
        cardText: "",
+       pinColor: primaryColor,
        onPressed: () {
          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
