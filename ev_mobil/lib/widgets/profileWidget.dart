@@ -21,27 +21,27 @@ class ProfileWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               CircleAvatar(
-                radius: 24,
+                radius: 26,
                 backgroundImage: NetworkImage(user.imgUrl),
               ),
-              SizedBox(width: 16),
+              SizedBox(width: deviceWidth(context)*0.02),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      user.name,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: maxSpace),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        user.name,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    Text(
-                      date,
-                      style: TextStyle(color: Colors.white38),
-                    )
-                  ],
+                      Text(date,style: TextStyle(color: Colors.white38))
+                    ],
+                  ),
                 ),
               )
             ],
