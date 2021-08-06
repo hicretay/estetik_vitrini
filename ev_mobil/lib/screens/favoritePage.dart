@@ -3,7 +3,8 @@ import 'package:ev_mobil/screens/makeAppointmentCalendarPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
 import 'package:ev_mobil/settings/navigationProvider.dart';
 import 'package:ev_mobil/widgets/backgroundContainer.dart';
-import 'package:ev_mobil/widgets/leadingRowWidget.dart';
+import 'package:ev_mobil/widgets/homeContainerWidget.dart';
+import 'package:ev_mobil/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -18,7 +19,6 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   TextEditingController teSearch = TextEditingController();
-  bool _checked = false;
   int counter = 99;
 
   @override
@@ -27,8 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
       child: Scaffold(
         body: BackGroundContainer(
           colors: backGroundColor1,
-          child: Column(
-            
+          child: Column(        
             children: [
               //-----------------------Sayfa Başlığı----------------------------
               Padding(
@@ -49,103 +48,34 @@ class _FavoritePageState extends State<FavoritePage> {
               Expanded(
                 child: Container(
                     decoration: BoxDecoration(
-                    color: lightWhite,
+                    color: white,
                     borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                   ),
                   child: ListView.builder(
-                    itemCount: 2,
+                    itemCount: 1,
                     controller: NavigationProvider.of(context)
                     .screens[FAVORITE_PAGE]
                     .scrollController,
                     itemBuilder: (BuildContext context, int index){
-                      return Column(
-                        children: [
-                          SizedBox(height: maxSpace),
-                          LeadingRowWidget( iconNumber: 0 ),//leading widgetı
-                          Padding(padding: const EdgeInsets.all(20.0),
-                            child: Center(
-                              //-----------------------Carousel Containerı------------------------
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(maxSpace)),
-                                  child : SizedBox(
-                                  width : double.infinity, //genişlik: container kadar
-                                  height: deviceHeight(context) * 0.25,//yükseklik
-                                  child : buildCarousel(), //Carousel fonksiyonu
-                                ),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              //-----------------Alt Header-----------------------
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    //Beğeni butonunu kaplayan circleAvatar yapısı
-                                    maxRadius: 22.5,
-                                    backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                    child: IconButton(
-                                      iconSize: iconSize,
-                                      icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
-                                      ),
-                                      onPressed: () {
-                                        setState(() { 
-                                          _checked = !_checked; //tıklandığında bool değeri tersler
-                                          _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ),
-                          //-----------------------Paylaşım iconButton'ı------------------------------
-                                  IconButton(icon: Icon(Icons.share_outlined,
-                                        color: primaryColor,
-                                        size : iconSize,
-                                      ),
-                                      onPressed: () {}),
-                          //--------------------------------------------------------------------------
-                          //----------------------İletişim iconButton'ı-------------------------------
-                                  IconButton(icon: Icon(LineIcons.phone,
-                                        color: primaryColor,
-                                        size : iconSize,
-                                      ),
-                                      onPressed: () {}),
-                          //-------------------------------------------------------------------------
-                                ],
-                              ),
-                              buildReservationButton(), //Rezervasyon MaterialButton'ı
-                            ],
-                          ),
-                          SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
-                          Padding(padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Icon(Icons.favorite, // Beğeni İcon'ı
-                                size : iconSize,
-                                color: primaryColor),
-                                SizedBox(width: minSpace),
-                                Text("$counter kişi tarafından favorilere eklendi"),
-                                // counter ile gösterilecek beğeni sayısı
-                              ],
-                            ),
-                          ),
-                          //------------------Açıklama Metni----------------------
-                          Padding(padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child    : Text("Kendin için bir şey yap.",
-                                  style    : TextStyle(fontSize: 22, color: primaryColor),
-                                  ),
-                                ),
-                                Text(aboutText),
-                              ],
-                            ),
-                          ),
-                          //------------------------------------------------------
+                      return Column(children:[
+                        HomeContainerWidget(
+                          iconNumber: 0,
+                          imgNumber: 1,
+                          cardText: "",
+                          onPressed: () {
+                             // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
+                          },
+                         ),
+                         HomeContainerWidget(
+                          iconNumber: 1,
+                          imgNumber: 2,
+                          cardText: "Kendin için bir\nşeyler yap...",
+                          onPressed: () {
+                             // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
+                          },
+                         ),
                         ],
                       );
                   }),
