@@ -1,4 +1,5 @@
 import 'package:ev_mobil/model/users.dart';
+import 'package:ev_mobil/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) => Material(
         type: MaterialType.transparency,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 48),
+          margin: EdgeInsets.symmetric(horizontal: deviceWidth(context)*0.05, vertical: deviceHeight(context)*0.09),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
