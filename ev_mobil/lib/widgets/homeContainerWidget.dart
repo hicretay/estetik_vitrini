@@ -97,11 +97,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                           child: Row(
                             children: [
                               Expanded(
-                                //---------Beğeni, iletişim ve paylaş iconButtonları-----------
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                        icon: _checked
+                                //-------------------------------ICONBUTTONLAR--------------------------------
+                                child: Row(children: [
+                                //---------------------------BEĞEN ICONBUTTONI-----------------------------
+                                    IconButton( icon: _checked
                                             ? Icon(Icons.favorite,
                                                 color: primaryColor)
                                             : Icon(LineIcons.heart,
@@ -111,21 +110,33 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                             _checked = !_checked;
                                           });
                                         }),
+                                //-------------------------------------------------------------------------
+                                //------------------------------PAYLAŞ ICONBUTTONI---------------------------
                                     IconButton(
                                     icon: Icon(
                                       Icons.share_outlined,
                                       color: primaryColor,
                                     ),
                                     onPressed: () {}),
+                                //--------------------------------------------------------------------------
+                                //----------------------------İLETİŞİM ICONBUTTONI--------------------------
                                     IconButton(
                                         icon: Icon(
                                           LineIcons.phone,
                                           color: primaryColor,
                                         ),
                                         onPressed: () {}),
+                                //-------------------------------------------------------------------------
+                                //----------------------Konum iconButton'ı-------------------------------
+                                  IconButton(icon: Icon(LineIcons.locationArrow,
+                                        color: primaryColor,
+                                        size : iconSize,
+                                      ),
+                                      onPressed: () {}),
+                                //------------------------------------------------------------------------
                                   ],
                                 ),
-                                //--------------------------------------------------------------
+                                //-------------------------------------------------------------------------
                               ),
                               TextButton(
                                 onPressed: widget.onPressed,

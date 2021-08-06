@@ -2,8 +2,6 @@ import 'package:ev_mobil/screens/homeDetailPage.dart';
 import 'package:ev_mobil/screens/storyPage.dart';
 import 'package:ev_mobil/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../settings/consts.dart';
 
 class HomePage extends StatefulWidget {
