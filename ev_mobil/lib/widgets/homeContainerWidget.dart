@@ -61,7 +61,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                       image: DecorationImage(
                         fit: BoxFit.cover, // Resim containerı kaplasın
                         image: NetworkImage(
-                           posts[widget.imgNumber]["img"],
+                          posts[widget.imgNumber]["img"],
                         ),
                       ),
                     ),

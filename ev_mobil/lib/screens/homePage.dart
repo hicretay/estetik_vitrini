@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                       ),
                       onTap: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StoryPage(user: users[index])));
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(user: users[index])));
                       },),
                     ],
                       );

@@ -4,6 +4,8 @@ import 'package:ev_mobil/widgets/storyWidget.dart';
 import 'package:flutter/material.dart';
 
 class StoryPage extends StatefulWidget {
+    static const route = "/storyPage";
+
   final User user;
 
   const StoryPage({
@@ -31,9 +33,11 @@ class _StoryPageState extends State<StoryPage> {
     controller.dispose();
     super.dispose();
   }
-
+  
   @override
-  Widget build(BuildContext context) => PageView(
+  Widget build(BuildContext context){
+    //SystemChrome.setEnabledSystemUIOverlays([]); // tam ekran
+    return PageView( 
         controller: controller,
         children: users
             .map((user) => StoryWidget(
@@ -42,4 +46,5 @@ class _StoryPageState extends State<StoryPage> {
                 ))
             .toList(),
       );
+}
 }

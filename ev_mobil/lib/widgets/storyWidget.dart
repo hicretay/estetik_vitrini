@@ -89,14 +89,13 @@ class _StoryWidgetState extends State<StoryWidget> {
               storyItems: storyItems,
               controller: controller,
               onComplete: handleCompleted,
-              onVerticalSwipeComplete: (direction) {
+              onVerticalSwipeComplete: (Direction direction) {
                 if ((direction == Direction.down) || (direction == Direction.up)) {
                   Navigator.pop(context);
                 }
               },
               onStoryShow: (storyItem) {
                 final index = storyItems.indexOf(storyItem);
-
                 if (index > 0) {
                   setState(() {
                     date = widget.user.stories[index].date;
