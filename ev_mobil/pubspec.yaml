@@ -9,10 +9,10 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   carousel_pro: null
   cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
   flutter_facebook_auth: ^3.5.0
   flutter_progress_hud: ^2.0.0
   flutter_svg: null
@@ -24,6 +24,7 @@ dependencies:
   provider: null
   story_view: ^0.13.1
   table_calendar: null
+  toast: ^0.1.5
 
 dev_dependencies:
   flutter_test:

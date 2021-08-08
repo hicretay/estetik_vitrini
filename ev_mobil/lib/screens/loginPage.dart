@@ -1,5 +1,6 @@
 import 'package:ev_mobil/screens/registerPage.dart';
 import 'package:ev_mobil/settings/consts.dart';
+import 'package:ev_mobil/settings/functions.dart';
 import 'package:ev_mobil/settings/root.dart';
 import 'package:ev_mobil/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
-  bool isOnline;
+  bool isOnline = false;
   Map userObject = {};
   @override
   Widget build(BuildContext context) {
@@ -51,18 +52,18 @@ class _LoginPageState extends State<LoginPage> {
                           reverse: true,
                           child: Column(children: [
                            //--------------------Kullanıcı textField'ı---------------------
-                           TextFieldWidget(textEditingController: txtUsername,
-                           keyboardType: TextInputType.emailAddress,
-                           hintText    : "Telefon veya E-Posta", //ipucu metni
-                           obscureText : false, // yazılanlar gizlenmesin
-                           ),
+                          TextFieldWidget(textEditingController: txtUsername,
+                          keyboardType: TextInputType.emailAddress,
+                          hintText    : "Telefon veya E-Posta", //ipucu metni
+                          obscureText : false, // yazılanlar gizlenmesin
+                          ),
                           //-------------------------Şifre textField'ı------------------------
                           TextFieldWidget(
                           textEditingController: txtPassword,
                           keyboardType: TextInputType.visiblePassword,
                           obscureText : true, // yazılanlar gizlensin
                           hintText    : "Şifre", //ipucu metni
-                            ),
+                          ),
                           //------------------------------------------------------------------
                           SizedBox(height: deviceHeight(context)*0.05),
                           Material(
@@ -125,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                               maxRadius: deviceWidth(context)*0.06,
                               child: FaIcon(FontAwesomeIcons.facebookF,
                               color: primaryColor,)),
-                              onTap: (){
+                              onTap: ()async{
                                 final progressUHD = ProgressHUD.of(context);
                                 progressUHD.show();
                                 FacebookAuth.instance.login(
@@ -137,10 +138,13 @@ class _LoginPageState extends State<LoginPage> {
                                         userObject = userData;
                                     });
                                   });
+                                 isOnline?
+                                 showToast(context,"Giriş Başarısız !"):
                                  Navigator.pushAndRemoveUntil(context,
-                                 MaterialPageRoute(builder: (context) => Root()), (route) => false);  
+                                 MaterialPageRoute(builder: (context) => Root()), (route) => false);
                                  progressUHD.dismiss(); 
-                                });
+                                }
+                                );
                               }),
                 //-----------------------------------------------------------------------------------
                               ]),
