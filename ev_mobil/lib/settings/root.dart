@@ -27,18 +27,21 @@ class Root extends StatelessWidget {
               ),
             ).toList();
 
-        return Scaffold(
-          body: IndexedStack(
-            children: screens,
-            index: provider.currentTabIndex,
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: bottomNavigationBarItems,
-            currentIndex: provider.currentTabIndex,
-            onTap: provider.setTab,
-            type: BottomNavigationBarType.fixed,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+        return WillPopScope(
+          onWillPop: () async => provider.onWillPop(context),
+          child: Scaffold(
+            body: IndexedStack(
+              children: screens,
+              index: provider.currentTabIndex,
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              items: bottomNavigationBarItems,
+              currentIndex: provider.currentTabIndex,
+              onTap: provider.setTab,
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+            ),
           ),
         );
       },

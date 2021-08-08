@@ -8,6 +8,7 @@ import 'package:ev_mobil/screens/settingsPage.dart';
 import 'package:ev_mobil/screens/splashPage.dart';
 import 'package:ev_mobil/settings/root.dart';
 import 'package:ev_mobil/settings/screenProviderModel.dart';
+import 'package:ev_mobil/widgets/exitAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -138,30 +139,34 @@ class NavigationProvider extends ChangeNotifier {
 
 //-----------------------Sayfa yönlendirme fonksiyonu---------------------
 //NavigationProvider.of(context).setTab(PAGENAME); şeklinde kullanılacak.
-  // void setTab(int tab) {
-  //   _currentScreenIndex = tab;
-  //   //_currentScreenIndex: başlangıç sayfası tab değerine eşitlendi
-  //   notifyListeners();
-  // }
   void setTab(int tab) {
-    if (tab == currentTabIndex) {
-      _scrollToStart();
-    } else {
-      _currentScreenIndex = tab;
-      notifyListeners();
-    }
+    _currentScreenIndex = tab;
+    //_currentScreenIndex: başlangıç sayfası tab değerine eşitlendi
+    notifyListeners();
   }
 //-----------------------------------------------------------------------
 
- void _scrollToStart() {
-    if (currentScreen.scrollController != null) {
-      currentScreen.scrollController.animateTo(
-        0,
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeInOut,
-      );
+
+  Future<bool> onWillPop(BuildContext context) async {
+    final currentNavigatorState = currentScreen.navigatorState.currentState;
+
+    if (currentNavigatorState.canPop()) {
+      currentNavigatorState.pop();
+      return false;
+    } else {
+      if (currentTabIndex != LOCATION_PAGE) {
+        setTab(LOCATION_PAGE);
+        notifyListeners();
+        return false;
+      } else {
+        return await showDialog(
+          context: context,
+          builder: (context) => ExitAlertDialog(),
+        );
+      }
     }
   }
 }
+
 
 
