@@ -1,4 +1,4 @@
-import 'package:ev_mobil/model/story.dart';
+import 'package:estetikvitrini/model/story.dart';
 import 'package:flutter/material.dart';
 
 class User {

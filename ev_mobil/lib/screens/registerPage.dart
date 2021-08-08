@@ -1,6 +1,6 @@
-import 'package:ev_mobil/screens/loginPage.dart';
-import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/textFieldWidget.dart';
+import 'package:estetikvitrini/screens/loginPage.dart';
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';

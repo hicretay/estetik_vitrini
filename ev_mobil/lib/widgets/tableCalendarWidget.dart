@@ -1,4 +1,4 @@
-import 'package:ev_mobil/settings/consts.dart';
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 

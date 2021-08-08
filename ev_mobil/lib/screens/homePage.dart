@@ -1,6 +1,6 @@
-import 'package:ev_mobil/screens/homeDetailPage.dart';
-import 'package:ev_mobil/screens/storyPage.dart';
-import 'package:ev_mobil/widgets/homeContainerWidget.dart';
+import 'package:estetikvitrini/screens/homeDetailPage.dart';
+import 'package:estetikvitrini/screens/storyPage.dart';
+import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import '../settings/consts.dart';
 

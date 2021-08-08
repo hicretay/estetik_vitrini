@@ -1,6 +1,6 @@
-import 'package:ev_mobil/screens/makeAppointmentCheckPage.dart';
-import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/textButtonWidget.dart';
+import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {

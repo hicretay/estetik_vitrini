@@ -1,7 +1,7 @@
-import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/backgroundContainer.dart';
-import 'package:ev_mobil/widgets/reservationResultWidget.dart';
-import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
+import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';

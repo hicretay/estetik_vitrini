@@ -1,5 +1,5 @@
-import 'package:ev_mobil/model/story.dart';
-import 'package:ev_mobil/model/users.dart';
+import 'package:estetikvitrini/model/story.dart';
+import 'package:estetikvitrini/model/users.dart';
 import 'package:flutter/material.dart';
 
 BoxDecoration boxDecoration = BoxDecoration(

@@ -1,8 +1,8 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:ev_mobil/screens/makeAppointmentCalendarPage.dart';
-import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/backgroundContainer.dart';
-import 'package:ev_mobil/widgets/leadingRowWidget.dart';
+import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 

@@ -1,5 +1,5 @@
-import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {

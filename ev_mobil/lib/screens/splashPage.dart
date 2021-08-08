@@ -1,5 +1,5 @@
-import 'package:ev_mobil/screens/loginPage.dart';
-import 'package:ev_mobil/settings/consts.dart';
+import 'package:estetikvitrini/screens/loginPage.dart';
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {

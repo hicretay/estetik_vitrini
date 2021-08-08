@@ -1,5 +1,5 @@
-import 'package:ev_mobil/model/users.dart';
-import 'package:ev_mobil/settings/consts.dart';
+import 'package:estetikvitrini/model/users.dart';
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {

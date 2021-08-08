@@ -1,7 +1,7 @@
-import 'package:ev_mobil/screens/makeAppointmentOperationPage.dart';
-import 'package:ev_mobil/settings/consts.dart';
-import 'package:ev_mobil/widgets/tableCalendarWidget.dart';
-import 'package:ev_mobil/widgets/textButtonWidget.dart';
+import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';
+import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
