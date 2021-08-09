@@ -139,9 +139,6 @@ class _LoginPageState extends State<LoginPage> {
                                   progressUHD.show();
                                   final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
                                   provider.googleLogin();
-
-
-
                                   progressUHD.dismiss();
                                 },),
                   //----------------------------------------------------------------------------------
@@ -200,6 +197,14 @@ class _LoginPageState extends State<LoginPage> {
                                 }),
                   //-----------------------------------------------------------------------------------
                                 ]),
+                                SizedBox(height: deviceHeight(context)*0.04),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: TextButton(
+                                  child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
+                                  onPressed: (){}, 
+                                  ),
+                                ),                          
                             ]),
                           )
                   ],),
@@ -210,16 +215,6 @@ class _LoginPageState extends State<LoginPage> {
         }}),
         ),
       ),
-    //   bottomNavigationBar:  
-    //   Container(
-    //     color: primaryColor,
-    // //---------------------------------------ŞİFREMİ UNUTTUM BUTONU----------------------------------
-    //     child: TextButton(
-    //     child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 18),),
-    //     onPressed: (){}, 
-    //     ),
-    // //-----------------------------------------------------------------------------------------------
-    //   ),
     );
   }
 }

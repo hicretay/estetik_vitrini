@@ -49,30 +49,15 @@ class _HomePageState extends State<HomePage> {
               // Bir arama Textfield'ı içerir
               Padding(
                 padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
-                child: TextField(
-                  controller: teSearch, //search TextEditingControllerı
-                  cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: primaryColor,
-                      size: 35,
-                    ),
-                    hintText: "Estetik Vitrini",
-                    hintStyle: Theme.of(context)
-                        .textTheme
-                        .headline5
-                        .copyWith(color: primaryColor, fontFamily: leadingFont),
-                    focusColor: primaryColor,
-                    hoverColor: primaryColor,
-                    //border textField'ı çevreleyen yapı
-                    //width:0 ve none verilerek kaldırıldı
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 0,
-                        style: BorderStyle.none,
-                      ),
-                    ),
+                child: Padding(
+                  padding: const EdgeInsets.all(defaultPadding),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text("Estetik Vitrini", 
+                    style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(color: primaryColor, fontFamily: leadingFont)),
                   ),
                 ),
               ),

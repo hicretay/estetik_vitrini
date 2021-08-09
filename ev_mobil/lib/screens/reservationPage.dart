@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/navigationProvider.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';
@@ -47,7 +48,9 @@ class _ReservationPageState extends State<ReservationPage> {
                       child: IconButton(
                         iconSize: iconSize,
                         icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
-                        onPressed: (){}
+                        onPressed: (){
+                          NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                        }
                       ),
                     ),
                   ],
