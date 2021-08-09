@@ -137,10 +137,17 @@ class _LoginPageState extends State<LoginPage> {
                                 onTap: (){
                                   final progressUHD = ProgressHUD.of(context);
                                   progressUHD.show();
-                                  final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
-                                  provider.googleLogin();
+                                  try{
+                                    final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+                                    provider.googleLogin();
+                                  }
+                                  catch(error){
+                                    print("error");
+                                    return null;
+                                  }
+
                                   progressUHD.dismiss();
-                                },),
+                                }),
                   //----------------------------------------------------------------------------------
                               SizedBox(width: deviceWidth(context)*0.05),
                   //------------------------------FACEBOOK LOGİN BUTONU--------------------------------

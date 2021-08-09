@@ -56,14 +56,13 @@ class _HomePageState extends State<HomePage> {
                     child: Text("Estetik Vitrini", 
                     style: Theme.of(context)
                             .textTheme
-                            .headline5
+                            .headline3
                             .copyWith(color: primaryColor, fontFamily: leadingFont)),
                   ),
                 ),
               ),
               //------------------------------------------------------------------
-              //----------------Story Paneli---------------
-              //StoryWidget kullanıldı
+              //---------------------------Story Paneli---------------------------
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
@@ -80,8 +79,8 @@ class _HomePageState extends State<HomePage> {
                           GestureDetector(
                           child:  Container(
                           //Genişlik - yükseklik eşit verilip shape circle verilerek şekillendirildi
-                          width: 92,
-                          height: 92,
+                          width: 82,
+                          height: 82,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             gradient: LinearGradient(
@@ -94,8 +93,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Padding(padding: const EdgeInsets.all(2.0), // mor rengin genişliğini ayaralar
                             child: Container(
-                              width: 90,
-                              height: 90,
+                              width: 80,
+                              height: 80,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: lightWhite,
@@ -112,6 +111,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: (){
                           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(user: users[index])));
                       },),
+                      Text(users[index].name),
                     ],
                       );
                     }),

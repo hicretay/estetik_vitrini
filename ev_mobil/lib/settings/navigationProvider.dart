@@ -7,7 +7,7 @@ import 'package:estetikvitrini/screens/reservationPage.dart';
 import 'package:estetikvitrini/screens/settingsPage.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
 import 'package:estetikvitrini/settings/root.dart';
-import 'package:estetikvitrini/settings/screenProviderModel.dart';
+import 'package:estetikvitrini/model/screenProviderModel.dart';
 import 'package:estetikvitrini/widgets/exitAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

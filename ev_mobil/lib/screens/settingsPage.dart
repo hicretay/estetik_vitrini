@@ -52,10 +52,11 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [ 
                         SizedBox(height: deviceHeight(context)*0.05),
                         CircleAvatar(
+                        backgroundColor: secondaryColor,
                         radius: 30,
-                        backgroundImage: NetworkImage(user.photoURL),
+                        child: user!=null ? Image(image: NetworkImage(user.photoURL)) : Icon(Icons.person),
                   ),
-                        Text(user.email),
+                        Text(user!=null ? user.email : ""),
                         SizedBox(height: maxSpace),
                       ],
                     ),
@@ -88,8 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
                           provider.logout();
                           progressUHD.dismiss();
-                        }),
-                        
+                        }),                      
                       ],
                     ),
                   ),

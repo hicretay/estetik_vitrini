@@ -8,7 +8,8 @@ BoxDecoration boxDecoration = BoxDecoration(
 );
 
 const primaryColor = Color(0xFF352A4D);
-const secondaryColor = Color(0xffCBABD1);
+//const secondaryColor = Color(0xffCBABD1);//8776A2
+const secondaryColor = Color(0xFFD4BDD8);
 const tertiaryColor = Color(0xff62C6C7);
 const darkWhite = Color(0xffE0E1E1);
 const lightWhite = Color(0xffF4F4F4);
