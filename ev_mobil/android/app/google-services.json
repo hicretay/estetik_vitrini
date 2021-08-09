@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "797889666379",
+    "project_id": "estetik-vitrini",
+    "storage_bucket": "estetik-vitrini.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797889666379:android:8ca3a837e67702bc505cce",
+        "android_client_info": {
+          "package_name": "com.ae.estetikvitrini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797889666379-hur05h8q08bqv69vhu8gkqnrcjm6rhl5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3RJgvsNbzJEUYGFZwq-ei5lqGXiI8nPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797889666379-hur05h8q08bqv69vhu8gkqnrcjm6rhl5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
