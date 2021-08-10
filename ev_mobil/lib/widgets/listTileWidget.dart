@@ -17,11 +17,11 @@ class ListTileWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
                   child : Container(
                   height: deviceHeight(context)*0.07,
-                  color : secondaryColor,
+                  color : primaryColor,
                   child : Row(
                     children: <Widget>[
                       SizedBox(width: defaultPadding),
-                      Expanded(child: Text(text,style: TextStyle(fontSize: 18))),
+                      Expanded(child: Text(text,style: TextStyle(fontSize: 18, color:  white))),
                       child,
                       SizedBox(width: defaultPadding),
                     ],

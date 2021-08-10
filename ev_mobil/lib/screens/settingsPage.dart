@@ -77,19 +77,19 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox(height: defaultPadding),
                           ListTileWidget(
                           text: "Lisans Bilgileri",
-                          child: LineIcon(LineIcons.fileAlt,color: primaryColor),
+                          child: LineIcon(LineIcons.fileAlt,color: white),
                         ), 
                         ListTileWidget(
                           text: "Gizlilik Sözleşmesi ve KVKK Bildirimi",
-                          child: LineIcon(LineIcons.fileContract,color: primaryColor),
+                          child: LineIcon(LineIcons.fileContract,color: white),
                         ), 
                         ListTileWidget(
                           text: "Estetik Vitrini Hakkında",
-                          child: LineIcon(LineIcons.infoCircle,color: primaryColor),
+                          child: LineIcon(LineIcons.infoCircle,color: white),
                         ), 
                         ListTileWidget(
                           text: "Uygulamadan çıkış yap",
-                          child: Icon(Icons.exit_to_app,color: primaryColor),
+                          child: Icon(Icons.exit_to_app,color: white),
                           onTap: (){
                           final progressUHD = ProgressHUD.of(context); 
                           progressUHD.show();
