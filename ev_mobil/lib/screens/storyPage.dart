@@ -1,4 +1,4 @@
-import 'package:estetikvitrini/model/users.dart';
+import 'package:estetikvitrini/model/company.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/storyWidget.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 class StoryPage extends StatefulWidget {
     static const route = "/storyPage";
 
-  final User user;
+  final Company company;
 
   const StoryPage({
-    @required this.user,
+    @required this.company,
     Key key,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class _StoryPageState extends State<StoryPage> {
   void initState() {
     super.initState();
 
-    final initialPage = users.indexOf(widget.user);
+    final initialPage = companies.indexOf(widget.company);
     controller = PageController(initialPage: initialPage);
   }
 
@@ -39,9 +39,9 @@ class _StoryPageState extends State<StoryPage> {
     //SystemChrome.setEnabledSystemUIOverlays([]); // tam ekran
     return PageView( 
         controller: controller,
-        children: users
+        children: companies
             .map((user) => StoryWidget(
-                  user: user,
+                  company: user,
                   controller: controller,
                 ))
             .toList(),

@@ -1,13 +1,13 @@
-import 'package:estetikvitrini/model/users.dart';
+import 'package:estetikvitrini/model/company.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final User user;
+  final Company company;
   final String date;
 
   const ProfileWidget({
-    @required this.user,
+    @required this.company,
     @required this.date,
     Key key,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class ProfileWidget extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 radius: 26,
-                backgroundImage: NetworkImage(user.imgUrl),
+                backgroundImage: NetworkImage(company.imgUrl),
               ),
               SizedBox(width: deviceWidth(context)*0.02),
               Expanded(
@@ -32,7 +32,7 @@ class ProfileWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        user.name,
+                        company.name,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

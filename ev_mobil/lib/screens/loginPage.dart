@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   bool isOnline = false;
-  Map userObject = {};
+
 
   @override
   Widget build(BuildContext context) {
@@ -197,6 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                                   final AccessToken accessToken = await FacebookAuth.instance.accessToken;
                                   if (accessToken != null) {
                                       print("başarılı");
+                                      print(userObject["email"]);
                                       Navigator.pushAndRemoveUntil(context,
                                       MaterialPageRoute(builder: (context) => Root()), (route) => false);
                                   }

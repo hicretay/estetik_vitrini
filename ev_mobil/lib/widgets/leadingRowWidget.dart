@@ -29,7 +29,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: NetworkImage(
-                    users[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
+                    companies[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
                   ),
                 ),
               ),

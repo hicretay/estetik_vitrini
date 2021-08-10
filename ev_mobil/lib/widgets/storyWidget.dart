@@ -1,16 +1,16 @@
 import 'package:estetikvitrini/model/story.dart';
-import 'package:estetikvitrini/model/users.dart';
+import 'package:estetikvitrini/model/company.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/profileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:story_view/story_view.dart';
 
 class StoryWidget extends StatefulWidget {
-  final User user;
+  final Company company;
   final PageController controller;
 
   const StoryWidget({
-    @required this.user,
+    @required this.company,
     @required this.controller,
   });
 
@@ -24,7 +24,7 @@ class _StoryWidgetState extends State<StoryWidget> {
   String date = '';
 
   void addStoryItems() {
-    for (final story in widget.user.stories) {
+    for (final story in widget.company.stories) {
       switch (story.mediaType) {
         case MediaType.image:
           storyItems.add(StoryItem.pageImage(
@@ -57,7 +57,7 @@ class _StoryWidgetState extends State<StoryWidget> {
 
     controller = StoryController();
     addStoryItems();
-    date = widget.user.stories[0].date;
+    date = widget.company.stories[0].date;
   }
 
   @override
@@ -72,8 +72,8 @@ class _StoryWidgetState extends State<StoryWidget> {
       curve: Curves.easeIn,
     );
 
-    final currentIndex = users.indexOf(widget.user);
-    final isLastPage = users.length - 1 == currentIndex;
+    final currentIndex = companies.indexOf(widget.company);
+    final isLastPage = companies.length - 1 == currentIndex;
     
     if (isLastPage) {
       Navigator.of(context).pop();
@@ -98,14 +98,14 @@ class _StoryWidgetState extends State<StoryWidget> {
                 final index = storyItems.indexOf(storyItem);
                 if (index > 0) {
                   setState(() {
-                    date = widget.user.stories[index].date;
+                    date = widget.company.stories[index].date;
                   });
                 }
               },
             ),
           ),
           ProfileWidget(
-            user: widget.user,
+            company: widget.company,
             date: date,
           ),
         ],

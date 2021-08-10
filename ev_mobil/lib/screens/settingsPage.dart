@@ -5,7 +5,6 @@ import 'package:estetikvitrini/widgets/listTileWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -40,9 +39,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           padding: const EdgeInsets.only(top: defaultPadding),
                           child: Text("Profil",
                           style: Theme.of(context)
-                                      .textTheme
-                                      .headline3
-                                      .copyWith(color: white, fontFamily: leadingFont)),
+                                .textTheme
+                                .headline3
+                                .copyWith(color: white, fontFamily: leadingFont)),
                         ),
                         
                       ],
@@ -52,11 +51,15 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [ 
                         SizedBox(height: deviceHeight(context)*0.05),
                         CircleAvatar(
-                        backgroundColor: secondaryColor,
-                        radius: 30,
-                        child: user!=null ? Image(image: NetworkImage(user.photoURL)) : Icon(Icons.person),
+                          radius: 32,
+                          backgroundColor: primaryColor,
+                          child: CircleAvatar(
+                          backgroundColor: secondaryColor,
+                          radius: 30,
+                          child: user!=null ? CircleAvatar(backgroundImage: NetworkImage(user.photoURL),radius: 30,) : Icon(Icons.person, color: primaryColor,size: 40),
                   ),
-                        Text(user!=null ? user.email : ""),
+                        ),
+                        Text(user != null ? user.email : ""),
                         SizedBox(height: maxSpace),
                       ],
                     ),
@@ -74,11 +77,15 @@ class _SettingsPageState extends State<SettingsPage> {
                         SizedBox(height: defaultPadding),
                           ListTileWidget(
                           text: "Lisans Bilgileri",
-                          child: FaIcon(FontAwesomeIcons.fileAlt),
+                          child: LineIcon(LineIcons.fileAlt,color: primaryColor),
+                        ), 
+                        ListTileWidget(
+                          text: "Gizlilik Sözleşmesi ve KVKK Bildirimi",
+                          child: LineIcon(LineIcons.fileContract,color: primaryColor),
                         ), 
                         ListTileWidget(
                           text: "Estetik Vitrini Hakkında",
-                          child: LineIcon(LineIcons.infoCircle),
+                          child: LineIcon(LineIcons.infoCircle,color: primaryColor),
                         ), 
                         ListTileWidget(
                           text: "Uygulamadan çıkış yap",

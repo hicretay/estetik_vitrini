@@ -1,6 +1,8 @@
 import 'package:estetikvitrini/model/story.dart';
-import 'package:estetikvitrini/model/users.dart';
+import 'package:estetikvitrini/model/company.dart';
 import 'package:flutter/material.dart';
+
+Map userObject = {};
 
 BoxDecoration boxDecoration = BoxDecoration(
   shape: BoxShape.rectangle,
@@ -122,28 +124,28 @@ final stories2 = [
 ];
 
 
-final users = [
-  User(
+final companies = [
+  Company(
     name: "Estecool",
     imgUrl:  "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
     stories: story,
   ),
-  User(
+  Company(
     name: "Epilady",
     imgUrl: "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
     stories: stories2,
   ),
-  User(
+  Company(
     name: "Estecool",
     imgUrl: "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
     stories: story,
   ),
-  User(
+  Company(
     name: "Epilady",
     imgUrl: "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
     stories: stories2,
   ),
-    User(
+    Company(
     name: "Estecool",
     imgUrl: "https://pbs.twimg.com/profile_images/1081166836635451392/vSiBXHju_400x400.jpg",
     stories: story,

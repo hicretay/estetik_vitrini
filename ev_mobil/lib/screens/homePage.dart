@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                   child: GridView.builder(
-                    itemCount: users.length,
+                    itemCount: companies.length,
                     scrollDirection: Axis.horizontal,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: maxSpace,
@@ -102,16 +102,16 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  image: NetworkImage(users[index].imgUrl),
+                                  image: NetworkImage(companies[index].imgUrl),
                                 ),
                               ),
                             ),
                           ),
                       ),
                       onTap: (){
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(user: users[index])));
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(company: companies[index])));
                       },),
-                      Text(users[index].name),
+                      Text(companies[index].name),
                     ],
                       );
                     }),
