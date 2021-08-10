@@ -14,7 +14,7 @@ dependencies:
   firebase_auth: ^3.0.1
   flutter:
     sdk: flutter
-  flutter_facebook_auth: ^3.5.0
+  
   flutter_progress_hud: ^2.0.0
   flutter_svg: null
   flutter_svg_provider: ^0.1.9

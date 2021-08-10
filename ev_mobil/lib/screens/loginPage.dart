@@ -1,6 +1,5 @@
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/settings/googleSignInProvider.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -177,31 +175,31 @@ class _LoginPageState extends State<LoginPage> {
                                   // }
                                   
 
-                                  FacebookAuth.instance.login(
-                                    permissions: ["public_profile","email"],
-                                  ).then((value){
-                                    FacebookAuth.instance.getUserData().then((userData){
-                                      setState(() {
-                                          isOnline = true;
-                                          userObject = userData;
-                                      });
-                                    });
-                                   isOnline?
-                                   showToast(context,"Giriş Başarısız !"):
-                                   Navigator.pushAndRemoveUntil(context,
-                                   MaterialPageRoute(builder: (context) => Root()), (route) => false);
-                                   progressUHD.dismiss(); 
-                                  }
-                                  );
+                                  // FacebookAuth.instance.login(
+                                  //   permissions: ["public_profile","email"],
+                                  // ).then((value){
+                                  //   FacebookAuth.instance.getUserData().then((userData){
+                                  //     setState(() {
+                                  //         isOnline = true;
+                                  //         userObject = userData;
+                                  //     });
+                                  //   });
+                                  //  isOnline?
+                                  //  showToast(context,"Giriş Başarısız !"):
+                                  //  Navigator.pushAndRemoveUntil(context,
+                                  //  MaterialPageRoute(builder: (context) => Root()), (route) => false);
+                                  //  progressUHD.dismiss(); 
+                                  // }
+                                  // );
 
-                                  final AccessToken accessToken = await FacebookAuth.instance.accessToken;
-                                  if (accessToken != null) {
-                                      print("başarılı");
-                                      print(userObject["email"]);
-                                      Navigator.pushAndRemoveUntil(context,
-                                      MaterialPageRoute(builder: (context) => Root()), (route) => false);
-                                  }
-                                  progressUHD.dismiss(); 
+                                  // final AccessToken accessToken = await FacebookAuth.instance.accessToken;
+                                  // if (accessToken != null) {
+                                  //     print("başarılı");
+                                  //     print(userObject["email"]);
+                                  //     Navigator.pushAndRemoveUntil(context,
+                                  //     MaterialPageRoute(builder: (context) => Root()), (route) => false);
+                                  // }
+                                  // progressUHD.dismiss(); 
                                 }),
                   //-----------------------------------------------------------------------------------
                                 ]),
