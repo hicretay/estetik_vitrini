@@ -1,4 +1,4 @@
-import 'package:estetikvitrini/settings/navigationProvider.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

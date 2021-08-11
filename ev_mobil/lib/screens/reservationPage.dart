@@ -1,5 +1,5 @@
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/settings/navigationProvider.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';

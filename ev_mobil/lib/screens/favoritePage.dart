@@ -1,7 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/settings/navigationProvider.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';

@@ -1,14 +1,16 @@
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
+import 'package:estetikvitrini/providers/jsonDataProvider.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
-import 'package:estetikvitrini/settings/navigationProvider.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const route = "/loginPage";
@@ -23,9 +25,16 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController txtPassword = TextEditingController();
   bool isOnline = false;
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final loginData = Provider.of<JsonDataProvider>(context, listen: false);
+  //   loginData.getLoginData(context);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    //final loginData = Provider.of<JsonDataProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: ProgressHUD(
@@ -94,8 +103,11 @@ class _LoginPageState extends State<LoginPage> {
                                   final progressUHD = ProgressHUD.of(context);
                                   progressUHD.show(); 
                                   //USER DATASI
-                                  final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false);
-                                  if(userData!=null){
+                                  usernameP = txtUsername.text;
+                                  passwordP = txtPassword.text;
+                                  final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false);  
+
+                                  if(userData != null){
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
                                   progressUHD.dismiss(); 

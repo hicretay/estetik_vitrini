@@ -15,17 +15,6 @@ Map<String, String> header = {
   "Access-Control-Allow-Methods": "POST, OPTIONS"
 };
 
-Map<String, String> header2 ={
-  "access-control-allow-credentials": true.toString(), 
-  "access-control-allow-methods": "GET,PUT,POST,DELETE,HEAD,OPTIONS,PATCH,PROPFIND,PROPPATCH,MKCOL,COPY,MOVE,LOCK" ,
-  "access-control-allow-origin": "http://service.estetikvitrini.com" ,
-  "content-length": 29.toString() ,
-  "content-type": "application/json; charset=utf-8" ,
-  "date": "Wed,11 Aug 2021 06:49:57 GMT" ,
-  "server": "Microsoft-IIS/8.5" ,
-  "x-powered-by": "ASP.NET",
-};
-
 //---------------------------------------------------Login Fonksiyonu--------------------------------------------------------------
 Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) async {
   final response = await http.post(Uri.parse(url + "LoginJsn"),

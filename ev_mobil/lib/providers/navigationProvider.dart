@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import 'consts.dart';
+import '../settings/consts.dart';
 
 const HOME_PAGE = 0;
 const FAVORITE_PAGE = 1;
@@ -166,6 +166,7 @@ class NavigationProvider extends ChangeNotifier {
     }
   }
 }
+
 
 
 
