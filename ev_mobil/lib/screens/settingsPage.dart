@@ -1,5 +1,5 @@
+import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/settings/googleSignInProvider.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/listTileWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
  static const route = "settingsPage";
@@ -93,10 +92,12 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: (){
                           final progressUHD = ProgressHUD.of(context); 
                           progressUHD.show();
-                          final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
-                          provider.logout();
+                          // final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+                          // user != null ? 
+                          // provider.logout():
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>LoginPage()));
                           progressUHD.dismiss();
-                        }),                      
+                        }),
                       ],
                     ),
                   ),
