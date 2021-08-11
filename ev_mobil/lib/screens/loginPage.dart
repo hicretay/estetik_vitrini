@@ -6,7 +6,6 @@ import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,21 +38,8 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       body: ProgressHUD(
         child: Builder(builder: (context)=>
-            StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context,snapshot){
-
-            if(snapshot.connectionState == ConnectionState.waiting){
-              return Center(child: CircularProgressIndicator()); // itembuildera sar
-              }
-            else if(snapshot.hasError){
-              return Center(child: Text("Bir şeyler yanlış gitti "));
-            }
-            else if(snapshot.hasData){
-              return Root();    
-            }
-            else{
-              return Stack(children:[
+            
+                Stack(children:[
                 Container(
                   decoration: BoxDecoration(gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -105,7 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                                   //USER DATASI
                                   usernameP = txtUsername.text;
                                   passwordP = txtPassword.text;
-                                  final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false);  
+                                  final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false); 
+                                   
 
                                   if(userData != null){
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
@@ -240,8 +227,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
           ],
-        );
-        }}),
+        ),
+        
         ),
       ),
     );

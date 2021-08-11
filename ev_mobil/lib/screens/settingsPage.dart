@@ -2,7 +2,7 @@ import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/listTileWidget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icon.dart';
@@ -18,7 +18,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +54,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: CircleAvatar(
                           backgroundColor: secondaryColor,
                           radius: 30,
-                          child: user!=null ? CircleAvatar(backgroundImage: NetworkImage(user.photoURL),radius: 30,) : Icon(Icons.person, color: primaryColor,size: 40),
+                          child:  Icon(Icons.person, color: primaryColor,size: 40),
                   ),
                         ),
-                        Text(user != null ? user.email : ""),
+                        Text(""),
                         SizedBox(height: maxSpace),
                       ],
                     ),
