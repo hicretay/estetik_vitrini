@@ -95,7 +95,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           // final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
                           // user != null ? 
                           // provider.logout():
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>LoginPage()));
+                          
+                          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                           progressUHD.dismiss();
                         }),
                       ],

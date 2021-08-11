@@ -83,7 +83,6 @@ class NavigationProvider extends ChangeNotifier {
       icon: SvgPicture.asset("assets/icons/takvim.svg"),
       title: "",
       activeIcon: CircleAvatar(
-        //maxRadius: 23.0,
         backgroundColor: secondaryColor,
         child: SvgPicture.asset("assets/icons/takvim.svg"),
       ),

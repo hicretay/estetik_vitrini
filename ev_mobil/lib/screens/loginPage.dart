@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                                   //USER DATASI
                                   final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false);
                                   if(userData!=null){
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Root()), (route) => false); 
+                                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   progressUHD.dismiss(); 
                                   }
                                   else{
