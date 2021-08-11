@@ -2,6 +2,7 @@ import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
+import 'package:estetikvitrini/settings/navigationProvider.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                                   final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false);
                                   if(userData!=null){
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
+                                  NavigationProvider.of(context).setTab(LOCATION_PAGE);
                                   progressUHD.dismiss(); 
                                   }
                                   else{
