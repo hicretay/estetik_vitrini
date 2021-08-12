@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                                   final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false); 
                                    
 
-                                  if(userData != null){
+                                  if(userData.success == true){
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
                                   progressUHD.dismiss(); 

@@ -23,12 +23,8 @@ Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) asy
       );
 
     if (response.statusCode == 200) {
-    if (response.body.contains("true")) {
     final String responseString = response.body;
-    return loginJsnFromJson(responseString);  
-    }else{
-      return null;
-    }    
+    return loginJsnFromJson(responseString);     
   } else {
     return null;
   }

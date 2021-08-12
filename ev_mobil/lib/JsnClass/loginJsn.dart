@@ -6,24 +6,53 @@ String loginJsnToJson(LoginJsn data) => json.encode(data.toJson());
 
 class LoginJsn {
     LoginJsn({
-        this.userName,
-        this.password,
-        this.social,
+        this.success,
+        this.result,
     });
 
-    String userName;
-    String password;
-    bool social;
+    bool success;
+    Result result;
 
     factory LoginJsn.fromJson(Map<String, dynamic> json) => LoginJsn(
-        userName: json["userName"],
-        password: json["password"],
-        social: json["social"],
+        success: json["success"],
+        result: Result.fromJson(json["result"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "userName": userName,
-        "password": password,
-        "social": social,
+        "success": success,
+        "result": result.toJson(),
     };
 }
+
+class Result {
+    Result({
+        this.id,
+        this.nameSurname,
+        this.country,
+        this.city,
+        this.county,
+    });
+
+    int id;
+    String nameSurname;
+    int country;
+    int city;
+    int county;
+
+    factory Result.fromJson(Map<String, dynamic> json) => Result(
+        id: json["id"],
+        nameSurname: json["nameSurname"],
+        country: json["country"],
+        city: json["city"],
+        county: json["county"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "nameSurname": nameSurname,
+        "country": country,
+        "city": city,
+        "county": county,
+    };
+}
+
