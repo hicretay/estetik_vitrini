@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:toast/toast.dart';
@@ -31,6 +32,22 @@ Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) asy
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
+//----------------------------------------------Kampanya Listesi Fonksiyonu--------------------------------------------------------
+Future<ContentStreamJsn> contentStreamJsnFunc(int id) async {
+  final response = await http.post(
+    Uri.parse(url + "ContentStream/List"),
+    body: '{"userId":' + id.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return contentStreamJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
 
 
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu----------------------------------------------------------

@@ -1,8 +1,8 @@
+import 'package:estetikvitrini/screens/aboutPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/listTileWidget.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icon.dart';
@@ -77,6 +77,12 @@ class _SettingsPageState extends State<SettingsPage> {
                           ListTileWidget(
                           text: "Lisans Bilgileri",
                           child: LineIcon(LineIcons.fileAlt,color: white),
+                          onTap: (){
+                            final progressUHD = ProgressHUD.of(context);
+                            progressUHD.show(); 
+                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AboutPage()));
+                            progressUHD.dismiss();
+                          },
                         ), 
                         ListTileWidget(
                           text: "Gizlilik Sözleşmesi ve KVKK Bildirimi",

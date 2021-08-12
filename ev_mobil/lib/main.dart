@@ -1,6 +1,5 @@
 import 'package:estetikvitrini/providers/jsonDataProvider.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
-//import 'package:estetikvitrini/providers/googleSignInProvider.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -22,7 +21,6 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
-        //ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         ChangeNotifierProvider<JsonDataProvider>(create: (_) => JsonDataProvider()),
       ],
       child: Builder(
