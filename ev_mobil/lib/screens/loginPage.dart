@@ -1,5 +1,4 @@
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
-import 'package:estetikvitrini/providers/jsonDataProvider.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -9,6 +8,7 @@ import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -86,15 +86,16 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Text("Giriş",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                                 //-----------------------------GİRİŞ BUTONU ONPRESSEDİ---------------------------------------------
                                 onPressed: ()async{
+                                  String username = txtUsername.text; // Kullanıcı Adı TextField'ının texti = username
+                                  String password = txtPassword.text; // Şifre TextField'ının texti = password
                                   final progressUHD = ProgressHUD.of(context);
                                   progressUHD.show(); 
-                                  //USER DATASI
-                                  usernameP = txtUsername.text;
-                                  passwordP = txtPassword.text;
-                                  final LoginJsn userData = await loginJsnFunc(txtUsername.text, txtPassword.text, false); 
-                                   
-
-                                  if(userData.success == true){
+                                  //--------------------------------USER DATASI DOLDURULMASI---------------------------
+                                  final LoginJsn userData = await loginJsnFunc(username, password, false); 
+                                  if(userData.success == true){ // Giriş kontrolü, succes
+                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  prefs.setString("user", username);     
+                                  prefs.setString("pass", password);    
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
                                   progressUHD.dismiss(); 

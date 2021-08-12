@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
  static const route = "settingsPage";
@@ -88,7 +89,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         ListTileWidget(
                           text: "Uygulamadan çıkış yap",
                           child: Icon(Icons.exit_to_app,color: white),
-                          onTap: (){
+                          onTap: ()async{
+                          SharedPreferences prefs = await SharedPreferences.getInstance();                
+                          prefs.remove("user");
+                          prefs.remove("pass");
                           final progressUHD = ProgressHUD.of(context); 
                           progressUHD.show();
                           // final provider = Provider.of<GoogleSignInProvider>(context,listen: false);

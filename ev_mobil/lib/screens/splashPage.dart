@@ -1,5 +1,8 @@
+import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
+import 'package:estetikvitrini/settings/root.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,11 +18,19 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1), () async{
-        // ignore: unused_local_variable
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        Navigator.of(context).pop();
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);  
-     
+        String user = prefs.getString("user");
+        String pass = prefs.getString("pass");
+
+        if(user==null){
+          Navigator.of(context).pop();
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);  
+        }
+        else{
+          // ignore: unused_local_variable
+          final LoginJsn userData = await loginJsnFunc(user, pass, false); 
+          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
+        }
     });
   }
 
