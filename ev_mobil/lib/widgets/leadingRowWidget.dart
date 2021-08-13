@@ -1,13 +1,15 @@
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../settings/consts.dart';
+
 
 class LeadingRowWidget extends StatefulWidget {
   //homePage ve favoritePage sayfalarında kullanıldı
- @required final int iconNumber; // icon resmi indexi
+ @required final String companyLogo; // icon resmi indexi
  @required final Color pinColor;
+ @required final String companyName;
 
-  const LeadingRowWidget({Key key, this.iconNumber, this.pinColor});
+  const LeadingRowWidget({Key key, this.pinColor, this.companyLogo, this.companyName});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -17,30 +19,33 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround, // Row içindeki widgetların yayılmasını sağlar
+      //mainAxisAlignment: MainAxisAlignment.spaceAround, // Row içindeki widgetların yayılmasını sağlar
       children: [
         Row(
           children: [
             //------------Başlıktaki firma logosu görünümü-----------
+            SizedBox(width: deviceWidth(context)*0.08), 
             Container(
+              alignment: Alignment.topLeft,
               width: 60,
               height: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: NetworkImage(
-                    companies[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
+                    //companies[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
+                    widget.companyLogo,
                   ),
                 ),
               ),
             ),
             //-----------------------------------------------------
-            SizedBox(width: 5), //başlık iconu - texti arası boşluk
+            SizedBox(width: deviceWidth(context)*0.05), //başlık iconu - texti arası boşluk
 
             Text(
-              //"Estecool Güzellik Merkezi" metni
-              leading,
-              style: Theme.of(context).textTheme.subtitle1,
+              widget.companyName,
+              style: TextStyle(fontSize: 20)
+              //Theme.of(context).textTheme.subtitle1,
             ),
           ],
         ),

@@ -1,10 +1,12 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeDetailPage extends StatefulWidget {
@@ -26,165 +28,184 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BackGroundContainer(
-          colors: backGroundColor1,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      //iconun çevresini saran yapı tasarımı
-                      maxRadius: 25,
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        iconSize: iconSize,
-                        icon: Icon(Icons.arrow_back,color: primaryColor,size: 25),
-                        onPressed: (){Navigator.pop(context, false);},
-                      ),
-                    ),
-                    SizedBox(width: maxSpace),
-                    Text("Estetik Vitrini",
-                      style     : TextStyle(
-                      fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                    ),
-                  ],
-                )
-              ),
-              Padding(padding: const EdgeInsets.only(left: 20),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text("Kampanyalar",
-                        style: TextStyle(
-                          fontFamily: leadingFont,
-                          color: Colors.white,
-                          fontSize: 45,
+        body: ProgressHUD(
+          child: Builder(builder: (context)=>
+              BackGroundContainer(
+              colors: backGroundColor1,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(defaultPadding),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          //iconun çevresini saran yapı tasarımı
+                          maxRadius: 25,
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            iconSize: iconSize,
+                            icon: Icon(Icons.arrow_back,color: primaryColor,size: 25),
+                            onPressed: (){Navigator.pop(context, false);},
+                          ),
                         ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text("Estecool Güzellik Merkezi",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    SizedBox(height: maxSpace)
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                    decoration: BoxDecoration(
-                    color: lightWhite,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
+                        SizedBox(width: maxSpace),
+                        Text("Estetik Vitrini",
+                          style     : TextStyle(
+                          fontFamily: leadingFont, fontSize: 25, color: Colors.white),
+                        ),
+                      ],
+                    )
                   ),
-                  child: ListView.builder(itemBuilder: (BuildContext context, int index){
-                    return Column(
-                        children: [
-                          SizedBox(height: maxSpace),
-                          LeadingRowWidget( 
-                            iconNumber: 0,
-                            pinColor: Colors.transparent,),//leading widgetı
-                          Padding(padding: const EdgeInsets.all(20.0),
-                            child: Center(
-                              //-----------------------Carousel Containerı------------------------
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(maxSpace)),
-                                  child : SizedBox(
-                                  width : double.infinity, //genişlik: container kadar
-                                  height: deviceHeight(context) * 0.25,//yükseklik
-                                  child : buildCarousel(), //Carousel fonksiyonu
-                                ),
-                              ),
+                  Padding(padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text("Kampanyalar",
+                            style: TextStyle(
+                              fontFamily: leadingFont,
+                              color: Colors.white,
+                              fontSize: 45,
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(homeDetailContent.result[0].companyName,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(height: maxSpace)
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                        decoration: BoxDecoration(
+                        color: lightWhite,
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
+                      ),
+                      child: ListView.builder(
+                        itemCount: homeDetailContent.result.length,
+                        itemBuilder: (BuildContext context, int index){
+                        
+                         _checked = homeDetailContent.result[index].liked; // Gönderi beğenilmiş mi servisten okuyacak                  
+                        return Column(
                             children: [
-                              //-----------------Alt Header-----------------------
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    //Beğeni butonunu kaplayan circleAvatar yapısı
-                                    maxRadius: 22.5,
-                                    backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                    child: IconButton(
-                                      iconSize: iconSize,
-                                      icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
+                              SizedBox(height: maxSpace),
+                              LeadingRowWidget( 
+                                companyName: homeDetailContent.result[index].companyName,
+                                companyLogo: homeDetailContent.result[index].companyLogo,
+                                pinColor: Colors.transparent,),//leading widgetı
+                              Padding(padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding),
+                                child: Center(
+                                  //-----------------------Carousel Containerı------------------------
+                                  child: Container(
+                                    width: double.infinity, //genişlik: container genişliği
+                                    height: 250, //container yüksekliği: 250
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover, // Resim containerı kaplasın
+                                        image: NetworkImage(
+                                          homeDetailContent.result[index].contentPicture,
+                                        ),
                                       ),
-                                      onPressed: () {
-                                        setState(() { 
-                                          _checked = !_checked; //tıklandığında bool değeri tersler
-                                          _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                          },
-                                        );
-                                      },
                                     ),
                                   ),
-                          //-----------------------Paylaşım iconButton'ı----------------------------
-                                  IconButton(icon: Icon(Icons.share_outlined,
-                                        color: primaryColor,
-                                        size : iconSize,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  //-----------------Alt Header-----------------------
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        //Beğeni butonunu kaplayan circleAvatar yapısı
+                                        maxRadius: 22.5,
+                                        backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
+                                        child: IconButton(
+                                          iconSize: iconSize,
+                                          icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
+                                          ),
+                                          onPressed: () {
+                                            setState(() { 
+                                              _checked = !_checked; //tıklandığında bool değeri tersler
+                                              _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
+                                              },
+                                            );
+                                          },
+                                        ),
                                       ),
-                                      onPressed: () {}),
-                          //------------------------------------------------------------------------
-                          //----------------------İletişim iconButton'ı-----------------------------
-                                  IconButton(icon: Icon(LineIcons.phone,
-                                        color: primaryColor,
-                                        size : iconSize,
-                                      ),
-                                      onPressed: () {}),
-                          //------------------------------------------------------------------------
-                           //----------------------Konum iconButton'ı-------------------------------
-                                  IconButton(icon: Icon(LineIcons.locationArrow,
-                                        color: primaryColor,
-                                        size : iconSize,
-                                      ),
-                                      onPressed: () {}),
-                          //------------------------------------------------------------------------
+                              //-----------------------Paylaşım iconButton'ı----------------------------
+                                      IconButton(icon: Icon(Icons.share_outlined,
+                                            color: primaryColor,
+                                            size : iconSize,
+                                          ),
+                                          onPressed: () {}),
+                              //------------------------------------------------------------------------
+                              //----------------------İletişim iconButton'ı-----------------------------
+                                      IconButton(icon: Icon(LineIcons.phone,
+                                            color: primaryColor,
+                                            size : iconSize,
+                                          ),
+                                          onPressed: () {
+                                          }),
+                              //------------------------------------------------------------------------
+                               //----------------------Konum iconButton'ı-------------------------------
+                                      IconButton(icon: Icon(LineIcons.locationArrow,
+                                            color: primaryColor,
+                                            size : iconSize,
+                                          ),
+                                          onPressed: () async{
+                                            final progressUHD = ProgressHUD.of(context);
+                                            progressUHD.show();
+                                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage()));
+                                            progressUHD.dismiss(); 
+                                          }),
+                              //------------------------------------------------------------------------
+                                    ],
+                                  ),
+                                  buildReservationButton(), //Rezervasyon MaterialButton'ı
                                 ],
                               ),
-                              buildReservationButton(), //Rezervasyon MaterialButton'ı
-                            ],
-                          ),
-                          SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
-                          Padding(padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Icon(Icons.favorite, // Beğeni İcon'ı
-                                size : iconSize,
-                                color: primaryColor),
-                                SizedBox(width: minSpace),
-                                Text("$counter kişi tarafından favorilere eklendi"),
-                                // counter ile gösterilecek beğeni sayısı
-                              ],
-                            ),
-                          ),
-                          //------------------Açıklama Metni----------------------
-                          Padding(padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child    : Text("Kendin için bir şey yap.",
-                                  style    : TextStyle(fontSize: 22, color: primaryColor),
-                                  ),
+                              SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
+                              Padding(padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.favorite, // Beğeni İcon'ı
+                                    size : iconSize,
+                                    color: primaryColor),
+                                    SizedBox(width: minSpace),
+                                    Text("${homeDetailContent.result[index].likeCount} kişi tarafından favorilere eklendi"),
+                                    // counter ile gösterilecek beğeni sayısı
+                                  ],
                                 ),
-                                Text(aboutText),
-                              ],
-                            ),
-                          ),
-                          //------------------------------------------------------
-                        ],
-                      );
-                  }),
-                ),
+                              ),
+                              //------------------Açıklama Metni----------------------
+                              Padding(padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child    : Text(homeDetailContent.result[index].contentTitle.toString(),
+                                      style    : TextStyle(fontSize: 22, color: primaryColor),
+                                      ),
+                                    ),
+                                    Text(aboutText),
+                                  ],
+                                ),
+                              ),
+                              //------------------------------------------------------
+                            ],
+                          );
+                      }),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

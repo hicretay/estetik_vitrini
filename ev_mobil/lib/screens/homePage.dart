@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
-                          final ContentStreamJsn homeDetailContent = await contentStreamJsnFunc(3);
+                          final ContentStreamJsn homeDetailContent = await contentStreamJsnFunc(3);                        
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
                           progressUHD.dismiss();

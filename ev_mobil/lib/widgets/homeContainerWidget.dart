@@ -43,8 +43,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                 padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
                 //Leading Widgetı
                 child: LeadingRowWidget(
-                  iconNumber: widget.iconNumber, // icon resmi indexi
+                  //iconNumber: widget.iconNumber, // icon resmi indexi
                   pinColor: widget.pinColor,
+                  companyLogo: "https://www.lynskincare.com/wp-content/uploads/2021/04/lyn-skincare-senin-en-iyi-halin.jpg",
+                  companyName: "Estetik Vitrini",
                 ),
               ),
               Expanded(
