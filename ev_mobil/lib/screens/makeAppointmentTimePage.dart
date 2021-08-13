@@ -2,6 +2,7 @@ import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {
   MakeAppointmentTimePage({Key key}) : super(key: key);
@@ -39,113 +40,117 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          color: secondaryColor,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      //iconun çevresini saran yapı tasarımı
-                      maxRadius: 25,
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        iconSize: iconSize,
-                        icon: Icon(Icons.arrow_back,color: secondaryColor,size: 25),
-                        onPressed: (){Navigator.pop(context, false);},
-                      ),
-                    ),
-                    SizedBox(
-                      width: maxSpace,
-                    ),
-                    Text(
-                      "Estetik Vitrini",
-                      style: TextStyle(
-                          fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                    ),
-                  ],
-                )
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Randevu Al",
-                        style: TextStyle(
-                          fontFamily: leadingFont,
-                          color: Colors.white,
-                          fontSize: 45,
+        body: ProgressHUD(
+          child: Builder(builder: (context)=>
+              Container(
+              color: secondaryColor,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(defaultPadding),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          //iconun çevresini saran yapı tasarımı
+                          maxRadius: 25,
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            iconSize: iconSize,
+                            icon: Icon(Icons.arrow_back,color: secondaryColor,size: 25),
+                            onPressed: (){Navigator.pop(context, false);},
+                          ),
                         ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Estecool Güzellik Merkezi",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    SizedBox(
-                      height: maxSpace,
+                        SizedBox(
+                          width: maxSpace,
+                        ),
+                        Text(
+                          "Estetik Vitrini",
+                          style: TextStyle(
+                              fontFamily: leadingFont, fontSize: 25, color: Colors.white),
+                        ),
+                      ],
                     )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(cardCurved),
-                    ),
                   ),
-                  child: SingleChildScrollView(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       children: [
-                      Padding(
-                      padding:  const EdgeInsets.only(top: defaultPadding*2),
-                      child: Padding(padding: const EdgeInsets.all(defaultPadding),
-                      child: GridView.builder(
-                        shrinkWrap: true,                 
-                        itemCount: gridChildren.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: (1 / .4),
-                          crossAxisCount : 4,
-                          mainAxisSpacing: minSpace,
-                          crossAxisSpacing: minSpace,
-                        ), 
-                        itemBuilder:  (BuildContext context, int index){
-                          return Container(
-                          color: _checked==index ? secondaryColor : white,
-                          child: TextButton(
-                            child: Text(
-                              gridChildren[index],
-                              style: TextStyle(
-                                color: primaryColor,
-                              ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Randevu Al",
+                            style: TextStyle(
+                              fontFamily: leadingFont,
+                              color: Colors.white,
+                              fontSize: 45,
                             ),
-                            onPressed: () {
-                              setState(() {
-                                //butona basıldığında değeri günceller
-                                _checked = index;
-                              });
-                            },
                           ),
-                        );
-                        }),
-                       ),
-                      ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Estecool Güzellik Merkezi",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(
+                          height: maxSpace,
+                        )
                       ],
                     ),
                   ),
-                ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(cardCurved),
+                        ),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                          Padding(
+                          padding:  const EdgeInsets.only(top: defaultPadding*2),
+                          child: Padding(padding: const EdgeInsets.all(defaultPadding),
+                          child: GridView.builder(
+                            shrinkWrap: true,                 
+                            itemCount: gridChildren.length,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: (1 / .4),
+                              crossAxisCount : 4,
+                              mainAxisSpacing: minSpace,
+                              crossAxisSpacing: minSpace,
+                            ), 
+                            itemBuilder:  (BuildContext context, int index){
+                              return Container(
+                              color: _checked==index ? secondaryColor : white,
+                              child: TextButton(
+                                child: Text(
+                                  gridChildren[index],
+                                  style: TextStyle(
+                                    color: primaryColor,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    //butona basıldığında değeri günceller
+                                    _checked = index;
+                                  });
+                                },
+                              ),
+                            );
+                            }),
+                           ),
+                          ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
         bottomNavigationBar: TextButtonWidget(

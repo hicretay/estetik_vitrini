@@ -37,8 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: ProgressHUD(
-        child: Builder(builder: (context)=>
-            
+        child: Builder(builder: (context)=>           
                 Stack(children:[
                 Container(
                   decoration: BoxDecoration(gradient: LinearGradient(

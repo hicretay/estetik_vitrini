@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -32,7 +33,7 @@ Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) asy
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------Kampanya Listesi Fonksiyonu--------------------------------------------------------
+//----------------------------------------------Ana sayfa postlar Listesi Fonksiyonu--------------------------------------------------------
 Future<ContentStreamJsn> contentStreamJsnFunc(int id) async {
   final response = await http.post(
     Uri.parse(url + "ContentStream/List"),
@@ -43,6 +44,23 @@ Future<ContentStreamJsn> contentStreamJsnFunc(int id) async {
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return contentStreamJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------Kampanya Listesi Fonksiyonu--------------------------------------------------------
+Future<ContentStreamDetailJsn> contentStreamDetailJsnFunc(int companyId, int campaingId) async {
+  final response = await http.post(
+    Uri.parse(url + "ContentStreamDetail/List"),
+    body: '{"companyId":' + companyId.toString() + ',' + '"campaingId":' + campaingId.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return contentStreamDetailJsnFromJson(responseString);
   } else {
     return null;
   }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
@@ -43,7 +42,7 @@ class _HomePageState extends State<HomePage> {
      _connectionChangeStream.cancel();
      super.dispose();
    }
-
+//-------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
       List<Widget> homeList = [
