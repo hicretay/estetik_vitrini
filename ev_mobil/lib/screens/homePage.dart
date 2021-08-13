@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
@@ -7,6 +8,7 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 
 class HomePage extends StatefulWidget {
   static const route = "/homePage";
@@ -55,16 +57,7 @@ class _HomePageState extends State<HomePage> {
          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
        },
      ),
-     HomeContainerWidget(
-       iconNumber: 1,
-       imgNumber: 1,
-       cardText: "",
-       pinColor: primaryColor,
-       onPressed: () {
-         // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-         Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
-       },
-     ),
+
     ];
     return SafeArea(
       child: Scaffold(
@@ -148,7 +141,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   //-------------------------------------------
                   //------------------------------------Anasayfa Postları----------------------------------------
-                  //HomeContainerWidget ile oluşturuldu
                   Container(
                     child: Flexible(
                       flex: 4,
@@ -156,7 +148,20 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         itemCount: homeList.length,
                         itemBuilder: (BuildContext context, int index){
-                        return homeList[index];
+                        return      HomeContainerWidget(
+                        iconNumber: 1,
+                        imgNumber: 1,
+                        cardText: "",
+                        pinColor: primaryColor,
+                        onPressed: () async{
+                          final progressUHD = ProgressHUD.of(context);
+                          progressUHD.show(); 
+                          final ContentStreamJsn homeDetailContent = await contentStreamJsnFunc(3);
+                          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
+                          progressUHD.dismiss();
+                        },
+                      );
                       }),
                     ),
                   )

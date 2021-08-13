@@ -1,4 +1,5 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -7,15 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeDetailPage extends StatefulWidget {
-  HomeDetailPage({Key key}) : super(key: key);
+  final ContentStreamJsn homeDetailContent;
+  HomeDetailPage({Key key, this.homeDetailContent}) : super(key: key);
 
   @override
-  _HomeDetailPageState createState() => _HomeDetailPageState();
+  _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
+  ContentStreamJsn homeDetailContent;
+
   bool _checked = false;
   int counter = 99;
+  
+  _HomeDetailPageState({this.homeDetailContent});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,8 +81,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                     color: lightWhite,
                     borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
+                  child: ListView.builder(itemBuilder: (BuildContext context, int index){
+                    return Column(
                         children: [
                           SizedBox(height: maxSpace),
                           LeadingRowWidget( 
@@ -174,8 +180,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                           ),
                           //------------------------------------------------------
                         ],
-                      ),
-                  ),
+                      );
+                  }),
                 ),
               ),
             ],
