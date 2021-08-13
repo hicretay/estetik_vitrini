@@ -67,7 +67,7 @@ class _FavoritePageState extends State<FavoritePage> {
                            ),
                           onPressed: () {
                              // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
                           },
                          ),
                          HomeContainerWidget(
@@ -81,7 +81,7 @@ class _FavoritePageState extends State<FavoritePage> {
                            ),
                           onPressed: () {
                              // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
+                           // Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
                           },
                          ),
                         ],
