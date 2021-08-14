@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
@@ -19,6 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController teSearch = TextEditingController();
+  ContentStreamJsn homeContent; 
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
@@ -27,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() { 
     super.initState();
+    homeContentList();
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
         _connectionChangeStream = connectionStatus.connectionChange.listen(connectionChanged);
   }
@@ -42,43 +46,37 @@ class _HomePageState extends State<HomePage> {
      _connectionChangeStream.cancel();
      super.dispose();
    }
+
+   Future homeContentList() async{
+     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3); 
+     setState(() {
+        homeContent = homeContentNewList;
+     });
+   }
 //-------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
-      List<Widget> homeList = [
-      HomeContainerWidget(
-       iconNumber: 0,
-       imgNumber: 0,
-       cardText: "Kendin için bir\nşeyler yap...",
-       pinColor: primaryColor,
-       onPressed: () {
-          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-         Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage()));
-       },
-     ),
-
-    ];
-    return SafeArea(
-      child: Scaffold(
+    return  SafeArea(
+        child: Scaffold(
         body: ProgressHUD(
-          child: Builder(builder: (context)=>
+        child: Builder(builder: (context)=>       
               Container(
               color: Colors.white,
               child: Column(
-                children: [
+              children: [
                   //-----------------------------Header-------------------------------
                   // Bir arama Textfield'ı içerir
                   Padding(
                     padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                     child: Padding(
-                      padding: const EdgeInsets.all(defaultPadding),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("Estetik Vitrini", 
-                        style: Theme.of(context)
-                                .textTheme
-                                .headline3
-                                .copyWith(color: primaryColor, fontFamily: leadingFont)),
+                    padding: const EdgeInsets.all(defaultPadding),
+                    child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text("Estetik Vitrini", 
+                    style: Theme.of(context)
+                            .textTheme
+                            .headline3
+                            .copyWith(color: primaryColor, fontFamily: leadingFont)),
                       ),
                     ),
                   ),
@@ -100,11 +98,11 @@ class _HomePageState extends State<HomePage> {
                               GestureDetector(
                               child:  Container(
                               //Genişlik - yükseklik eşit verilip shape circle verilerek şekillendirildi
-                              width: 82,
-                              height: 82,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                gradient: LinearGradient(
+                                  width: 82,
+                                  height: 82,
+                                  decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
                                   //storyColor ile mor - beyaz renkleri liste haline getirildi,
                                   //gradient ile center olarak konumlandırılıp dış çerçeve oluşturuldu
                                   colors: storyColor,
@@ -114,17 +112,17 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: Padding(padding: const EdgeInsets.all(2.0), // mor rengin genişliğini ayaralar
                                 child: Container(
-                                  width: 80,
-                                  height: 80,
-                                  decoration: BoxDecoration(
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: lightWhite,
-                                      width: 2.0, // beyaz rengin genişliğini ayarlar
-                                    ),
+                                    color: lightWhite,
+                                    width: 2.0, // beyaz rengin genişliğini ayarlar
+                                  ),
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                      image: NetworkImage(companies[index].imgUrl),
-                                    ),
+                                    image: NetworkImage(companies[index].imgUrl),
+                                  ),
                                   ),
                                 ),
                               ),
@@ -145,21 +143,32 @@ class _HomePageState extends State<HomePage> {
                       flex: 4,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: homeList.length,
+                        itemCount: 1,
                         itemBuilder: (BuildContext context, int index){
-                        return      HomeContainerWidget(
-                        iconNumber: 1,
-                        imgNumber: 1,
-                        cardText: "",
-                        pinColor: primaryColor,
-                        onPressed: () async{
+                        return HomeContainerWidget(
+                          companyLogo: homeContent?.result[index].companyLogo,
+                          companyName: homeContent?.result[index].companyName,
+                          contentPicture: homeContent?.result[index].contentPicture,
+                          cardText: homeContent?.result[index].contentTitle,
+                          pinColor: primaryColor,
+                          //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
+                          onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
-                          final ContentStreamJsn homeDetailContent = await contentStreamJsnFunc(3);                        
+                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent.result[index].companyId, homeContent.result[index].campaingId);                        
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent, homeContent: homeContent)));
                           progressUHD.dismiss();
                         },
+                        //--------------------------------------------------------------------------------------------------------------------
+                        //-----------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------
+                        onPressedLocation: (){
+                          final progressUHD = ProgressHUD.of(context);
+                          progressUHD.show();
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent.result[index].googleAdressLink)));
+                          progressUHD.dismiss();
+                        },
+                        //-------------------------------------------------------------------------------------------------------------------
                       );
                       }),
                     ),
@@ -171,5 +180,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+
   }
 }

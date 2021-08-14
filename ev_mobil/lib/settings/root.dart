@@ -2,11 +2,15 @@ import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Root extends StatelessWidget {
+class Root extends StatefulWidget {
   
   static const route = '/rootPage';
-  //Uygulama için bottombar başlangıc noktası
 
+  @override
+  _RootState createState() => _RootState();
+}
+
+class _RootState extends State<Root> {
   @override
   Widget build(BuildContext context) {
     return Consumer<NavigationProvider>(

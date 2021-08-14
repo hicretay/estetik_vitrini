@@ -1,4 +1,5 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
@@ -10,20 +11,22 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeDetailPage extends StatefulWidget {
-  final ContentStreamJsn homeDetailContent;
-  HomeDetailPage({Key key, this.homeDetailContent}) : super(key: key);
+  final ContentStreamDetailJsn homeDetailContent;
+  final ContentStreamJsn homeContent;
+  HomeDetailPage({Key key, this.homeDetailContent, this.homeContent}) : super(key: key);
 
   @override
-  _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent);
+  _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, homeContent: homeContent);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
-  ContentStreamJsn homeDetailContent;
+  ContentStreamDetailJsn homeDetailContent;
+  ContentStreamJsn homeContent;
 
   bool _checked = false;
   int counter = 99;
   
-  _HomeDetailPageState({this.homeDetailContent});
+  _HomeDetailPageState({this.homeDetailContent, this.homeContent});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,7 +74,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         ),
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(homeDetailContent.result[0].companyName,
+                          child: Text(homeContent.result[0].companyName,
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -87,34 +90,33 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       ),
                       child: ListView.builder(
                         itemCount: homeDetailContent.result.length,
-                        itemBuilder: (BuildContext context, int index){
-                        
-                         _checked = homeDetailContent.result[index].liked; // Gönderi beğenilmiş mi servisten okuyacak                  
+                        itemBuilder: (BuildContext context, int index){                      
+                        _checked = homeContent.result[index].liked; // Gönderi beğenilmiş mi servisten okuyacak                  
                         return Column(
                             children: [
                               SizedBox(height: maxSpace),
                               LeadingRowWidget( 
-                                companyName: homeDetailContent.result[index].companyName,
-                                companyLogo: homeDetailContent.result[index].companyLogo,
+                                companyName: homeContent.result[index].companyName,
+                                companyLogo: homeContent.result[index].companyLogo,
                                 pinColor: Colors.transparent,),//leading widgetı
                               Padding(padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding),
                                 child: Center(
                                   //-----------------------Carousel Containerı------------------------
-                                  child: Container(
+                                    child: Container(
                                     width: double.infinity, //genişlik: container genişliği
                                     height: 250, //container yüksekliği: 250
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover, // Resim containerı kaplasın
-                                        image: NetworkImage(
-                                          homeDetailContent.result[index].contentPicture,
-                                        ),
-                                      ),
+                                    borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
+                                    image: DecorationImage(
+                                    fit: BoxFit.cover, // Resim containerı kaplasın
+                                    image: NetworkImage(
+                                      homeDetailContent.result[index].contentPictures[0].cPicture
                                     ),
                                   ),
                                 ),
                               ),
+                            ),
+                          ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
@@ -126,10 +128,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         maxRadius: 22.5,
                                         backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
                                         child: IconButton(
-                                          iconSize: iconSize,
-                                          icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
-                                          ),
-                                          onPressed: () {
+                                        iconSize: iconSize,
+                                        icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
+                                        ),
+                                        onPressed: () {
                                             setState(() { 
                                               _checked = !_checked; //tıklandığında bool değeri tersler
                                               _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
@@ -161,7 +163,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           onPressed: () async{
                                             final progressUHD = ProgressHUD.of(context);
                                             progressUHD.show();
-                                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage()));
+                                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent.result[index].googleAdressLink)));
                                             progressUHD.dismiss(); 
                                           }),
                               //------------------------------------------------------------------------
@@ -189,11 +191,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   children: [
                                     Align(
                                       alignment: Alignment.bottomLeft,
-                                      child    : Text(homeDetailContent.result[index].contentTitle.toString(),
+                                      child    : Text(homeContent.result[index].contentTitle.toString(),
                                       style    : TextStyle(fontSize: 22, color: primaryColor),
                                       ),
                                     ),
-                                    Text(aboutText),
+                                    Text(homeDetailContent.result[index].campaingDetail),
                                   ],
                                 ),
                               ),

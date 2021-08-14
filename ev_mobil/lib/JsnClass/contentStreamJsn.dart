@@ -50,16 +50,16 @@ class Result {
     int likeCount;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
-        companyId: json["companyId"],
-        campaingId: json["campaingId"],
-        companyName: json["companyName"],
-        companyLogo: json["companyLogo"],
-        companyPhone: json["companyPhone"],
-        googleAdressLink: json["googleAdressLink"],
-        contentPicture: json["contentPicture"],
-        contentTitle: json["contentTitle"],
-        liked: json["liked"],
-        likeCount: json["likeCount"],
+        companyId: json["companyId"] ?? 0,
+        campaingId: json["campaingId"] ?? 0,
+        companyName: json["companyName"] ?? "",
+        companyLogo: json["companyLogo"] ?? "",
+        companyPhone: json["companyPhone"] ?? "",
+        googleAdressLink: json["googleAdressLink"] ?? "",
+        contentPicture: json["contentPicture"] ?? "",
+        contentTitle: json["contentTitle"] ?? "",
+        liked: json["liked"] ?? false,
+        likeCount: json["likeCount"] ?? 0,
     );
 
     Map<String, dynamic> toJson() => {

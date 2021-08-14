@@ -6,15 +6,20 @@ import 'leadingRowWidget.dart';
 
 class HomeContainerWidget extends StatefulWidget {
   //homePage sayfasında post görünümü oluşturulmasında kullanıldı
-  final int iconNumber; // başlık resmi indexi
-  final int imgNumber; // post resmi indexi
+
+
   final String cardText; // resimde yer alacak metin
+  final String companyLogo; // resimde yer alacak metin
+  final String companyName; // resimde yer alacak metin
+  final String contentPicture;
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
   final Widget child;
   final Color pinColor;
+  final bool checked;
+  final VoidCallback onPressedLocation;
 
   const HomeContainerWidget(
-      {Key key, this.iconNumber, this.imgNumber, this.cardText, this.onPressed, this.child, this.pinColor})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture, this.checked, this.onPressedLocation})
       : super(key: key);
 
   @override
@@ -22,7 +27,7 @@ class HomeContainerWidget extends StatefulWidget {
 }
 
 class _HomeContainerWidgetState extends State<HomeContainerWidget> {
-  bool _checked = false;
+  bool checked = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,8 +50,8 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                 child: LeadingRowWidget(
                   //iconNumber: widget.iconNumber, // icon resmi indexi
                   pinColor: widget.pinColor,
-                  companyLogo: "https://www.lynskincare.com/wp-content/uploads/2021/04/lyn-skincare-senin-en-iyi-halin.jpg",
-                  companyName: "Estetik Vitrini",
+                  companyLogo: widget.companyLogo,
+                  companyName: widget.companyName,
                 ),
               ),
               Expanded(
@@ -63,7 +68,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                       image: DecorationImage(
                         fit: BoxFit.cover, // Resim containerı kaplasın
                         image: NetworkImage(
-                          posts[widget.imgNumber]["img"],
+                          widget.contentPicture
                         ),
                       ),
                     ),
@@ -78,7 +83,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                             child: Text(
                               widget.cardText, //Kendin için bir şeyler yap metni
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: primaryColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30),
                             ),
@@ -102,14 +107,14 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                 //-------------------------------ICONBUTTONLAR--------------------------------
                                 child: Row(children: [
                                 //---------------------------BEĞEN ICONBUTTONI-----------------------------
-                                    IconButton( icon: _checked
+                                    IconButton( icon: checked
                                             ? Icon(Icons.favorite,
                                                 color: primaryColor)
                                             : Icon(LineIcons.heart,
                                                 color: primaryColor),
                                         onPressed: () {
                                           setState(() {
-                                            _checked = !_checked;
+                                            checked = !checked;
                                           });
                                         }),
                                 //-------------------------------------------------------------------------
@@ -134,7 +139,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                         color: primaryColor,
                                         size : iconSize,
                                       ),
-                                      onPressed: () {}),
+                                      onPressed: widget.onPressedLocation)
                                 //------------------------------------------------------------------------
                                   ],
                                 ),

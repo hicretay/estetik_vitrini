@@ -19,7 +19,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      //mainAxisAlignment: MainAxisAlignment.spaceAround, // Row içindeki widgetların yayılmasını sağlar
+      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Row içindeki widgetların yayılmasını sağlar
       children: [
         Row(
           children: [
@@ -27,17 +27,17 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
             SizedBox(width: deviceWidth(context)*0.08), 
             Container(
               alignment: Alignment.topLeft,
-              width: 60,
-              height: 60,
+              width: deviceWidth(context)*0.1,
+              height: deviceWidth(context)*0.1,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: NetworkImage(
-                    //companies[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
-                    widget.companyLogo,
-                  ),
-                ),
+              shape: BoxShape.circle,
+              image: DecorationImage(
+              image: NetworkImage(
+                //companies[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
+                widget.companyLogo,
               ),
+             ),
+            ),
             ),
             //-----------------------------------------------------
             SizedBox(width: deviceWidth(context)*0.05), //başlık iconu - texti arası boşluk
@@ -54,6 +54,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
           icon: Icon(FontAwesomeIcons.thumbtack,color: widget.pinColor,size: 20),
           onPressed: (){}, // olayı parametre alındı
         ),
+       
       ],
     );
   }

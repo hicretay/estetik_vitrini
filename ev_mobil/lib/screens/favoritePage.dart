@@ -61,26 +61,24 @@ class _FavoritePageState extends State<FavoritePage> {
                         .scrollController,
                         itemBuilder: (BuildContext context, int index){
                           return Column(children:[
-                            HomeContainerWidget(
-                              iconNumber: 0,
-                              imgNumber: 1,
-                              cardText: "",
-                              child: IconButton(
-                                 // pin butonu
-                                 icon: Icon(FontAwesomeIcons.thumbtack,color: primaryColor,size: 20),
-                                 onPressed: (){}, // olayı parametre alındı
-                               ),
-                              //------------------------------------DETAYLI BİLGİ İÇİN BUTONU ONPPRESSEDİ-------------------------------------------
-                              onPressed: () async{
-                                final progressUHD = ProgressHUD.of(context);
-                                progressUHD.show(); 
-                                final ContentStreamJsn homeDetailContent = await contentStreamJsnFunc(3);  
-                                 // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
-                                progressUHD.dismiss();
-                              },
-                              //--------------------------------------------------------------------------------------------------------------------
-                             ),
+                            // HomeContainerWidget(
+                            //   cardText: "",
+                            //   child: IconButton(
+                            //      // pin butonu
+                            //      icon: Icon(FontAwesomeIcons.thumbtack,color: primaryColor,size: 20),
+                            //      onPressed: (){}, // olayı parametre alındı
+                            //    ),
+                            //   //------------------------------------DETAYLI BİLGİ İÇİN BUTONU ONPPRESSEDİ-------------------------------------------
+                            //   onPressed: () async{
+                            //     final progressUHD = ProgressHUD.of(context);
+                            //     progressUHD.show(); 
+                            //     final ContentStreamJsn homeDetailContent = await contentStreamJsnFunc(3);  
+                            //      // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                            //     Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent)));
+                            //     progressUHD.dismiss();
+                            //   },
+                            //   //--------------------------------------------------------------------------------------------------------------------
+                            //  ),
                             ],
                           );
                       }),
