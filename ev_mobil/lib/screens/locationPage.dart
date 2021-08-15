@@ -16,10 +16,6 @@ class LocationPage extends StatefulWidget {
 
 class _LocationPageState extends State<LocationPage> {
 
-  CityJsn cityData;
-  //Sayfada gösterilecek konumlar mapi
-  //String ile konum adı, bool ile seçili olup olmadığı tutulacak
-
    Future cityList() async{
    final CityJsn cityNewList = await cityJsnFunc(); 
    setState(() {
@@ -27,8 +23,6 @@ class _LocationPageState extends State<LocationPage> {
    });
  }
 
- bool operator ==(dynamic other) =>
-      other != null && other is CityJsn && this.cityData.result == other.result;
 
 
  @override
@@ -49,8 +43,6 @@ class _LocationPageState extends State<LocationPage> {
 
   List data = [];
 
-  @override
-  int get hashCode => super.hashCode;
 
   @override
   Widget build(BuildContext context) {
