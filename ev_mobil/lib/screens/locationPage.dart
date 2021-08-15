@@ -1,8 +1,10 @@
+import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 
 import '../settings/consts.dart';
 
@@ -13,8 +15,27 @@ class LocationPage extends StatefulWidget {
 }
 
 class _LocationPageState extends State<LocationPage> {
+
+  CityJsn cityData;
   //Sayfada gösterilecek konumlar mapi
   //String ile konum adı, bool ile seçili olup olmadığı tutulacak
+
+   Future cityList() async{
+   final CityJsn cityNewList = await cityJsnFunc(); 
+   setState(() {
+      data = cityNewList.result;
+   });
+ }
+
+ bool operator ==(dynamic other) =>
+      other != null && other is CityJsn && this.cityData.result == other.result;
+
+
+ @override
+ void initState() { 
+   super.initState();
+   cityList();
+ }
   Map<String, bool> _location = {
     "Fatih": false,
     "Maltepe": false,
@@ -23,7 +44,14 @@ class _LocationPageState extends State<LocationPage> {
     "Beşiktaş": false,
     "Kartal": false,
   };
-  String city = "İstanbul";
+  //String city = "İstanbul";
+  String selection;
+
+  List data = [];
+
+  @override
+  int get hashCode => super.hashCode;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -107,107 +135,118 @@ class _LocationPageState extends State<LocationPage> {
                             title: Center(
                               child: DropdownButton(
                                     dropdownColor: Colors.transparent,
-                                    value: city,
-                                    items: [
-                                      DropdownMenuItem(child: Text("İstanbul",style: TextStyle(color: white, fontSize: 25)),value: "İstanbul"),
-                                      DropdownMenuItem(child: Text("Ankara",style: TextStyle(color: white, fontSize: 25)),value: "Ankara"),
-                                    ],
+                                    value: selection,
+                                    items: data.map((e){
+                                      return DropdownMenuItem(
+                                      child: Center(
+                                        child: Text(e.city,
+                                        style: TextStyle(color: white, fontSize: 20)),
+                                      ),
+                                      value: e.id.toString());
+                                    }).toList(),                                  
                                     onChanged: (value) {
                                      setState(() {
-                                       city = value;
+                                       selection = value;
                                      });
+                                     
                                      },
+                                     
+                                     
                                     ),
                             ),
                             trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.08)),
                         ),
                       ),
                       SizedBox(height: deviceHeight(context)*0.02),
-                      ListView.separated(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
-                      shrinkWrap: true,
-                      itemCount: _location.length, //_location mapi uzunluğu kadar
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), // yalnızca sol ve sağdan boşluk
-                            //InkWell sarmaladığı widgeta tıklanabilirlik özelliği kazandırdı
-                            //InkWell ile liste yapısının tamamı tıklanabilir hale geldi
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
-                                  _location.update(_location.keys.toList()[index],
-                                      (value) => !value);
-                                });
-                              },
-                              child: Container(
-                                //locationların listeleneceği card genişliği
-                                height: deviceHeight(context) * 0.08,
-                                width: deviceWidth(context) * 0.9,
-                                decoration: BoxDecoration(
-                                  // Container rengi gradient ile verildi
-                                  borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
-                                  gradient: LinearGradient(
-                                    //soldan sağa doğru color listteki renkleri yaydı
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.topRight,
-                                    //_location mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
-                                    colors: _location.values.toList()[index]
-                                        ? backGroundColor1 // true ise(seçili) ise renk koyu
-                                        : backGroundColor3, // false ise seçilmemişse açık
-                                  ),
-                                ),
-                                child: Center(
-                                  //Bir seçim radiosu ve text yapısından oluşan listTile
-                                  child: ListTile(
-                                    //İç container yapısı
-                                    leading: Container(
-                                    width  : deviceWidth(context)*0.065,
-                                    height : deviceHeight(context)*0.065,
-                                    decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.topRight,
-                                          //_location mapinin valuelarının index değerine göre renk belirler
-                                          colors: _location.values.toList()[index]
-                                              ? backGroundColor1 // true ise(seçili) ise renk koyu
-                                              : backGroundColor3, // false ise seçilmemişse açık
-                                        ),
-                                      ),
-                                      //Dış container yapısı
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: lightWhite,
-                                              width: 4.5 ),// mor dairenin genişliği
-                                        ),
-                                      ),
-                                    ),
-                                    //_location isimlerinin gösterildiği text
-                                    title: Text(_location.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
-                                      textAlign: TextAlign.center,
-                                      style    : TextStyle(
-                                      fontSize : 22, // ilçelerin fontu
-                                      color: _location.values.toList()[index]
-                                            ? Colors.white // seçili ise açık text
-                                            : primaryColor, // seçili değilse koyu
-                                      ),
-                                    ),
-                                    trailing: Icon(Icons.location_city,color: Colors.transparent) //SvgPicture.asset("assets/icons/haritanoktası.svg"),
-                                  ),
-                                ),
-                              ),
-                            ),
-                        );
-                      },
-                      //separatorBuilder list itemları arasına bir widget koymayı sağlıyor
-                      //SizedBox ile itemlar arası boşluk sağlandı
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: minSpace);
-                      },
-                      ),
+                      // ListView.separated(
+                      // physics: BouncingScrollPhysics(),
+                      // scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
+                      // shrinkWrap: true,
+                      // itemCount: _location.length, //_location mapi uzunluğu kadar
+                      // itemBuilder: (BuildContext context, int index) {
+                      //   setState(() {
+                      //     globalCity = cityData.result[index].city; 
+                      //     globalCityId = cityData.result[index].id;           
+                      //   });
+                      //   return Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), // yalnızca sol ve sağdan boşluk
+                      //       //InkWell sarmaladığı widgeta tıklanabilirlik özelliği kazandırdı
+                      //       //InkWell ile liste yapısının tamamı tıklanabilir hale geldi
+                      //       child: InkWell(
+                      //         onTap: () {
+                      //           setState(() {
+                      //             //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
+                      //             _location.update(_location.keys.toList()[index],
+                      //                 (value) => !value);
+                      //           });
+                      //         },
+                      //         child: Container(
+                      //           //locationların listeleneceği card genişliği
+                      //           height: deviceHeight(context) * 0.08,
+                      //           width: deviceWidth(context) * 0.9,
+                      //           decoration: BoxDecoration(
+                      //             // Container rengi gradient ile verildi
+                      //             borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
+                      //             gradient: LinearGradient(
+                      //               //soldan sağa doğru color listteki renkleri yaydı
+                      //               begin: Alignment.topLeft,
+                      //               end: Alignment.topRight,
+                      //               //_location mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
+                      //               colors: _location.values.toList()[index]
+                      //                   ? backGroundColor1 // true ise(seçili) ise renk koyu
+                      //                   : backGroundColor3, // false ise seçilmemişse açık
+                      //             ),
+                      //           ),
+                      //           child: Center(
+                      //             //Bir seçim radiosu ve text yapısından oluşan listTile
+                      //             child: ListTile(
+                      //               //İç container yapısı
+                      //               leading: Container(
+                      //               width  : deviceWidth(context)*0.065,
+                      //               height : deviceHeight(context)*0.065,
+                      //               decoration: BoxDecoration(
+                      //               shape: BoxShape.circle,
+                      //               gradient: LinearGradient(
+                      //               begin: Alignment.topLeft,
+                      //               end: Alignment.topRight,
+                      //                     //_location mapinin valuelarının index değerine göre renk belirler
+                      //                     colors: _location.values.toList()[index]
+                      //                         ? backGroundColor1 // true ise(seçili) ise renk koyu
+                      //                         : backGroundColor3, // false ise seçilmemişse açık
+                      //                   ),
+                      //                 ),
+                      //                 //Dış container yapısı
+                      //                 child: Container(
+                      //                   decoration: BoxDecoration(
+                      //                     shape: BoxShape.circle,
+                      //                     border: Border.all(
+                      //                         color: lightWhite,
+                      //                         width: 4.5 ),// mor dairenin genişliği
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               //_location isimlerinin gösterildiği text
+                      //               title: Text(_location.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
+                      //                 textAlign: TextAlign.center,
+                      //                 style    : TextStyle(
+                      //                 fontSize : 22, // ilçelerin fontu
+                      //                 color: _location.values.toList()[index]
+                      //                       ? Colors.white // seçili ise açık text
+                      //                       : primaryColor, // seçili değilse koyu
+                      //                 ),
+                      //               ),
+                      //               trailing: Icon(Icons.location_city,color: Colors.transparent) //SvgPicture.asset("assets/icons/haritanoktası.svg"),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //   );
+                      // },
+                      // //separatorBuilder list itemları arasına bir widget koymayı sağlıyor
+                      // //SizedBox ile itemlar arası boşluk sağlandı
+                      // separatorBuilder: (BuildContext context, int index) {
+                      //   return SizedBox(height: minSpace);
+                      // },
+                      // ),
                     ],
                     ),
                   ),
