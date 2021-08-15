@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:toast/toast.dart';
@@ -61,6 +62,23 @@ Future<ContentStreamDetailJsn> contentStreamDetailJsnFunc(int companyId, int cam
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return contentStreamDetailJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------Favori Salonlar Listesi Fonksiyonu--------------------------------------------------------
+Future<FavoriCompanyJsn> favoriCompanyJsnFunc(int id) async {
+  final response = await http.post(
+    Uri.parse(url + "FavoriCompany/List"),
+    body: '{"userId":' + id.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return favoriCompanyJsnFromJson(responseString);
   } else {
     return null;
   }

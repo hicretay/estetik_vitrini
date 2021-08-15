@@ -143,19 +143,19 @@ class _HomePageState extends State<HomePage> {
                       flex: 4,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 1,
+                        itemCount: homeContent.result == null ? 0 : homeContent.result.length,
                         itemBuilder: (BuildContext context, int index){
                         return HomeContainerWidget(
-                          companyLogo: homeContent?.result[index].companyLogo,
-                          companyName: homeContent?.result[index].companyName,
+                          companyLogo   : homeContent?.result[index].companyLogo,
+                          companyName   : homeContent?.result[index].companyName,
                           contentPicture: homeContent?.result[index].contentPicture,
-                          cardText: homeContent?.result[index].contentTitle,
-                          pinColor: primaryColor,
+                          cardText      : homeContent?.result[index].contentTitle,
+                          pinColor      : primaryColor,
                           //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
                           onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
-                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent.result[index].companyId, homeContent.result[index].campaingId);                        
+                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent?.result[index].companyId, homeContent?.result[index].campaingId);                        
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent, homeContent: homeContent)));
                           progressUHD.dismiss();
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                         onPressedLocation: (){
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show();
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent.result[index].googleAdressLink)));
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent?.result[index].googleAdressLink)));
                           progressUHD.dismiss();
                         },
                         //-------------------------------------------------------------------------------------------------------------------
