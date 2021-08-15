@@ -46,6 +46,9 @@ const aboutText =
     "Alanında uzman, profesyonel kadrosu ile hizmet veren Estecool, kaliteli ve kişiye özel olan hizmet anlayışı ile güzelliğin adresi olan bir kuruluştur. 15 yılı aşkın tecrübesi ile “Kendin için bir şey yap!” sloganı ile hizmet vermeye devam etmektedir. Estecool’un başarısının en büyük anahtarı estetik ve güzellik uygulamalarına dair dünya çapındaki gelişmeleri takip ederek son teknolojik ekipman ve eğitimli personel kadrosu ile siz değerli müşterilerimizin hizmetindeyiz.";
 const leading = "Estecool Güzellik Merkezi";
 
+String globalCity = "";
+int globalCityId = 1;
+
 const carouselImage = [
   "https://www.1mg.com/articles/wp-content/uploads/2020/12/skincare-woman.jpg",
   "https://ankaramoonlight.com/wp-content/uploads/2017/05/hydrafacial-moonlight.jpg",

@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
@@ -97,6 +98,22 @@ Future<UserFavoriAreaJsn> userFavoriAreaJsnFunc(int id) async {
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return userFavoriAreaJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------Şehir Listesi Fonksiyonu--------------------------------------------------------
+Future<CityJsn> cityJsnFunc() async {
+  final response = await http.post(
+    Uri.parse(url + "City"),
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return cityJsnFromJson(responseString);
   } else {
     return null;
   }
