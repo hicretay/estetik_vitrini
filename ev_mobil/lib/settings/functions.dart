@@ -1,6 +1,7 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/JsnClass/userfavoriAreaJsn.dart';
@@ -36,7 +37,7 @@ Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) asy
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------Ana sayfa postlar Listesi Fonksiyonu--------------------------------------------------------
+//----------------------------------------------Ana sayfa postlar Listesi Fonksiyonu-----------------------------------------------
 Future<ContentStreamJsn> contentStreamJsnFunc(int id) async {
   final response = await http.post(
     Uri.parse(url + "ContentStream/List"),
@@ -70,7 +71,7 @@ Future<ContentStreamDetailJsn> contentStreamDetailJsnFunc(int companyId, int cam
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------Favori Salonlar Listesi Fonksiyonu--------------------------------------------------------
+//----------------------------------------------Favori Salonlar Listesi Fonksiyonu-------------------------------------------------
 Future<FavoriCompanyJsn> favoriCompanyJsnFunc(int id) async {
   final response = await http.post(
     Uri.parse(url + "FavoriCompany/List"),
@@ -87,7 +88,7 @@ Future<FavoriCompanyJsn> favoriCompanyJsnFunc(int id) async {
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------Favori Konumlar Listesi Fonksiyonu--------------------------------------------------------
+//----------------------------------------------Favori Konumlar Listesi Fonksiyonu-------------------------------------------------
 Future<UserFavoriAreaJsn> userFavoriAreaJsnFunc(int id) async {
   final response = await http.post(
     Uri.parse(url + "UserFavoriArea/List"),
@@ -104,7 +105,7 @@ Future<UserFavoriAreaJsn> userFavoriAreaJsnFunc(int id) async {
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------Şehir Listesi Fonksiyonu--------------------------------------------------------
+//----------------------------------------------Şehir Listesi Fonksiyonu-----------------------------------------------------------
 Future<CityJsn> cityJsnFunc() async {
   final response = await http.post(
     Uri.parse(url + "City"),
@@ -114,6 +115,23 @@ Future<CityJsn> cityJsnFunc() async {
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return cityJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------İlçe Listesi Fonksiyonu-----------------------------------------------------------
+Future<CountyJsn> countyJsnFunc(String city) async {
+  final response = await http.post(
+    Uri.parse(url + "County"),
+    body: '{"city":' + city + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return countyJsnFromJson(responseString);
   } else {
     return null;
   }

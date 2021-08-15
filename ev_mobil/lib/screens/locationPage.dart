@@ -125,26 +125,28 @@ class _LocationPageState extends State<LocationPage> {
                                   ),),
                             child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.04),
                             title: Center(
-                              child: DropdownButton(      
-                              dropdownColor: Colors.transparent,
-                              value: selection,
-                              items: data.map((e){
-                                return DropdownMenuItem(
-                                child: SizedBox(
-                                  width: deviceWidth(context)*0.45,
-                                  child: Center(
-                                    child: Text(e.city, textAlign: TextAlign.center,
-                                    style: TextStyle(color: white, fontSize: 20)),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(      
+                                dropdownColor: Colors.transparent,
+                                value: selection,
+                                items: data.map((e){
+                                  return DropdownMenuItem(
+                                  child: SizedBox(
+                                    width: deviceWidth(context)*0.45,
+                                    child: Center(
+                                      child: Text(e.city, textAlign: TextAlign.center,
+                                      style: TextStyle(color: white, fontSize: 20)),
+                                    ),
                                   ),
-                                ),
-                                value: e.id.toString());
-                              }).toList(),                                  
-                              onChanged: (value) {
-                               setState(() {
-                                 selection = value;
-                               });
-                               },
+                                  value: e.id.toString());
+                                }).toList(),                                  
+                                onChanged: (value) {
+                                 setState(() {
+                                   selection = value;
+                                 });
+                                 },
                              ),
+                              ),
                             ),
                             trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.05)
                             ),
