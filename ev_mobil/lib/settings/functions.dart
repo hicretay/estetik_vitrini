@@ -2,6 +2,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
+import 'package:estetikvitrini/JsnClass/userfavoriAreaJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +80,23 @@ Future<FavoriCompanyJsn> favoriCompanyJsnFunc(int id) async {
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return favoriCompanyJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------Favori Konumlar Listesi Fonksiyonu--------------------------------------------------------
+Future<UserFavoriAreaJsn> userFavoriAreaJsnFunc(int id) async {
+  final response = await http.post(
+    Uri.parse(url + "UserFavoriArea/List"),
+    body: '{"userId":' + id.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return userFavoriAreaJsnFromJson(responseString);
   } else {
     return null;
   }
