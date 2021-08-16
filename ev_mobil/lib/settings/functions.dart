@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
+import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
@@ -124,7 +125,7 @@ Future<CityJsn> cityJsnFunc() async {
 //----------------------------------------------İlçe Listesi Fonksiyonu-----------------------------------------------------------
 Future<CountyJsn> countyJsnFunc(String city) async {
   final response = await http.post(
-    Uri.parse(url + "County"),
+    Uri.parse(url + "CompanyList"),
     body: '{"city":' + city + '}',
     headers: header
   );
@@ -136,10 +137,43 @@ Future<CountyJsn> countyJsnFunc(String city) async {
     return null;
   }
 }
-//---------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------Hikayedeki Firmaların Listesi Fonksiyonu-----------------------------------------
+Future<CompanyListJsn> companyListJsnFunc() async {
+  final response = await http.post(
+    Uri.parse(url + "CompanyList"),
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return companyListJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------Hikaye İçeriği Fonksiyonu--------------------------------------------------
+Future<UserFavoriAreaJsn> storyContentJsnFunc(int id) async {
+  final response = await http.post(
+    Uri.parse(url + "StoryContentJsn"),
+    body: '{"companyId":' + id.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return userFavoriAreaJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
 
 
-//-----------------------------------------Toast Mesaj Gösterme Fonksiyonu----------------------------------------------------------
+//-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
   return Toast.show(content, context, backgroundColor: Colors.grey,duration: 3, textColor: Colors.black,gravity: Toast.LENGTH_SHORT);
 }

@@ -1,6 +1,4 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
-import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';

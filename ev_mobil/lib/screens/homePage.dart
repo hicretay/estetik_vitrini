@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   
   TextEditingController teSearch = TextEditingController();
   List homeContent; 
+  CompanyListJsn companyContent;
 
   _HomePageState({this.cityDenemeID});
   int cityDenemeID ;
@@ -38,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   void initState() { 
     super.initState();
     homeContentList();
+    companyStoryList();
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
         _connectionChangeStream = connectionStatus.connectionChange.listen(connectionChanged);
   }
@@ -59,6 +62,13 @@ class _HomePageState extends State<HomePage> {
      setState(() {
         homeContent = homeContentNewList.result;
      });
+   }
+
+  Future companyStoryList() async{
+   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   setState(() {
+      companyContent = companyNewList;
+   });
    }
 //-------------------------------------------------------------------------------------
   @override
@@ -93,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                       child: GridView.builder(
-                        itemCount: companies.length,
+                        itemCount: companyContent.result.length,
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisSpacing: maxSpace,
@@ -128,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                    image: NetworkImage(companies[index].imgUrl),
+                                    image: NetworkImage(companyContent.result[index].companyLogo),
                                   ),
                                   ),
                                 ),
@@ -137,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                           onTap: (){
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(company: companies[index])));
                           },),
-                          Text(companies[index].name),
+                          Text(companyContent.result[index].companyName),
                         ],
                           );
                         }),

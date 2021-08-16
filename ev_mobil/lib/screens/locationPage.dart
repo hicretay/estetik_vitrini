@@ -1,14 +1,12 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
-import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/screens/homePage.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:estetikvitrini/settings/functions.dart';
-import 'package:equatable/equatable.dart';
+
 
 import '../settings/consts.dart';
 
@@ -22,20 +20,17 @@ class _LocationPageState extends State<LocationPage> {
 
    Future cityList() async{
    final CityJsn cityNewList = await cityJsnFunc(); 
-
    setState(() {
       cities = cityNewList.result;
    });
  }
 
 //    Future countyList() async{
-//    final CountyJsn countiesNewList = await countyJsnFunc(selection); 
+//    final CountyJsn countiesNewList = await countyJsnFunc("İSTANBUL"); 
 //    setState(() {
 //       counties = countiesNewList.result;
 //    });
 //  }
-
-
 
  @override
  void initState() { 
@@ -132,6 +127,7 @@ class _LocationPageState extends State<LocationPage> {
                       children: [
                       SizedBox(height: defaultPadding),
                       Center(
+                        
                         child: Container(
                           height: deviceHeight(context)*0.08,
                           width: deviceWidth(context)*0.9,
@@ -147,16 +143,16 @@ class _LocationPageState extends State<LocationPage> {
                                 child: DropdownButton(   
                                 dropdownColor: Colors.transparent,
                                 value: selection,
-                                items: cities.map((e){
+                                items: cities.map((data){
                                   return DropdownMenuItem(
                                   child: SizedBox(
                                     width: deviceWidth(context)*0.45,
                                     child: Center(
-                                      child: Text(e.city, textAlign: TextAlign.center,
+                                      child: Text(data.city, textAlign: TextAlign.center,
                                       style: TextStyle(color: white, fontSize: 20)),
                                     ),
                                   ),
-                                  value: e.id.toString());
+                                  value: data.id.toString());
                                 }).toList(),                                  
                                 onChanged: (value) {
                                  setState(() {
@@ -172,6 +168,13 @@ class _LocationPageState extends State<LocationPage> {
                         ),
                       ),
                       SizedBox(height: deviceHeight(context)*0.02),
+                      ListView.builder(
+                        itemCount: counties.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index){
+                          print(counties[index].county);
+                        return Text(counties[index].county);
+                      })
                       // ListView.separated(
                       // physics: BouncingScrollPhysics(),
                       // scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
@@ -269,7 +272,6 @@ class _LocationPageState extends State<LocationPage> {
       bottomNavigationBar: TextButtonWidget(
         buttonText: "Uygula",
         onPressed: (){
-         print( counties.length);
           //NavigationProvider.of(context).setTab(HOME_PAGE);            
         }),
    ),
@@ -277,23 +279,23 @@ class _LocationPageState extends State<LocationPage> {
   }
 }
 
-class City extends Equatable {
-  final String id;
-  final String city;
-
-  City(this.city, this.id);
-   
-  @override
-  List<Object> get props => [id];
-}
-
-// class City extends Equatable{
+// class City extends Equatable {
 //   final String id;
 //   final String city;
 
-//   const City(this.city, this.id);
-
-//   int get hashCode => id.hashCode;
-
-//   bool operator==(Object other) => other is City && other.id == id;
+//   City(this.city, this.id);
+   
+//   @override
+//   List<Object> get props => [id];
 // }
+
+class Language {
+  final String id;
+  final String city;
+
+  const Language(this.city, this.id);
+
+  int get hashCode => id.hashCode;
+
+  bool operator==(Object other) => other is Language && other.id == id;
+}
