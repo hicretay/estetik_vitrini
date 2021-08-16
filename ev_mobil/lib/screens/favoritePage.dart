@@ -22,7 +22,7 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   TextEditingController teSearch = TextEditingController();
-  FavoriCompanyJsn favoriContent;
+  List favoriContent;
   int counter = 99;
 
   @override
@@ -34,7 +34,7 @@ class _FavoritePageState extends State<FavoritePage> {
   Future favoriContentList() async{
   final FavoriCompanyJsn favoriContentNewList = await favoriCompanyJsnFunc(3); 
   setState(() {
-     favoriContent = favoriContentNewList;
+     favoriContent = favoriContentNewList.result;
   });
 }
 
@@ -71,25 +71,25 @@ class _FavoritePageState extends State<FavoritePage> {
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
                       child: ListView.builder(
-                        itemCount: favoriContent.result == null ? 0 : favoriContent.result.length,
+                        itemCount: favoriContent == null ? 0 : favoriContent.length,
                         controller: NavigationProvider.of(context)
                         .screens[FAVORITE_PAGE]
                         .scrollController,
                         itemBuilder: (BuildContext context, int index){
                           return HomeContainerWidget(
-                          companyLogo   : favoriContent?.result[index].companyLogo,
-                          companyName   : favoriContent?.result[index].companyName,
-                          contentPicture: favoriContent?.result[index].contentPicture,
-                          cardText      : favoriContent?.result[index].contentTitle,
+                          companyLogo   : favoriContent[index].companyLogo,
+                          companyName   : favoriContent[index].companyName,
+                          contentPicture: favoriContent[index].contentPicture,
+                          cardText      : favoriContent[index].contentTitle,
                           pinColor      : primaryColor,
                           //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
                           onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
-                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent?.result[index].companyId, favoriContent?.result[index].campaingId); 
+                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
                           final ContentStreamJsn homeContent = await contentStreamJsnFunc(3);                       
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent, homeContent: homeContent)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, homeContent: homeContent.result)));
                           progressUHD.dismiss();
                         },
                         //--------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ class _FavoritePageState extends State<FavoritePage> {
                         onPressedLocation: (){
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show();
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: favoriContent?.result[index].googleAdressLink)));
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: favoriContent[index].googleAdressLink)));
                           progressUHD.dismiss();
                         },
                         //-------------------------------------------------------------------------------------------------------------------

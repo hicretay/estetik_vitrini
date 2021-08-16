@@ -54,11 +54,8 @@ class NavigationProvider extends ChangeNotifier {
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          default:
-            return MaterialPageRoute(builder: (_) => HomePage());
-        }
+      onGenerateRoute: (RouteSettings settings) {
+            return MaterialPageRoute(settings: settings ,builder: (_) => HomePage(cityDenemeID: 5));
       },
     ),
     FAVORITE_PAGE: Screen(
@@ -71,11 +68,8 @@ class NavigationProvider extends ChangeNotifier {
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          default:
+      onGenerateRoute: (_) {
             return MaterialPageRoute(builder: (_) => FavoritePage());
-        }
       },
       scrollController: ScrollController(),
     ),
@@ -89,11 +83,8 @@ class NavigationProvider extends ChangeNotifier {
       child: ReservationPage(),
       initialRoute: ReservationPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          default:
+      onGenerateRoute: (_) {
             return MaterialPageRoute(builder: (_) => ReservationPage());
-        }
       },
     ),
     LOCATION_PAGE: Screen(    
@@ -106,11 +97,8 @@ class NavigationProvider extends ChangeNotifier {
       child: LocationPage(),
       initialRoute: LocationPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          default:
+      onGenerateRoute: (_) {
             return MaterialPageRoute(builder: (_) => LocationPage());
-        }
       },
     ),
     SETTINGS_PAGE: Screen(
@@ -123,11 +111,8 @@ class NavigationProvider extends ChangeNotifier {
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          default:
+      onGenerateRoute: (_) {
             return MaterialPageRoute(builder: (_) => SettingsPage());
-        }
       },
     ),
   };

@@ -11,8 +11,8 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomeDetailPage extends StatefulWidget {
-  final ContentStreamDetailJsn homeDetailContent;
-  final ContentStreamJsn homeContent;
+  final List homeDetailContent;
+  final List homeContent;
   HomeDetailPage({Key key, this.homeDetailContent, this.homeContent}) : super(key: key);
 
   @override
@@ -20,8 +20,8 @@ class HomeDetailPage extends StatefulWidget {
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
-  ContentStreamDetailJsn homeDetailContent;
-  ContentStreamJsn homeContent;
+  List homeDetailContent;
+  List homeContent;
 
   bool _checked = false;
   int counter = 99;
@@ -74,7 +74,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         ),
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(homeContent.result[0].companyName,
+                          child: Text(homeContent[0].companyName,
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -89,15 +89,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
                       child: ListView.builder(
-                        itemCount: homeDetailContent.result.length,
+                        itemCount: homeDetailContent.length,
                         itemBuilder: (BuildContext context, int index){                      
-                        _checked = homeContent.result[index].liked; // Gönderi beğenilmiş mi servisten okuyacak                  
+                        _checked = homeContent[index].liked; // Gönderi beğenilmiş mi servisten okuyacak                  
                         return Column(
                             children: [
                               SizedBox(height: maxSpace),
                               LeadingRowWidget( 
-                                companyName: homeContent.result[index].companyName,
-                                companyLogo: homeContent.result[index].companyLogo,
+                                companyName: homeContent[index].companyName,
+                                companyLogo: homeContent[index].companyLogo,
                                 pinColor: Colors.transparent,),//leading widgetı
                               Padding(padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding),
                                 child: Center(
@@ -110,7 +110,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     image: DecorationImage(
                                     fit: BoxFit.cover, // Resim containerı kaplasın
                                     image: NetworkImage(
-                                      homeDetailContent.result[index].contentPictures[0].cPicture
+                                      homeDetailContent[index].contentPictures[0].cPicture
                                     ),
                                   ),
                                 ),
@@ -163,7 +163,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           onPressed: () async{
                                             final progressUHD = ProgressHUD.of(context);
                                             progressUHD.show();
-                                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent.result[index].googleAdressLink)));
+                                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
                                             progressUHD.dismiss(); 
                                           }),
                               //------------------------------------------------------------------------
@@ -180,7 +180,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     size : iconSize,
                                     color: primaryColor),
                                     SizedBox(width: minSpace),
-                                    Text("${homeDetailContent.result[index].likeCount} kişi tarafından favorilere eklendi"),
+                                    Text("${homeDetailContent[index].likeCount} kişi tarafından favorilere eklendi"),
                                     // counter ile gösterilecek beğeni sayısı
                                   ],
                                 ),
@@ -191,11 +191,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   children: [
                                     Align(
                                       alignment: Alignment.bottomLeft,
-                                      child    : Text(homeContent.result[index].contentTitle.toString(),
+                                      child    : Text(homeContent[index].contentTitle.toString(),
                                       style    : TextStyle(fontSize: 22, color: primaryColor),
                                       ),
                                     ),
-                                    Text(homeDetailContent.result[index].campaingDetail),
+                                    Text(homeDetailContent[index].campaingDetail),
                                   ],
                                 ),
                               ),

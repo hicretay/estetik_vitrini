@@ -11,17 +11,24 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   static const route = "/homePage";
-  HomePage({Key key}) : super(key: key);
+  int cityDenemeID ;
+
+  HomePage({Key key, this.cityDenemeID}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(cityDenemeID: cityDenemeID);
 }
 
 class _HomePageState extends State<HomePage> {
+  
   TextEditingController teSearch = TextEditingController();
-  ContentStreamJsn homeContent; 
+  List homeContent; 
+
+  _HomePageState({this.cityDenemeID});
+  int cityDenemeID ;
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
@@ -50,7 +57,7 @@ class _HomePageState extends State<HomePage> {
    Future homeContentList() async{
      final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3); 
      setState(() {
-        homeContent = homeContentNewList;
+        homeContent = homeContentNewList.result;
      });
    }
 //-------------------------------------------------------------------------------------
@@ -59,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     return  SafeArea(
         child: Scaffold(
         body: ProgressHUD(
-        child: Builder(builder: (context)=>       
+        child: homeContent != null ? Builder(builder: (context)=>       
               Container(
               color: Colors.white,
               child: Column(
@@ -143,21 +150,21 @@ class _HomePageState extends State<HomePage> {
                       flex: 4,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: homeContent.result == null ? 0 : homeContent.result.length,
+                        itemCount: homeContent == null ? 0 : homeContent.length,
                         itemBuilder: (BuildContext context, int index){
                         return HomeContainerWidget(
-                          companyLogo   : homeContent?.result[index].companyLogo,
-                          companyName   : homeContent?.result[index].companyName,
-                          contentPicture: homeContent?.result[index].contentPicture,
-                          cardText      : homeContent?.result[index].contentTitle,
+                          companyLogo   : homeContent[index].companyLogo,
+                          companyName   : homeContent[index].companyName,
+                          contentPicture: homeContent[index].contentPicture,
+                          cardText      : homeContent[index].contentTitle,
                           pinColor      : primaryColor,
                           //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
                           onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
-                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent?.result[index].companyId, homeContent?.result[index].campaingId);                        
+                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent, homeContent: homeContent)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,)));
                           progressUHD.dismiss();
                         },
                         //--------------------------------------------------------------------------------------------------------------------
@@ -165,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                         onPressedLocation: (){
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show();
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent?.result[index].googleAdressLink)));
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
                           progressUHD.dismiss();
                         },
                         //-------------------------------------------------------------------------------------------------------------------
@@ -176,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ),
+          ):CircularProgressIndicator(),
         ),
       ),
     );

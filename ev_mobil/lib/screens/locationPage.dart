@@ -1,14 +1,18 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
+import 'package:estetikvitrini/JsnClass/countyJsn.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/screens/homePage.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:estetikvitrini/settings/functions.dart';
+import 'package:equatable/equatable.dart';
 
 import '../settings/consts.dart';
 
-class LocationPage extends StatefulWidget {
+class LocationPage extends StatefulWidget{
   static const route = "locationPage";
   @override
   _LocationPageState createState() => _LocationPageState();
@@ -18,10 +22,18 @@ class _LocationPageState extends State<LocationPage> {
 
    Future cityList() async{
    final CityJsn cityNewList = await cityJsnFunc(); 
+
    setState(() {
-      data = cityNewList.result;
+      cities = cityNewList.result;
    });
  }
+
+//    Future countyList() async{
+//    final CountyJsn countiesNewList = await countyJsnFunc(selection); 
+//    setState(() {
+//       counties = countiesNewList.result;
+//    });
+//  }
 
 
 
@@ -29,7 +41,11 @@ class _LocationPageState extends State<LocationPage> {
  void initState() { 
    super.initState();
    cityList();
+   //countyList();
+
  }
+
+ //---------silinecek
   Map<String, bool> _location = {
     "Fatih": false,
     "Maltepe": false,
@@ -38,10 +54,12 @@ class _LocationPageState extends State<LocationPage> {
     "Beşiktaş": false,
     "Kartal": false,
   };
-  //String city = "İstanbul";
+  //------------------------------
+
   String selection;
 
-  List data = [];
+  List cities = [];
+  List counties = [];
 
 
   @override
@@ -126,10 +144,10 @@ class _LocationPageState extends State<LocationPage> {
                             child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.04),
                             title: Center(
                               child: DropdownButtonHideUnderline(
-                                child: DropdownButton(      
+                                child: DropdownButton(   
                                 dropdownColor: Colors.transparent,
                                 value: selection,
-                                items: data.map((e){
+                                items: cities.map((e){
                                   return DropdownMenuItem(
                                   child: SizedBox(
                                     width: deviceWidth(context)*0.45,
@@ -146,7 +164,8 @@ class _LocationPageState extends State<LocationPage> {
                                  });
                                  },
                              ),
-                              ),
+                            ),
+     
                             ),
                             trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.05)
                             ),
@@ -159,10 +178,6 @@ class _LocationPageState extends State<LocationPage> {
                       // shrinkWrap: true,
                       // itemCount: _location.length, //_location mapi uzunluğu kadar
                       // itemBuilder: (BuildContext context, int index) {
-                      //   setState(() {
-                      //     globalCity = cityData.result[index].city; 
-                      //     globalCityId = cityData.result[index].id;           
-                      //   });
                       //   return Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), // yalnızca sol ve sağdan boşluk
                       //       //InkWell sarmaladığı widgeta tıklanabilirlik özelliği kazandırdı
                       //       //InkWell ile liste yapısının tamamı tıklanabilir hale geldi
@@ -253,8 +268,32 @@ class _LocationPageState extends State<LocationPage> {
       ),
       bottomNavigationBar: TextButtonWidget(
         buttonText: "Uygula",
-        onPressed: (){}),
+        onPressed: (){
+         print( counties.length);
+          //NavigationProvider.of(context).setTab(HOME_PAGE);            
+        }),
    ),
     );
   }
 }
+
+class City extends Equatable {
+  final String id;
+  final String city;
+
+  City(this.city, this.id);
+   
+  @override
+  List<Object> get props => [id];
+}
+
+// class City extends Equatable{
+//   final String id;
+//   final String city;
+
+//   const City(this.city, this.id);
+
+//   int get hashCode => id.hashCode;
+
+//   bool operator==(Object other) => other is City && other.id == id;
+// }
