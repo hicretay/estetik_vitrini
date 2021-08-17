@@ -78,7 +78,7 @@ class _ReservationPageState extends State<ReservationPage> {
                             ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: 4,
+                              itemCount: 1,
                               itemBuilder: (BuildContext context, int index){
                               return ResevationResultWidget(
                               companyName: "Epilady Güzellik Salonu",

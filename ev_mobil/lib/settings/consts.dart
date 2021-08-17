@@ -67,7 +67,6 @@ final story = [
   ),
 ];
 
-
 final companies = [
   Company(
     name: "Estecool",

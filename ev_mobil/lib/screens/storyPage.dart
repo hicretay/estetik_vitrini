@@ -39,12 +39,10 @@ class _StoryPageState extends State<StoryPage> {
     //SystemChrome.setEnabledSystemUIOverlays([]); // tam ekran
     return PageView( 
         controller: controller,
-        children: companies
-            .map((user) => StoryWidget(
+        children: companies.map((user) => StoryWidget(
                   company: user,
                   controller: controller,
-                ))
-            .toList(),
+                )).toList(),
       );
 }
 }

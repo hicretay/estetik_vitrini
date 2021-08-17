@@ -23,13 +23,12 @@ class _StoryWidgetState extends State<StoryWidget> {
 
   void addStoryItems() {
     for (final story in widget.company.stories) {
-      storyItems.add(StoryItem.pageImage(
+        storyItems.add(StoryItem.pageImage(
         url: story.url,
         controller: controller,
         caption: story.caption,
         duration: Duration(
-          milliseconds: (story.duration * 1000).toInt(),
-        ),
+        milliseconds: (story.duration * 1000).toInt()),
       ));     
     }
   }
@@ -37,7 +36,6 @@ class _StoryWidgetState extends State<StoryWidget> {
   @override
   void initState() {
     super.initState();
-
     controller = StoryController();
     addStoryItems();
     date = widget.company.stories[0].date;
