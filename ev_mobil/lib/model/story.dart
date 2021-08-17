@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum MediaType { image, text }
-
 class Story {
-  final MediaType mediaType;
   final String url;
   final double duration;
   final String caption;
@@ -11,7 +8,6 @@ class Story {
   final Color color;
 
   Story({
-    @required this.mediaType,
     @required this.caption,
     @required this.date,
     this.url,

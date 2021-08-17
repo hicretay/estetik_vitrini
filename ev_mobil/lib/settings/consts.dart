@@ -49,43 +49,18 @@ const leading = "Estecool Güzellik Merkezi";
 String globalCity = "";
 int globalCityId = 1;
 
-const carouselImage = [
-  "https://www.1mg.com/articles/wp-content/uploads/2020/12/skincare-woman.jpg",
-  "https://ankaramoonlight.com/wp-content/uploads/2017/05/hydrafacial-moonlight.jpg",
-  "https://firsat.me/img/big1024/13915_58bd7db143d63_980x400.png",
-  "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/flawlessskin-1589384044.png"
-];
-
-const posts =[
-  {
-    "id" : 0,
-    "img" :"https://www.1mg.com/articles/wp-content/uploads/2020/12/skincare-woman.jpg",
-  },
-  {
-    "id" : 1,
-    "img" : "https://www.dsm.com/personal-care/en_US/formulations/facial-skin-care/nourishing-barrier-skin-care-cream.thumb.800.480.png",
-  },
-  {
-    "id" : 2,
-    "img" :   "https://www.lynskincare.com/wp-content/uploads/2021/04/lyn-skincare-senin-en-iyi-halin.jpg",
-  }
-];
-
 final story = [
   Story(
-    mediaType: MediaType.image,
     url:'https://images.unsplash.com/photo-1531299244174-d247dd4e5a66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=670&q=80',
     caption: 'Salatalı göz hikayesi',
     date: 'şimdi',
   ),
   Story(
-    mediaType: MediaType.image,
     url:'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
     caption: 'Cilt Bakımı',
     date:'2 saat önce',
   ),
   Story(
-    mediaType: MediaType.image,
     url: 'https://media.giphy.com/media/FfjiOpMBIWlUBE6rSm/giphy.gif',
     caption: 'Güzellik :)',
     date: '6 saat önce',

@@ -1,4 +1,3 @@
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -245,27 +244,27 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   }
 //---------------------------------------------------------------------------------------
 //--------------------------------Carousel fonksiyonu------------------------------------
-  Carousel buildCarousel() {
-    return Carousel(
-      borderRadius: true,
-      radius: Radius.circular(maxSpace),
-      boxFit: BoxFit.cover,
-      autoplay: false,
-      animationCurve: Curves.bounceInOut, // animasyon efekti
-      animationDuration: Duration(milliseconds: 1000), // animasyon süresi
-      dotSize: 6.0, //Nokta büyüklüğü
-      dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
-      dotBgColor: Colors.transparent, //Carousel alt bar rengi
-      dotPosition: DotPosition.bottomCenter, // Noktaların konumu
-      dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
-      showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
-      indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
-      images: [
-        //Carousel resimleri dizisi
-        NetworkImage(carouselImage[0]),
-        NetworkImage(carouselImage[1]),
-        NetworkImage(carouselImage[2]),
-      ],
-    );
-  }
+//   Carousel buildCarousel() {
+//     return Carousel(
+//       borderRadius: true,
+//       radius: Radius.circular(maxSpace),
+//       boxFit: BoxFit.cover,
+//       autoplay: false,
+//       animationCurve: Curves.bounceInOut, // animasyon efekti
+//       animationDuration: Duration(milliseconds: 1000), // animasyon süresi
+//       dotSize: 6.0, //Nokta büyüklüğü
+//       dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
+//       dotBgColor: Colors.transparent, //Carousel alt bar rengi
+//       dotPosition: DotPosition.bottomCenter, // Noktaların konumu
+//       dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
+//       showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
+//       indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
+//       images: [
+//         //Carousel resimleri dizisi
+//         NetworkImage(carouselImage[0]),
+//         NetworkImage(carouselImage[1]),
+//         NetworkImage(carouselImage[2]),
+//       ],
+//     );
+//   }
 }
