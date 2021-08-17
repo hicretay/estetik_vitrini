@@ -125,7 +125,7 @@ Future<CityJsn> cityJsnFunc() async {
 //----------------------------------------------İlçe Listesi Fonksiyonu-----------------------------------------------------------
 Future<CountyJsn> countyJsnFunc(String city) async {
   final response = await http.post(
-    Uri.parse(url + "CompanyList"),
+    Uri.parse(url + "County"),
     body: '{"city":' + city + '}',
     headers: header
   );

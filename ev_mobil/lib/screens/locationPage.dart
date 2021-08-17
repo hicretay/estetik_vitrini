@@ -1,5 +1,4 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
-import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -40,15 +39,15 @@ class _LocationPageState extends State<LocationPage> {
 
  }
 
- //---------silinecek
-  Map<String, bool> _location = {
-    "Fatih": false,
-    "Maltepe": false,
-    "Üsküdar": true,
-    "Sarıyer": false,
-    "Beşiktaş": false,
-    "Kartal": false,
-  };
+ //---------silinecek------------
+  // Map<String, bool> _location = {
+  //   "Fatih": false,
+  //   "Maltepe": false,
+  //   "Üsküdar": true,
+  //   "Sarıyer": false,
+  //   "Beşiktaş": false,
+  //   "Kartal": false,
+  // };
   //------------------------------
 
   String selection;

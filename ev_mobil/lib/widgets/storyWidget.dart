@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/model/story.dart';
 import 'package:estetikvitrini/model/company.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/profileWidget.dart';
@@ -25,29 +24,14 @@ class _StoryWidgetState extends State<StoryWidget> {
 
   void addStoryItems() {
     for (final story in widget.company.stories) {
-      switch (story.mediaType) {
-        case MediaType.image:
-          storyItems.add(StoryItem.pageImage(
-            url: story.url,
-            controller: controller,
-            caption: story.caption,
-            duration: Duration(
-              milliseconds: (story.duration * 1000).toInt(),
-            ),
-          ));
-          break;
-        case MediaType.text:
-          storyItems.add(
-            StoryItem.text(
-              title: story.caption,
-              backgroundColor: story.color,
-              duration: Duration(
-              milliseconds: (story.duration * 1000).toInt(),
-              ),
-            ),
-          );
-          break;
-      }
+      storyItems.add(StoryItem.pageImage(
+        url: story.url,
+        controller: controller,
+        caption: story.caption,
+        duration: Duration(
+          milliseconds: (story.duration * 1000).toInt(),
+        ),
+      ));     
     }
   }
 

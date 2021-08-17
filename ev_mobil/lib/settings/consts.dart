@@ -90,40 +90,6 @@ final story = [
     caption: 'Güzellik :)',
     date: '6 saat önce',
   ),
-  Story(
-    mediaType: MediaType.text,
-    caption: 'İzlediğiniz için teşekkürler...',
-    color: Colors.purple,
-    date: '8 saat önce',
-  ),
-];
-
-final stories2 = [
-  Story(
-    mediaType: MediaType.image,
-    url:
-        'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-    caption: 'Başlıkk',
-    date: '1 saat önce',
-  ),
-  Story(
-    mediaType: MediaType.image,
-    url:'https://images.unsplash.com/photo-1531299244174-d247dd4e5a66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=670&q=80',
-    caption: 'Totally Cool',
-    date: '2 saat önce',
-  ),
-  Story(
-    mediaType: MediaType.image,
-    url: 'https://media.giphy.com/media/MNolM0COeDjQQ/giphy.gif',
-    caption: 'Estecool',
-    date: '2 saat önce',
-  ),
-  Story(
-    mediaType: MediaType.text,
-    caption: 'İzlediğiniz için teşekkürler...',
-    color: Colors.purple,
-    date: 'Şimdi',
-  ),
 ];
 
 
@@ -136,7 +102,7 @@ final companies = [
   Company(
     name: "Epilady",
     imgUrl: "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
-    stories: stories2,
+    stories: story,
   ),
   Company(
     name: "Estecool",
@@ -146,7 +112,7 @@ final companies = [
   Company(
     name: "Epilady",
     imgUrl: "https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f8/26/48/f8264838-4211-a3a0-693e-157bd9962202/source/256x256bb.jpg",
-    stories: stories2,
+    stories: story,
   ),
     Company(
     name: "Estecool",
