@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
+import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -17,25 +18,30 @@ class LocationPage extends StatefulWidget{
 
 class _LocationPageState extends State<LocationPage> {
 
+  String selection;
+  
+  List cities = [];
+  List counties = [];
+
    Future cityList() async{
    final CityJsn cityNewList = await cityJsnFunc(); 
    setState(() {
       cities = cityNewList.result;
    });
  }
-
-//    Future countyList() async{
-//    final CountyJsn countiesNewList = await countyJsnFunc("İSTANBUL"); 
-//    setState(() {
-//       counties = countiesNewList.result;
-//    });
-//  }
+   
+   Future countyList() async{
+   final CountyJsn countiesNewList = await countyJsnFunc("KONYA"); 
+   setState(() {
+      counties = countiesNewList.result;
+   });
+ }
 
  @override
  void initState() { 
    super.initState();
    cityList();
-   //countyList();
+   countyList();
 
  }
 
@@ -49,12 +55,6 @@ class _LocationPageState extends State<LocationPage> {
   //   "Kartal": false,
   // };
   //------------------------------
-
-  String selection;
-
-  List cities = [];
-  List counties = [];
-
 
   @override
   Widget build(BuildContext context) {

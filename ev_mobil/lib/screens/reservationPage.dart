@@ -34,27 +34,22 @@ class _ReservationPageState extends State<ReservationPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(
-                          "Randevularım",
+                         Text("Randevularım",
                           style: Theme.of(context)
                             .textTheme
                             .headline4
                             .copyWith(color: white, fontFamily: leadingFont),
                         ),
-                        SizedBox(
-                          width: maxSpace,
-                        ),
-                        CircleAvatar(
-                          //iconun çevresini saran yapı tasarımı
+                        SizedBox(width: maxSpace),
+                        CircleAvatar(//iconun çevresini saran yapı tasarımı
                           maxRadius: 25,
                           backgroundColor: Colors.white,
                           child: IconButton(
-                            iconSize: iconSize,
-                            icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
-                            onPressed: (){
-                              NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                            }
-                          ),
+                          iconSize: iconSize,
+                          icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
+                          onPressed: (){
+                            NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                          }),
                         ),
                       ],
                     ),
