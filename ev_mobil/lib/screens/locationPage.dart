@@ -31,7 +31,7 @@ class _LocationPageState extends State<LocationPage> {
  }
    
    Future countyList() async{
-   final CountyJsn countiesNewList = await countyJsnFunc("KONYA"); 
+   final CountyJsn countiesNewList = await countyJsnFunc(selection ==null ? "İSTANBUL" : selection); 
    setState(() {
       counties = countiesNewList.result;
    });
@@ -40,9 +40,10 @@ class _LocationPageState extends State<LocationPage> {
  @override
  void initState() { 
    super.initState();
+   setState(() {
    cityList();
    countyList();
-
+  });
  }
 
  //---------silinecek------------
@@ -126,8 +127,7 @@ class _LocationPageState extends State<LocationPage> {
                       children: [
                       SizedBox(height: defaultPadding),
                       Center(
-                        
-                        child: Container(
+                          child: Container(
                           height: deviceHeight(context)*0.08,
                           width: deviceWidth(context)*0.9,
                           decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
@@ -140,6 +140,7 @@ class _LocationPageState extends State<LocationPage> {
                             title: Center(
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(   
+                                hint: Text("il seçiniz"),
                                 dropdownColor: Colors.transparent,
                                 value: selection,
                                 items: cities.map((data){
@@ -151,12 +152,15 @@ class _LocationPageState extends State<LocationPage> {
                                       style: TextStyle(color: white, fontSize: 20)),
                                     ),
                                   ),
-                                  value: data.id.toString());
+                                  value: data.city);
                                 }).toList(),                                  
                                 onChanged: (value) {
                                  setState(() {
                                    selection = value;
                                  });
+                                 },
+                                 onTap: (){
+                                    
                                  },
                              ),
                             ),
@@ -167,13 +171,34 @@ class _LocationPageState extends State<LocationPage> {
                         ),
                       ),
                       SizedBox(height: deviceHeight(context)*0.02),
-                      ListView.builder(
-                        itemCount: counties.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index){
-                          print(counties[index].county);
-                        return Text(counties[index].county);
-                      })
+                      //Text("$selection"),
+                      //Text("---------------------"),
+                      // ListView.builder(
+                      //   itemCount: counties.length,
+                      //   shrinkWrap: true,
+                      //   itemBuilder: (context, index){
+                      //   return Text(counties[index].county);
+                      // })
+                      //selection != null?
+                      FutureBuilder(
+                        future: countyList(),
+                        builder: (context,snapshot){                        
+                          return 
+                          ListView.builder(
+                            itemCount: counties.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index){
+                              //var list = snapshot.data[index];
+                              return Text(counties[index].county);
+                          });
+                          }
+
+                          //return Text("no data found");
+                        
+                      )
+                      //Text("select item"),
+
+
                       // ListView.separated(
                       // physics: BouncingScrollPhysics(),
                       // scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
