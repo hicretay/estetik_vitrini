@@ -171,15 +171,6 @@ class _LocationPageState extends State<LocationPage> {
                         ),
                       ),
                       SizedBox(height: deviceHeight(context)*0.02),
-                      //Text("$selection"),
-                      //Text("---------------------"),
-                      // ListView.builder(
-                      //   itemCount: counties.length,
-                      //   shrinkWrap: true,
-                      //   itemBuilder: (context, index){
-                      //   return Text(counties[index].county);
-                      // })
-                      //selection != null?
                       FutureBuilder(
                         future: countyList(),
                         builder: (context,snapshot){                        
@@ -188,16 +179,9 @@ class _LocationPageState extends State<LocationPage> {
                             itemCount: counties.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index){
-                              //var list = snapshot.data[index];
                               return Text(counties[index].county);
                           });
-                          }
-
-                          //return Text("no data found");
-                        
-                      )
-                      //Text("select item"),
-
+                          })
 
                       // ListView.separated(
                       // physics: BouncingScrollPhysics(),
