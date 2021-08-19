@@ -46,7 +46,7 @@ class _LocationPageState extends State<LocationPage> {
   });
  }
 
- //---------silinecek------------
+  //---------silinecek------------
   // Map<String, bool> _location = {
   //   "Fatih": false,
   //   "Maltepe": false,
@@ -56,6 +56,8 @@ class _LocationPageState extends State<LocationPage> {
   //   "Kartal": false,
   // };
   //------------------------------
+  //Map<String, bool> countyMap = {};
+
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +170,11 @@ class _LocationPageState extends State<LocationPage> {
                                  });
                                  },
                                  onTap: (){
-                                    
+                                   //countyMap.values.every((element) => false);
+                                   //final index = counties.indexOf(counties);
+                                   //countyMap.addAll(counties[index].county);
+                                    //countyMap.updateAll((key, value) => false);
+                                    //print(countyMap);
                                  },
                              ),
                             ),
@@ -223,7 +229,7 @@ class _LocationPageState extends State<LocationPage> {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     //İç container yapısı
                                     children: [
-                                    SizedBox(width: deviceWidth(context)*0.05),
+                                    SizedBox(width: deviceWidth(context)*0.04),
                                     Container(
                                     width  : deviceWidth(context)*0.06,
                                     height : deviceHeight(context)*0.06,

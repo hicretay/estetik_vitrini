@@ -5,6 +5,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
+import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/JsnClass/userfavoriAreaJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:toast/toast.dart';
@@ -156,7 +157,7 @@ Future<CompanyListJsn> companyListJsnFunc() async {
 //-------------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------Hikaye İçeriği Fonksiyonu--------------------------------------------------
-Future<UserFavoriAreaJsn> storyContentJsnFunc(int id) async {
+Future<StoryContentJsn> storyContentJsnFunc(int id) async {
   final response = await http.post(
     Uri.parse(url + "StoryContentJsn"),
     body: '{"companyId":' + id.toString() + '}',
@@ -165,7 +166,7 @@ Future<UserFavoriAreaJsn> storyContentJsnFunc(int id) async {
 
   if (response.statusCode == 200) {
     final String responseString = response.body;
-    return userFavoriAreaJsnFromJson(responseString);
+    return storyContentJsnFromJson(responseString);
   } else {
     return null;
   }
