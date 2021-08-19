@@ -1,7 +1,9 @@
+import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/model/company.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:story_view/story_view.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 
 class StoryWidget extends StatefulWidget {
   final Company company;
@@ -21,6 +23,15 @@ class _StoryWidgetState extends State<StoryWidget> {
   StoryController controller;
   String date = '';
 
+  List companyContent =[];
+
+  Future companyList() async{
+   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   setState(() {
+      companyContent = companyNewList.result;
+   });
+ }
+
   void addStoryItems() {
     for (final story in widget.company.stories) {
         storyItems.add(StoryItem.pageImage(
@@ -37,6 +48,7 @@ class _StoryWidgetState extends State<StoryWidget> {
   void initState() {
     super.initState();
     controller = StoryController();
+    companyList();
     addStoryItems();
     date = widget.company.stories[0].date;
   }
@@ -93,9 +105,22 @@ class _StoryWidgetState extends State<StoryWidget> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CircleAvatar(
+              CircleAvatar(              
                 radius: 26,
-                backgroundImage: NetworkImage(widget.company.imgUrl),
+                child: Container(
+                  child: companyContent.isEmpty ? 
+                  CircularProgressIndicator():
+                  Image.network(companyContent.first.companyLogo ?? " ",
+                  loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                  if (loadingProgress == null) return child; // fotoğraf yüklenirken circular döndürme
+                      return Center(
+                      child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null 
+                      ?  loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                      : null,
+                    ));
+                  }),
+                ),
               ),
               SizedBox(width: deviceWidth(context)*0.02),
               Expanded(
@@ -105,7 +130,8 @@ class _StoryWidgetState extends State<StoryWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        widget.company.name,
+                        companyContent.isEmpty ? "company" :
+                        companyContent.first.companyName  , //companyContent companyName
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

@@ -60,11 +60,6 @@ final story = [
     caption: 'Cilt Bakımı',
     date:'2 saat önce',
   ),
-  Story(
-    url: 'https://media.giphy.com/media/FfjiOpMBIWlUBE6rSm/giphy.gif',
-    caption: 'Güzellik :)',
-    date: '6 saat önce',
-  ),
 ];
 
 final companies = [
