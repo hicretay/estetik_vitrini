@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   
   TextEditingController teSearch = TextEditingController();
   List homeContent; 
-  CompanyListJsn companyContent;
+  List companyContent;
 
   _HomePageState({this.cityDenemeID});
   int cityDenemeID ;
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
   Future companyStoryList() async{
    final CompanyListJsn companyNewList = await companyListJsnFunc(); 
    setState(() {
-      companyContent = companyNewList;
+      companyContent = companyNewList.result;
    });
    }
 //-------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                       child: GridView.builder(
-                        itemCount: companyContent.result.length,
+                        itemCount: companyContent.length,
                         scrollDirection: Axis.horizontal,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisSpacing: maxSpace,
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                    image: NetworkImage(companyContent.result[index].companyLogo),
+                                    image: NetworkImage(companyContent[index].companyLogo),
                                   ),
                                   ),
                                 ),
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                           onTap: (){
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(company: companies[index])));
                           },),
-                          Text(companyContent.result[index].companyName),
+                          Text(companyContent[index].companyName),
                         ],
                           );
                         }),
