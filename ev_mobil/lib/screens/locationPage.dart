@@ -128,7 +128,7 @@ class _LocationPageState extends State<LocationPage> {
                       SizedBox(height: defaultPadding),
                       Center(
                           child: Container(
-                          height: deviceHeight(context)*0.08,
+                          height: deviceHeight(context)*0.07,
                           width: deviceWidth(context)*0.9,
                           decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
                           gradient: LinearGradient(
@@ -136,11 +136,19 @@ class _LocationPageState extends State<LocationPage> {
                                     end: Alignment.topRight,
                                     colors: backGroundColor1
                                   ),),
-                            child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.04),
+                            child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.035),
                             title: Center(
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(   
-                                hint: Text("il seçiniz"),
+                                isExpanded: true,
+                                hint: Center(
+                                  child: Text("İSTANBUL",
+                                  textAlign: TextAlign.center,
+                                        style    : TextStyle(
+                                        fontSize : 20, // ilçelerin fontu
+                                        color:  Colors.white,
+                                        ),),
+                                ),
                                 dropdownColor: Colors.transparent,
                                 value: selection,
                                 items: cities.map((data){
@@ -166,7 +174,7 @@ class _LocationPageState extends State<LocationPage> {
                             ),
      
                             ),
-                            trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.05)
+                            trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.065)
                             ),
                         ),
                       ),
@@ -211,11 +219,14 @@ class _LocationPageState extends State<LocationPage> {
                                 ),
                                 child: Center(
                                   //Bir seçim radiosu ve text yapısından oluşan listTile
-                                  child: ListTile(
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     //İç container yapısı
-                                    leading: Container(
-                                    width  : deviceWidth(context)*0.065,
-                                    height : deviceHeight(context)*0.065,
+                                    children: [
+                                    SizedBox(width: deviceWidth(context)*0.05),
+                                    Container(
+                                    width  : deviceWidth(context)*0.06,
+                                    height : deviceHeight(context)*0.06,
                                     decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     gradient: LinearGradient(
@@ -238,18 +249,25 @@ class _LocationPageState extends State<LocationPage> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(width: deviceWidth(context)*0.2),
                                     //_location isimlerinin gösterildiği text
-                                    title: Text(  counties[index].county,   //_location.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
-                                      textAlign: TextAlign.center,
-                                      style    : TextStyle(
-                                      fontSize : 22, // ilçelerin fontu
-                                      color:  Colors.white,
-                                            // _location.values.toList()[index]
-                                            // ? Colors.white // seçili ise açık text
-                                            // : primaryColor, // seçili değilse koyu
-                                      ),
+                                      Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: 
+                                          [Text(  counties[index].county,   //_location.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
+                                          textAlign: TextAlign.center,
+                                          style    : TextStyle(
+                                          fontSize : 18, // ilçelerin fontu
+                                          color:  primaryColor,
+                                                // _location.values.toList()[index]
+                                                // ? Colors.white // seçili ise açık text
+                                                // : primaryColor, // seçili değilse koyu
+                                          ),
                                     ),
-                                    trailing: Icon(Icons.location_city,color: Colors.transparent) //SvgPicture.asset("assets/icons/haritanoktası.svg"),
+                                        ],
+                                      ),
+                                     Icon(Icons.location_city,color: Colors.transparent) //SvgPicture.asset("assets/icons/haritanoktası.svg"),
+                                    ],
                                   ),
                                 ),
                               ),
