@@ -87,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: ()async{
                                   String username = txtUsername.text; // Kullanıcı Adı TextField'ının texti = username
                                   String password = txtPassword.text; // Şifre TextField'ının texti = password
-                                  final progressUHD = ProgressHUD.of(context);
-                                  progressUHD.show(); 
+                                  final progressHUD = ProgressHUD.of(context);
+                                  progressHUD.show(); 
                                   //--------------------------------USER DATASI DOLDURULMASI---------------------------
                                   final LoginJsn userData = await loginJsnFunc(username, password, false); 
                                   if(userData.success == true){ // Giriş kontrolü, succes
@@ -97,13 +97,13 @@ class _LoginPageState extends State<LoginPage> {
                                   prefs.setString("pass", password);    
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
-                                  progressUHD.dismiss(); 
+                                  progressHUD.dismiss(); 
                                   }
                                   else{
                                     showAlert(context, "Kullanıcı adı veya şifre yanlış!");
                                   }
 
-                                  progressUHD.dismiss(); 
+                                  progressHUD.dismiss(); 
                               }),
                             //-----------------------------------------------------------------------------------------------------------------------------
                             ),

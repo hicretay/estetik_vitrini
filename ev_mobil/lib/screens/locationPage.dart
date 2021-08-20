@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:estetikvitrini/settings/functions.dart';
-
-
 import '../settings/consts.dart';
 
 class LocationPage extends StatefulWidget{
@@ -51,19 +49,6 @@ class _LocationPageState extends State<LocationPage> {
    countyList();
   });
  }
-
-  //---------silinecek------------
-  // Map<String, bool> _location = {
-  //   "Fatih": false,
-  //   "Maltepe": false,
-  //   "Üsküdar": true,
-  //   "Sarıyer": false,
-  //   "Beşiktaş": false,
-  //   "Kartal": false,
-  // };
-  //------------------------------
-  //Map<String, bool> countyMap = {};
-
 
   @override
   Widget build(BuildContext context) {

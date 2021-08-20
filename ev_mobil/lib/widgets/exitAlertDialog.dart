@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,7 @@ class ExitAlertDialog extends StatelessWidget {
         MaterialButton(
           color: primaryColor,
           onPressed: () {
-            Navigator.of(context).pop(true);
+            exit(0);
           },
           child: Text("Evet",
           style: Theme.of(context).textTheme.button.copyWith(
