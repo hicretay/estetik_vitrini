@@ -250,10 +250,9 @@ class _LocationPageState extends State<LocationPage> {
                                           textAlign: TextAlign.center,
                                           style    : TextStyle(
                                           fontSize : 18, // ilçelerin fontu
-                                          color: 
-                                                countyMap.values.toList()[index]
-                                                ? Colors.white // seçili ise açık text
-                                                : primaryColor, // seçili değilse koyu
+                                          color: countyMap.values.toList()[index]
+                                                 ? Colors.white // seçili ise açık text
+                                                 : primaryColor, // seçili değilse koyu
                                           ),
                                     ),
                                         ],

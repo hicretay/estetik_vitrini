@@ -5,18 +5,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class MakeAppointmentOperationPage extends StatefulWidget {
-  MakeAppointmentOperationPage({Key key}) : super(key: key);
+  final List companyOperation;
+  MakeAppointmentOperationPage({Key key, this.companyOperation}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState();
+  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation);
 }
 
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
-    Map<String, bool> _operations = {
-    "Cilt Bakımı": false,
-    "Medikal Estetik": false,
-    "Lazer Epilasyon": false,
-  };
+
+  List companyOperation;
+  _MakeAppointmentOperationPageState({this.companyOperation});
+
+  Map<dynamic,bool> operationListMap = {};
+
+   operationListFunc() {
+    setState(() {
+      for (var item in companyOperation) {
+      Map<dynamic,bool> newItem = {item:false};
+      operationListMap.addEntries(newItem.entries);
+    }
+  });
+}
+
+  //   Map<String, bool> _operations = {
+  //   "Cilt Bakımı": false,
+  //   "Medikal Estetik": false,
+  //   "Lazer Epilasyon": false,
+  // };
+
+  @override
+  void initState() { 
+    super.initState();
+      operationListFunc();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -96,7 +119,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
                         shrinkWrap: true,
-                        itemCount: _operations.length, //_location mapi uzunluğu kadar
+                        itemCount: companyOperation.length, //_location mapi uzunluğu kadar
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), // yalnızca sol ve sağdan boşluk
                               //InkWell sarmaladığı widgeta tıklanabilirlik özelliği kazandırdı
@@ -105,7 +128,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                 onTap: () {
                                   setState(() {
                                     //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
-                                    _operations.update(_operations.keys.toList()[index],
+                                    operationListMap.update(operationListMap.keys.toList()[index],
                                         (value) => !value);
                                   });
                                 },
@@ -121,7 +144,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                       begin: Alignment.topLeft,
                                       end: Alignment.topRight,
                                       //_operation mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
-                                      colors: _operations.values.toList()[index]
+                                      colors: operationListMap.values.toList()[index]
                                           ? backGroundColor1 // true ise(seçili) ise renk koyu
                                           : backGroundColor3, // false ise seçilmemişse açık
                                     ),
@@ -139,7 +162,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                       begin: Alignment.topLeft,
                                       end: Alignment.topRight,
                                             //_operation mapinin valuelarının index değerine göre renk belirler
-                                            colors: _operations.values.toList()[index]
+                                            colors: operationListMap.values.toList()[index]
                                                 ? backGroundColor1 // true ise(seçili) ise renk koyu
                                                 : backGroundColor3, // false ise seçilmemişse açık
                                           ),
@@ -155,11 +178,11 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                         ),
                                       ),
                                       //_location isimlerinin gösterildiği text
-                                      title: Text(_operations.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
+                                      title: Text(companyOperation[index].operationName, //_location mapinin keylerinin indexine göre ekrana yazar
                                         textAlign: TextAlign.center,
                                         style    : TextStyle(
                                         fontSize : 20, // işlemlerin fontu
-                                        color: _operations.values.toList()[index]
+                                        color: operationListMap.values.toList()[index]
                                               ? Colors.white // seçili ise açık text
                                               : primaryColor, // seçili değilse koyu
                                         ),

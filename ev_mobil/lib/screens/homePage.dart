@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
@@ -145,11 +146,18 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                          ],
-                              ),
-                          onTap: (){
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>StoryPage(company: companies[index])));
-                          },),
+                          ]),
+                          //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
+                          onTap: ()async{
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show();
+                              final StoryContentJsn storyContent = await storyContentJsnFunc(1); 
+                              Navigator.of(context, rootNavigator: true).push(
+                              MaterialPageRoute(builder: (context)=>StoryPage(company: companies[index], storyContent: storyContent)));
+                              progressHUD.dismiss();
+                          },
+                          //------------------------------------------------------------------------------------------------------------------------------
+                          ),
                           Text(companyContent[index].companyName),
                         ],
                           );
@@ -172,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                           contentPicture: homeContent[index].contentPicture,
                           cardText      : homeContent[index].contentTitle,
                           pinColor      : primaryColor,
-                          //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
+                          //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                           onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
@@ -181,15 +189,15 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,)));
                           progressUHD.dismiss();
                         },
-                        //--------------------------------------------------------------------------------------------------------------------
-                        //-----------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------
+                        //---------------------------------------------------------------------------------------------------------------------------------------------------
+                        //-----------------------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
                         onPressedLocation: (){
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show();
                           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
                           progressUHD.dismiss();
                         },
-                        //-------------------------------------------------------------------------------------------------------------------
+                        //-----------------------------------------------------------------------------------------------------------------------------------------------------
                       );
                       }),
                     ),
