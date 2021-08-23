@@ -131,19 +131,21 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                                 return Container(
                                 color: _checked==index ? secondaryColor : white,
                                 child: TextButton(
-                                  child: Row(children: [
-                                   Text(companyOperationTime[index].operationStartTime,
-                                        style: TextStyle(
-                                        color: primaryColor,
+                                  child: Center(
+                                    child: Row(children: [
+                                     Text(companyOperationTime[index].operationStartTime,
+                                          style: TextStyle(
+                                          color: primaryColor,
+                                          ),
                                         ),
-                                      ),
-                                   Text(" - ",style: TextStyle(color: primaryColor)),
-                                   Text(companyOperationTime[index].operationEndTime,
-                                        style: TextStyle(
-                                        color: primaryColor,
+                                     Text(" - ",style: TextStyle(color: primaryColor)),
+                                     Text(companyOperationTime[index].operationEndTime,
+                                          style: TextStyle(
+                                          color: primaryColor,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                   onPressed: () {
                                     setState(() {

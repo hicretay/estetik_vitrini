@@ -150,9 +150,9 @@ class _HomePageState extends State<HomePage> {
                           onTap: ()async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show();
-                              final StoryContentJsn storyContent = await storyContentJsnFunc(1); 
+                              final StoryContentJsn storyContent = await storyContentJsnFunc(companyContent[index].id);
                               Navigator.of(context, rootNavigator: true).push(
-                              MaterialPageRoute(builder: (context)=>StoryPage(company: companies[index], storyContent: storyContent)));
+                              MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyContent: storyContent)));
                               progressHUD.dismiss();
                           },
                           //------------------------------------------------------------------------------------------------------------------------------

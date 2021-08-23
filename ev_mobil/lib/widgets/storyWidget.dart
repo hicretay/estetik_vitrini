@@ -1,12 +1,11 @@
-import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
-import 'package:estetikvitrini/model/company.dart';
+import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:story_view/story_view.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
 class StoryWidget extends StatefulWidget {
-  final Company company;
+  final dynamic company; //silinecek
   final PageController controller;
 
   const StoryWidget({
@@ -21,26 +20,27 @@ class StoryWidget extends StatefulWidget {
 class _StoryWidgetState extends State<StoryWidget> {
   final storyItems = <StoryItem>[];
   StoryController controller;
-  String date = '';
+  String date = 'UNKNOWN';
+  int storyIndex = 0;
 
-  List companyContent =[];
+  List storyContent = [];
 
-  Future companyList() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   Future storyContentList() async{
+   final StoryContentJsn storyContentNewList = await storyContentJsnFunc(widget.company.id); 
    setState(() {
-      companyContent = companyNewList.result;
+      storyContent = storyContentNewList.result;
    });
  }
 
-  void addStoryItems() {
-    for (final story in widget.company.stories) {
+  Future addStoryItems() async{
+    await storyContentList();
+    for (final story in storyContent) {
         storyItems.add(StoryItem.pageImage(
-        url: story.url,
+        url: story.storyContentPicture,
         controller: controller,
-        caption: story.caption,
-        duration: Duration(
-        milliseconds: (story.duration * 1000).toInt()),
-      ));     
+        caption: story.storyContent,
+        duration: Duration(milliseconds: 5000),
+      ));
     }
   }
 
@@ -48,9 +48,7 @@ class _StoryWidgetState extends State<StoryWidget> {
   void initState() {
     super.initState();
     controller = StoryController();
-    companyList();
     addStoryItems();
-    date = widget.company.stories[0].date;
   }
 
   @override
@@ -64,17 +62,19 @@ class _StoryWidgetState extends State<StoryWidget> {
       duration: Duration(milliseconds: 300),
       curve: Curves.easeIn,
     );
-
-    final currentIndex = companies.indexOf(widget.company);
-    final isLastPage = companies.length - 1 == currentIndex;
-    
+    final currentIndex = storyContent.indexOf(storyContent[storyIndex]);
+    final isLastPage = storyContent.length - 1 == currentIndex;   
     if (isLastPage) {
       Navigator.of(context).pop();
-    }
+    }else{
+    storyIndex++;
+    }    
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
+  Widget build(BuildContext context) => 
+  storyItems.isEmpty ? Center(child: CircularProgressIndicator(backgroundColor: primaryColor,valueColor: AlwaysStoppedAnimation<Color>(Colors.white),)):
+        Stack(
         children: <Widget>[
           Material(
             type: MaterialType.transparency,
@@ -91,7 +91,7 @@ class _StoryWidgetState extends State<StoryWidget> {
                 final index = storyItems.indexOf(storyItem);
                 if (index > 0) {
                   setState(() {
-                    date = widget.company.stories[index].date;
+                    date = date;
                   });
                 }
               },
@@ -108,9 +108,9 @@ class _StoryWidgetState extends State<StoryWidget> {
               CircleAvatar(              
                 radius: 26,
                 child: Container(
-                  child: companyContent.isEmpty ? 
+                  child: widget.company.companyLogo.isEmpty ?
                   CircularProgressIndicator():
-                  Image.network(companyContent.first.companyLogo ?? " ",
+                  Image.network(widget.company.companyLogo ?? " ",
                   loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
                   if (loadingProgress == null) return child; // fotoğraf yüklenirken circular döndürme
                       return Center(
@@ -130,8 +130,8 @@ class _StoryWidgetState extends State<StoryWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        companyContent.isEmpty ? "company" :
-                        companyContent.first.companyName  , //companyContent companyName
+                        widget.company.companyName.isEmpty ? "company" :
+                        widget.company.companyName  , //companyContent companyName
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

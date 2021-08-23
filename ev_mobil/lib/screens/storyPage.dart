@@ -1,30 +1,30 @@
-import 'package:estetikvitrini/model/company.dart';
-import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/widgets/storyWidget.dart';
 import 'package:flutter/material.dart';
 
 class StoryPage extends StatefulWidget {
-    static const route = "/storyPage";
+  static const route = "/storyPage";
 
-  final Company company;
+  final List company;
+  final StoryContentJsn storyContent;
 
-  const StoryPage({
-    @required this.company,
-    Key key,
-  }) : super(key: key);
+
+  const StoryPage({@required this.company, @required this.storyContent});
 
   @override
-  _StoryPageState createState() => _StoryPageState();
+  _StoryPageState createState() => _StoryPageState(storyContent: storyContent);
 }
 
 class _StoryPageState extends State<StoryPage> {
   PageController controller;
+  StoryContentJsn storyContent;
+
+  _StoryPageState({this.storyContent});
 
   @override
   void initState() {
     super.initState();
-
-    final initialPage = companies.indexOf(widget.company);
+    final initialPage = widget.company.indexOf(widget.company);
     controller = PageController(initialPage: initialPage);
   }
 
@@ -39,10 +39,13 @@ class _StoryPageState extends State<StoryPage> {
     //SystemChrome.setEnabledSystemUIOverlays([]); // tam ekran
     return PageView( 
         controller: controller,
-        children: companies.map((user) => StoryWidget(
-                  company: user,
+        children:  widget.company.map((compData) => 
+                  StoryWidget(
+                  company: compData,
                   controller: controller,
                 )).toList(),
       );
-}
-}
+     }
+   }
+
+
