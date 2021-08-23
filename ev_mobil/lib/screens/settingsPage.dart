@@ -20,6 +20,8 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
+  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -96,7 +98,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           text: "Uygulamadan çıkış yap",
                           child: Icon(Icons.exit_to_app,color: white),
                           onTap: ()async{
-                          SharedPreferences prefs = await SharedPreferences.getInstance();                
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          // shared preferences nesnelerinin silinmesi                
                           prefs.remove("user");
                           prefs.remove("pass");
                           final progressUHD = ProgressHUD.of(context); 

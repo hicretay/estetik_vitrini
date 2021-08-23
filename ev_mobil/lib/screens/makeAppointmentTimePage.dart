@@ -120,10 +120,10 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                             child: Padding(padding: const EdgeInsets.all(defaultPadding),
                             child: GridView.builder(
                               shrinkWrap: true,                 
-                              itemCount: gridChildren.length,
+                              itemCount: companyOperationTime.length,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: (1 / .4),
-                                crossAxisCount : 4,
+                                childAspectRatio: (1 / .2),
+                                crossAxisCount : 2,
                                 mainAxisSpacing: minSpace,
                                 crossAxisSpacing: minSpace,
                               ), 
@@ -131,11 +131,19 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                                 return Container(
                                 color: _checked==index ? secondaryColor : white,
                                 child: TextButton(
-                                  child: Text(
-                                    gridChildren[index],
-                                    style: TextStyle(
-                                      color: primaryColor,
-                                    ),
+                                  child: Row(children: [
+                                   Text(companyOperationTime[index].operationStartTime,
+                                        style: TextStyle(
+                                        color: primaryColor,
+                                        ),
+                                      ),
+                                   Text(" - ",style: TextStyle(color: primaryColor)),
+                                   Text(companyOperationTime[index].operationEndTime,
+                                        style: TextStyle(
+                                        color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   onPressed: () {
                                     setState(() {
