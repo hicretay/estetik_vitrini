@@ -20,7 +20,7 @@ class StoryWidget extends StatefulWidget {
 class _StoryWidgetState extends State<StoryWidget> {
   final storyItems = <StoryItem>[];
   StoryController controller;
-  String date = 'UNKNOWN';
+  String date = "date";
   int storyIndex = 0;
 
   List storyContent = [];
@@ -101,7 +101,7 @@ class _StoryWidgetState extends State<StoryWidget> {
         Material(
         type: MaterialType.transparency,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: deviceWidth(context)*0.05, vertical: deviceHeight(context)*0.09),
+          margin: EdgeInsets.symmetric(horizontal: deviceWidth(context)*0.05, vertical: deviceHeight(context)*0.1),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

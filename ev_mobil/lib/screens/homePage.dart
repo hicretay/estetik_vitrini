@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
     return  SafeArea(
         child: Scaffold(
         body: ProgressHUD(
-        child: homeContent != null ? Builder(builder: (context)=>       
+        child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>       
               Container(
               color: Colors.white,
               child: Column(
