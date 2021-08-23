@@ -1,6 +1,7 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
+import 'package:estetikvitrini/JsnClass/companyOperationTime.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
@@ -185,6 +186,24 @@ Future<CompanyOperationJsn> companyOperationJsnFunc(int id) async {
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return companyOperationJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------İşlem Saatleri Fonksiyonu--------------------------------------------------
+Future<CompanyOperationTimeJsn> companyOperationTimeJsnFunc(List id) async {
+  final response = await http.post(
+    Uri.parse(url + "CompanyOperation/Time"),
+    body: '{"operationId":' + id.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return companyOperationTimeJsnFromJson(responseString);
   } else {
     return null;
   }

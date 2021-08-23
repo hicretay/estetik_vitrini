@@ -25,6 +25,8 @@ class _LocationPageState extends State<LocationPage> {
 
    Future cityList() async{
    final CityJsn cityNewList = await cityJsnFunc(); 
+   if (!mounted)
+   return;
    setState(() {
       cities = cityNewList.result;
    });
@@ -32,6 +34,8 @@ class _LocationPageState extends State<LocationPage> {
    
    Future countyList() async{
    final CountyJsn countiesNewList = await countyJsnFunc(selection ==null ? "İSTANBUL" : selection); 
+   if (!mounted)
+   return;
    setState(() {     
       counties = countiesNewList.result;
       for (var temp in counties) {
@@ -44,6 +48,8 @@ class _LocationPageState extends State<LocationPage> {
  @override
  void initState() { 
    super.initState();
+   if (!mounted)
+   return;
    setState(() {
    cityList();
    countyList();
@@ -155,7 +161,9 @@ class _LocationPageState extends State<LocationPage> {
                                   ),
                                   value: data.city);
                                 }).toList(),                                  
-                                onChanged: (value) {                                  
+                                onChanged: (value) {
+                                     if (!mounted)
+                                     return;                                  
                                  setState(() {
                                    countyMap.clear();
                                    counties.clear();
@@ -185,6 +193,8 @@ class _LocationPageState extends State<LocationPage> {
                             //InkWell ile liste yapısının tamamı tıklanabilir hale geldi
                             child: InkWell(
                               onTap: () {
+                                   if (!mounted)
+                                   return;
                                 setState(() {
                                   //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
                                   countyMap.update(countyMap.keys.toList()[index],
@@ -202,7 +212,7 @@ class _LocationPageState extends State<LocationPage> {
                                     //soldan sağa doğru color listteki renkleri yaydı
                                     begin: Alignment.topLeft,
                                     end: Alignment.topRight,
-                                    //_location mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
+                                    //countyMap mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
                                     colors: 
                                     countyMap.values.toList()[index]
                                         ? backGroundColor1 // true ise(seçili) ise renk koyu
@@ -224,7 +234,7 @@ class _LocationPageState extends State<LocationPage> {
                                     gradient: LinearGradient(
                                     begin: Alignment.topLeft,
                                     end: Alignment.topRight,
-                                          //_location mapinin valuelarının index değerine göre renk belirler
+                                          //countyMap mapinin valuelarının index değerine göre renk belirler
                                           colors: 
                                              countyMap.values.toList()[index]
                                              ? backGroundColor1 // true ise(seçili) ise renk koyu
@@ -242,11 +252,11 @@ class _LocationPageState extends State<LocationPage> {
                                       ),
                                     ),
                                     SizedBox(width: deviceWidth(context)*0.2),
-                                    //_location isimlerinin gösterildiği text
+                                    //countyMap isimlerinin gösterildiği text
                                       Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                         children: 
-                                          [Text( counties[index].county,   //_location.keys.toList()[index], //_location mapinin keylerinin indexine göre ekrana yazar
+                                          [Text( counties[index].county,   //countyMap mapinin keylerinin indexine göre ekrana yazar
                                           textAlign: TextAlign.center,
                                           style    : TextStyle(
                                           fontSize : 18, // ilçelerin fontu
@@ -281,7 +291,7 @@ class _LocationPageState extends State<LocationPage> {
           ),
         ),
       ),
-      bottomNavigationBar: TextButtonWidget(
+        bottomNavigationBar: TextButtonWidget(
         buttonText: "Uygula",
         onPressed: (){
           //NavigationProvider.of(context).setTab(HOME_PAGE);
@@ -295,7 +305,7 @@ class _LocationPageState extends State<LocationPage> {
             print(item.county);
           }
         }),
-   ),
+      ),
     );
   }
 }

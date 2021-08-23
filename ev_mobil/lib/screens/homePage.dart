@@ -82,8 +82,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
               child: Column(
               children: [
-                  //-----------------------------Header-------------------------------
-                  // Bir arama Textfield'ı içerir
+                  //-----------------------------BAŞLIK-------------------------------
                   Padding(
                     padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                     child: Padding(
