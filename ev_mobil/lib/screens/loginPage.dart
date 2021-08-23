@@ -23,6 +23,13 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   bool isOnline = false;
+  
+    @override
+    void dispose() {
+    txtUsername.dispose();
+    txtPassword.dispose();
+    super.dispose();
+  }
 
   // @override
   // void initState() {

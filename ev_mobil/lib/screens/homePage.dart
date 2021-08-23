@@ -165,11 +165,10 @@ class _HomePageState extends State<HomePage> {
                     )
                   ),
                   //--------------------------------------------------------------------------------------------
-                  SizedBox(height: deviceHeight(context)*0.01), // story - postlar arası boşluk
                   //------------------------------------Anasayfa Postları----------------------------------------
                   Container(
                     child: Flexible(
-                      flex: 5,
+                      flex: 4,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: homeContent == null ? 0 : homeContent.length,
