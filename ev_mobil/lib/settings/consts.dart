@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-Map userObject = {};
-
 BoxDecoration boxDecoration = BoxDecoration(
   shape: BoxShape.rectangle,
   borderRadius: BorderRadius.circular(minCurved),

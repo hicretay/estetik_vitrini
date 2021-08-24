@@ -122,8 +122,8 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                               shrinkWrap: true,                 
                               itemCount: companyOperationTime.length,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: (1 / .2),
-                                crossAxisCount : 2,
+                                childAspectRatio: (1 / .4),
+                                crossAxisCount : 4,
                                 mainAxisSpacing: minSpace,
                                 crossAxisSpacing: minSpace,
                               ), 
@@ -132,20 +132,11 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                                 color: _checked==index ? secondaryColor : white,
                                 child: TextButton(
                                   child: Center(
-                                    child: Row(children: [
-                                     Text(companyOperationTime[index].operationStartTime,
-                                          style: TextStyle(
-                                          color: primaryColor,
-                                          ),
-                                        ),
-                                     Text(" - ",style: TextStyle(color: primaryColor)),
-                                     Text(companyOperationTime[index].operationEndTime,
-                                          style: TextStyle(
-                                          color: primaryColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    child: Text(companyOperationTime[index].operationStartTime,
+                                         style: TextStyle(
+                                         color: primaryColor,
+                                         ),
+                                       ),
                                   ),
                                   onPressed: () {
                                     setState(() {

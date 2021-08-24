@@ -20,7 +20,7 @@ class StoryWidget extends StatefulWidget {
 class _StoryWidgetState extends State<StoryWidget> {
   final storyItems = <StoryItem>[];
   StoryController controller;
-  String date = "date";
+  String date = "";
   int storyIndex = 0;
 
   List storyContent = [];
@@ -138,7 +138,6 @@ class _StoryWidgetState extends State<StoryWidget> {
                           color: Colors.white,
                         ),
                       ),
-                      Text(date,style: TextStyle(color: Colors.white38))
                     ],
                   ),
                 ),
