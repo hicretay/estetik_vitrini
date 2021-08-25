@@ -86,13 +86,13 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                     child: Padding(
-                    padding: const EdgeInsets.all(defaultPadding),
+                    padding: const EdgeInsets.only(right: defaultPadding,top: defaultPadding),
                     child: Align(
                     alignment: Alignment.topLeft,
                     child: Text("Estetik Vitrini", 
                     style: Theme.of(context)
                             .textTheme
-                            .headline3
+                            .headline4
                             .copyWith(color: primaryColor, fontFamily: leadingFont)),
                       ),
                     ),

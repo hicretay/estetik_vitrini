@@ -105,7 +105,8 @@ class _StoryWidgetState extends State<StoryWidget> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CircleAvatar(              
+              CircleAvatar(  
+                backgroundColor: white,            
                 radius: 26,
                 child: Container(
                   child: widget.company.companyLogo.isEmpty ?
@@ -129,13 +130,16 @@ class _StoryWidgetState extends State<StoryWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        widget.company.companyName.isEmpty ? "company" :
-                        widget.company.companyName  , //companyContent companyName
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          widget.company.companyName.isEmpty ? "company" :
+                          widget.company.companyName  , 
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],

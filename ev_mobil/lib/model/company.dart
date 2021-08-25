@@ -1,5 +1,3 @@
-
-
 class Company {
   Company({
         this.id,
