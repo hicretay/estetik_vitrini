@@ -12,7 +12,6 @@ const darkWhite = Color(0xffE0E1E1);
 const lightWhite = Color(0xffF4F4F4);
 const white = Colors.white;
 
-const storyColor = [Color(0xffECEDEB), primaryColor];
 const backGroundColor1 = [primaryColor, secondaryColor];
 const backGroundColor2 = [primaryColor, tertiaryColor];
 const backGroundColor3 = [darkWhite, darkWhite];

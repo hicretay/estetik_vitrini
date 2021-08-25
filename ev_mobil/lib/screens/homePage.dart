@@ -114,37 +114,28 @@ class _HomePageState extends State<HomePage> {
                           return Column(children:[
                               GestureDetector(
                               child:  Stack(children:[
-                                Container(
-                                  //Genişlik - yükseklik eşit verilip shape circle verilerek şekillendirildi
-                                    width: 82,
-                                    height: 82,
-                                    decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  //   gradient: LinearGradient(
-                                  //   //storyColor ile mor - beyaz renkleri liste haline getirildi,
-                                  //   //gradient ile center olarak konumlandırılıp dış çerçeve oluşturuldu
-                                  //   colors: storyColor,
-                                  //   begin: Alignment.center,
-                                  //   end: Alignment.center,
-                                  // ),
-                                  ),
-                            ),
-                            Padding(padding: const EdgeInsets.all(2.0), // mor rengin genişliğini ayaralar
-                                    child: Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                    border: Border.all(
-                                    color: primaryColor,
-                                    width: 2.0, // beyaz rengin genişliğini ayarlar
-                                  ),
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                    image: NetworkImage(companyContent[index].companyLogo),
-                                  ),
+                            Container(
+                              width: 86,
+                              height: 86,
+                              decoration: BoxDecoration(
+                              border: Border.all(
+                              color: darkWhite,
+                              width: 3),
+                              shape: BoxShape.circle),
+                              child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                              border: Border.all(
+                              color: secondaryColor,
+                              width: 2),
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                              image: NetworkImage(companyContent[index].companyLogo),
+                                    ),
                                   ),
                                 ),
-                              ),
+                            ),
                           ]),
                           //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
                           onTap: ()async{
