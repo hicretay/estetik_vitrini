@@ -24,20 +24,22 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
         Row(
           children: [
             //------------Başlıktaki firma logosu görünümü-----------
-            SizedBox(width: deviceWidth(context)*0.08), 
+            SizedBox(width: deviceWidth(context)*0.03), 
             Container(
-              alignment: Alignment.topLeft,
-              width: deviceWidth(context)*0.1,
-              height: deviceWidth(context)*0.1,
-              decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-              image: NetworkImage(
-                //companies[widget.iconNumber].imgUrl, //stories listesinden icon indexi çekme
-                widget.companyLogo,
+              child: Container(
+                alignment: Alignment.topLeft,
+                width: deviceWidth(context)*0.15,
+                height: deviceWidth(context)*0.15,
+                decoration: BoxDecoration(
+                color: white,
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                image: NetworkImage(
+                  widget.companyLogo,
+                ),
+               ),
               ),
-             ),
-            ),
+              ),
             ),
             //-----------------------------------------------------
             SizedBox(width: deviceWidth(context)*0.05), //başlık iconu - texti arası boşluk
@@ -45,7 +47,6 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
             Text(
               widget.companyName,
               style: TextStyle(fontSize: 20)
-              //Theme.of(context).textTheme.subtitle1,
             ),
           ],
         ),

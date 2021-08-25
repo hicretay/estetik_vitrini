@@ -85,7 +85,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                               style: TextStyle(
                                   color: primaryColor,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30),
+                                  fontSize: 20),
                             ),
                           ),
                         ),
