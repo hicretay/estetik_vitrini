@@ -6,38 +6,17 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {
   final List companyOperationTime;
-  MakeAppointmentTimePage({Key key, this.companyOperationTime}) : super(key: key);
+   final dynamic companyInfo;
+  MakeAppointmentTimePage({Key key, this.companyOperationTime, this.companyInfo, }) : super(key: key);
 
   @override
-  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime);
+  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime,companyInfo: companyInfo);
 }
 
 class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
   List companyOperationTime;
-  _MakeAppointmentTimePageState({this.companyOperationTime});
-
-  List<String> gridChildren = [
-    "08.00",
-    "08.30",
-    "09.00",
-    "09.30",
-    "10.00",
-    "10.30",
-    "11.00",
-    "11.30",
-    "12.00",
-    "12.30",
-    "13.00",
-    "13.30",
-    "14.00",
-    "14.30",
-    "15.00",
-    "15.30",
-    "16.00",
-    "16.30",
-    "17.00",
-    "17.30",
-  ];
+    dynamic companyInfo;
+  _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo});
 
   int _checked = 0;
   @override
@@ -94,7 +73,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Estecool Güzellik Merkezi",
+                              companyInfo[0].companyName, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -160,7 +139,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
           bottomNavigationBar: TextButtonWidget(
           buttonText: "Randevuyu Tamamla",
           onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeReservationPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,)));
           },),
           ),
         ),

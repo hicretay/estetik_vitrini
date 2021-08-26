@@ -6,18 +6,21 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 import '../widgets/informationRowWidget.dart';
 
-class MakeReservationPage extends StatefulWidget {
-
-  MakeReservationPage({Key key}) : super(key: key);
+class MakeAppointmentCheckPage extends StatefulWidget {
+  final dynamic companyInfo;
+  MakeAppointmentCheckPage({Key key, this.companyInfo}) : super(key: key);
 
   @override
-  _MakeReservationPageState createState() => _MakeReservationPageState();
+  _MakeAppointmentCheckPageState createState() => _MakeAppointmentCheckPageState(companyInfo: companyInfo);
 }
 
-class _MakeReservationPageState extends State<MakeReservationPage> {
+class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
   TextEditingController teName = TextEditingController();
   TextEditingController teNote = TextEditingController();
   String teOperation;
+
+   dynamic companyInfo;
+   _MakeAppointmentCheckPageState({this.companyInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,7 @@ class _MakeReservationPageState extends State<MakeReservationPage> {
                           ),
                         ),
                         Align(alignment: Alignment.topLeft,
-                            child: Text("Estecool Güzellik Merkezi",
+                            child: Text(companyInfo[0].companyName, 
                             style: TextStyle(
                             color: Colors.white),
                           ),

@@ -1,5 +1,7 @@
+import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';
@@ -19,6 +21,21 @@ class ReservationPage extends StatefulWidget {
 class _ReservationPageState extends State<ReservationPage> {
   TextEditingController teSearch = TextEditingController();
   Map<CalendarFormat, String> days = {};
+  List appointmentList;
+
+  Future appointmentListFunc() async{
+    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,"");
+    setState(() {
+      appointmentList = appointmentNewList.result;
+    });
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    appointmentListFunc();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,12 +71,12 @@ class _ReservationPageState extends State<ReservationPage> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
+                      Expanded(
+                        child: Container(
+                        decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(cardCurved),
+                        top: Radius.circular(cardCurved),
                         ),
                       ),
                       child: SingleChildScrollView(
@@ -68,17 +85,18 @@ class _ReservationPageState extends State<ReservationPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(defaultPadding),
-                              child: TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
+                              child  : TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
                             ),
                             ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: 1,
+                              itemCount: appointmentList == null ? 0 : appointmentList.length,
                               itemBuilder: (BuildContext context, int index){
                               return ResevationResultWidget(
-                              companyName: "Epilady Güzellik Salonu",
-                              operation: "Cilt Bakımı",
-                              time: "10:00",
+                              companyName: appointmentList[index].companyName,
+                              operation  : appointmentList[index].operationName,
+                              time       : appointmentList[index].appointmentTime,
+                              date       : appointmentList[index].appointmentDate,
                             );
                             }),
                           ],

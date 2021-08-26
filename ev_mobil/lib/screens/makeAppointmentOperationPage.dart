@@ -7,16 +7,18 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class MakeAppointmentOperationPage extends StatefulWidget {
   final List companyOperation;
-  MakeAppointmentOperationPage({Key key, this.companyOperation}) : super(key: key);
+  final dynamic companyInfo;
+  MakeAppointmentOperationPage({Key key, this.companyOperation, this.companyInfo}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation);
+  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,companyInfo: companyInfo);
 }
 
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
 
   List companyOperation;
-  _MakeAppointmentOperationPageState({this.companyOperation});
+   dynamic companyInfo;
+  _MakeAppointmentOperationPageState({this.companyOperation,this.companyInfo});
 
   Map<dynamic,bool> operationListMap = {};
 
@@ -88,7 +90,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Estecool Güzellik Merkezi",
+                              companyInfo[0].companyName, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -221,7 +223,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                 final progressHUD = ProgressHUD.of(context);
                 progressHUD.show();
                 final companyOperationTime = await companyOperationTimeJsnFunc([1,2]);               
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result)));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo)));
                 progressHUD.dismiss();
                 },),
           ),

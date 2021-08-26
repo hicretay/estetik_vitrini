@@ -166,7 +166,33 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                               //------------------------------------------------------------------------
                                     ],
                                   ),
-                                  buildReservationButton(), //Rezervasyon MaterialButton'ı
+                                  
+                                //-------------------------RANDEVU AL BUTONU----------------------------
+                                Material(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(30.0),
+                                child: MaterialButton(
+                                  minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
+                                  onPressed: () {
+                                    setState(() {
+                                      final progressHUD = ProgressHUD.of(context);
+                                      progressHUD.show(); 
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent)));
+                                      progressHUD.dismiss();
+                                    });
+                                    //Buton tıklandığında randevu al sayfasına yönlendirilecek
+                                  },
+                                  child: Row(
+                                    children: [
+                                      //----------------------------Buton Metni------------------------------------------
+                                      Text("Randevu Al",style: Theme.of(context).textTheme.button.copyWith(color: white)),
+                                      //---------------------------------------------------------------------------------
+                                      SizedBox(width: 10), //butondaki Text ve icon arası boşluk
+                                      Icon(LineIcons.arrowRight,color: lightWhite),
+                                    ],
+                                  ),
+                                ),
+                              )
                                 ],
                               ),
                               SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
@@ -210,39 +236,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       ),
     );
   }
-  //-----------------------------MaterialButton fonksiyonu-----------------------------------
-  Material buildReservationButton() {
-    return Material(
-      color: primaryColor,
-      borderRadius: BorderRadius.circular(30.0),
-      child: MaterialButton(
-        minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-        onPressed: () {
-          setState(() {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => MakeAppointmentPage()));
-          });
-          //Buton tıklandığında randevu al sayfasına yönlendirilecek
-        },
-        child: Row(
-          children: [
-            //-------------Buton Metni-------------
-            Text(
-              "Randevu Al",
-              style: Theme.of(context).textTheme.button.copyWith(color: white),
-            ),
-            //-------------------------------------
-            SizedBox(width: 10), //butondaki Text ve icon arası boşluk
-            Icon(
-              LineIcons.arrowRight, //ileri iconu
-              color: lightWhite,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-//---------------------------------------------------------------------------------------
 //--------------------------------Carousel fonksiyonu------------------------------------
 //   Carousel buildCarousel() {
 //     return Carousel(

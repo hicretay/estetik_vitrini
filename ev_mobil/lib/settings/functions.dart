@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
@@ -204,6 +205,23 @@ Future<CompanyOperationTimeJsn> companyOperationTimeJsnFunc(List id) async {
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return companyOperationTimeJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------Randevular Fonksiyonu--------------------------------------------------
+Future<AppointmentListJsn> appointmentListJsnFunc(int userId, String appointmentDate) async {
+  final response = await http.post(
+    Uri.parse(url + "Appointment/List"),
+    body: '{"userId":' + userId.toString() + ',' +  '"appointmentDate":' + '"$appointmentDate"' + '}', 
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return appointmentListJsnFromJson(responseString);
   } else {
     return null;
   }

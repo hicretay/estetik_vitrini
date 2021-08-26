@@ -9,16 +9,22 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
 
-class MakeAppointmentPage extends StatefulWidget {
+class MakeAppointmentCalendarPage extends StatefulWidget { 
+  final dynamic companyInfo;
+  MakeAppointmentCalendarPage({this.companyInfo});
+
   @override
-  _MakeAppointmentPageState createState() => _MakeAppointmentPageState();
+  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(companyInfo: companyInfo);
 }
 
-class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
+class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPage> {
   TextEditingController teSearch = TextEditingController();
   bool calendarSelected = false;
   bool reservationSelected = true;
 
+  dynamic companyInfo;
+
+  _MakeAppointmentCalendarPageState({this.companyInfo});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,7 +78,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Estecool Güzellik Merkezi",
+                              companyInfo[0].companyName, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -110,7 +116,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
            final progressHUD = ProgressHUD.of(context);
            progressHUD.show(); 
            final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(1);
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result)));
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result,companyInfo: companyInfo)));
            progressHUD.dismiss();
          }
          //-------------------------------------------------------------------------------------------------
