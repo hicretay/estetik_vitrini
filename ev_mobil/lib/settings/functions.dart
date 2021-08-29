@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
@@ -209,9 +212,9 @@ Future<CompanyOperationTimeJsn> companyOperationTimeJsnFunc(List id) async {
     return null;
   }
 }
-//-------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------------Randevular Fonksiyonu--------------------------------------------------
+//-----------------------------------------------Randevular Listesi Fonksiyonu-------------------------------------------------
 Future<AppointmentListJsn> appointmentListJsnFunc(int userId, String appointmentDate) async {
   final response = await http.post(
     Uri.parse(url + "Appointment/List"),
@@ -226,7 +229,36 @@ Future<AppointmentListJsn> appointmentListJsnFunc(int userId, String appointment
     return null;
   }
 }
-//-------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------- Randevu Ekleme Fonksiyonu-----------------------------------------------------
+Future<AppointmentAddJsn> appointmentAddJsnFunc(int userId, int companyId, int campaingId, String appointmentDate, int appointmentTimeId, int operation, String specialNote) async{
+  var bodys ={};
+  bodys["userId"]           = userId;
+  bodys["companyId"]        = companyId;
+  bodys["campaingId"]       = campaingId;
+  bodys["appointmentDate"]  = appointmentDate;
+  bodys["appointmentTimeId"]= appointmentTimeId;
+  bodys["operation"]        = operation;
+  bodys["specialNote"]      = specialNote;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "Appointment/Add"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return appointmentAddJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//--------------------------------------------------------------------------------------------------------------
+
 
 
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------

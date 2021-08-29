@@ -3,7 +3,7 @@ class AppointmentObject {
   int userId; //
   int companyId; //
   String appointmentDate; //
-  String appointmentTimeId;//
+  int appointmentTimeId;//
   int operation; //
   String specialNote;//
 

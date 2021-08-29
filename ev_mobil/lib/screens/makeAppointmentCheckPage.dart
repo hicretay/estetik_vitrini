@@ -1,11 +1,11 @@
-import 'package:estetikvitrini/providers/navigationProvider.dart';
+//import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-
 import '../widgets/informationRowWidget.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 
 class MakeAppointmentCheckPage extends StatefulWidget {
   final AppointmentObject appointment;
@@ -178,8 +178,9 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                   color: Colors.white,
                                   fontSize: 22),
                             ),
-                            onPressed: () {
-                              setState(() {
+                            onPressed: () async{
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
                                 appointment.specialNote = teNote.text;
                                 print(appointment.specialNote);
                                 // Navigator.pop(context);
@@ -187,7 +188,9 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                 // Navigator.pop(context);
                                 // Navigator.pop(context);
                                 // Navigator.pop(context);
-                              });
+                                await appointmentAddJsnFunc(1, 1, 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operation, teNote.text);
+                                showToast(context, "Randevu başarıyla kaydedildi!");
+                              progressHUD.dismiss();
                             },
                           ),
                         ),
