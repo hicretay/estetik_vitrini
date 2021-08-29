@@ -17,7 +17,6 @@ class MakeAppointmentCheckPage extends StatefulWidget {
 }
 
 class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
-  TextEditingController teName = TextEditingController();
   TextEditingController teNote = TextEditingController();
   String teOperation;
 
@@ -102,7 +101,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     operationName: "Tarih",
                     width: 250,
                     height: 50,
-                    child: Text(appointment.appointmentTimeId,
+                    child: Text(appointment.appointmentDate,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -115,7 +114,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     height: 50,
                     operationName: "Saat",
                     child: Text(
-                      appointment.operation.toString(),
+                      appointment.timeS,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -127,7 +126,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     operationName: "İşlem",
                     width: 250,
                     height: 50,
-                    child: Text("Medikal Estetik",
+                    child: Text(appointment.operationS,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -181,11 +180,13 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                             ),
                             onPressed: () {
                               setState(() {
-                                Navigator.pop(context);
-                                NavigationProvider.of(context).setTab(RESERVATION_PAGE);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
+                                appointment.specialNote = teNote.text;
+                                print(appointment.specialNote);
+                                // Navigator.pop(context);
+                                // NavigationProvider.of(context).setTab(RESERVATION_PAGE);
+                                // Navigator.pop(context);
+                                // Navigator.pop(context);
+                                // Navigator.pop(context);
                               });
                             },
                           ),

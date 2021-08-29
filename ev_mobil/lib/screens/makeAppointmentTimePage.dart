@@ -125,6 +125,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                                       //butona basıldığında değeri günceller
                                       _checked = index;
                                       appointment.appointmentTimeId = companyOperationTime[index].id.toString();
+                                      appointment.timeS = companyOperationTime[index].operationStartTime;
                                       print(companyOperationTime[index].id.toString());
 
                                     });
