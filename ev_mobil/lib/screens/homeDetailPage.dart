@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
+import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
@@ -175,9 +176,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
                                   onPressed: () {
                                     setState(() {
+                                      AppointmentObject appointment = AppointmentObject(companyId: homeContent[index].companyId,userId: 1);
                                       final progressHUD = ProgressHUD.of(context);
                                       progressHUD.show(); 
-                                      Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent)));
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment)));
                                       progressHUD.dismiss();
                                     });
                                     //Buton tıklandığında randevu al sayfasına yönlendirilecek

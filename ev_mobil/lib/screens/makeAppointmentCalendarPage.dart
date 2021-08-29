@@ -1,7 +1,7 @@
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
+import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -10,21 +10,37 @@ import 'package:estetikvitrini/settings/functions.dart';
 
 
 class MakeAppointmentCalendarPage extends StatefulWidget { 
+  final AppointmentObject appointment;
   final dynamic companyInfo;
-  MakeAppointmentCalendarPage({this.companyInfo});
+  MakeAppointmentCalendarPage({this.companyInfo, this.appointment});
 
   @override
-  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(companyInfo: companyInfo);
+  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(companyInfo: companyInfo , appointment: appointment);
 }
 
 class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPage> {
+  AppointmentObject appointment;
   TextEditingController teSearch = TextEditingController();
   bool calendarSelected = false;
   bool reservationSelected = true;
 
-  dynamic companyInfo;
+  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+    Map<DateTime, List<Event>> selectedEvents;
 
-  _MakeAppointmentCalendarPageState({this.companyInfo});
+  List<Event> _getEventsForDay(DateTime date) {
+    return selectedEvents[date] ?? [];
+  }
+  
+
+  dynamic companyInfo;
+  @override
+  void initState() { 
+    super.initState();
+    selectedEvents = {};
+  }
+
+  _MakeAppointmentCalendarPageState({this.companyInfo,this.appointment});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -99,7 +115,48 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                             TableCalendarWidget(calendarFormat: CalendarFormat.month),
+                             TableCalendar(
+                             locale: "tr",
+                             focusedDay: _focusedDay,
+                             firstDay: DateTime.utc(2010, 10, 16),
+                             lastDay: DateTime.utc(2030, 3, 14),
+                             shouldFillViewport: false,
+                             startingDayOfWeek: StartingDayOfWeek.monday,
+                             calendarFormat:  CalendarFormat.month,
+                             calendarStyle: CalendarStyle(
+                               isTodayHighlighted: true,
+                               selectedDecoration: BoxDecoration(
+                                 color: primaryColor,
+                                 shape: BoxShape.rectangle,
+                                 borderRadius: BorderRadius.circular(minCurved),
+                               ),
+                               outsideDecoration: boxDecoration,
+                               defaultDecoration: boxDecoration,
+                               weekendDecoration: boxDecoration,
+                               selectedTextStyle: TextStyle(
+                                 color: Colors.white,
+                               ),
+                               todayDecoration: BoxDecoration(
+                                 color: secondaryColor,
+                                 shape: BoxShape.rectangle,
+                                 borderRadius: BorderRadius.circular(minCurved),
+                               ),
+                             ),
+                             selectedDayPredicate: (day) {
+                               return isSameDay(_selectedDay, day);
+                             },
+                             onDaySelected: (selectedDay, focusedDay) {
+                               setState(() {          
+                                 _selectedDay = selectedDay;
+                                 _focusedDay = focusedDay;
+                               });
+                             },
+                             headerStyle: HeaderStyle(
+                               formatButtonVisible: false,
+                               titleCentered: true,
+                             ),
+                             eventLoader: _getEventsForDay,
+                           )
                             
                             ],
                           ),
@@ -113,6 +170,8 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
            TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
            //-----------------------------Randevu alınacak işlemi seçiniz butonu------------------------------
            onPressed: ()async{
+          appointment.appointmentDate=_selectedDay.toString();
+          print(" "+ appointment.companyId.toString() + ' --- '+ appointment.appointmentDate);
            final progressHUD = ProgressHUD.of(context);
            progressHUD.show(); 
            final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(1);
@@ -126,4 +185,10 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
         ),
     );
   }
+}
+class Event {
+  final String operation;
+  Event({this.operation});
+
+  String toString() => this.operation;
 }

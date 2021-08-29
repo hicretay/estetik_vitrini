@@ -182,7 +182,8 @@ class _LocationPageState extends State<LocationPage> {
                       FutureBuilder(
                       future: countyList(),
                       builder: (context,snapshot){                                            
-                      return  counties.isNotEmpty ? ListView.separated(
+                      return  counties.isNotEmpty ? 
+                      ListView.separated(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
                       shrinkWrap: true,

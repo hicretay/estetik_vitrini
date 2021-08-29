@@ -81,16 +81,16 @@ class _ReservationPageState extends State<ReservationPage> {
                       ),
                       child: SingleChildScrollView(
                         physics: ScrollPhysics(),
-                        child: Column(
+                        child  : Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(defaultPadding),
                               child  : TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
                             ),
                             ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: appointmentList == null ? 0 : appointmentList.length,
+                              physics    : NeverScrollableScrollPhysics(),
+                              shrinkWrap : true,
+                              itemCount  : appointmentList == null ? 0 : appointmentList.length,
                               itemBuilder: (BuildContext context, int index){
                               return ResevationResultWidget(
                               companyName: appointmentList[index].companyName,

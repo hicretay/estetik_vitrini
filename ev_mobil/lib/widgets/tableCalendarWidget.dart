@@ -2,9 +2,11 @@ import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+// ignore: must_be_immutable
 class TableCalendarWidget extends StatefulWidget {
   final CalendarFormat calendarFormat;
   TableCalendarWidget({this.calendarFormat});
+  String selectedDay;
 
   @override
   _TableCalendarWidgetState createState() => _TableCalendarWidgetState();
@@ -58,9 +60,9 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         return isSameDay(_selectedDay, day);
       },
       onDaySelected: (selectedDay, focusedDay) {
-        setState(() {
+        setState(() {          
           _selectedDay = selectedDay;
-          _focusedDay = focusedDay;
+          _focusedDay = focusedDay;     
         });
       },
       headerStyle: HeaderStyle(
