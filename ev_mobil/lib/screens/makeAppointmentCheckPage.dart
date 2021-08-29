@@ -1,4 +1,4 @@
-//import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
@@ -183,14 +183,14 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                               progressHUD.show(); 
                                 appointment.specialNote = teNote.text;
                                 print(appointment.specialNote);
-                                // Navigator.pop(context);
-                                // NavigationProvider.of(context).setTab(RESERVATION_PAGE);
-                                // Navigator.pop(context);
-                                // Navigator.pop(context);
-                                // Navigator.pop(context);
                                 await appointmentAddJsnFunc(1, 1, 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operation, teNote.text);
-                                showToast(context, "Randevu başarıyla kaydedildi!");
-                              progressHUD.dismiss();
+                                await showToast(context, "Randevu başarıyla kaydedildi!");
+                                Navigator.pop(context);
+                                NavigationProvider.of(context).setTab(RESERVATION_PAGE);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                progressHUD.dismiss();
                             },
                           ),
                         ),
