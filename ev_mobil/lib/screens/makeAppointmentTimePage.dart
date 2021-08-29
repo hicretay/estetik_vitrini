@@ -1,22 +1,25 @@
 import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
+import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {
+  final AppointmentObject appointment;
   final List companyOperationTime;
-   final dynamic companyInfo;
-  MakeAppointmentTimePage({Key key, this.companyOperationTime, this.companyInfo, }) : super(key: key);
+  final dynamic companyInfo;
+  MakeAppointmentTimePage({Key key, this.companyOperationTime, this.companyInfo, this.appointment, }) : super(key: key);
 
   @override
-  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime,companyInfo: companyInfo);
+  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime,companyInfo: companyInfo, appointment: appointment);
 }
 
 class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
+  AppointmentObject appointment;
   List companyOperationTime;
-    dynamic companyInfo;
-  _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo});
+  dynamic companyInfo;
+  _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo, this.appointment});
 
   int _checked = 0;
   @override
@@ -108,19 +111,22 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                               ), 
                               itemBuilder:  (BuildContext context, int index){
                                 return Container(
-                                color: _checked==index ? secondaryColor : white,
+                                color: _checked == index ? secondaryColor : white, 
                                 child: TextButton(
                                   child: Center(
-                                    child: Text(companyOperationTime[index].operationStartTime,
-                                         style: TextStyle(
-                                         color: primaryColor,
-                                         ),
+                                  child: Text(companyOperationTime[index].operationStartTime,
+                                       style: TextStyle(
+                                       color: primaryColor,
                                        ),
-                                  ),
+                                     ),
+                                   ),
                                   onPressed: () {
                                     setState(() {
                                       //butona basıldığında değeri günceller
                                       _checked = index;
+                                      appointment.appointmentTimeId = companyOperationTime[index].id.toString();
+                                      print(companyOperationTime[index].id.toString());
+
                                     });
                                   },
                                 ),
@@ -136,11 +142,17 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                   ],
                 ),
               ),
+          //--------------------------------RANDEVUYU TAMAMLA BUTONU-----------------------------------
           bottomNavigationBar: TextButtonWidget(
           buttonText: "Randevuyu Tamamla",
           onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,)));
-          },),
+          //print(appointment.appointmentTimeId+"timee");
+          final progressHUD = ProgressHUD.of(context);
+          progressHUD.show();
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,appointment: appointment)));
+          progressHUD.dismiss();
+          }),
+          //--------------------------------------------------------------------------------------------
           ),
         ),
       ),

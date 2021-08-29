@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +8,12 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../widgets/informationRowWidget.dart';
 
 class MakeAppointmentCheckPage extends StatefulWidget {
+  final AppointmentObject appointment;
   final dynamic companyInfo;
-  MakeAppointmentCheckPage({Key key, this.companyInfo}) : super(key: key);
+  MakeAppointmentCheckPage({Key key, this.companyInfo, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentCheckPageState createState() => _MakeAppointmentCheckPageState(companyInfo: companyInfo);
+  _MakeAppointmentCheckPageState createState() => _MakeAppointmentCheckPageState(companyInfo: companyInfo, appointment: appointment);
 }
 
 class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
@@ -19,8 +21,10 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
   TextEditingController teNote = TextEditingController();
   String teOperation;
 
+   AppointmentObject appointment;
+
    dynamic companyInfo;
-   _MakeAppointmentCheckPageState({this.companyInfo});
+   _MakeAppointmentCheckPageState({this.companyInfo, this.appointment});
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +102,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     operationName: "Tarih",
                     width: 250,
                     height: 50,
-                    child: Text("20 Ağustos 2021",
+                    child: Text(appointment.appointmentTimeId,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -111,7 +115,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     height: 50,
                     operationName: "Saat",
                     child: Text(
-                      "16.30",
+                      appointment.operation.toString(),
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

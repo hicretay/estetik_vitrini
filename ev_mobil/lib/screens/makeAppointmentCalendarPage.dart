@@ -170,12 +170,12 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
            TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
            //-----------------------------Randevu alınacak işlemi seçiniz butonu------------------------------
            onPressed: ()async{
-          appointment.appointmentDate=_selectedDay.toString();
-          print(" "+ appointment.companyId.toString() + ' --- '+ appointment.appointmentDate);
+          appointment.appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
+          print(appointment.appointmentDate);
            final progressHUD = ProgressHUD.of(context);
            progressHUD.show(); 
            final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(1);
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result,companyInfo: companyInfo)));
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result,companyInfo: companyInfo, appointment: appointment)));
            progressHUD.dismiss();
          }
          //-------------------------------------------------------------------------------------------------

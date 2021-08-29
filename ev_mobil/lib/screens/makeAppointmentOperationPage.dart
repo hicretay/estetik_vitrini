@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
+import 'package:estetikvitrini/settings/appointmentObject.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
@@ -6,19 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class MakeAppointmentOperationPage extends StatefulWidget {
+  final AppointmentObject appointment;
   final List companyOperation;
   final dynamic companyInfo;
-  MakeAppointmentOperationPage({Key key, this.companyOperation, this.companyInfo}) : super(key: key);
+  MakeAppointmentOperationPage({Key key, this.companyOperation, this.companyInfo, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,companyInfo: companyInfo);
+  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,companyInfo: companyInfo, appointment: appointment);
 }
 
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
+  AppointmentObject appointment;
+  List checkedOperation = [];
 
   List companyOperation;
    dynamic companyInfo;
-  _MakeAppointmentOperationPageState({this.companyOperation,this.companyInfo});
+  _MakeAppointmentOperationPageState({this.companyOperation,this.companyInfo, this.appointment});
 
   Map<dynamic,bool> operationListMap = {};
 
@@ -217,15 +221,27 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                   ],
                 ),
               ),
+              //-----------------------------------RANDEVU SAATİNİ SEÇ BUTONU-------------------------------------------
               bottomNavigationBar: TextButtonWidget(
               buttonText: "Randevu Saatini Seç",
               onPressed: ()async{
                 final progressHUD = ProgressHUD.of(context);
                 progressHUD.show();
+                    for (var i = 0; i < companyOperation.length; i++) {
+                    if (operationListMap.values.toList()[i]) {
+                      checkedOperation.add(operationListMap.keys.toList()[i]);
+                    }
+                  }
+                  for (var item in checkedOperation) {
+                  print(item.id);
+                  print(item.operationName);
+                  appointment.operation = item.id;
+                }
                 final companyOperationTime = await companyOperationTimeJsnFunc([1,2]);               
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo)));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo, appointment: appointment)));
                 progressHUD.dismiss();
-                },),
+                }),
+                //--------------------------------------------------------------------------------------------------------------
           ),
         ),
       ),
