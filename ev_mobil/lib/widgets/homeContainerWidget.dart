@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -12,6 +13,7 @@ class HomeContainerWidget extends StatefulWidget {
   final String companyLogo; // resimde yer alacak metin
   final String companyName; // resimde yer alacak metin
   final String contentPicture;
+  final String companyPhone;
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
   final Widget child;
   final Color pinColor;
@@ -19,7 +21,7 @@ class HomeContainerWidget extends StatefulWidget {
   final VoidCallback onPressedLocation;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture, this.checked, this.onPressedLocation})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture, this.checked, this.onPressedLocation, this.companyPhone})
       : super(key: key);
 
   @override
@@ -119,26 +121,17 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                         }),
                                 //-------------------------------------------------------------------------
                                 //------------------------------PAYLAŞ ICONBUTTONI---------------------------
-                                    IconButton(
-                                    icon: Icon(
-                                      Icons.share_outlined,
-                                      color: primaryColor,
-                                    ),
-                                    onPressed: () {}),
+                                  IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
+                                  onPressed: () {}),
                                 //--------------------------------------------------------------------------
                                 //----------------------------İLETİŞİM ICONBUTTONI--------------------------
-                                    IconButton(
-                                        icon: Icon(
-                                          LineIcons.phone,
-                                          color: primaryColor,
-                                        ),
-                                        onPressed: () {}),
-                                //-------------------------------------------------------------------------
-                                //----------------------Konum iconButton'ı-------------------------------
-                                  IconButton(icon: Icon(LineIcons.locationArrow,
-                                        color: primaryColor,
-                                        size : iconSize,
-                                      ),
+                                  IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
+                                      onPressed: () {
+                                        showAlert(context,"İletişim" + "\n${widget.companyPhone}");
+                                      }),
+                                //----------------------------------------------------------------------------
+                                //-----------------------------KONUM ICONBUTTONI----------------------------
+                                  IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
                                       onPressed: widget.onPressedLocation)
                                 //------------------------------------------------------------------------
                                   ],

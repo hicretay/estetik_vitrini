@@ -166,6 +166,7 @@ class _HomePageState extends State<HomePage> {
                         return HomeContainerWidget(
                           companyLogo   : homeContent[index].companyLogo,
                           companyName   : homeContent[index].companyName,
+                          companyPhone  : homeContent[index].companyPhone,
                           contentPicture: homeContent[index].contentPicture,
                           cardText      : homeContent[index].contentTitle,
                           pinColor      : primaryColor,

@@ -315,7 +315,7 @@ Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc2(int id) async {
 
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
-  return Toast.show(content, context, backgroundColor: Colors.grey,duration: 3, textColor: Colors.black,gravity: Toast.LENGTH_SHORT);
+  return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.BOTTOM);
 }
 //----------------------------------------------------------------------------------------------------------------------------------
 
