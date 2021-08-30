@@ -59,9 +59,8 @@ class _ReservationPageState extends State<ReservationPage> {
                             .headline4
                             .copyWith(color: white, fontFamily: leadingFont),
                         ),
-                        SizedBox(width: maxSpace),
                         CircleAvatar(//iconun çevresini saran yapı tasarımı
-                          maxRadius: 25,
+                          maxRadius: deviceWidth(context)*0.06,
                           backgroundColor: Colors.white,
                           child: IconButton(
                           iconSize: iconSize,

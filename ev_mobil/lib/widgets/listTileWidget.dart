@@ -16,7 +16,7 @@ class ListTileWidget extends StatelessWidget {
               child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
                   child : Container(
-                  height: deviceHeight(context)*0.07,
+                  height: deviceHeight(context)*0.08,
                   color : primaryColor,
                   child : Row(
                     children: <Widget>[

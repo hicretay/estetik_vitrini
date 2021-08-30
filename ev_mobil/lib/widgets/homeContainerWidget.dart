@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/settings/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -37,7 +36,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
         //-----------------------------Postu çevreleyecek container yapısı-------------------------
         Container(
           width: double.infinity, //genişlik: container genişliği kadar
-          height: 300, //container yüksekliği: 300
+          height: deviceHeight(context)*0.5, //container yüksekliği: 300
           decoration: BoxDecoration(
             color: lightWhite,
             borderRadius: BorderRadius.circular(
@@ -105,9 +104,9 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                           //container yüksekliği: 40
                           child: Row(
                             children: [
-                              Expanded(
-                                //-------------------------------ICONBUTTONLAR--------------------------------
-                                child: Row(children: [
+                              Flexible(
+                                child: Row(
+                                  children: [
                                 //---------------------------BEĞEN ICONBUTTONI-----------------------------
                                     IconButton( icon: checked
                                             ? Icon(Icons.favorite,
@@ -124,19 +123,18 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
                                   onPressed: () {}),
                                 //--------------------------------------------------------------------------
-                                //----------------------------İLETİŞİM ICONBUTTONI--------------------------
-                                  IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
-                                      onPressed: () {
-                                        showAlert(context,"İletişim" + "\n${widget.companyPhone}");
-                                      }),
-                                //----------------------------------------------------------------------------
+                                // //----------------------------İLETİŞİM ICONBUTTONI--------------------------
+                                //   IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
+                                //       onPressed: () {
+                                //         showAlert(context,"İletişim" + "\n${widget.companyPhone}");
+                                //       }),
+                                // //----------------------------------------------------------------------------
                                 //-----------------------------KONUM ICONBUTTONI----------------------------
                                   IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
                                       onPressed: widget.onPressedLocation)
                                 //------------------------------------------------------------------------
                                   ],
                                 ),
-                                //-------------------------------------------------------------------------
                               ),
                               TextButton(
                                 onPressed: widget.onPressed,

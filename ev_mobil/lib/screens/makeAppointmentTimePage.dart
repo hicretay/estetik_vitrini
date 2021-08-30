@@ -97,14 +97,12 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                            Padding(
-                            padding:  const EdgeInsets.only(top: defaultPadding*2),
-                            child: Padding(padding: const EdgeInsets.all(defaultPadding),
+                            Padding(padding: const EdgeInsets.all(defaultPadding),
                             child: GridView.builder(
                               shrinkWrap: true,                 
                               itemCount: companyOperationTime.length,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: (1 / .4),
+                                childAspectRatio: (1 / .5),
                                 crossAxisCount : 4,
                                 mainAxisSpacing: minSpace,
                                 crossAxisSpacing: minSpace,
@@ -134,7 +132,6 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                               );
                               }),
                              ),
-                            ),
                             ],
                           ),
                         ),

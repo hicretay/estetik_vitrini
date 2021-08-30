@@ -113,7 +113,6 @@ class _LocationPageState extends State<LocationPage> {
                   //---------------------------------------------------
                 ),
                 Expanded(
-                  child: Padding(padding: const EdgeInsets.only(top: defaultPadding),
                   child: Container(
                     // arkaplan containerı
                     decoration: BoxDecoration(
@@ -135,46 +134,52 @@ class _LocationPageState extends State<LocationPage> {
                                     end: Alignment.topRight,
                                     colors: backGroundColor1
                                   ),),
-                            child: ListTile(leading: SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.035),
-                            title: Center(
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton(   
-                                isExpanded: true,
-                                hint: Center(
-                                  child: Text("İSTANBUL",
-                                  textAlign: TextAlign.center,
-                                        style    : TextStyle(
-                                        fontSize : 20, // ilçelerin fontu
-                                        color:  Colors.white,
-                                        ),),
-                                ),
-                                dropdownColor: Colors.transparent,
-                                value: selection,
-                                items: cities.map((data){
-                                  return DropdownMenuItem(
-                                  child: SizedBox(
-                                    width: deviceWidth(context)*0.45,
-                                    child: Center(
-                                      child: Text(data.city, textAlign: TextAlign.center,
-                                      style: TextStyle(color: white, fontSize: 20)),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                              SizedBox(width: deviceWidth(context)*0.06),
+                              SvgPicture.asset("assets/icons/haritanoktası.svg",color: secondaryColor,height: deviceHeight(context)*0.035),
+                              Flexible(
+                                child: Center(
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton(   
+                                    isExpanded: true,
+                                    hint: Center(
+                                      child: Text("İSTANBUL",
+                                      textAlign: TextAlign.center,
+                                            style    : TextStyle(
+                                            fontSize : 20, // ilçelerin fontu
+                                            color:  Colors.white,
+                                            ),),
                                     ),
-                                  ),
-                                  value: data.city);
-                                }).toList(),                                  
-                                onChanged: (value) {
-                                     if (!mounted)
-                                     return;                                  
-                                 setState(() {
-                                   countyMap.clear();
-                                   counties.clear();
-                                   selection = value;
-                                 });
-                                 },
+                                    dropdownColor: Colors.transparent,
+                                    value: selection,
+                                    items: cities.map((data){
+                                      return DropdownMenuItem(
+                                      child: SizedBox(
+                                        child: Center(
+                                          child: Text(data.city, textAlign: TextAlign.center,
+                                          style: TextStyle(color: white, fontSize: 20)),
+                                        ),
+                                      ),
+                                      value: data.city);
+                                    }).toList(),                                  
+                                    onChanged: (value) {
+                                         if (!mounted)
+                                         return;                                  
+                                     setState(() {
+                                       countyMap.clear();
+                                       counties.clear();
+                                       selection = value;
+                                     });
+                                     },
                              ),
                             ),
-     
-                            ),
-                            trailing: SvgPicture.asset("assets/icons/haritanoktası.svg",color: Colors.transparent,height: deviceHeight(context)*0.065)
+                                ),
+                              ),
+                            SizedBox(width: deviceWidth(context)*0.06),
+                              ],
+
                             ),
                         ),
                       ),
@@ -285,8 +290,7 @@ class _LocationPageState extends State<LocationPage> {
                      }),                
                     ],
                     ),
-                  ),
-                ))
+                  ))
               ],
             ),
           ),

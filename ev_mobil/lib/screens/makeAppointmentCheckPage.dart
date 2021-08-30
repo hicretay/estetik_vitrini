@@ -115,8 +115,8 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                   InformationRowWidget(
                     containerColor: secondaryColor,
                     operationName: "Tarih",
-                    width: 250,
-                    height: 50,
+                    width: deviceWidth(context)*0.6,
+                    height: deviceWidth(context)*0.15,
                     child: Text(appointment.appointmentDate,
                       style: TextStyle(
                           color: Colors.white,
@@ -126,8 +126,8 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                   ),
                   InformationRowWidget(
                     containerColor: secondaryColor,
-                    width: 250,
-                    height: 50,
+                    width:  deviceWidth(context)*0.6,
+                    height: deviceWidth(context)*0.15,
                     operationName: "Saat",
                     child: Text(
                       appointment.timeS,
@@ -140,8 +140,8 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                   InformationRowWidget(
                     containerColor: secondaryColor,
                     operationName: "İşlem",
-                    width: 250,
-                    height: 50,
+                    width:  deviceWidth(context)*0.6,
+                    height: deviceWidth(context)*0.15,
                     child: Text(appointment.operationS,
                       style: TextStyle(
                           color: Colors.white,
@@ -151,8 +151,8 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                   ),
                   InformationRowWidget(
                     containerColor: darkWhite,
-                    width: 250,
-                    height: 100,
+                    width:  deviceWidth(context)*0.6,
+                    height: deviceWidth(context)*0.3,
                     operationName: "Özel Not",
                     child: TextField(
                       keyboardType: TextInputType.multiline,
@@ -174,8 +174,8 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     children: [
                       Text(""),
                       Container(
-                        width: 250,
-                        height: 70,
+                        width: deviceWidth(context)*0.6,
+                        height: deviceWidth(context)*0.15,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.topLeft,
@@ -192,7 +192,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                               style: TextStyle(
                                   fontFamily: leadingFont,
                                   color: Colors.white,
-                                  fontSize: 22),
+                                  fontSize: 18),
                             ),
                             onPressed: () async{
                               final progressHUD = ProgressHUD.of(context);

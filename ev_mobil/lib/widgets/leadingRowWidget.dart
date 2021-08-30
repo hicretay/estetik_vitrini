@@ -46,7 +46,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
 
             Text(
               widget.companyName,
-              style: TextStyle(fontSize: 20)
+              style: TextStyle(fontSize: 20, fontFamily: headerFont)
             ),
           ],
         ),

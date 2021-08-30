@@ -41,11 +41,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       children: [
                         CircleAvatar(
                           //iconun çevresini saran yapı tasarımı
-                          maxRadius: 25,
+                          maxRadius: deviceWidth(context)*0.06,
                           backgroundColor: Colors.white,
                           child: IconButton(
                             iconSize: iconSize,
-                            icon: Icon(Icons.arrow_back,color: primaryColor,size: 25),
+                            icon: Icon(Icons.arrow_back,color: primaryColor,size: 23),
                             onPressed: (){Navigator.pop(context, false);},
                           ),
                         ),
@@ -57,18 +57,17 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       ],
                     )
                   ),
-                  Padding(padding: const EdgeInsets.only(left: 20),
+                  Padding(padding: const EdgeInsets.only(left: maxSpace),
                     child: Column(
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("Kampanyalar",
-                            style: TextStyle(
-                              fontFamily: leadingFont,
-                              color: Colors.white,
-                              fontSize: 45,
+                          child: Text("Kampanyalar", //Büyük Başlık
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4
+                                  .copyWith(color: white, fontFamily: leadingFont),
                             ),
-                          ),
                         ),
                         Align(
                           alignment: Alignment.topLeft,
@@ -97,12 +96,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 companyName: homeContent[index].companyName,
                                 companyLogo: homeContent[index].companyLogo,
                                 pinColor: Colors.transparent,),//leading widgetı
-                              Padding(padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding),
+                              Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                 child: Center(
                                   //-----------------------Carousel Containerı------------------------
                                     child: Container(
                                     width: double.infinity, //genişlik: container genişliği
-                                    height: 250, //container yüksekliği: 250
+                                    height: deviceHeight(context)*0.3, //container yüksekliği: 250
                                     decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                                     image: DecorationImage(
@@ -123,11 +122,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     children: [
                                       CircleAvatar(
                                         //Beğeni butonunu kaplayan circleAvatar yapısı
-                                        maxRadius: 22.5,
+                                        maxRadius: deviceWidth(context)*0.06,
                                         backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
                                         child: IconButton(
                                         iconSize: iconSize,
-                                        icon: Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
+                                        icon: Icon(LineIcons.heart,size: 20, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
                                         ),
                                         onPressed: () {
                                             setState(() { 
@@ -138,6 +137,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           },
                                         ),
                                       ),
+                                      
                               //-----------------------Paylaşım iconButton'ı----------------------------
                                       IconButton(icon: Icon(Icons.share_outlined,
                                             color: primaryColor,
@@ -145,14 +145,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           ),
                                           onPressed: () {}),
                               //------------------------------------------------------------------------
-                              //----------------------İletişim iconButton'ı-----------------------------
-                                      IconButton(icon: Icon(LineIcons.phone,
-                                            color: primaryColor,
-                                            size : iconSize,
-                                          ),
-                                          onPressed: () {
-                                          }),
-                              //------------------------------------------------------------------------
+                              // //----------------------İletişim iconButton'ı-----------------------------
+                              //         IconButton(icon: Icon(LineIcons.phone,
+                              //               color: primaryColor,
+                              //               size : iconSize,
+                              //             ),
+                              //             onPressed: () {
+                              //             }),
+                              // //------------------------------------------------------------------------
                                //----------------------Konum iconButton'ı-------------------------------
                                       IconButton(icon: Icon(LineIcons.locationArrow,
                                             color: primaryColor,
@@ -198,7 +198,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 ],
                               ),
                               SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
-                              Padding(padding: const EdgeInsets.only(left: 20),
+                              Padding(padding: const EdgeInsets.only(left: maxSpace),
                                 child: Row(
                                   children: [
                                     Icon(Icons.favorite, // Beğeni İcon'ı
@@ -211,7 +211,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 ),
                               ),
                               //------------------Açıklama Metni----------------------
-                              Padding(padding: const EdgeInsets.all(20.0),
+                              Padding(padding: const EdgeInsets.all(maxSpace),
                                 child: Column(
                                   children: [
                                     Align(

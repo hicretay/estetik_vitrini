@@ -19,7 +19,7 @@ class TextButtonWidget extends StatelessWidget {
      children  : [Text(buttonText,
      style     : TextStyle(
      color     : darkWhite,
-     fontSize  : 18,
+     fontSize  : 15,
      fontFamily: contentFont)),
      SizedBox(width: deviceWidth(context)*0.01),
      FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: secondaryColor)
