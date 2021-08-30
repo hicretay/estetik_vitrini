@@ -21,7 +21,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
   dynamic companyInfo;
   _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo, this.appointment});
 
-  int _checked = 0;
+  int _checked = -1;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
