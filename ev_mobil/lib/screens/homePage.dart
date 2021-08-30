@@ -100,6 +100,7 @@ class _HomePageState extends State<HomePage> {
                   //------------------------------------------------------------------
                   //---------------------------Story Paneli---------------------------
                   Flexible(
+
                     child: Padding(
                       padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
                       child: GridView.builder(
@@ -115,16 +116,16 @@ class _HomePageState extends State<HomePage> {
                               GestureDetector(
                               child:  Stack(children:[
                             Container(
-                              width: 86,
-                              height: 86,
+                              width: deviceWidth(context)*0.2,
+                              height: deviceWidth(context)*0.2,
                               decoration: BoxDecoration(
                               border: Border.all(
                               color: darkWhite,
                               width: 3),
                               shape: BoxShape.circle),
                               child: Container(
-                              width: 80,
-                              height: 80,
+                              width: deviceWidth(context)*0.21,
+                              height: deviceWidth(context)*0.21,
                               decoration: BoxDecoration(
                               border: Border.all(
                               color: secondaryColor,
