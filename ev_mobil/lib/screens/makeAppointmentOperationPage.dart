@@ -238,8 +238,13 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                   appointment.operation = item.id;
                   appointment.operationS = item.operationName;
                 }
-                final companyOperationTime = await companyOperationTimeJsnFunc([1,2]);               
+                final companyOperationTime = await companyOperationTimeJsnFunc([1,2]); 
+                if(appointment.operation!=null){              
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo, appointment: appointment)));
+                }
+                else{
+                  showToast(context, "Lütfen bir işlem seçiniz!");
+                }
                 progressHUD.dismiss();
                 }),
                 //--------------------------------------------------------------------------------------------------------------

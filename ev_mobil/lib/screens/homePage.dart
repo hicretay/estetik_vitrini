@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   //------------------------------------Anasayfa Postları----------------------------------------
                   Container(
                     child: Flexible(
-                      flex: 2,
+                      flex: 4,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: homeContent == null ? 0 : homeContent.length,

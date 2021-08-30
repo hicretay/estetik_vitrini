@@ -1,6 +1,7 @@
 import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -147,7 +148,12 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
           //print(appointment.appointmentTimeId+"timee");
           final progressHUD = ProgressHUD.of(context);
           progressHUD.show();
+          if(appointment.appointmentTimeId!=null){
           Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,appointment: appointment)));
+          }
+          else{
+            showToast(context, "Lütfen bir saat seçiniz!");
+          }
           progressHUD.dismiss();
           }),
           //--------------------------------------------------------------------------------------------
