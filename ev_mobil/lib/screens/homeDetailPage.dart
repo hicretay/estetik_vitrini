@@ -1,6 +1,6 @@
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
-import 'package:estetikvitrini/settings/appointmentObject.dart';
+import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/leadingRowWidget.dart';

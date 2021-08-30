@@ -1,5 +1,5 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/settings/appointmentObject.dart';
+import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -181,8 +181,6 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                             onPressed: () async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                                appointment.specialNote = teNote.text;
-                                print(appointment.specialNote);
                                 await appointmentAddJsnFunc(1, 1, 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operation, teNote.text);
                                 await showToast(context, "Randevu başarıyla kaydedildi!");
                                 Navigator.pop(context);

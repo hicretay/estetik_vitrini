@@ -1,6 +1,6 @@
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
-import 'package:estetikvitrini/settings/appointmentObject.dart';
+import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';

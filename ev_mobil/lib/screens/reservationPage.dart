@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
@@ -29,6 +30,7 @@ class _ReservationPageState extends State<ReservationPage> {
       appointmentList = appointmentNewList.result;
     });
   }
+
 
   @override
   void initState() { 
@@ -97,6 +99,17 @@ class _ReservationPageState extends State<ReservationPage> {
                               operation  : appointmentList[index].operationName,
                               time       : appointmentList[index].appointmentTime,
                               date       : appointmentList[index].appointmentDate,
+                              onTap      : ()async{
+                                final progressHUD = ProgressHUD.of(context);
+                                progressHUD.show(); 
+                                await appointmentDeleteJsnFunc(appointmentList[index].id);
+                                final AppointmentDeleteJsn deleteAppointment = await appointmentDeleteJsnFunc2(appointmentList[index].id);
+                                if(deleteAppointment.success==true){
+                                  showToast(context, "Randevu başarıyla silindi!");
+                                }
+                                await appointmentListFunc();                              
+                                progressHUD.dismiss();
+                              },
                             );
                             }),
                           ],

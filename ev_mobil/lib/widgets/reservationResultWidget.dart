@@ -6,9 +6,10 @@ class ResevationResultWidget extends StatelessWidget {
   final String operation;
   final String time;
   final String date;
+  final VoidCallback onTap;
 
   const ResevationResultWidget({
-    Key key, this.companyName, this.operation, this.time, this.date,
+    Key key, this.companyName, this.operation, this.time, this.date, this.onTap,
   }) : super(key: key);
 
   @override
@@ -63,9 +64,9 @@ class ResevationResultWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: defaultPadding * 2),
-                        Icon(
-                          Icons.clear,
-                          size: 18,
+                        GestureDetector(
+                          child: Icon(Icons.clear,size: 18),
+                          onTap: onTap,
                         )
                       ],
                     ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
+import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
@@ -257,7 +258,58 @@ Future<AppointmentAddJsn> appointmentAddJsnFunc(int userId, int companyId, int c
     return null;
   }
 }
-//--------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------
+
+//--------------------------------------------- Randevu Silme Fonksiyonu-----------------------------------------------------
+Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc(int id) async{
+  var bodys ={};
+  bodys["id"] = id;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "Appointment/Delete"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return appointmentDeleteJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------
+
+//-----------------------------------------------Randevular Silme2 Fonksiyonu-------------------------------------------------
+Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc2(int id) async {
+  final response = await http.post(
+    Uri.parse(url + "Appointment/Delete"),
+    body: '{"id":' + id.toString() + '}', 
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return appointmentDeleteJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-----------------------------------------------------------------------------------------------------------------
+
+  // Future<AppointmentDeleteJsn> deleteNote(int id) {
+  //   return http.delete(Uri.parse(url + "Appointment/Delete"),
+  //   body: '{"id":' + id.toString() + '}', 
+  //   headers: header).then((data) {
+  //     if (data.statusCode == 204) {
+  //       return AppointmentDeleteJsn(success: true);
+  //     }
+  //     return null;
+  //   });
+  // }
 
 
 

@@ -1,5 +1,5 @@
 import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
-import 'package:estetikvitrini/settings/appointmentObject.dart';
+import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
