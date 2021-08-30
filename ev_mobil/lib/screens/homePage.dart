@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>       
               Container(
               color: Colors.white,
-              child: Column(
+              child: Stack(
               children: [
                   //-----------------------------BAŞLIK-------------------------------
                   Padding(
@@ -99,99 +99,94 @@ class _HomePageState extends State<HomePage> {
                   ),
                   //------------------------------------------------------------------
                   //---------------------------Story Paneli---------------------------
-                  Flexible(
-
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
-                      child: GridView.builder(
-                        itemCount: companyContent.length,
-                        scrollDirection: Axis.horizontal,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisSpacing: maxSpace,
-                        crossAxisSpacing: 0,
-                        childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height/3),
-                        crossAxisCount: 1),
-                        itemBuilder: (BuildContext context,index){
-                          return Column(children:[
-                              GestureDetector(
-                              child:  Stack(children:[
-                            Container(
-                              width: deviceWidth(context)*0.2,
-                              height: deviceWidth(context)*0.2,
-                              decoration: BoxDecoration(
-                              border: Border.all(
-                              color: darkWhite,
-                              width: 3),
-                              shape: BoxShape.circle),
-                              child: Container(
-                              width: deviceWidth(context)*0.21,
-                              height: deviceWidth(context)*0.21,
-                              decoration: BoxDecoration(
-                              border: Border.all(
-                              color: secondaryColor,
-                              width: 2),
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                              image: NetworkImage(companyContent[index].companyLogo),
-                                    ),
-                                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: maxSpace, right: maxSpace, top: 48),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                    itemCount: companyContent.length,
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(width: maxSpace);
+                    },                   
+                    itemBuilder: (BuildContext context,index){
+                      return Column(children:[
+                          GestureDetector(
+                          child:  Stack(children:[
+                        Container(
+                          width: deviceWidth(context)*0.2,
+                          height: deviceWidth(context)*0.2,
+                          decoration: BoxDecoration(
+                          border: Border.all(
+                          color: darkWhite,
+                          width: 3),
+                          shape: BoxShape.circle),
+                          child: Container(
+                          width: deviceWidth(context)*0.21,
+                          height: deviceWidth(context)*0.21,
+                          decoration: BoxDecoration(
+                          border: Border.all(
+                          color: secondaryColor,
+                          width: 2),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                          image: NetworkImage(companyContent[index].companyLogo),
                                 ),
+                              ),
                             ),
-                          ]),
-                          //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
-                          onTap: ()async{
-                              final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show();
-                              final StoryContentJsn storyContent = await storyContentJsnFunc(companyContent[index].id);
-                              Navigator.of(context, rootNavigator: true).push(
-                              MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyContent: storyContent)));
-                              progressHUD.dismiss();
-                          },
-                          //------------------------------------------------------------------------------------------------------------------------------
-                          ),
-                          Text(companyContent[index].companyName),
-                        ],
-                          );
-                        }),
-                    )
+                        ),
+                      ]),
+                      //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
+                      onTap: ()async{
+                          final progressHUD = ProgressHUD.of(context);
+                          progressHUD.show();
+                          final StoryContentJsn storyContent = await storyContentJsnFunc(companyContent[index].id);
+                          Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyContent: storyContent)));
+                          progressHUD.dismiss();
+                      },
+                      //------------------------------------------------------------------------------------------------------------------------------
+                      ),
+                      Text(companyContent[index].companyName),
+                    ],
+                      );
+                      
+                    }),
                   ),
                   //--------------------------------------------------------------------------------------------
                   //------------------------------------Anasayfa Postları----------------------------------------
-                  Container(
-                    child: Flexible(
-                      flex: 4,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: homeContent == null ? 0 : homeContent.length,
-                        itemBuilder: (BuildContext context, int index){
-                        return HomeContainerWidget(
-                          companyLogo   : homeContent[index].companyLogo,
-                          companyName   : homeContent[index].companyName,
-                          companyPhone  : homeContent[index].companyPhone,
-                          contentPicture: homeContent[index].contentPicture,
-                          cardText      : homeContent[index].contentTitle,
-                          pinColor      : primaryColor,
-                          //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
-                          onPressed: () async{
-                          final progressUHD = ProgressHUD.of(context);
-                          progressUHD.show(); 
-                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
-                          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,)));
-                          progressUHD.dismiss();
-                        },
-                        //---------------------------------------------------------------------------------------------------------------------------------------------------
-                        //-----------------------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
-                        onPressedLocation: (){
-                          final progressUHD = ProgressHUD.of(context);
-                          progressUHD.show();
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
-                          progressUHD.dismiss();
-                        },
-                        //-----------------------------------------------------------------------------------------------------------------------------------------------------
-                      );
-                      }),
-                    ),
+                  Padding(
+                    padding: EdgeInsets.only(top:48+deviceWidth(context)*0.2+20),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount:  homeContent == null ? 0 : homeContent.length,
+                      itemBuilder: (BuildContext context, int index){
+                      return HomeContainerWidget(
+                        companyLogo   : homeContent[index].companyLogo,
+                        companyName   : homeContent[index].companyName,
+                        companyPhone  : homeContent[index].companyPhone,
+                        contentPicture: homeContent[index].contentPicture,
+                        cardText      : homeContent[index].contentTitle,
+                        pinColor      : primaryColor,
+                        //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
+                        onPressed: () async{
+                        final progressUHD = ProgressHUD.of(context);
+                        progressUHD.show(); 
+                        final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
+                        // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,)));
+                        progressUHD.dismiss();
+                      },
+                      //---------------------------------------------------------------------------------------------------------------------------------------------------
+                      //-----------------------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
+                      onPressedLocation: (){
+                        final progressUHD = ProgressHUD.of(context);
+                        progressUHD.show();
+                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
+                        progressUHD.dismiss();
+                      },
+                      //-----------------------------------------------------------------------------------------------------------------------------------------------------
+                    );
+                    }),
                   )
                 ],
               ),
