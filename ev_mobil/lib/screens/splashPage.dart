@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -14,10 +17,12 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  var connectivityResult = Connectivity().checkConnectivity();
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1), () async{
+        if(await connectivityResult != ConnectivityResult.none){
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String user = prefs.getString("user");
         String pass = prefs.getString("pass");
@@ -31,8 +36,30 @@ class _SplashPageState extends State<SplashPage> {
           final LoginJsn userData = await loginJsnFunc(user, pass, false); 
           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
         }
-    });
-  }
+        }
+
+      else{
+      showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(
+        content: Text("İnternet bağlantınızı kontrol ediniz.", style: TextStyle(fontFamily: contentFont)),
+        actions: <Widget>[
+           Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               MaterialButton(
+               color: primaryColor,
+               child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), 
+               onPressed: () async{
+               exit(0);
+               }),
+             ],
+           ),
+        ],
+      );
+    });        
+   }
+  });
+}
 
   @override
   Widget build(BuildContext context) {
