@@ -79,7 +79,7 @@ class _LocationPageState extends State<LocationPage> {
                             Text("Favori\nBölgeler", //Büyük Başlık
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline3
+                                  .headline4
                                   .copyWith(color: white, fontFamily: leadingFont),
                               maxLines: 2,
                             ),

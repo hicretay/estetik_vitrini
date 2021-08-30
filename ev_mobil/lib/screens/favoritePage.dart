@@ -57,7 +57,7 @@ class _FavoritePageState extends State<FavoritePage> {
                         "Favori\nSalonlar",
                         style: Theme.of(context)
                             .textTheme
-                            .headline2
+                            .headline3
                             .copyWith(color: white, fontFamily: leadingFont),
                       ),
                     ),

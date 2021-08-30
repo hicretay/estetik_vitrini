@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +25,21 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
 
    dynamic companyInfo;
    _MakeAppointmentCheckPageState({this.companyInfo, this.appointment});
+
+  List appointmentList;
+
+  Future appointmentListFunc() async{
+    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,"");
+    setState(() {
+      appointmentList = appointmentNewList.result;
+    });
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    appointmentListFunc();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -183,6 +199,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                               progressHUD.show(); 
                                 await appointmentAddJsnFunc(1, 1, 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operation, teNote.text);
                                 await showToast(context, "Randevu başarıyla kaydedildi!");
+                                await appointmentListFunc();
                                 Navigator.pop(context);
                                 NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                                 Navigator.pop(context);

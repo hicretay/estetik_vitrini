@@ -100,15 +100,47 @@ class _ReservationPageState extends State<ReservationPage> {
                               time       : appointmentList[index].appointmentTime,
                               date       : appointmentList[index].appointmentDate,
                               onTap      : ()async{
-                                final progressHUD = ProgressHUD.of(context);
-                                progressHUD.show(); 
-                                await appointmentDeleteJsnFunc(appointmentList[index].id);
-                                final AppointmentDeleteJsn deleteAppointment = await appointmentDeleteJsnFunc2(appointmentList[index].id);
-                                if(deleteAppointment.success==true){
-                                  showToast(context, "Randevu başarıyla silindi!");
-                                }
-                                await appointmentListFunc();                              
-                                progressHUD.dismiss();
+                                showDialog(context: context, builder: (BuildContext context){
+                                  return ProgressHUD(
+                                    child: Builder(builder: (context)=>
+                                        AlertDialog(
+                                        content: Text("Randevu iptal edilsin mi?",style: TextStyle(fontFamily: contentFont)),
+                                        actions: <Widget>[
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              MaterialButton(
+                                                color: primaryColor,
+                                                child: Text("Evet"),
+                                                onPressed: ()async{
+                                                  final progressHUD = ProgressHUD.of(context);
+                                                  progressHUD.show(); 
+                                                  await appointmentDeleteJsnFunc(appointmentList[index].id);
+                                                  final AppointmentDeleteJsn deleteAppointment = await appointmentDeleteJsnFunc2(appointmentList[index].id);
+                                                  if(deleteAppointment.success==true){
+                                                    showToast(context, "Randevu başarıyla iptal edildi!");
+                                                  }
+                                                  await appointmentListFunc();    
+                                                  Navigator.of(context).pop();                          
+                                                  progressHUD.dismiss();
+                                                  }),
+                                              SizedBox(width: deviceWidth(context)*0.01),
+                                              MaterialButton(
+                                                color: primaryColor,
+                                                child: Text("Hayır"),
+                                                onPressed: (){
+                                                   showToast(context, "Randevu iptal edilmedi!");
+                                                   Navigator.of(context).pop();
+                                                },
+                                                
+                                              ),
+                                          ],)
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                });
+
                               },
                             );
                             }),

@@ -8,5 +8,4 @@ class AppointmentObject {
 
   String timeS;
   String operationS;
-
 }
