@@ -37,7 +37,6 @@ const maxSpace = 10.0;
 
 const iconSize = 25.0;
 
-String globalCity = "";
-int globalCityId = 1;
+//Global servis ID'leri
+int globalUserId = 1;
 int globalCompanyId = 1;
-

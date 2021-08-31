@@ -42,7 +42,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
               ),
             ),
             //-----------------------------------------------------
-            SizedBox(width: deviceWidth(context)*0.05), //başlık iconu - texti arası boşluk
+            SizedBox(width: deviceWidth(context)*0.03), //başlık iconu - texti arası boşluk
 
             Text(
               widget.companyName,

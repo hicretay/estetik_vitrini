@@ -146,7 +146,14 @@ class _HomePageState extends State<HomePage> {
                       },
                       //------------------------------------------------------------------------------------------------------------------------------
                       ),
-                      Text(companyContent[index].companyName),
+                      SizedBox(
+                        width: 55.0,
+                        child: Center(
+                          child: Text(companyContent[index].companyName,              
+                          overflow: TextOverflow.fade,
+                          softWrap: false,),
+                        ),
+                      ),
                     ],
                       );
                       
