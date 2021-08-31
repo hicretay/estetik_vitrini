@@ -90,12 +90,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       child: ListView.builder(
                         itemCount: homeDetailContent.length,
                         itemBuilder: (BuildContext context, int index){ 
-                         //////////////////////////////////////////////////////////////////////
+                        //--------------------Slider Imageları-------------------
                         List<dynamic> sliderImg = [];
                         for (var item in homeDetailContent[index].contentPictures) {
                           sliderImg.add(NetworkImage(item.cPicture));
                         }   
-                        ////////////////////////////////////////////////////////////////////////                  
+                        //-------------------------------------------------------                 
                         _checked = homeContent[index].liked; // Gönderi beğenilmiş mi servisten okuyacak                  
                         return Column(
                             children: [
@@ -110,62 +110,23 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     child: Container(
                                     width: double.infinity, //genişlik: container genişliği
                                     height: deviceHeight(context)*0.3, //container yüksekliği
-                                //     decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
-                                //     image: DecorationImage(
-                                //     fit: BoxFit.cover, // Resim containerı kaplasın
-                                //     image: NetworkImage(
-                                //       homeDetailContent[index].contentPictures[0].cPicture
-                                //     ),
-                                //   ),
-                                // ),
-                                child: homeDetailContent == null ? CircularProgressIndicator() :
-                              //   CarouselSlider(
-                              //   autoPlay: true,
-                              //   pauseAutoPlayOnTouch: Duration(seconds: 5),
-                              //   height: MediaQuery.of(context).size.height * 0.60,
-                              //   items: <Widget>[
-                              //     for (var i = 0; i < homeDetailContent[index].contentPictures.length; i++)
-                              //       Container(
-                              //           margin: const EdgeInsets.only(top: maxSpace, left: maxSpace),
-                              //           decoration: BoxDecoration(
-                              //             image: DecorationImage(
-                              //               image: homeDetailContent == null ? CircularProgressIndicator()
-                              //               : NetworkImage(homeDetailContent[index].contentPictures[i].cPicture),
-                              //               fit: BoxFit.fill //BoxFit.fitHeight,
-                              //             ),
-                              //             borderRadius: BorderRadius.circular(32.0),
-                              //           ),
-                              //         ),                                     
-                              //   ],
-                              // ),
-                              Carousel(
-                              borderRadius: true,
-                              radius: Radius.circular(maxSpace),
-                              boxFit: BoxFit.cover,
-                              autoplay: false,
-                              animationCurve: Curves.bounceInOut, // animasyon efekti
-                              animationDuration: Duration(milliseconds: 1000), // animasyon süresi
-                              dotSize: 6.0, //Nokta büyüklüğü
-                              dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
-                              dotBgColor: Colors.transparent, //Carousel alt bar rengi
-                              dotPosition: DotPosition.bottomCenter, // Noktaların konumu
-                              dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
-                              showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
-                              indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
-                              images: sliderImg
-                              // [
-                              //   ListView.builder(
-                              //     itemCount: homeDetailContent.length,
-                              //     itemBuilder: (BuildContext context, int index){
-                              //    return Image.network(homeDetailContent[index].contentPictures[index].cPicture);
-                              // })]
-                              /////////////////////////////////////////////////////////
-                              // homeDetailContent[index].contentPictures.map((url)=> 
-                              // Image.network(url[index].cPicture)).toList
-                       
-                            )
-                     
+                                    child: homeDetailContent == null ? CircularProgressIndicator() :
+                                    Carousel(
+                                    borderRadius: true,
+                                    radius: Radius.circular(maxSpace),
+                                    boxFit: BoxFit.cover,
+                                    autoplay: false,
+                                    animationCurve: Curves.bounceInOut, // animasyon efekti
+                                    animationDuration: Duration(milliseconds: 1000), // animasyon süresi
+                                    dotSize: 6.0, //Nokta büyüklüğü
+                                    dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
+                                    dotColor: secondaryColor,
+                                    dotBgColor: Colors.transparent, //Carousel alt bar rengi
+                                    dotPosition: DotPosition.bottomCenter, // Noktaların konumu
+                                    dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
+                                    showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
+                                    indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
+                                    images: sliderImg)
                               ),
                             ),
                           ),
