@@ -85,7 +85,7 @@ class _ReservationPageState extends State<ReservationPage> {
                         child  : Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(defaultPadding),
+                              padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
                               child  : TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
                             ),
                             ListView.builder(

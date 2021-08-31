@@ -46,13 +46,13 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
 
             Text(
               widget.companyName,
-              style: TextStyle(fontSize: 20, fontFamily: headerFont)
+              style: TextStyle(fontSize: 17, fontFamily: headerFont)
             ),
           ],
         ),
         IconButton(
           // pin butonu
-          icon: Icon(FontAwesomeIcons.thumbtack,color: widget.pinColor,size: 20),
+          icon: Icon(FontAwesomeIcons.thumbtack,color: widget.pinColor,size: 18),
           onPressed: (){}, // olayı parametre alındı
         ),
        
