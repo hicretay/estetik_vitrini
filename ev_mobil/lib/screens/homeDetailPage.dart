@@ -90,6 +90,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       child: ListView.builder(
                         itemCount: homeDetailContent.length,
                         itemBuilder: (BuildContext context, int index){ 
+
+                          // setState(() {
+                          //    globalHomeContentId = homeContent[index];             
+                          // });
+
                         //--------------------Slider Imageları-------------------
                         List<dynamic> sliderImg = [];
                         for (var item in homeDetailContent[index].contentPictures) {
@@ -125,7 +130,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     dotPosition: DotPosition.bottomCenter, // Noktaların konumu
                                     dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
                                     showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
-                                    indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
+                                    indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı                                   
                                     images: sliderImg)
                               ),
                             ),

@@ -16,12 +16,11 @@ import 'package:estetikvitrini/settings/functions.dart';
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   static const route = "/homePage";
-  int cityDenemeID ;
 
-  HomePage({Key key, this.cityDenemeID}) : super(key: key);
+  HomePage({Key key,}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState(cityDenemeID: cityDenemeID);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {

@@ -1,18 +1,18 @@
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
-import 'package:estetikvitrini/widgets/tableCalendarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+// ignore: must_be_immutable
 class ReservationPage extends StatefulWidget {
   static const route = "reservationPage";
+  String selectedDay;
   ReservationPage({Key key}) : super(key: key);
 
   @override
@@ -25,16 +25,26 @@ class _ReservationPageState extends State<ReservationPage> {
   List appointmentList;
 
   Future appointmentListFunc() async{
-    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,"");
+    String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
+    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,calendarDate);
     setState(() {
       appointmentList = appointmentNewList.result;
     });
+  }
+
+  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+  Map<DateTime, List<Event>> selectedEvents;
+
+  List<Event> _getEventsForDay(DateTime date) {
+    return selectedEvents[date] ?? [];
   }
 
 
   @override
   void initState() { 
     super.initState();
+    selectedEvents = {};
     appointmentListFunc();
   }
 
@@ -65,8 +75,9 @@ class _ReservationPageState extends State<ReservationPage> {
                           child: IconButton(
                           iconSize: iconSize,
                           icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
-                          onPressed: (){
-                            NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                          onPressed: ()async{
+                            //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                           await appointmentListFunc();
                           }),
                         ),
                       ],
@@ -86,7 +97,49 @@ class _ReservationPageState extends State<ReservationPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
-                              child  : TableCalendarWidget(calendarFormat: CalendarFormat.twoWeeks),
+                              child  : TableCalendar(
+                              locale: "tr",
+                              focusedDay: _focusedDay,
+                              firstDay: DateTime.utc(2010, 10, 16),
+                              lastDay: DateTime.utc(2030, 3, 14),
+                              shouldFillViewport: false,
+                              startingDayOfWeek: StartingDayOfWeek.monday,
+                              calendarFormat: CalendarFormat.twoWeeks,
+                              calendarStyle: CalendarStyle(
+                                isTodayHighlighted: true,
+                                selectedDecoration: BoxDecoration(
+                                  color: primaryColor,
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(minCurved),
+                                ),
+                                outsideDecoration: boxDecoration,
+                                defaultDecoration: boxDecoration,
+                                weekendDecoration: boxDecoration,
+                                selectedTextStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                todayDecoration: BoxDecoration(
+                                  color: secondaryColor,
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(minCurved),
+                                ),
+                              ),
+                              selectedDayPredicate: (day) {
+                                return isSameDay(_selectedDay, day);
+                              },
+                              onDaySelected: (selectedDay, focusedDay) async{
+                                   
+                                  _selectedDay = selectedDay;
+                                  _focusedDay = focusedDay;   
+                                  await appointmentListFunc();  
+                            
+                              },
+                              headerStyle: HeaderStyle(
+                                formatButtonVisible: false,
+                                titleCentered: true,
+                              ),
+                              eventLoader: _getEventsForDay,
+                            )
                             ),
                             ListView.builder(
                               physics    : NeverScrollableScrollPhysics(),
@@ -156,4 +209,10 @@ class _ReservationPageState extends State<ReservationPage> {
       ),
     );
   }
+}
+class Event {
+  final String operation;
+  Event({this.operation});
+
+  String toString() => this.operation;
 }

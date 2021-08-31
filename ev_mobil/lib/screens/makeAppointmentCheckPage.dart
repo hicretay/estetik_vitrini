@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -202,7 +201,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                 await showToast(context, "Randevu başarıyla kaydedildi!");
                                 await appointmentListFunc();
                                 Navigator.pop(context);
-                                NavigationProvider.of(context).setTab(RESERVATION_PAGE);
+                                //NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
