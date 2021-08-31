@@ -35,7 +35,7 @@ const minCurved = 3.0;
 const minSpace = 5.0;
 const maxSpace = 10.0;
 
-const iconSize = 30.0;
+const iconSize = 25.0;
 
 String globalCity = "";
 int globalCityId = 1;

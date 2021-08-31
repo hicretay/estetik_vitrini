@@ -20,7 +20,7 @@ class TextFieldWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
       child: Container(
-        height: MediaQuery.of(context).size.height*0.065,
+        height: deviceHeight(context)*0.07,
         width: deviceWidth(context),
         child: TextField(
           controller: textEditingController,
@@ -28,6 +28,7 @@ class TextFieldWidget extends StatelessWidget {
           obscureText: obscureText,
           cursorColor: primaryColor,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(maxSpace),
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
@@ -36,7 +37,7 @@ class TextFieldWidget extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(
               color: Colors.black38,
-              fontSize: 16,
+              fontSize: 17,
               fontFamily: contentFont
             ),
             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
