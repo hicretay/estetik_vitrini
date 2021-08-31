@@ -17,7 +17,7 @@ class ResevationResultWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding: const EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: defaultPadding),
             child: Align(
             alignment: Alignment.topLeft,
             child: Text(date,     
@@ -31,7 +31,7 @@ class ResevationResultWidget extends StatelessWidget {
           color: lightWhite,
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.all(25),
+            padding:  EdgeInsets.all(defaultPadding),
             child: Column(
             children: [
                 Row(
@@ -46,13 +46,10 @@ class ResevationResultWidget extends StatelessWidget {
                         SizedBox(height: minSpace),
                         Text(
                           operation,
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 16),
                           textAlign: TextAlign.left,
                         ),
                       ],
-                    ),
-                    Column(
-                      children: [],
                     ),
                     Row(
                       children: [
@@ -60,10 +57,10 @@ class ResevationResultWidget extends StatelessWidget {
                           alignment: Alignment.topRight,
                           child: Text(
                             time,
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 16),
                           ),
                         ),
-                        SizedBox(width: defaultPadding * 2),
+                        SizedBox(width:deviceWidth(context)*0.05),
                         GestureDetector(
                           child: Icon(Icons.clear,size: 18),
                           onTap: onTap,
