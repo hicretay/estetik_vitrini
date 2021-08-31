@@ -37,27 +37,24 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                     Padding(
                       padding: const EdgeInsets.all(defaultPadding),
                       child: Row(
-                        children: [
-                          CircleAvatar(
-                            //iconun çevresini saran yapı tasarımı
-                            maxRadius: 25,
-                            backgroundColor: Colors.white,
-                            child: IconButton(
-                              iconSize: iconSize,
-                              icon: Icon(Icons.arrow_back,color: secondaryColor,size: 25),
-                              onPressed: (){Navigator.pop(context, false);},
-                            ),
+                      children: [
+                        CircleAvatar(
+                          //iconun çevresini saran yapı tasarımı
+                          maxRadius: deviceWidth(context)*0.06,
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            iconSize: iconSize,
+                            icon: Icon(Icons.arrow_back,color: secondaryColor,size: 23),
+                            onPressed: (){Navigator.pop(context, false);},
                           ),
-                          SizedBox(
-                            width: maxSpace,
-                          ),
-                          Text(
-                            "Estetik Vitrini",
-                            style: TextStyle(
-                                fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                          ),
-                        ],
-                      )
+                        ),
+                        SizedBox(width: maxSpace),
+                        Text("Estetik Vitrini",
+                          style     : TextStyle(
+                          fontFamily: leadingFont, fontSize: 25, color: Colors.white),
+                        ),
+                      ],
+                    )
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
@@ -65,13 +62,11 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child: Text(
-                              "Randevu Al",
-                              style: TextStyle(
-                                fontFamily: leadingFont,
-                                color: Colors.white,
-                                fontSize: 45,
-                              ),
+                            child:  Text("Randevu Al", //Büyük Başlık
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4
+                                  .copyWith(color: white, fontFamily: leadingFont),
                             ),
                           ),
                           Align(
