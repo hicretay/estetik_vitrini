@@ -140,10 +140,10 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
           bottomNavigationBar: TextButtonWidget(
           buttonText: "Randevuyu Tamamla",
           onPressed: (){
-          //print(appointment.appointmentTimeId+"timee");
+          print(appointment.timeS);
           final progressHUD = ProgressHUD.of(context);
           progressHUD.show();
-          if(appointment.appointmentTimeId!=null){
+          if(appointment.timeS!=null){
           Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,appointment: appointment)));
           }
           else{
