@@ -156,6 +156,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     operationName: "Özel Not",
                     child: TextField(
                       keyboardType: TextInputType.multiline,
+                      maxLines: null,
                       controller: teNote,
                       cursorColor: primaryColor,
                       style: TextStyle(color: primaryColor, fontSize: 18),
