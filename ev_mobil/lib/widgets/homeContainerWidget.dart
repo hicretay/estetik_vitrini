@@ -62,8 +62,6 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                       const EdgeInsets.only(left: maxSpace, right: maxSpace),
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: Container(
-                    width: double.infinity, //genişlik: container genişliği
-                    height: 250, //container yüksekliği: 250
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                       image: DecorationImage(

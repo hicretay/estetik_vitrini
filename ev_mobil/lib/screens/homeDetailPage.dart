@@ -101,7 +101,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   //-----------------------Carousel Containerı------------------------
                                     child: Container(
                                     width: double.infinity, //genişlik: container genişliği
-                                    height: deviceHeight(context)*0.3, //container yüksekliği: 250
+                                    height: deviceHeight(context)*0.3, //container yüksekliği
                                     decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                                     image: DecorationImage(
@@ -114,88 +114,91 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                               ),
                             ),
                           ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  //-----------------Alt Header-----------------------
-                                  Row(
-                                    children: [
-                                      CircleAvatar(
-                                        //Beğeni butonunu kaplayan circleAvatar yapısı
-                                        maxRadius: deviceWidth(context)*0.06,
-                                        backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                        child: IconButton(
-                                        iconSize: iconSize,
-                                        icon: Icon(LineIcons.heart,size: 20, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
-                                        ),
-                                        onPressed: () {
-                                            setState(() { 
-                                              _checked = !_checked; //tıklandığında bool değeri tersler
-                                              _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      
-                              //-----------------------Paylaşım iconButton'ı----------------------------
-                                      IconButton(icon: Icon(Icons.share_outlined,
-                                            color: primaryColor,
-                                            size : iconSize,
+                              Padding(
+                                padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    //-----------------Alt Header-----------------------
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          //Beğeni butonunu kaplayan circleAvatar yapısı
+                                          maxRadius: deviceWidth(context)*0.05,
+                                          backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
+                                          child: IconButton(
+                                          iconSize: iconSize,
+                                          icon: Icon(LineIcons.heart,size: 22, color: _checked  ? Colors.white : primaryColor, // //Seçili ise açık, değilse koyu renk verildi
                                           ),
-                                          onPressed: () {}),
-                              //------------------------------------------------------------------------
-                              // //----------------------İletişim iconButton'ı-----------------------------
-                              //         IconButton(icon: Icon(LineIcons.phone,
-                              //               color: primaryColor,
-                              //               size : iconSize,
-                              //             ),
-                              //             onPressed: () {
-                              //             }),
-                              // //------------------------------------------------------------------------
-                               //----------------------Konum iconButton'ı-------------------------------
-                                      IconButton(icon: Icon(LineIcons.locationArrow,
-                                            color: primaryColor,
-                                            size : iconSize,
+                                          onPressed: () {
+                                              setState(() { 
+                                                _checked = !_checked; //tıklandığında bool değeri tersler
+                                                _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
+                                                },
+                                              );
+                                            },
                                           ),
-                                          onPressed: () async{
-                                            final progressUHD = ProgressHUD.of(context);
-                                            progressUHD.show();
-                                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
-                                            progressUHD.dismiss(); 
-                                          }),
-                              //------------------------------------------------------------------------
-                                    ],
+                                        ),
+                                        
+                                //-----------------------Paylaşım iconButton'ı----------------------------
+                                        IconButton(icon: Icon(Icons.share_outlined,
+                                              color: primaryColor,
+                                              size : iconSize,
+                                            ),
+                                            onPressed: () {}),
+                                //------------------------------------------------------------------------
+                                // //----------------------İletişim iconButton'ı-----------------------------
+                                //         IconButton(icon: Icon(LineIcons.phone,
+                                //               color: primaryColor,
+                                //               size : iconSize,
+                                //             ),
+                                //             onPressed: () {
+                                //             }),
+                                // //------------------------------------------------------------------------
+                                 //----------------------Konum iconButton'ı-------------------------------
+                                        IconButton(icon: Icon(LineIcons.locationArrow,
+                                              color: primaryColor,
+                                              size : iconSize,
+                                            ),
+                                            onPressed: () async{
+                                              final progressUHD = ProgressHUD.of(context);
+                                              progressUHD.show();
+                                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
+                                              progressUHD.dismiss(); 
+                                            }),
+                                //------------------------------------------------------------------------
+                                      ],
+                                    ),
+                                    
+                                  //-------------------------RANDEVU AL BUTONU----------------------------
+                                  Material(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  child: MaterialButton(
+                                    minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
+                                    onPressed: () {
+                                      setState(() {
+                                        AppointmentObject appointment = AppointmentObject(companyId: homeContent[index].companyId,userId: 1);
+                                        final progressHUD = ProgressHUD.of(context);
+                                        progressHUD.show(); 
+                                        Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment)));
+                                        progressHUD.dismiss();
+                                      });
+                                      //Buton tıklandığında randevu al sayfasına yönlendirilecek
+                                    },
+                                    child: Row(
+                                      children: [
+                                        //----------------------------Buton Metni------------------------------------------
+                                        Text("Randevu Al",style: Theme.of(context).textTheme.button.copyWith(color: white)),
+                                        //---------------------------------------------------------------------------------
+                                        SizedBox(width: 10), //butondaki Text ve icon arası boşluk
+                                        Icon(LineIcons.arrowRight,color: lightWhite),
+                                      ],
+                                    ),
                                   ),
-                                  
-                                //-------------------------RANDEVU AL BUTONU----------------------------
-                                Material(
-                                color: primaryColor,
-                                borderRadius: BorderRadius.circular(30.0),
-                                child: MaterialButton(
-                                  minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                  onPressed: () {
-                                    setState(() {
-                                      AppointmentObject appointment = AppointmentObject(companyId: homeContent[index].companyId,userId: 1);
-                                      final progressHUD = ProgressHUD.of(context);
-                                      progressHUD.show(); 
-                                      Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment)));
-                                      progressHUD.dismiss();
-                                    });
-                                    //Buton tıklandığında randevu al sayfasına yönlendirilecek
-                                  },
-                                  child: Row(
-                                    children: [
-                                      //----------------------------Buton Metni------------------------------------------
-                                      Text("Randevu Al",style: Theme.of(context).textTheme.button.copyWith(color: white)),
-                                      //---------------------------------------------------------------------------------
-                                      SizedBox(width: 10), //butondaki Text ve icon arası boşluk
-                                      Icon(LineIcons.arrowRight,color: lightWhite),
-                                    ],
-                                  ),
+                                )
+                                  ],
                                 ),
-                              )
-                                ],
                               ),
                               SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
                               Padding(padding: const EdgeInsets.only(left: maxSpace),
@@ -220,7 +223,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       style    : TextStyle(fontSize: 22, color: primaryColor),
                                       ),
                                     ),
-                                    Text(homeDetailContent[index].campaingDetail),
+                                    Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Text(homeDetailContent[index].campaingDetail)),
                                   ],
                                 ),
                               ),
