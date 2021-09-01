@@ -175,10 +175,6 @@ class _HomePageState extends State<HomePage> {
                         pinColor      : primaryColor,
                         //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                         onPressed: () async{
-                          
-                          // setState(() {
-                          //    globalHomeContentId = homeContent[index];             
-                          // });
                         final progressUHD = ProgressHUD.of(context);
                         progressUHD.show(); 
                         final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
@@ -191,7 +187,8 @@ class _HomePageState extends State<HomePage> {
                       onPressedLocation: (){
                         final progressUHD = ProgressHUD.of(context);
                         progressUHD.show();
-                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
+                        int indeks = homeContent[index].companyId;
+                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[indeks-1].googleAdressLink))); 
                         progressUHD.dismiss();
                       },
                       //-----------------------------------------------------------------------------------------------------------------------------------------------------

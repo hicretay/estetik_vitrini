@@ -76,7 +76,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         ),
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(homeContent[indexx-1].companyName,  /////////////////////düzeltilecek
+                          child: Text(homeContent[indexx-1].companyName,  
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -104,8 +104,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                             children: [
                               SizedBox(height: maxSpace),
                               LeadingRowWidget( 
-                                companyName: homeContent[indexx-1].companyName,  /////////////////////düzeltilecek
-                                companyLogo: homeContent[indexx-1].companyLogo,  /////////////////////düzeltilecek
+                                companyName: homeContent[indexx-1].companyName,  
+                                companyLogo: homeContent[indexx-1].companyLogo,  
                                 pinColor: Colors.transparent,),//leading widgetı
                               Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                 child: Center(
@@ -198,7 +198,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                               onPressed  : () async{
                                               final progressUHD = ProgressHUD.of(context);
                                               progressUHD.show();
-                                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[index].googleAdressLink)));
+                                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[indexx-1].googleAdressLink)));
                                               progressUHD.dismiss(); 
                                             }),
                                       ),
