@@ -77,7 +77,19 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                     //------------------------------------------------------------------
 
                     //----------------Resim üzerinde yer alacak yapılar-----------------
-                   
+                   child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
+                            child: Padding(padding: EdgeInsets.only(left: maxSpace,bottom: deviceHeight(context)*0.01),
+                              child: Text(
+                                widget.cardText, //Kendin için bir şeyler yap metni
+                                style: TextStyle(
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                            ),
+                          ),
+                          //cardText ve alt container arasındaki boşluk
+                         
                   ),
                 ),
               ),
@@ -90,20 +102,6 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         child: Column(
                         mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
                         children: [
-                          // Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
-                          //   child: Padding(padding: const EdgeInsets.only(left: maxSpace),
-                          //     child: Text(
-                          //       widget.cardText, //Kendin için bir şeyler yap metni
-                          //       style: TextStyle(
-                          //           color: primaryColor,
-                          //           fontWeight: FontWeight.bold,
-                          //           fontSize: 20),
-                          //     ),
-                          //   ),
-                          // ),
-                          // //cardText ve alt container arasındaki boşluk
-                          // SizedBox(height: defaultPadding),
-
                           //-----------------Butonların yer aldığı container--------------------
                           Container(
                             decoration: BoxDecoration(
