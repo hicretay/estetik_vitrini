@@ -100,14 +100,14 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                       ),
                     ),
                     Expanded(
-                      child: SingleChildScrollView(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(cardCurved),
-                            ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(cardCurved),
                           ),
+                        ),
+                        child: SingleChildScrollView(
                           child: Column(
                             children: [
                              TableCalendar(                              
