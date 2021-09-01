@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -84,8 +85,8 @@ class _ReservationPageState extends State<ReservationPage> {
                           iconSize: iconSize,
                           icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
                           onPressed: ()async{
-                            //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                           await appointmentListFunc();
+                            NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                           //await appointmentListFunc();
                           }),
                         ),
                       ],
@@ -108,7 +109,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               child  : TableCalendar(
                               locale: "tr",
                               focusedDay: _focusedDay,
-                              firstDay: DateTime.utc(2010, 10, 16),
+                              firstDay: DateTime.now(),
                               lastDay: DateTime.utc(2030, 3, 14),
                               shouldFillViewport: false,
                               startingDayOfWeek: StartingDayOfWeek.monday,

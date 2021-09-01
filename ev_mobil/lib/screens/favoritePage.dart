@@ -62,8 +62,8 @@ class _FavoritePageState extends State<FavoritePage> {
                       ),
                     ),
                   ),
-                  //----------------------------------------------------------------
-                  //------------------------- // Arkaplan containerı------------------
+                  //-----------------------------------------------------------------
+                  //------------------------- Arkaplan containerı---------------------
                   Expanded(
                     child: Container(
                         decoration: BoxDecoration(

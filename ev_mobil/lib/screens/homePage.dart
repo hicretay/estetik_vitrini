@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ):CircularProgressIndicator(),
+          ):Center(child: CircularProgressIndicator(backgroundColor: primaryColor)),
         ),
       ),
     );

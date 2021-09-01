@@ -113,7 +113,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                              TableCalendar(                              
                              locale: "tr",
                              focusedDay: _focusedDay,
-                             firstDay: DateTime.utc(2010, 10, 16),
+                             firstDay: DateTime.now(),
                              lastDay: DateTime.utc(2030, 3, 14),
                              shouldFillViewport: false,
                              startingDayOfWeek: StartingDayOfWeek.monday,
