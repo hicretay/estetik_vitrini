@@ -217,7 +217,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       AppointmentObject appointment = AppointmentObject(companyId: homeContent[index].companyId,userId: 1);
                                       final progressHUD = ProgressHUD.of(context);
                                       progressHUD.show(); 
-                                      Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment)));
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment, indexx: indexx)));
                                       progressHUD.dismiss();
                                     });
                                     //Buton tıklandığında randevu al sayfasına yönlendirilecek

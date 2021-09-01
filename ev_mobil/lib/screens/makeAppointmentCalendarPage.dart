@@ -12,10 +12,11 @@ import 'package:estetikvitrini/settings/functions.dart';
 class MakeAppointmentCalendarPage extends StatefulWidget { 
   final AppointmentObject appointment;
   final dynamic companyInfo;
-  MakeAppointmentCalendarPage({this.companyInfo, this.appointment});
+  final int indexx;
+  MakeAppointmentCalendarPage({this.companyInfo, this.appointment, this.indexx});
 
   @override
-  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(companyInfo: companyInfo , appointment: appointment);
+  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(companyInfo: companyInfo , appointment: appointment, indexx: indexx);
 }
 
 class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPage> {
@@ -23,6 +24,9 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
   TextEditingController teSearch = TextEditingController();
   bool calendarSelected = false;
   bool reservationSelected = true;
+  int indexx;
+
+  
 
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
@@ -40,7 +44,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
     selectedEvents = {};
   }
 
-  _MakeAppointmentCalendarPageState({this.companyInfo,this.appointment});
+  _MakeAppointmentCalendarPageState({this.companyInfo,this.appointment, this.indexx});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -89,7 +93,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              companyInfo[0].companyName, 
+                              companyInfo[indexx-1].companyName, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -168,7 +172,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
            final progressHUD = ProgressHUD.of(context);
            progressHUD.show(); 
            final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(1);
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result,companyInfo: companyInfo, appointment: appointment)));
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result,companyInfo: companyInfo, appointment: appointment, indexx: indexx)));
            progressHUD.dismiss();
          }
          //-------------------------------------------------------------------------------------------------
