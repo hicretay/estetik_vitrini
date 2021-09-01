@@ -44,9 +44,14 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
             //-----------------------------------------------------
             SizedBox(width: deviceWidth(context)*0.03), //başlık iconu - texti arası boşluk
 
-            Text(
-              widget.companyName,
-              style: TextStyle(fontSize: 17, fontFamily: headerFont)
+            SizedBox(
+              width: deviceWidth(context)*0.6,
+              child: Text(
+                widget.companyName,
+                overflow: TextOverflow.fade,
+                softWrap: false,
+                style: TextStyle(fontSize: 17, fontFamily: headerFont)
+              ),
             ),
           ],
         ),
