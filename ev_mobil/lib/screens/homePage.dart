@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                         child: Center(
                           child: Text(companyContent[index].companyName,              
                           overflow: TextOverflow.fade,
-                          softWrap: false,),
+                          softWrap: false),
                         ),
                       ),
                     ],
@@ -175,11 +175,15 @@ class _HomePageState extends State<HomePage> {
                         pinColor      : primaryColor,
                         //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                         onPressed: () async{
+                          
+                          // setState(() {
+                          //    globalHomeContentId = homeContent[index];             
+                          // });
                         final progressUHD = ProgressHUD.of(context);
                         progressUHD.show(); 
                         final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
                         // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,indexx: homeContent[index].companyId)));
                         progressUHD.dismiss();
                       },
                       //---------------------------------------------------------------------------------------------------------------------------------------------------

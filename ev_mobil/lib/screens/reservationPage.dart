@@ -32,12 +32,20 @@ class _ReservationPageState extends State<ReservationPage> {
     });
   }
 
+  Future fullDays() async{
+    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,"");
+    setState(() {
+      appointmentList = appointmentNewList.result;
+    });
+  }
+
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   Map<DateTime, List<Event>> selectedEvents;
 
   List<Event> _getEventsForDay(DateTime date) {
-    return selectedEvents[date] ?? [];
+    return selectedEvents[date] ?? [
+    ];
   }
 
 
@@ -128,10 +136,10 @@ class _ReservationPageState extends State<ReservationPage> {
                                 return isSameDay(_selectedDay, day);
                               },
                               onDaySelected: (selectedDay, focusedDay) async{
-                                   
                                   _selectedDay = selectedDay;
                                   _focusedDay = focusedDay;   
                                   await appointmentListFunc();  
+                                  
                             
                               },
                               headerStyle: HeaderStyle(

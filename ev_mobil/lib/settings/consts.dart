@@ -40,3 +40,4 @@ const iconSize = 25.0;
 //Global servis ID'leri
 int globalUserId = 1;
 int globalCompanyId = 1;
+dynamic globalHomeContentId;

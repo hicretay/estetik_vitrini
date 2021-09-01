@@ -12,23 +12,26 @@ import 'package:line_icons/line_icons.dart';
 class HomeDetailPage extends StatefulWidget {
   final List homeDetailContent;
   final List homeContent;
-  HomeDetailPage({Key key, this.homeDetailContent, this.homeContent}) : super(key: key);
+  final int indexx;
+  HomeDetailPage({Key key, this.homeDetailContent, this.homeContent, this.indexx}) : super(key: key);
 
   @override
-  _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, homeContent: homeContent);
+  _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, homeContent: homeContent, indexx: indexx);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
   List homeDetailContent;
   List homeContent;
+  int indexx;
 
   bool _checked = false;
   int counter = 99;
 
   
-  _HomeDetailPageState({this.homeDetailContent, this.homeContent});
+  _HomeDetailPageState({this.homeDetailContent, this.homeContent, this.indexx});
   @override
   Widget build(BuildContext context) {
+    print(indexx);
     return SafeArea(
       child: Scaffold(
         body: ProgressHUD(
@@ -73,7 +76,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         ),
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(homeContent[0].companyName,
+                          child: Text(homeContent[indexx-1].companyName,  /////////////////////düzeltilecek
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -88,13 +91,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
                       child: ListView.builder(
-                        itemCount: homeDetailContent.length,
+                        itemCount: 1,
                         itemBuilder: (BuildContext context, int index){ 
-
-                          // setState(() {
-                          //    globalHomeContentId = homeContent[index];             
-                          // });
-
                         //--------------------Slider Imageları-------------------
                         List<dynamic> sliderImg = [];
                         for (var item in homeDetailContent[index].contentPictures) {
@@ -106,8 +104,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                             children: [
                               SizedBox(height: maxSpace),
                               LeadingRowWidget( 
-                                companyName: homeContent[index].companyName,
-                                companyLogo: homeContent[index].companyLogo,
+                                companyName: homeContent[indexx-1].companyName,  /////////////////////düzeltilecek
+                                companyLogo: homeContent[indexx-1].companyLogo,  /////////////////////düzeltilecek
                                 pinColor: Colors.transparent,),//leading widgetı
                               Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                 child: Center(
@@ -119,7 +117,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     Carousel(
                                     borderRadius: true,
                                     radius: Radius.circular(maxSpace),
-                                    boxFit: BoxFit.cover,
+                                    boxFit: BoxFit.contain,
                                     autoplay: false,
                                     animationCurve: Curves.bounceInOut, // animasyon efekti
                                     animationDuration: Duration(milliseconds: 1000), // animasyon süresi
@@ -280,28 +278,4 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       ),
     );
   }
-//--------------------------------Carousel fonksiyonu------------------------------------
-//   Carousel buildCarousel() {
-//     return Carousel(
-//       borderRadius: true,
-//       radius: Radius.circular(maxSpace),
-//       boxFit: BoxFit.cover,
-//       autoplay: false,
-//       animationCurve: Curves.bounceInOut, // animasyon efekti
-//       animationDuration: Duration(milliseconds: 1000), // animasyon süresi
-//       dotSize: 6.0, //Nokta büyüklüğü
-//       dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
-//       dotBgColor: Colors.transparent, //Carousel alt bar rengi
-//       dotPosition: DotPosition.bottomCenter, // Noktaların konumu
-//       dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
-//       showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
-//       indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı
-//       images: [
-//         //Carousel resimleri dizisi
-//         // NetworkImage(carouselImage[0]),
-//         // NetworkImage(carouselImage[1]),
-//         // NetworkImage(carouselImage[2]),
-//       ],
-//     );
-//   }
 }

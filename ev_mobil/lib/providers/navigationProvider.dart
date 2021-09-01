@@ -12,7 +12,7 @@ import 'package:estetikvitrini/widgets/exitAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-
+//import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/consts.dart';
 
 const HOME_PAGE = 0;
@@ -24,7 +24,28 @@ const SETTINGS_PAGE = 4;
 class NavigationProvider extends ChangeNotifier {
   static NavigationProvider of(BuildContext context) => Provider.of<NavigationProvider>(context, listen: false);
 
-  int _currentScreenIndex = LOCATION_PAGE; // Başlangıç sayfası locationPage
+  int _currentScreenIndex = HOME_PAGE; // Başlangıç sayfası homePage
+ 
+  //  isFirstTime() async {
+  //   //  var isFirstTime = SharedPref.pref.getBool('first_time');
+  //   //  if (isFirstTime != null && !isFirstTime) {
+  //   //    SharedPref.pref.setBool('first_time', false);
+  //   //    return false;
+  //   //  } else {
+  //   //    SharedPref.pref.setBool('first_time', false);
+  //   //    return true;
+  //   //  }
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   //var isLoggedIn = (prefs.getBool('isLoggedIn') == null) ? false : prefs.getBool('isLoggedIn');
+  //   String user = prefs.getString("user");
+  //   if(user==null){
+  //     return false;
+  //   }
+  //   else{
+  //     return true;
+  //   }
+  // }
+
 
   int get currentTabIndex => _currentScreenIndex;
 
@@ -55,7 +76,7 @@ class NavigationProvider extends ChangeNotifier {
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (RouteSettings settings) {
-            return MaterialPageRoute(settings: settings ,builder: (_) => HomePage(cityDenemeID: 5));
+            return MaterialPageRoute(settings: settings ,builder: (_) => HomePage());
       },
     ),
     FAVORITE_PAGE: Screen(
