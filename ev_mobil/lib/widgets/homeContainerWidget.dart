@@ -36,7 +36,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
         //-----------------------------Postu çevreleyecek container yapısı-------------------------
         Container(
           width: double.infinity, //genişlik: container genişliği kadar
-          height: deviceHeight(context)*0.4, //container yüksekliği
+          height: 300, //container yüksekliği
           decoration: BoxDecoration(
             color: lightWhite,
             borderRadius: BorderRadius.circular(
@@ -63,7 +63,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: Container(
                     width: deviceWidth(context),
-                    height: deviceHeight(context)*0.4,
+                    height: 300,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                       image: DecorationImage(
@@ -100,7 +100,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                             borderRadius: BorderRadius.circular(minSpace),
                           ),
                           width: double.infinity, // genişlik: container kadar
-                          height: deviceWidth(context) * 0.12,
+                          height: 40,
                           child: Row(
                             children: [
                               Flexible(

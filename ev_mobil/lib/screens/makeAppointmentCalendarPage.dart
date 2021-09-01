@@ -100,59 +100,61 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(cardCurved),
+                      child: SingleChildScrollView(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(cardCurved),
+                            ),
                           ),
-                        ),
-                        child: Column(
-                          children: [
-                           TableCalendar(                              
-                           locale: "tr",
-                           focusedDay: _focusedDay,
-                           firstDay: DateTime.utc(2010, 10, 16),
-                           lastDay: DateTime.utc(2030, 3, 14),
-                           shouldFillViewport: false,
-                           startingDayOfWeek: StartingDayOfWeek.monday,
-                           calendarFormat:  CalendarFormat.month,
-                           calendarStyle: CalendarStyle(
-                             isTodayHighlighted: true,
-                             selectedDecoration: BoxDecoration(
-                               color: primaryColor,
-                               shape: BoxShape.rectangle,
-                               borderRadius: BorderRadius.circular(minCurved),
+                          child: Column(
+                            children: [
+                             TableCalendar(                              
+                             locale: "tr",
+                             focusedDay: _focusedDay,
+                             firstDay: DateTime.utc(2010, 10, 16),
+                             lastDay: DateTime.utc(2030, 3, 14),
+                             shouldFillViewport: false,
+                             startingDayOfWeek: StartingDayOfWeek.monday,
+                             calendarFormat:  CalendarFormat.month,
+                             calendarStyle: CalendarStyle(
+                               isTodayHighlighted: true,
+                               selectedDecoration: BoxDecoration(
+                                 color: primaryColor,
+                                 shape: BoxShape.rectangle,
+                                 borderRadius: BorderRadius.circular(minCurved),
+                               ),
+                               outsideDecoration: boxDecoration,
+                               defaultDecoration: boxDecoration,
+                               weekendDecoration: boxDecoration,
+                               selectedTextStyle: TextStyle(
+                                 color: Colors.white,
+                               ),
+                               todayDecoration: BoxDecoration(
+                                 color: secondaryColor,
+                                 shape: BoxShape.rectangle,
+                                 borderRadius: BorderRadius.circular(minCurved),
+                               ),
                              ),
-                             outsideDecoration: boxDecoration,
-                             defaultDecoration: boxDecoration,
-                             weekendDecoration: boxDecoration,
-                             selectedTextStyle: TextStyle(
-                               color: Colors.white,
+                             selectedDayPredicate: (day) {
+                               return isSameDay(_selectedDay, day);
+                             },
+                             onDaySelected: (selectedDay, focusedDay) {
+                               setState(() {          
+                                 _selectedDay = selectedDay;
+                                 _focusedDay = focusedDay;
+                               });
+                             },
+                             headerStyle: HeaderStyle(
+                               formatButtonVisible: false,
+                               titleCentered: true,
                              ),
-                             todayDecoration: BoxDecoration(
-                               color: secondaryColor,
-                               shape: BoxShape.rectangle,
-                               borderRadius: BorderRadius.circular(minCurved),
-                             ),
-                           ),
-                           selectedDayPredicate: (day) {
-                             return isSameDay(_selectedDay, day);
-                           },
-                           onDaySelected: (selectedDay, focusedDay) {
-                             setState(() {          
-                               _selectedDay = selectedDay;
-                               _focusedDay = focusedDay;
-                             });
-                           },
-                           headerStyle: HeaderStyle(
-                             formatButtonVisible: false,
-                             titleCentered: true,
-                           ),
-                           eventLoader: _getEventsForDay,
-                         )
-                          
-                          ],
+                             eventLoader: _getEventsForDay,
+                           )
+                            
+                            ],
+                          ),
                         ),
                       ),
                     ),
