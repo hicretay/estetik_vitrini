@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -118,16 +119,16 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                           });
                                         }),
                                 //-------------------------------------------------------------------------
-                                //------------------------------PAYLAŞ ICONBUTTONI---------------------------
-                                  IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
-                                  onPressed: () {}),
-                                //--------------------------------------------------------------------------
-                                // //----------------------------İLETİŞİM ICONBUTTONI--------------------------
-                                //   IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
-                                //       onPressed: () {
-                                //         showAlert(context,"İletişim" + "\n${widget.companyPhone}");
-                                //       }),
-                                // //----------------------------------------------------------------------------
+                                // //------------------------------PAYLAŞ ICONBUTTONI---------------------------
+                                //   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
+                                //   onPressed: () {}),
+                                // //--------------------------------------------------------------------------
+                                //----------------------------İLETİŞİM ICONBUTTONI--------------------------
+                                  IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
+                                      onPressed: () {
+                                        showAlert(context,"İletişim" + "\n${widget.companyPhone}");
+                                      }),
+                                //----------------------------------------------------------------------------
                                 //-----------------------------KONUM ICONBUTTONI----------------------------
                                   IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
                                       onPressed: widget.onPressedLocation)
