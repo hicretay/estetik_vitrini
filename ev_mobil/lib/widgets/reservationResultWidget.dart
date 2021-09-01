@@ -40,8 +40,14 @@ class ResevationResultWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(companyName,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        SizedBox(
+                          width: deviceWidth(context)*0.57,
+                          child: Text(
+                            companyName,
+                            overflow: TextOverflow.fade,
+                            softWrap: false,                          
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
                         SizedBox(height: minSpace),
                         Text(

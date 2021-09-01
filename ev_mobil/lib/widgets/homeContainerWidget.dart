@@ -37,7 +37,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
         //-----------------------------Postu çevreleyecek container yapısı-------------------------
         Container(
           width: double.infinity, //genişlik: container genişliği kadar
-          height: 300, //container yüksekliği
+          height: 320, //container yüksekliği
           decoration: BoxDecoration(
             color: lightWhite,
             borderRadius: BorderRadius.circular(
@@ -64,7 +64,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: Container(
                     width: deviceWidth(context),
-                    height: 300,
+                    height: 320,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                       image: DecorationImage(
@@ -77,92 +77,100 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                     //------------------------------------------------------------------
 
                     //----------------Resim üzerinde yer alacak yapılar-----------------
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
-                      children: [
-                        Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
-                          child: Padding(padding: const EdgeInsets.only(left: maxSpace),
-                            child: Text(
-                              widget.cardText, //Kendin için bir şeyler yap metni
-                              style: TextStyle(
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                          ),
-                        ),
-                        //cardText ve alt container arasındaki boşluk
-                        SizedBox(height: defaultPadding),
-
-                        //-----------------Butonların yer aldığı container--------------------
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(minSpace),
-                          ),
-                          width: double.infinity, // genişlik: container kadar
-                          height: 40,
-                          child: Row(
-                            children: [
-                              Flexible(
-                                child: Row(
-                                  children: [
-                                //---------------------------BEĞEN ICONBUTTONI-----------------------------
-                                    IconButton( icon: checked
-                                            ? Icon(Icons.favorite,
-                                                color: primaryColor)
-                                            : Icon(LineIcons.heart,
-                                                color: primaryColor),
-                                        onPressed: () {
-                                          setState(() {
-                                            checked = !checked;
-                                          });
-                                        }),
-                                //-------------------------------------------------------------------------
-                                // //------------------------------PAYLAŞ ICONBUTTONI---------------------------
-                                //   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
-                                //   onPressed: () {}),
-                                // //--------------------------------------------------------------------------
-                                //----------------------------İLETİŞİM ICONBUTTONI--------------------------
-                                  IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
-                                      onPressed: () {
-                                        showAlert(context,"İletişim" + "\n${widget.companyPhone}");
-                                      }),
-                                //----------------------------------------------------------------------------
-                                //-----------------------------KONUM ICONBUTTONI----------------------------
-                                  IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
-                                      onPressed: widget.onPressedLocation)
-                                //------------------------------------------------------------------------
-                                  ],
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: widget.onPressed,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Detaylı Bilgi İçin",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          .copyWith(color: primaryColor),
-                                    ),
-                                    SizedBox(width: minSpace),
-                                    //Buton texti - icon arası boşluk
-                                    Icon( LineIcons.arrowRight, // sağa ok ikonu
-                                      color: primaryColor,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //------------------------------------------------------------------
-                      ],
-                    ),
+                   
                   ),
                 ),
+              ),
+              //////////////////////////ICONbUTTONLAR PANELİ
+              Padding(
+                padding:const EdgeInsets.only(left: maxSpace, right: maxSpace),
+                child: Container(
+                        width: deviceWidth(context),
+                        //height: 100,
+                        child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
+                        children: [
+                          // Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
+                          //   child: Padding(padding: const EdgeInsets.only(left: maxSpace),
+                          //     child: Text(
+                          //       widget.cardText, //Kendin için bir şeyler yap metni
+                          //       style: TextStyle(
+                          //           color: primaryColor,
+                          //           fontWeight: FontWeight.bold,
+                          //           fontSize: 20),
+                          //     ),
+                          //   ),
+                          // ),
+                          // //cardText ve alt container arasındaki boşluk
+                          // SizedBox(height: defaultPadding),
+
+                          //-----------------Butonların yer aldığı container--------------------
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(minSpace),
+                            ),
+                            width: double.infinity, // genişlik: container kadar
+                            height: 40,
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: Row(
+                                    children: [
+                                  //---------------------------BEĞEN ICONBUTTONI-----------------------------
+                                      IconButton( icon: checked
+                                              ? Icon(Icons.favorite,
+                                                  color: primaryColor)
+                                              : Icon(LineIcons.heart,
+                                                  color: primaryColor),
+                                          onPressed: () {
+                                            setState(() {
+                                              checked = !checked;
+                                            });
+                                          }),
+                                  //-------------------------------------------------------------------------
+                                  // //------------------------------PAYLAŞ ICONBUTTONI---------------------------
+                                  //   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
+                                  //   onPressed: () {}),
+                                  // //--------------------------------------------------------------------------
+                                  //----------------------------İLETİŞİM ICONBUTTONI--------------------------
+                                    IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
+                                        onPressed: () {
+                                          showAlert(context,"İletişim" + "\n${widget.companyPhone}");
+                                        }),
+                                  //----------------------------------------------------------------------------
+                                  //-----------------------------KONUM ICONBUTTONI----------------------------
+                                    IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
+                                        onPressed: widget.onPressedLocation)
+                                  //------------------------------------------------------------------------
+                                    ],
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: widget.onPressed,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Detaylı Bilgi İçin",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            .copyWith(color: primaryColor),
+                                      ),
+                                      SizedBox(width: minSpace),
+                                      //Buton texti - icon arası boşluk
+                                      Icon( LineIcons.arrowRight, // sağa ok ikonu
+                                        color: primaryColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          //------------------------------------------------------------------
+                        ],
+                      )),
               ),
               // Post ana containeri - resim containerı arası alt boşluk
               SizedBox(height: maxSpace),
