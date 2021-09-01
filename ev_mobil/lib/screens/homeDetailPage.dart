@@ -254,7 +254,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   children: [
                                     Align(
                                       alignment: Alignment.bottomLeft,
-                                      child    : Text(homeContent[index].contentTitle.toString(),
+                                      child    : Text(homeContent[indexx-1].contentTitle,
                                       style    : TextStyle(fontSize: 22, color: primaryColor),
                                       ),
                                     ),
