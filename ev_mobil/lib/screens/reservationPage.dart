@@ -28,6 +28,8 @@ class _ReservationPageState extends State<ReservationPage> {
   List companyContent;
   List homeContent;
 
+  int selection;
+
 
   final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -120,33 +122,51 @@ class _ReservationPageState extends State<ReservationPage> {
                               // }
                               showDialog(context: rootContext, builder: (BuildContext rootContext){
                                 return AlertDialog(
-                                  title: Column(
-                                    children: [Text("Randevu alınacak firmayı seçiniz"),
-                                    Divider(color: secondaryColor,thickness: 2,)]),
+                                  // title: Column(
+                                  //   children: [Text("Randevu alınacak firmayı seçiniz"),
+                                  //   Divider(color: secondaryColor,thickness: 2,)]),
                                   actions: <Widget>[
                                     Container(
-                                      height: 150,
+                                      height: 50,
                                       width: 300,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: companyContent.length,
-                                        itemBuilder: (BuildContext rootContext, int index){
-                                        return GestureDetector(
-                                          child: Container(
-                                            height: 30,
-                                            decoration: BoxDecoration(),
-                                            child: Card(
-                                            color: secondaryColor,
-                                            child: Center(child: Text(companyContent[index].companyName,style: TextStyle(fontSize: 18)))),
-                                          ),
-                                          onTap: (){
-                                            print(companyContent[index].id.toString());
-                                            AppointmentObject appointment = AppointmentObject(companyId: companyContent[index].id,userId: 1);
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: homeContent)));
-                                            Navigator.of(rootContext).pop(false);
-                                          }
-                                        );
-                                      }),
+                                      child: DropdownButton(   
+                                        isExpanded: true,
+                                             hint: Center(
+                                               child: Text("Randevu alınacak firmayı seçiniz",
+                                               textAlign: TextAlign.center,
+                                                     style    : TextStyle(
+                                                     fontSize : 18, 
+                                                     color:  primaryColor,
+                                                     )),
+                                             ),
+                                             dropdownColor: white,
+                                             value: selection,
+                                             items: companyContent.map((data){
+                                               return DropdownMenuItem(
+                                               child: SizedBox(
+                                                 child: Center(
+                                                   child: Text(data.companyName, textAlign: TextAlign.center,
+                                                   style: TextStyle(color: primaryColor, fontSize: 20)),
+                                                 ),
+                                               ),
+                                               value: data.id);
+                                             }).toList(),                                  
+                                             onChanged: (value) {
+                                                  if (!mounted)
+                                                  return;                                  
+                                              setState(() {
+                                                selection = value;
+                                                print(companyContent[selection-1].id.toString());
+                                                AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
+                                                Navigator.of(rootContext).pop(false);
+                                              });
+                                              },
+                                            
+                                      )
+                                     
+
+                                    
                                     )
                                   ],
                                 );
