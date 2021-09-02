@@ -144,7 +144,6 @@ class _ReservationPageState extends State<ReservationPage> {
                                             AppointmentObject appointment = AppointmentObject(companyId: companyContent[index].id,userId: 1);
                                             Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: homeContent)));
                                             Navigator.of(rootContext).pop(false);
-                                            
                                           }
                                         );
                                       }),
@@ -175,7 +174,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               child  : TableCalendar(
                               locale: "tr",
                               focusedDay: _focusedDay,
-                              firstDay: DateTime.now(),
+                              firstDay: DateTime.utc(2010, 10, 16),
                               lastDay: DateTime.utc(2030, 3, 14),
                               shouldFillViewport: false,
                               startingDayOfWeek: StartingDayOfWeek.monday,

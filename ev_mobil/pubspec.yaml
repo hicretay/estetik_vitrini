@@ -52,7 +52,7 @@ flutter:
     - family: nouvelle_vague_final
       fonts:
         - asset: assets/fonts/nouvelle_vague_final.ttf
-    
+
     - family: gothic_book
       fonts:
         - asset: assets/fonts/gothic_book.ttf
