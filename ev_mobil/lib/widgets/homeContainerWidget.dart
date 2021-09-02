@@ -50,7 +50,6 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                 padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
                 //Leading Widgetı
                 child: LeadingRowWidget(
-                  //iconNumber: widget.iconNumber, // icon resmi indexi
                   pinColor: widget.pinColor,
                   companyLogo: widget.companyLogo,
                   companyName: widget.companyName,
@@ -60,7 +59,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                 //resim containerının yalnızca sağ ve sol boşluk veren paddingi
                 child: Padding(
                   padding:
-                      const EdgeInsets.only(left: maxSpace, right: maxSpace),
+                      const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: Container(
                     width: deviceWidth(context),
@@ -93,12 +92,11 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   ),
                 ),
               ),
-              //////////////////////////ICONbUTTONLAR PANELİ
+              //-------------------------------------ICONBUTTONLAR PANELİ----------------------------------------
               Padding(
-                padding:const EdgeInsets.only(left: maxSpace, right: maxSpace),
+                padding:const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
                 child: Container(
                         width: deviceWidth(context),
-                        //height: 100,
                         child: Column(
                         mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
                         children: [
@@ -115,7 +113,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                 Flexible(
                                   child: Row(
                                     children: [
-                                  //---------------------------BEĞEN ICONBUTTONI-----------------------------
+                                  //------------------------------BEĞEN ICONBUTTONI-------------------------------
                                       IconButton( icon: checked
                                               ? Icon(Icons.favorite,
                                                   color: primaryColor)
@@ -126,21 +124,21 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                               checked = !checked;
                                             });
                                           }),
-                                  //-------------------------------------------------------------------------
+                                  //------------------------------------------------------------------------------
                                   // //------------------------------PAYLAŞ ICONBUTTONI---------------------------
                                   //   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
                                   //   onPressed: () {}),
-                                  // //--------------------------------------------------------------------------
-                                  //----------------------------İLETİŞİM ICONBUTTONI--------------------------
+                                  // //---------------------------------------------------------------------------
+                                  //------------------------------İLETİŞİM ICONBUTTONI----------------------------
                                     IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
                                         onPressed: () {
                                           showAlert(context,"İletişim" + "\n${widget.companyPhone}");
                                         }),
-                                  //----------------------------------------------------------------------------
-                                  //-----------------------------KONUM ICONBUTTONI----------------------------
+                                  //------------------------------------------------------------------------------
+                                  //-----------------------------KONUM ICONBUTTONI--------------------------------
                                     IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
                                         onPressed: widget.onPressedLocation)
-                                  //------------------------------------------------------------------------
+                                  //------------------------------------------------------------------------------
                                     ],
                                   ),
                                 ),
@@ -170,6 +168,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         ],
                       )),
               ),
+              //-------------------------------------------------------------------------------------------------
               // Post ana containeri - resim containerı arası alt boşluk
               SizedBox(height: maxSpace),
             ],
