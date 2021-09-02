@@ -1,6 +1,7 @@
 import 'package:estetikvitrini/providers/jsonDataProvider.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';

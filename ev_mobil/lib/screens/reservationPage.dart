@@ -1,6 +1,9 @@
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
+import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
+import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -13,7 +16,6 @@ import 'package:table_calendar/table_calendar.dart';
 // ignore: must_be_immutable
 class ReservationPage extends StatefulWidget {
   static const route = "reservationPage";
-  String selectedDay;
   ReservationPage({Key key}) : super(key: key);
 
   @override
@@ -22,8 +24,12 @@ class ReservationPage extends StatefulWidget {
 
 class _ReservationPageState extends State<ReservationPage> {
   TextEditingController teSearch = TextEditingController();
-  Map<CalendarFormat, String> days = {};
   List appointmentList;
+  List companyContent;
+
+
+  final navigatorKey = GlobalKey<NavigatorState>();
+
 
   Future appointmentListFunc() async{
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
@@ -32,6 +38,13 @@ class _ReservationPageState extends State<ReservationPage> {
       appointmentList = appointmentNewList.result;
     });
   }
+
+  Future companyListFunc() async{
+   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   setState(() {
+      companyContent = companyNewList.result;
+   });
+   }
 
   Future fullDays() async{
     final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,"");
@@ -42,23 +55,32 @@ class _ReservationPageState extends State<ReservationPage> {
 
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
-  Map<DateTime, List<Event>> selectedEvents;
+  
+  Map<DateTime, List<Event>> selectedEvents = {
+    // DateTime.now():[Event(operation: "işlem"),Event(operation: "işlem")],
+    // DateTime.utc(2022, 9, 10):[Event(operation: "işlem"),],
+  };
 
   List<Event> _getEventsForDay(DateTime date) {
     return selectedEvents[date] ?? [
+     //Event(operation: "deneme"),
+     // Event(operation: "deneme"),
+  
     ];
   }
-
+  
 
   @override
   void initState() { 
     super.initState();
     selectedEvents = {};
     appointmentListFunc();
+    companyListFunc();
   }
 
   @override
   Widget build(BuildContext context) {
+    final rootContext = context.findRootAncestorStateOfType<NavigatorState>().context;
     return SafeArea(
       child: Scaffold(
         body: ProgressHUD(
@@ -85,8 +107,51 @@ class _ReservationPageState extends State<ReservationPage> {
                           iconSize: iconSize,
                           icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
                           onPressed: ()async{
-                            NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                            //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
                            //await appointmentListFunc();
+                           ///////////////////////////////////////////////////////////////////////
+                              //   if (selectedEvents[_selectedDay] != null)
+                              //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
+                              //  else {
+                              //   selectedEvents[_selectedDay] = [
+                              //     Event(operation: "islem")
+                              //   ];
+                              // }
+                              showDialog(context: rootContext, builder: (BuildContext rootContext){
+                                return AlertDialog(
+                                  title: Column(
+                                    children: [Text("Randevu alınacak firmayı seçiniz"),
+                                    Divider(color: secondaryColor,thickness: 2,)]),
+                                  actions: <Widget>[
+                                    Container(
+                                      height: 150,
+                                      width: 300,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: companyContent.length,
+                                        itemBuilder: (BuildContext rootContext, int index){
+                                        return GestureDetector(
+                                          child: Container(
+                                            height: 30,
+                                            decoration: BoxDecoration(),
+                                            child: Card(
+                                            color: secondaryColor,
+                                            child: Center(child: Text(companyContent[index].companyName,style: TextStyle(fontSize: 18)))),
+                                          ),
+                                          onTap: (){
+                                            print(companyContent[index].id.toString());
+                                            AppointmentObject appointment = AppointmentObject(companyId: companyContent[index].id,userId: 1);
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: companyContent)));
+                                            Navigator.of(rootContext).pop(false);
+                                            
+                                          }
+                                        );
+                                      }),
+                                    )
+                                  ],
+                                );
+                              });
+                               
                           }),
                         ),
                       ],
@@ -139,9 +204,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               onDaySelected: (selectedDay, focusedDay) async{
                                   _selectedDay = selectedDay;
                                   _focusedDay = focusedDay;   
-                                  await appointmentListFunc();  
-                                  
-                            
+                                  await appointmentListFunc();  // randevuları yenileme
                               },
                               headerStyle: HeaderStyle(
                                 formatButtonVisible: false,
@@ -205,6 +268,30 @@ class _ReservationPageState extends State<ReservationPage> {
                               },
                             );
                             }),
+                            //  Container( // silinecek
+                            //           height: 150,
+                            //           width: 300,
+                            //           child: ListView.builder(
+                            //             shrinkWrap: true,
+                            //             itemCount: companyContent.length ?? 0,
+                            //             itemBuilder: (BuildContext context, int index){
+                            //             return GestureDetector(
+                            //               child: Container(
+                            //                 height: 30,
+                            //                 decoration: BoxDecoration(),
+                            //                 child: Card(
+                            //                 color: secondaryColor,
+                            //                 child: Center(child: Text(companyContent[index].companyName,style: TextStyle(fontSize: 18)))),
+                            //               ),
+                            //               onTap: (){
+                            //                 //print(companyContent[index].id.toString());
+                            //                 AppointmentObject appointment = AppointmentObject(companyId: companyContent[index].id,userId: 1);
+                            //                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: companyContent)));
+
+                            //               }
+                            //             );
+                            //           }),
+                            //         )
                           ],
                         ),
                       ),
