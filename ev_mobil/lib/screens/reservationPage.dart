@@ -1,8 +1,8 @@
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
+import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
-import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -26,6 +26,7 @@ class _ReservationPageState extends State<ReservationPage> {
   TextEditingController teSearch = TextEditingController();
   List appointmentList;
   List companyContent;
+  List homeContent;
 
 
   final navigatorKey = GlobalKey<NavigatorState>();
@@ -46,12 +47,13 @@ class _ReservationPageState extends State<ReservationPage> {
    });
    }
 
-  Future fullDays() async{
-    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,"");
-    setState(() {
-      appointmentList = appointmentNewList.result;
-    });
-  }
+
+   Future homeContentList() async{
+     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3); 
+     setState(() {
+        homeContent = homeContentNewList.result;
+     });
+   }
 
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
@@ -76,6 +78,7 @@ class _ReservationPageState extends State<ReservationPage> {
     selectedEvents = {};
     appointmentListFunc();
     companyListFunc();
+    homeContentList();
   }
 
   @override
@@ -107,8 +110,6 @@ class _ReservationPageState extends State<ReservationPage> {
                           iconSize: iconSize,
                           icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
                           onPressed: ()async{
-                            //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                           //await appointmentListFunc();
                            ///////////////////////////////////////////////////////////////////////
                               //   if (selectedEvents[_selectedDay] != null)
                               //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
@@ -141,7 +142,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                           onTap: (){
                                             print(companyContent[index].id.toString());
                                             AppointmentObject appointment = AppointmentObject(companyId: companyContent[index].id,userId: 1);
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: companyContent)));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: homeContent)));
                                             Navigator.of(rootContext).pop(false);
                                             
                                           }
@@ -253,10 +254,9 @@ class _ReservationPageState extends State<ReservationPage> {
                                                 color: primaryColor,
                                                 child: Text("Hayır"),
                                                 onPressed: (){
-                                                   showToast(context, "Randevu iptal edilmedi!");
-                                                   Navigator.of(context).pop();
+                                                  showToast(context, "Randevu iptal edilmedi!");
+                                                  Navigator.of(context).pop();
                                                 },
-                                                
                                               ),
                                           ],)
                                         ],
@@ -264,34 +264,9 @@ class _ReservationPageState extends State<ReservationPage> {
                                     ),
                                   );
                                 });
-
                               },
                             );
                             }),
-                            //  Container( // silinecek
-                            //           height: 150,
-                            //           width: 300,
-                            //           child: ListView.builder(
-                            //             shrinkWrap: true,
-                            //             itemCount: companyContent.length ?? 0,
-                            //             itemBuilder: (BuildContext context, int index){
-                            //             return GestureDetector(
-                            //               child: Container(
-                            //                 height: 30,
-                            //                 decoration: BoxDecoration(),
-                            //                 child: Card(
-                            //                 color: secondaryColor,
-                            //                 child: Center(child: Text(companyContent[index].companyName,style: TextStyle(fontSize: 18)))),
-                            //               ),
-                            //               onTap: (){
-                            //                 //print(companyContent[index].id.toString());
-                            //                 AppointmentObject appointment = AppointmentObject(companyId: companyContent[index].id,userId: 1);
-                            //                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[index].id,appointment: appointment,companyInfo: companyContent)));
-
-                            //               }
-                            //             );
-                            //           }),
-                            //         )
                           ],
                         ),
                       ),
