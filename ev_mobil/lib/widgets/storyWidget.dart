@@ -2,10 +2,9 @@ import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:story_view/story_view.dart';
-import 'package:estetikvitrini/settings/functions.dart';
 
 class StoryWidget extends StatefulWidget {
-  final dynamic company; //silinecek
+  final dynamic company; 
   final PageController controller;
   final int storyIndex;
   final StoryContentJsn storyContent;
@@ -22,17 +21,9 @@ class StoryWidget extends StatefulWidget {
 class _StoryWidgetState extends State<StoryWidget> {
   final storyItems = <StoryItem>[];
   StoryController controller;
-  String date = "";
   int storyIndex;
 
   List storyContent = [];
-
-//    Future storyContentList() async{
-//    final StoryContentJsn storyContentNewList = await storyContentJsnFunc(widget.company.id); 
-//    setState(() {
-//       storyContent = storyContentNewList.result;
-//    });
-//  }
 
   Future addStoryItems() async{
     for (final story in storyContent) {
@@ -74,7 +65,7 @@ class _StoryWidgetState extends State<StoryWidget> {
 
   @override
   Widget build(BuildContext context) => 
-  storyItems.isEmpty ? Center(child: CircularProgressIndicator(backgroundColor: primaryColor,valueColor: AlwaysStoppedAnimation<Color>(Colors.white),)):
+  storyItems.isEmpty ? circularBasic :
         Stack(
         children: <Widget>[
           Material(
@@ -88,14 +79,6 @@ class _StoryWidgetState extends State<StoryWidget> {
                   Navigator.pop(context);
                 }
               },
-              // onStoryShow: (storyItem) {
-              //   final index = storyItems.indexOf(storyItem);
-              //   if (index > 0) {
-              //     setState(() {
-              //       date = date;
-              //     });
-              //   }
-              // },
             ),
           ),
         //--------------------------------Profil görünümü------------------------------------

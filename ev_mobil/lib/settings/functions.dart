@@ -298,20 +298,7 @@ Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc2(int id) async {
     return null;
   }
 }
-//-----------------------------------------------------------------------------------------------------------------
-
-  // Future<AppointmentDeleteJsn> deleteNote(int id) {
-  //   return http.delete(Uri.parse(url + "Appointment/Delete"),
-  //   body: '{"id":' + id.toString() + '}', 
-  //   headers: header).then((data) {
-  //     if (data.statusCode == 204) {
-  //       return AppointmentDeleteJsn(success: true);
-  //     }
-  //     return null;
-  //   });
-  // }
-
-
+//----------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){

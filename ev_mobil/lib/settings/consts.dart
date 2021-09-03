@@ -41,3 +41,5 @@ const iconSize = 25.0;
 int globalUserId = 1;
 int globalCompanyId = 1;
 dynamic globalHomeContentId;
+
+var circularBasic = Center(child: CircularProgressIndicator(backgroundColor: primaryColor,valueColor: AlwaysStoppedAnimation<Color>(secondaryColor)));

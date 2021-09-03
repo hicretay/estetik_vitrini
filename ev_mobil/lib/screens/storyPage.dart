@@ -25,6 +25,7 @@ class _StoryPageState extends State<StoryPage> {
   @override
   void initState() {
     super.initState();
+    // ignore: unused_local_variable
     final initialPage = widget.company.indexOf(widget.company);
     controller = PageController(initialPage: widget.storyIndex);
   }
