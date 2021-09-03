@@ -10,6 +10,7 @@ import 'package:estetikvitrini/settings/connection.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
@@ -84,22 +85,33 @@ class _HomePageState extends State<HomePage> {
                   //-----------------------------BAŞLIK-------------------------------
                   Padding(
                     padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
-                    child: Padding(
-                    padding: const EdgeInsets.only(right: defaultPadding,top: defaultPadding),
-                    child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text("Estetik Vitrini", 
-                    style: Theme.of(context)
+                    child: TextField(
+                      controller: teSearch, //search TextEditingControllerı
+                      cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
+                      decoration: InputDecoration(
+                        suffixIcon: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 30,textDirection: TextDirection.ltr),                    
+                        hintText: "Estetik Vitrini",
+                        hintStyle: Theme.of(context)
                             .textTheme
                             .headline4
-                            .copyWith(color: primaryColor, fontFamily: leadingFont)),
+                            .copyWith(color: primaryColor, fontFamily: leadingFont),
+                        focusColor: primaryColor,
+                        hoverColor: primaryColor,
+                        //border textField'ı çevreleyen yapı
+                        //width:0 ve none verilerek kaldırıldı
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0,
+                            style: BorderStyle.none,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   //------------------------------------------------------------------
                   //---------------------------Story Paneli---------------------------
                   Padding(
-                    padding: EdgeInsets.only(left: maxSpace, right: maxSpace, top: 48),
+                    padding: EdgeInsets.only(left: maxSpace, right: maxSpace, top: 58),
                     child: ListView.separated(
                       shrinkWrap: true,
                     itemCount: companyContent.length,
@@ -141,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                           progressHUD.show();
                           final StoryContentJsn storyContent = await storyContentJsnFunc(companyContent[index].id);
                           Navigator.of(context, rootNavigator: true).push(
-                          MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyContent: storyContent)));
+                          MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyContent: storyContent, storyIndex: index,)));
                           progressHUD.dismiss();
                       },
                       //------------------------------------------------------------------------------------------------------------------------------
@@ -162,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                   //--------------------------------------------------------------------------------------------
                   //------------------------------------Anasayfa Postları----------------------------------------
                   Padding(
-                    padding: EdgeInsets.only(top:48+deviceWidth(context)*0.2+20),
+                    padding: EdgeInsets.only(top:58+deviceWidth(context)*0.2+20),
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount:  homeContent == null ? 0 : homeContent.length,

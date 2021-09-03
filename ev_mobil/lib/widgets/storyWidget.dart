@@ -7,10 +7,12 @@ import 'package:estetikvitrini/settings/functions.dart';
 class StoryWidget extends StatefulWidget {
   final dynamic company; //silinecek
   final PageController controller;
+  final int storyIndex;
+  final StoryContentJsn storyContent;
 
   const StoryWidget({
     @required this.company,
-    @required this.controller,
+    @required this.controller, this.storyIndex, this.storyContent,
   });
 
   @override
@@ -21,19 +23,18 @@ class _StoryWidgetState extends State<StoryWidget> {
   final storyItems = <StoryItem>[];
   StoryController controller;
   String date = "";
-  int storyIndex = 0;
+  int storyIndex;
 
   List storyContent = [];
 
-   Future storyContentList() async{
-   final StoryContentJsn storyContentNewList = await storyContentJsnFunc(widget.company.id); 
-   setState(() {
-      storyContent = storyContentNewList.result;
-   });
- }
+//    Future storyContentList() async{
+//    final StoryContentJsn storyContentNewList = await storyContentJsnFunc(widget.company.id); 
+//    setState(() {
+//       storyContent = storyContentNewList.result;
+//    });
+//  }
 
   Future addStoryItems() async{
-    await storyContentList();
     for (final story in storyContent) {
         storyItems.add(StoryItem.pageImage(
         url: story.storyContentPicture,
@@ -47,7 +48,9 @@ class _StoryWidgetState extends State<StoryWidget> {
   @override
   void initState() {
     super.initState();
-    controller = StoryController();
+    this.storyIndex = widget.storyIndex;
+    this.storyContent = widget.storyContent.result;
+    controller = StoryController();    
     addStoryItems();
   }
 
@@ -66,9 +69,7 @@ class _StoryWidgetState extends State<StoryWidget> {
     final isLastPage = storyContent.length - 1 == currentIndex;   
     if (isLastPage) {
       Navigator.of(context).pop();
-    }else{
-    storyIndex++;
-    }    
+    }   
   }
 
   @override
@@ -87,14 +88,14 @@ class _StoryWidgetState extends State<StoryWidget> {
                   Navigator.pop(context);
                 }
               },
-              onStoryShow: (storyItem) {
-                final index = storyItems.indexOf(storyItem);
-                if (index > 0) {
-                  setState(() {
-                    date = date;
-                  });
-                }
-              },
+              // onStoryShow: (storyItem) {
+              //   final index = storyItems.indexOf(storyItem);
+              //   if (index > 0) {
+              //     setState(() {
+              //       date = date;
+              //     });
+              //   }
+              // },
             ),
           ),
         //--------------------------------Profil görünümü------------------------------------

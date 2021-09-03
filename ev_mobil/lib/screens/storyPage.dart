@@ -7,9 +7,10 @@ class StoryPage extends StatefulWidget {
 
   final List company;
   final StoryContentJsn storyContent;
+  final int storyIndex;
 
 
-  const StoryPage({@required this.company, @required this.storyContent});
+  const StoryPage({@required this.company, @required this.storyContent, this.storyIndex});
 
   @override
   _StoryPageState createState() => _StoryPageState(storyContent: storyContent);
@@ -25,7 +26,7 @@ class _StoryPageState extends State<StoryPage> {
   void initState() {
     super.initState();
     final initialPage = widget.company.indexOf(widget.company);
-    controller = PageController(initialPage: initialPage);
+    controller = PageController(initialPage: widget.storyIndex);
   }
 
   @override
@@ -43,6 +44,8 @@ class _StoryPageState extends State<StoryPage> {
                   StoryWidget(
                   company: compData,
                   controller: controller,
+                  storyIndex: widget.storyIndex,
+                  storyContent: storyContent,
                 )).toList(),
       );
      }

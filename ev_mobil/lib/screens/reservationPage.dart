@@ -93,12 +93,11 @@ class _ReservationPageState extends State<ReservationPage> {
               BackGroundContainer(
               colors: backGroundColor2,
               child: Column(
+              children: [
+              Padding(padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding,bottom: defaultPadding),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding,bottom: defaultPadding),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
                          Text("Randevularım",
                           style: Theme.of(context)
                             .textTheme
@@ -120,58 +119,50 @@ class _ReservationPageState extends State<ReservationPage> {
                               //     Event(operation: "islem")
                               //   ];
                               // }
-                              showDialog(context: rootContext, builder: (BuildContext rootContext){
-                                return AlertDialog(
-                                  // title: Column(
-                                  //   children: [Text("Randevu alınacak firmayı seçiniz"),
-                                  //   Divider(color: secondaryColor,thickness: 2,)]),
-                                  actions: <Widget>[
-                                    Container(
-                                      height: 50,
-                                      width: 300,
-                                      child: DropdownButton(   
-                                        isExpanded: true,
-                                             hint: Center(
-                                               child: Text("Randevu alınacak firmayı seçiniz",
-                                               textAlign: TextAlign.center,
-                                                     style    : TextStyle(
-                                                     fontSize : 18, 
-                                                     color:  primaryColor,
-                                                     )),
-                                             ),
-                                             dropdownColor: white,
-                                             value: selection,
-                                             items: companyContent.map((data){
-                                               return DropdownMenuItem(
-                                               child: SizedBox(
-                                                 child: Center(
-                                                   child: Text(data.companyName, textAlign: TextAlign.center,
-                                                   style: TextStyle(color: primaryColor, fontSize: 20)),
-                                                 ),
-                                               ),
-                                               value: data.id);
-                                             }).toList(),                                  
-                                             onChanged: (value) {
-                                                  if (!mounted)
-                                                  return;                                  
-                                              setState(() {
-                                                selection = value;
-                                                print(companyContent[selection-1].id.toString());
-                                                AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
-                                                Navigator.of(rootContext).pop(false);
-                                              });
-                                              },
-                                            
-                                      )
-                                     
-
-                                    
-                                    )
-                                  ],
-                                );
-                              });
-                               
+                           showDialog(context: rootContext, builder: (BuildContext rootContext){
+                             return AlertDialog(
+                               actions: <Widget>[
+                                 Container(
+                                   height: 50,
+                                   width: 300,
+                                   child: DropdownButton(   
+                                     isExpanded: true,
+                                     hint: Center(
+                                     child: Text("Randevu alınacak firmayı seçiniz",
+                                     textAlign: TextAlign.center,
+                                     style    : TextStyle(
+                                     fontSize : 18, 
+                                     color    :  primaryColor,
+                                     )),
+                                     ),
+                                     dropdownColor: white,
+                                     value: selection,
+                                     items: companyContent.map((data){
+                                     return DropdownMenuItem(
+                                     child: SizedBox(
+                                     child: Center(
+                                     child: Text(data.companyName, textAlign: TextAlign.center,
+                                     style: TextStyle(color: primaryColor, fontSize: 20)),
+                                     ),
+                                     ),
+                                     value: data.id);
+                                     }).toList(),                                  
+                                     onChanged: (value) {
+                                     if (!mounted)
+                                     return;                                  
+                                     setState(() {
+                                       selection = value;
+                                       print(companyContent[selection-1].id.toString());
+                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
+                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
+                                       Navigator.of(rootContext).pop(false);
+                                     });
+                                     },
+                                   )
+                                 )
+                               ],
+                             );
+                           });
                           }),
                         ),
                       ],
@@ -185,7 +176,7 @@ class _ReservationPageState extends State<ReservationPage> {
                         top: Radius.circular(cardCurved),
                         ),
                       ),
-                      child: SingleChildScrollView(
+                        child  : SingleChildScrollView(
                         physics: ScrollPhysics(),
                         child  : Column(
                           children: [
