@@ -6,21 +6,17 @@ class StoryPage extends StatefulWidget {
   static const route = "/storyPage";
 
   final List company;
-  final StoryContentJsn storyContent;
   final int storyIndex;
 
 
-  const StoryPage({@required this.company, @required this.storyContent, this.storyIndex});
+  const StoryPage({@required this.company, this.storyIndex});
 
   @override
-  _StoryPageState createState() => _StoryPageState(storyContent: storyContent);
+  _StoryPageState createState() => _StoryPageState();
 }
 
 class _StoryPageState extends State<StoryPage> {
   PageController controller;
-  StoryContentJsn storyContent;
-
-  _StoryPageState({this.storyContent});
 
   @override
   void initState() {
@@ -46,10 +42,9 @@ class _StoryPageState extends State<StoryPage> {
                   company: compData,
                   controller: controller,
                   storyIndex: widget.storyIndex,
-                  storyContent: storyContent,
                 )).toList(),
       );
-     }
-   }
+    }
+  }
 
 

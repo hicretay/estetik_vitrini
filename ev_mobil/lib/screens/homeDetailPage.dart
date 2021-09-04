@@ -33,22 +33,22 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   Widget build(BuildContext context) {
     print(indexx);
     return SafeArea(
-      child: Scaffold(
+        child: Scaffold(
         body: ProgressHUD(
-          child: Builder(builder: (context)=>
+        child: Builder(builder: (context)=>
               BackGroundContainer(
               colors: backGroundColor1,
               child: Column(
-                children: [
+              children: [
                   Padding(
                     padding: const EdgeInsets.all(defaultPadding),
                     child: Row(
-                      children: [
+                    children: [
                         CircleAvatar(
                           //iconun çevresini saran yapı tasarımı
-                          maxRadius: deviceWidth(context)*0.06,
-                          backgroundColor: Colors.white,
-                          child: IconButton(
+                            maxRadius: deviceWidth(context)*0.06,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
                             iconSize: iconSize,
                             icon: Icon(Icons.arrow_back,color: primaryColor,size: 23),
                             onPressed: (){Navigator.pop(context, false);},
@@ -63,21 +63,21 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                     )
                   ),
                   Padding(padding: const EdgeInsets.only(left: maxSpace),
-                    child: Column(
+                      child: Column(
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text("Kampanyalar", //Büyük Başlık
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  .copyWith(color: white, fontFamily: leadingFont),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4
+                              .copyWith(color: white, fontFamily: leadingFont),
                             ),
                         ),
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(homeContent[indexx-1].companyName,  
-                            style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white),
                           ),
                         ),
                         SizedBox(height: maxSpace)
@@ -113,7 +113,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     child: Container(
                                     width: double.infinity, //genişlik: container genişliği
                                     height: deviceHeight(context)*0.3, //container yüksekliği
-                                    child: homeDetailContent == null ? CircularProgressIndicator() :
+                                    child: homeDetailContent == null ? circularBasic : // ana sayfa içeriği boş ise circular, ekli görsel sayısı 1 ise Image.network
+                                    sliderImg.length == 1 ? Image.network(homeDetailContent[index].contentPictures[index].cPicture): //  ekli görsel sayısı 1den fazla ise carousel 
                                     Carousel(
                                     borderRadius: true,
                                     radius: Radius.circular(maxSpace),

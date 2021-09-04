@@ -1,3 +1,4 @@
+//import 'package:dropdown_search/dropdown_search.dart';
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
@@ -11,7 +12,9 @@ import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:table_calendar/table_calendar.dart';
+
 
 // ignore: must_be_immutable
 class ReservationPage extends StatefulWidget {
@@ -59,6 +62,7 @@ class _ReservationPageState extends State<ReservationPage> {
 
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
+
   
   Map<DateTime, List<Event>> selectedEvents = {
     // DateTime.now():[Event(operation: "işlem"),Event(operation: "işlem")],
@@ -72,7 +76,11 @@ class _ReservationPageState extends State<ReservationPage> {
   
     ];
   }
-  
+List<String> alertCompanyList = [];
+//   for (var item in companyContent[index].companyName) {
+//    alertCompanyList.add(item.companyName);
+//  }
+
 
   @override
   void initState() { 
@@ -96,8 +104,8 @@ class _ReservationPageState extends State<ReservationPage> {
               children: [
               Padding(padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding,bottom: defaultPadding),
                 child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                          Text("Randevularım",
                           style: Theme.of(context)
                             .textTheme
@@ -120,12 +128,13 @@ class _ReservationPageState extends State<ReservationPage> {
                               //   ];
                               // }
                            showDialog(context: rootContext, builder: (BuildContext rootContext){
+                             
                              return AlertDialog(
                                actions: <Widget>[
                                  Container(
-                                   height: 50,
                                    width: 300,
-                                   child: DropdownButton(   
+                                   child: 
+                                   SearchableDropdown(
                                      isExpanded: true,
                                      hint: Center(
                                      child: Text("Randevu alınacak firmayı seçiniz",
@@ -135,7 +144,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                      color    :  primaryColor,
                                      )),
                                      ),
-                                     dropdownColor: white,
+                                     //dropdownColor: white,
                                      value: selection,
                                      items: companyContent.map((data){
                                      return DropdownMenuItem(
@@ -158,16 +167,86 @@ class _ReservationPageState extends State<ReservationPage> {
                                        Navigator.of(rootContext).pop(false);
                                      });
                                      },
-                                   )
-                                 )
-                               ],
-                             );
-                           });
-                          }),
-                        ),
-                      ],
-                    ),
-                  ),
+                                     )
+                                   ////////////////////////////////////////////////////////////
+                                  // DropdownButton(   
+                                  //    isExpanded: true,
+                                  //    hint: Center(
+                                  //    child: Text("Randevu alınacak firmayı seçiniz",
+                                  //    textAlign: TextAlign.center,
+                                  //    style    : TextStyle(
+                                  //    fontSize : 18, 
+                                  //    color    :  primaryColor,
+                                  //    )),
+                                  //    ),
+                                  //    dropdownColor: white,
+                                  //    value: selection,
+                                  //    items: companyContent.map((data){
+                                  //    return DropdownMenuItem(
+                                  //    child: SizedBox(
+                                  //    child: Center(
+                                  //    child: Text(data.companyName, textAlign: TextAlign.center,
+                                  //    style: TextStyle(color: primaryColor, fontSize: 20)),
+                                  //    ),
+                                  //    ),
+                                  //    value: data.id);
+                                  //    }).toList(),                                  
+                                  //    onChanged: (value) {
+                                  //    if (!mounted)
+                                  //    return;                                  
+                                  //    setState(() {
+                                  //      selection = value;
+                                  //      print(companyContent[selection-1].id.toString());
+                                  //      AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
+                                  //      Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
+                                  //      Navigator.of(rootContext).pop(false);
+                                  //    });
+                                  //    },
+                                  //  )
+
+                                  ///////////////////////////////////////////////////////////////////////////////////////////////////
+                                //   child: DropdownSearch<String>(
+                                //   mode: Mode.BOTTOM_SHEET,
+                                //   items: alertCompanyList,
+                                //   label: "Randevu alınacak firmayı seçiniz",
+                                //   onChanged: print,
+                                //   selectedItem: "Randevu alınacak firmayı seçiniz",
+                                //   showSearchBox: true,
+                                //   popupTitle: Container(
+                                //     height: 50,
+                                //     decoration: BoxDecoration(
+                                //     color: primaryColor,
+                                //     borderRadius: BorderRadius.only(
+                                //         topLeft: Radius.circular(20),
+                                //         topRight: Radius.circular(20),
+                                //       ),
+                                //     ),
+                                //     child: Center(
+                                //       child: Text('Randevu alınabilecek Firmalar',
+                                //           style: TextStyle(
+                                //           fontSize: 24,
+                                //           fontWeight: FontWeight.bold,
+                                //           color: Colors.white,
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ),
+                                //       popupShape: RoundedRectangleBorder(
+                                //       borderRadius: BorderRadius.only(
+                                //       topLeft: Radius.circular(24),
+                                //       topRight: Radius.circular(24),
+                                //     ),
+                                //   ),
+                                // ),
+                              )
+                            ],
+                          );
+                        });
+                       }),
+                     ),
+                   ],
+                 ),
+               ),
                       Expanded(
                         child: Container(
                         decoration: BoxDecoration(
@@ -229,6 +308,13 @@ class _ReservationPageState extends State<ReservationPage> {
                               shrinkWrap : true,
                               itemCount  : appointmentList == null ? 0 : appointmentList.length,
                               itemBuilder: (BuildContext context, int index){
+                                
+                                 setState(() {
+                                    for (var item in companyContent[index].companyName) {
+                                    alertCompanyList.add(item.companyName);
+                                  }
+                                 });
+                                
                               return ResevationResultWidget(
                               companyName: appointmentList[index].companyName,
                               operation  : appointmentList[index].operationName,
