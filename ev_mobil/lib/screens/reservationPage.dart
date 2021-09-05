@@ -32,12 +32,7 @@ class _ReservationPageState extends State<ReservationPage> {
   List companyContent;
   List homeContent;
 
-  int selection;
-  String select;
-
-
-  final navigatorKey = GlobalKey<NavigatorState>();
-
+  String select; // firma seçimi dropDown değeri
 
   Future appointmentListFunc() async{
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
@@ -47,15 +42,12 @@ class _ReservationPageState extends State<ReservationPage> {
     });
   }
 
-   Map<String,int> companyMap = {};
-
   Future companyListFunc() async{
    final CompanyListJsn companyNewList = await companyListJsnFunc(); 
    setState(() {
       companyContent = companyNewList.result;
    });
    }
-
 
    Future homeContentList() async{
      final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3); 
@@ -66,8 +58,7 @@ class _ReservationPageState extends State<ReservationPage> {
 
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
-
-  
+ 
   Map<DateTime, List<Event>> selectedEvents = {
     // DateTime.now():[Event(operation: "işlem"),Event(operation: "işlem")],
     // DateTime.utc(2022, 9, 10):[Event(operation: "işlem"),],
@@ -76,15 +67,9 @@ class _ReservationPageState extends State<ReservationPage> {
   List<Event> _getEventsForDay(DateTime date) {
     return selectedEvents[date] ?? [
      //Event(operation: "deneme"),
-     // Event(operation: "deneme"),
-  
+     // Event(operation: "deneme"), 
     ];
   }
-List<String> alertCompanyList = [];
-//   for (var item in companyContent[index].companyName) {
-//    alertCompanyList.add(item.companyName);
-//  }
-
 
   @override
   void initState() { 
@@ -289,14 +274,7 @@ List<String> alertCompanyList = [];
                               physics    : NeverScrollableScrollPhysics(),
                               shrinkWrap : true,
                               itemCount  : appointmentList == null ? 0 : appointmentList.length,
-                              itemBuilder: (BuildContext context, int index){
-                                
-                                 setState(() {
-                                    for (var item in companyContent[index].companyName) {
-                                    alertCompanyList.add(item.companyName);
-                                  }
-                                 });
-                                
+                              itemBuilder: (BuildContext context, int index){  
                               return ResevationResultWidget(
                               companyName: appointmentList[index].companyName,
                               operation  : appointmentList[index].operationName,
