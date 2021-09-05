@@ -4,6 +4,7 @@ import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -131,17 +132,18 @@ List<String> alertCompanyList = [];
                               //   ];
                               // }
                            showDialog(context: rootContext, builder: (BuildContext rootContext){
-                             
+                             int compID = -1;
                              return AlertDialog(
                                actions: <Widget>[
                                  Container(
-                                   width: 300,
+                                   width: deviceWidth(context),
                                    child: 
-                                   SearchableDropdown.single(
+                                   SearchableDropdown(
+                                     menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
                                      closeButton: null,
-                                    //  (){
-                                    //    Navigator.pop(context);
-                                    //  },
+                                     dialogBox: false,
+                                     isCaseSensitiveSearch: false,
+                                     style: TextStyle(color: primaryColor),
                                      isExpanded: true,
                                      hint: Center(
                                      child: Text("Randevu alınacak firmayı seçiniz",
@@ -161,17 +163,18 @@ List<String> alertCompanyList = [];
                                      ),
                                      ),
                                      value: data.companyName);
-                                     }).toList(),                                  
+                                     }).toList(),  
                                      onChanged: (value) {
                                      if (!mounted)
                                      return;                                  
                                      setState(() {
                                        select = value;
-                                       int compID = -1;
                                        for (var item in companyContent) {
                                          if(item.companyName==value){
                                            compID = item.id -1;
-
+                                         }
+                                         else{
+                                           NavigationProvider.of(rootContext).setTab(RESERVATION_PAGE);
                                          }
                                        }
                                        print(companyContent[compID].id.toString());
