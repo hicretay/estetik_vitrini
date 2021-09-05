@@ -46,6 +46,8 @@ class _ReservationPageState extends State<ReservationPage> {
     });
   }
 
+   Map<String,int> companyMap = {};
+
   Future companyListFunc() async{
    final CompanyListJsn companyNewList = await companyListJsnFunc(); 
    setState(() {
@@ -135,7 +137,11 @@ List<String> alertCompanyList = [];
                                  Container(
                                    width: 300,
                                    child: 
-                                   SearchableDropdown(
+                                   SearchableDropdown.single(
+                                     closeButton: null,
+                                    //  (){
+                                    //    Navigator.pop(context);
+                                    //  },
                                      isExpanded: true,
                                      hint: Center(
                                      child: Text("Randevu alınacak firmayı seçiniz",
@@ -161,10 +167,16 @@ List<String> alertCompanyList = [];
                                      return;                                  
                                      setState(() {
                                        select = value;
-                                      
-                                       print(companyContent[selection-1].id.toString());
-                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
-                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
+                                       int compID = -1;
+                                       for (var item in companyContent) {
+                                         if(item.companyName==value){
+                                           compID = item.id -1;
+
+                                         }
+                                       }
+                                       print(companyContent[compID].id.toString());
+                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1);
+                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[compID].id,appointment: appointment,companyInfo: homeContent)));
                                        Navigator.of(rootContext).pop(false);
                                      });
                                      },
@@ -205,41 +217,6 @@ List<String> alertCompanyList = [];
                                   //    });
                                   //    },
                                   //  )
-
-                                  ///////////////////////////////////////////////////////////////////////////////////////////////////
-                                //   child: DropdownSearch<String>(
-                                //   mode: Mode.BOTTOM_SHEET,
-                                //   items: alertCompanyList,
-                                //   label: "Randevu alınacak firmayı seçiniz",
-                                //   onChanged: print,
-                                //   selectedItem: "Randevu alınacak firmayı seçiniz",
-                                //   showSearchBox: true,
-                                //   popupTitle: Container(
-                                //     height: 50,
-                                //     decoration: BoxDecoration(
-                                //     color: primaryColor,
-                                //     borderRadius: BorderRadius.only(
-                                //         topLeft: Radius.circular(20),
-                                //         topRight: Radius.circular(20),
-                                //       ),
-                                //     ),
-                                //     child: Center(
-                                //       child: Text('Randevu alınabilecek Firmalar',
-                                //           style: TextStyle(
-                                //           fontSize: 24,
-                                //           fontWeight: FontWeight.bold,
-                                //           color: Colors.white,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                //       popupShape: RoundedRectangleBorder(
-                                //       borderRadius: BorderRadius.only(
-                                //       topLeft: Radius.circular(24),
-                                //       topRight: Radius.circular(24),
-                                //     ),
-                                //   ),
-                                // ),
                               )
                             ],
                           );
