@@ -32,6 +32,7 @@ class _ReservationPageState extends State<ReservationPage> {
   List homeContent;
 
   int selection;
+  String select;
 
 
   final navigatorKey = GlobalKey<NavigatorState>();
@@ -144,8 +145,7 @@ List<String> alertCompanyList = [];
                                      color    :  primaryColor,
                                      )),
                                      ),
-                                     //dropdownColor: white,
-                                     value: selection,
+                                     value: select,
                                      items: companyContent.map((data){
                                      return DropdownMenuItem(
                                      child: SizedBox(
@@ -154,13 +154,14 @@ List<String> alertCompanyList = [];
                                      style: TextStyle(color: primaryColor, fontSize: 20)),
                                      ),
                                      ),
-                                     value: data.id);
+                                     value: data.companyName);
                                      }).toList(),                                  
                                      onChanged: (value) {
                                      if (!mounted)
                                      return;                                  
                                      setState(() {
-                                       selection = value;
+                                       select = value;
+                                      
                                        print(companyContent[selection-1].id.toString());
                                        AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
@@ -168,6 +169,7 @@ List<String> alertCompanyList = [];
                                      });
                                      },
                                      )
+                                     
                                    ////////////////////////////////////////////////////////////
                                   // DropdownButton(   
                                   //    isExpanded: true,
