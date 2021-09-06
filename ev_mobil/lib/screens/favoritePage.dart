@@ -89,7 +89,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
                           final ContentStreamJsn homeContent = await contentStreamJsnFunc(3);                       
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, homeContent: homeContent.result,indexx: favoriContent[index].companyId)));
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, homeContent: homeContent.result,indexx: favoriContent[index].campaingId)));
                           progressUHD.dismiss();
                         },
                         //--------------------------------------------------------------------------------------------------------------------

@@ -206,6 +206,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
+                                Navigator.pop(context);
                                 progressHUD.dismiss();
                             },
                           ),

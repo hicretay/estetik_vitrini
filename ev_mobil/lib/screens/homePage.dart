@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                           progressUHD.show(); 
                           final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,indexx: homeContent[index].campaingId)));
+                           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,indexx: homeContent[index].campaingId)));
                           progressUHD.dismiss();
                         },
                         //---------------------------------------------------------------------------------------------------------------------------------------------------

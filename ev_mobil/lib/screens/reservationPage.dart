@@ -82,7 +82,7 @@ class _ReservationPageState extends State<ReservationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final rootContext = context.findRootAncestorStateOfType<NavigatorState>().context;
+    //final rootContext = context.findRootAncestorStateOfType<NavigatorState>().context;
     return SafeArea(
       child: Scaffold(
         body: ProgressHUD(
@@ -116,7 +116,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               //     Event(operation: "islem")
                               //   ];
                               // }
-                           showDialog(context: rootContext, builder: (BuildContext rootContext){
+                           showDialog(context: context, builder: (BuildContext context){
                              int compID = -1;
                              return AlertDialog(
                                actions: <Widget>[
@@ -159,13 +159,13 @@ class _ReservationPageState extends State<ReservationPage> {
                                            compID = item.id -1;
                                          }
                                          else{
-                                           NavigationProvider.of(rootContext).setTab(RESERVATION_PAGE);
+                                           NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                                          }
                                        }
                                        print(companyContent[compID].id.toString());
                                        AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1);
                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[compID].id,appointment: appointment,companyInfo: homeContent)));
-                                       Navigator.of(rootContext).pop(false);
+                                        Navigator.of(context).pop(false);
                                      });
                                      },
                                      )
