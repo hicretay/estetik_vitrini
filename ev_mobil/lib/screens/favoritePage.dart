@@ -80,7 +80,6 @@ class _FavoritePageState extends State<FavoritePage> {
                           companyLogo   : favoriContent[index].companyLogo,
                           companyName   : favoriContent[index].companyName,
                           contentPicture: favoriContent[index].contentPicture,
-                          companyPhone  : favoriContent[index].companyPhone,
                           cardText      : favoriContent[index].contentTitle,
                           pinColor      : primaryColor,
                           //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------

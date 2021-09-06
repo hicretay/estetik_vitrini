@@ -13,15 +13,15 @@ class HomeContainerWidget extends StatefulWidget {
   final String companyLogo; // resimde yer alacak metin
   final String companyName; // resimde yer alacak metin
   final String contentPicture;
-  final String companyPhone;
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
   final Widget child;
   final Color pinColor;
   final bool checked;
-  final VoidCallback onPressedLocation;
+  final bool liked;
+  final VoidCallback onPressedLocation, onPressedPhone;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture, this.checked, this.onPressedLocation, this.companyPhone})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture, this.checked, this.onPressedLocation, this.liked, this.onPressedPhone})
       : super(key: key);
 
   @override
@@ -131,9 +131,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                   // //---------------------------------------------------------------------------
                                   //------------------------------İLETİŞİM ICONBUTTONI----------------------------
                                     IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
-                                        onPressed: () {
-                                          showAlert(context,"İletişim" + "\n${widget.companyPhone}");
-                                        }),
+                                        onPressed: widget.onPressedPhone),
                                   //------------------------------------------------------------------------------
                                   //-----------------------------KONUM ICONBUTTONI--------------------------------
                                     IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),

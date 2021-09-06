@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
-import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../settings/consts.dart';
@@ -192,10 +192,14 @@ class _HomePageState extends State<HomePage> {
                         return HomeContainerWidget(
                           companyLogo   : homeContent[index].companyLogo,
                           companyName   : homeContent[index].companyName,
-                          companyPhone  : homeContent[index].companyPhone,
                           contentPicture: homeContent[index].contentPicture,
                           cardText      : homeContent[index].contentTitle,
                           pinColor      : primaryColor,
+                          liked         : homeContent[index].liked,
+                          onPressedPhone: () async{ 
+                                          dynamic number = homeContent[index].companyPhone.toString();
+                                          bool res = await FlutterPhoneDirectCaller.callNumber(number);
+                                        },
                           //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                           onPressed: () async{
                           final progressUHD = ProgressHUD.of(context);

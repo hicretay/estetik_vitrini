@@ -24,9 +24,9 @@ class _StoryWidgetState extends State<StoryWidget> {
   int storyIndex;
 
   List storyContent = [];
-  
-  Future<List<StoryItem>> addStoryItems() async{ //storyItems listesine storyleri ekleyen fonk.
   List<StoryItem> storyItems = [];
+  Future<List<StoryItem>> addStoryItems() async{ //storyItems listesine storyleri ekleyen fonk.
+
   StoryContentJsn temp = await storyContentJsnFunc(widget.company.id);
   List<dynamic>storyContent = temp.result; 
     for (final itemS in storyContent) {
@@ -45,7 +45,6 @@ class _StoryWidgetState extends State<StoryWidget> {
     super.initState();
     this.storyIndex = widget.storyIndex;
     controller = StoryController();
-    addStoryItems();
   }
 
   @override
@@ -149,7 +148,7 @@ class _StoryWidgetState extends State<StoryWidget> {
             }else {
               return circularBasic;
             }
-            
           }
-        );}
+        );
+      }
 }

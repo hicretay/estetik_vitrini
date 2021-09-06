@@ -29,8 +29,8 @@ dependencies:
   table_calendar: ^3.0.2
   toast: ^0.1.5
   webview_flutter: ^2.0.12
-  dropdown_search: ^0.4.9
   searchable_dropdown: ^1.1.3
+  flutter_phone_direct_caller: ^2.0.0
 
 dev_dependencies:
   flutter_test:

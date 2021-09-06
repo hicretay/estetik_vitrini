@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/widgets/storyWidget.dart';
 import 'package:flutter/material.dart';
 
