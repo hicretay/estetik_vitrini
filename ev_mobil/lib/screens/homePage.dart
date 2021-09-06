@@ -8,9 +8,9 @@ import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
@@ -198,7 +198,8 @@ class _HomePageState extends State<HomePage> {
                           liked         : homeContent[index].liked,
                           onPressedPhone: () async{ 
                                           dynamic number = homeContent[index].companyPhone.toString();
-                                          bool res = await FlutterPhoneDirectCaller.callNumber(number);
+                                          //bool res = await FlutterPhoneDirectCaller.callNumber(number);
+                                          launch("tel://$number");
                                         },
                           //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                           onPressed: () async{
