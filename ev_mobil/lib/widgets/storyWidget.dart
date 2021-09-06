@@ -21,12 +21,12 @@ class StoryWidget extends StatefulWidget {
 
 class _StoryWidgetState extends State<StoryWidget> {
   StoryController controller;
-  int storyIndex;
+  //int storyIndex;
 
   List storyContent = [];
   List<StoryItem> storyItems = [];
-  Future<List<StoryItem>> addStoryItems() async{ //storyItems listesine storyleri ekleyen fonk.
 
+  Future<List<StoryItem>> addStoryItems() async{ //storyItems listesine storyleri ekleyen fonk.
   StoryContentJsn temp = await storyContentJsnFunc(widget.company.id);
   List<dynamic>storyContent = temp.result; 
     for (final itemS in storyContent) {
@@ -34,7 +34,7 @@ class _StoryWidgetState extends State<StoryWidget> {
         url: itemS.storyContentPicture,
         controller: controller,
         caption: itemS.storyContent,
-        duration: Duration(milliseconds: 3000),
+        duration: Duration(milliseconds: 5000),
       ));
     }
     return storyItems;
@@ -43,8 +43,8 @@ class _StoryWidgetState extends State<StoryWidget> {
   @override
   void initState() {
     super.initState();
-    this.storyIndex = widget.storyIndex;
     controller = StoryController();
+    setState(() {});
   }
 
   @override
@@ -53,13 +53,15 @@ class _StoryWidgetState extends State<StoryWidget> {
     super.dispose();
   }
 
+///////////////////////doğru çalışmıyor
   void handleCompleted() { // Story tamamlandığında olacakların fonk.
     widget.controller.nextPage( // sonraki sayfa animasyonu
       duration: Duration(milliseconds: 300),
       curve: Curves.easeIn,
     );
-    final currentIndex = storyContent.indexOf(storyContent[storyIndex]);
-    final isLastPage = storyContent.length  == currentIndex;   
+
+    final currentIndex = widget.storyIndex; ///////////
+    final isLastPage = widget.storyIndex - 1 == currentIndex;   
     if (isLastPage) {
       Navigator.of(context).pop();
     } 
