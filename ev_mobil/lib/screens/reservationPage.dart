@@ -59,15 +59,14 @@ class _ReservationPageState extends State<ReservationPage> {
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
  
-  Map<DateTime, List<Event>> selectedEvents = {
+  Map<DateTime, List> selectedEvents = {
     // DateTime.now():[Event(operation: "işlem"),Event(operation: "işlem")],
     // DateTime.utc(2022, 9, 10):[Event(operation: "işlem"),],
   };
 
   List<Event> _getEventsForDay(DateTime date) {
     return selectedEvents[date] ?? [
-     //Event(operation: "deneme"),
-     // Event(operation: "deneme"), 
+    // Event(operation: "deneme"),
     ];
   }
 
@@ -165,7 +164,6 @@ class _ReservationPageState extends State<ReservationPage> {
                                        print(companyContent[compID].id.toString());
                                        AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1);
                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[compID].id,appointment: appointment,companyInfo: homeContent)));
-                                        Navigator.of(context).pop(false);
                                      });
                                      },
                                      )

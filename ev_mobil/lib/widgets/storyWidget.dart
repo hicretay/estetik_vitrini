@@ -9,27 +9,35 @@ class StoryWidget extends StatefulWidget {
   final PageController controller;
   final int storyIndex; //company list servisindeki id değeri
   final StoryContentJsn storyContent; // storyContentJsn servisindeki id, storyContentPicture,  storyContent değişkenkleri 
+  final int lastCompId;
 
   const StoryWidget({
     @required this.company,
-    @required this.controller, this.storyIndex, this.storyContent,
+    @required this.controller, this.storyContent, this.storyIndex, this.lastCompId,
   });
 
   @override
-  _StoryWidgetState createState() => _StoryWidgetState();
+  _StoryWidgetState createState() => _StoryWidgetState(storyIndex: storyIndex, lastCompId: lastCompId);
 }
 
 class _StoryWidgetState extends State<StoryWidget> {
   StoryController controller;
-  //int storyIndex;
+  int storyIndex;
+  int lastCompId;
+
+  _StoryWidgetState({this.storyIndex, this.lastCompId});
 
   List storyContent = [];
   List<StoryItem> storyItems = [];
+  
+  int counter = 0;
+
 
   Future<List<StoryItem>> addStoryItems() async{ //storyItems listesine storyleri ekleyen fonk.
   StoryContentJsn temp = await storyContentJsnFunc(widget.company.id);
-  List<dynamic>storyContent = temp.result; 
-    for (final itemS in storyContent) {
+  List<dynamic>storyContent = temp.result;  
+        
+  for (final itemS in storyContent) {    
         storyItems.add(StoryItem.pageImage(
         url: itemS.storyContentPicture,
         controller: controller,
@@ -40,11 +48,11 @@ class _StoryWidgetState extends State<StoryWidget> {
     return storyItems;
   }
 
+
   @override
   void initState() {
     super.initState();
     controller = StoryController();
-    setState(() {});
   }
 
   @override
@@ -53,18 +61,14 @@ class _StoryWidgetState extends State<StoryWidget> {
     super.dispose();
   }
 
-///////////////////////doğru çalışmıyor
   void handleCompleted() { // Story tamamlandığında olacakların fonk.
-    widget.controller.nextPage( // sonraki sayfa animasyonu
+      widget.controller.nextPage( // sonraki sayfa animasyonu
       duration: Duration(milliseconds: 300),
       curve: Curves.easeIn,
     );
-
-    final currentIndex = widget.storyIndex; ///////////
-    final isLastPage = widget.storyIndex - 1 == currentIndex;   
-    if (isLastPage) {
+      if (widget.company.id == lastCompId) {
       Navigator.of(context).pop();
-    } 
+    }    
   }
 
   @override
@@ -95,7 +99,7 @@ class _StoryWidgetState extends State<StoryWidget> {
             Material(
             type: MaterialType.transparency,
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: deviceWidth(context)*0.05, vertical: deviceHeight(context)*0.1),
+              margin: EdgeInsets.symmetric(horizontal: deviceWidth(context)*0.05, vertical: deviceHeight(context)*0.06),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -147,10 +151,10 @@ class _StoryWidgetState extends State<StoryWidget> {
       ),
     ],
   );
-            }else {
-              return circularBasic;
-            }
-          }
-        );
-      }
+       }else {
+         return circularBasic;
+       }
+     }
+   );
+ }
 }

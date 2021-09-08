@@ -6,16 +6,20 @@ class StoryPage extends StatefulWidget {
 
   final List company;
   final int storyIndex;
+  final int lastCompId;
 
 
-  const StoryPage({@required this.company, this.storyIndex});
+  const StoryPage({@required this.company, this.storyIndex, this.lastCompId});
 
   @override
-  _StoryPageState createState() => _StoryPageState();
+  _StoryPageState createState() => _StoryPageState(storyIndex: storyIndex, lastCompId: lastCompId);
 }
 
 class _StoryPageState extends State<StoryPage> {
   PageController controller;
+  int storyIndex;
+  int lastCompId;
+  _StoryPageState({this.storyIndex, this.lastCompId});
 
   @override
   void initState() {
@@ -30,7 +34,6 @@ class _StoryPageState extends State<StoryPage> {
     controller.dispose();
     super.dispose();
   }
-  
   @override
   Widget build(BuildContext context){
     //SystemChrome.setEnabledSystemUIOverlays([]); // tam ekran
@@ -41,6 +44,7 @@ class _StoryPageState extends State<StoryPage> {
                   company: compData,
                   controller: controller,
                   storyIndex: widget.storyIndex,
+                  lastCompId: lastCompId,
                 )).toList(),
       );
     }
