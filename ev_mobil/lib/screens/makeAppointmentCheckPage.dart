@@ -93,7 +93,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                           ),
                         ),
                         Align(alignment: Alignment.topLeft,
-                            child: Text(companyInfo[indexx-1].companyName, 
+                            child: Text(appointment.companyNameS, 
                             style: TextStyle(
                             color: Colors.white),
                           ),
@@ -199,7 +199,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                             onPressed: () async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                                await appointmentAddJsnFunc(1, companyInfo[indexx-1].companyId,  companyInfo[indexx-1].campaingId ?? 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operation, teNote.text);
+                                await appointmentAddJsnFunc(1, appointment.companyId, appointment.campaignId ?? 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operation, teNote.text);
                                 await showToast(context, "Randevu başarıyla kaydedildi!");
                                 await appointmentListFunc();
                                 Navigator.pop(context);

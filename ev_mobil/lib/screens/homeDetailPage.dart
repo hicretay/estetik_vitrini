@@ -225,10 +225,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
                                     onPressed: () {
                                       setState(() {
-                                        AppointmentObject appointment = AppointmentObject(companyId: homeContent[0].companyId,userId: 1);
+                                        AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: 1, companyNameS: companyName, campaignId: campaingId);
                                         final progressHUD = ProgressHUD.of(context);
                                         progressHUD.show(); 
-                                        Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment, indexx: campaingId)));
+                                        Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment)));
                                         progressHUD.dismiss();
                                       });
                                       //Buton tıklandığında randevu al sayfasına yönlendirilecek

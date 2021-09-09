@@ -10,22 +10,19 @@ class MakeAppointmentOperationPage extends StatefulWidget {
   final AppointmentObject appointment;
   final List companyOperation;
   final dynamic companyInfo;
-  final int indexx;
-  MakeAppointmentOperationPage({Key key, this.companyOperation, this.companyInfo, this.appointment, this.indexx}) : super(key: key);
+  MakeAppointmentOperationPage({Key key, this.companyOperation, this.companyInfo, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,companyInfo: companyInfo, appointment: appointment, indexx: indexx);
+  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,companyInfo: companyInfo, appointment: appointment);
 }
 
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
   AppointmentObject appointment;
   List checkedOperation = [];
 
-  int indexx;
-
   List companyOperation;
    dynamic companyInfo;
-  _MakeAppointmentOperationPageState({this.companyOperation,this.companyInfo, this.appointment, this.indexx});
+  _MakeAppointmentOperationPageState({this.companyOperation,this.companyInfo, this.appointment});
 
   Map<dynamic,bool> operationListMap = {};
 
@@ -92,7 +89,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              companyInfo[indexx-1].companyName, 
+                              appointment.companyNameS, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -238,7 +235,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                 }
                 final companyOperationTime = await companyOperationTimeJsnFunc([1,2]); 
                 if(appointment.operation!=null){              
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo, appointment: appointment, indexx: indexx)));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo, appointment: appointment)));
                 }
                 else{
                   showToast(context, "Lütfen bir işlem seçiniz!");

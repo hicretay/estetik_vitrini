@@ -10,19 +10,19 @@ class MakeAppointmentTimePage extends StatefulWidget {
   final AppointmentObject appointment;
   final List companyOperationTime;
   final dynamic companyInfo;
-  final int indexx;
-  MakeAppointmentTimePage({Key key, this.companyOperationTime, this.companyInfo, this.appointment, this.indexx, }) : super(key: key);
+
+  MakeAppointmentTimePage({Key key, this.companyOperationTime, this.companyInfo, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime,companyInfo: companyInfo, appointment: appointment, indexx: indexx);
+  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime,companyInfo: companyInfo, appointment: appointment);
 }
 
 class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
   AppointmentObject appointment;
   List companyOperationTime;
   dynamic companyInfo;
-  int indexx;
-  _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo, this.appointment, this.indexx});
+
+  _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo, this.appointment});
 
   int _checked = -1;
   @override
@@ -74,7 +74,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              companyInfo[indexx-1].companyName, 
+                              appointment.companyNameS, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -146,7 +146,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
           final progressHUD = ProgressHUD.of(context);
           progressHUD.show();
           if(appointment.timeS!=null){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,appointment: appointment, indexx: indexx)));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,appointment: appointment)));
           }
           else{
             showToast(context, "Lütfen bir saat seçiniz!");
