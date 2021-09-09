@@ -47,16 +47,16 @@ Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) asy
 //---------------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------Ana sayfa postlar Listesi Fonksiyonu-----------------------------------------------
-Future<ContentStreamJsn> contentStreamJsnFunc(int id) async {
+Future<ContentStreamJsn> contentStreamJsnFunc(int id, int page) async {
   final response = await http.post(
     Uri.parse(url + "ContentStream/List"),
-    body: '{"userId":' + id.toString() + '}',
+    body: '{"userId":' + id.toString() + ',' + '"page":' + page.toString() + '}',
     headers: header
   );
 
-  if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
     final String responseString = response.body;
-    return contentStreamJsnFromJson(responseString);
+    return contentStreamJsnFromJson(responseString);     
   } else {
     return null;
   }

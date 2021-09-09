@@ -7,19 +7,23 @@ String contentStreamJsnToJson(ContentStreamJsn data) => json.encode(data.toJson(
 class ContentStreamJsn {
     ContentStreamJsn({
         this.success,
+        this.totalPage,
         this.result,
     });
 
     bool success;
+    int totalPage;
     List<Result> result;
 
     factory ContentStreamJsn.fromJson(Map<String, dynamic> json) => ContentStreamJsn(
         success: json["success"],
+        totalPage: json["totalPage"],
         result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "success": success,
+        "totalPage": totalPage,
         "result": List<dynamic>.from(result.map((x) => x.toJson())),
     };
 }
@@ -50,16 +54,16 @@ class Result {
     int likeCount;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
-        companyId: json["companyId"] ?? 0,
-        campaingId: json["campaingId"] ?? 0,
-        companyName: json["companyName"] ?? "",
-        companyLogo: json["companyLogo"] ?? "",
-        companyPhone: json["companyPhone"] ?? "",
-        googleAdressLink: json["googleAdressLink"] ?? "",
-        contentPicture: json["contentPicture"] ?? "",
-        contentTitle: json["contentTitle"] ?? "",
-        liked: json["liked"] ?? false,
-        likeCount: json["likeCount"] ?? 0,
+        companyId: json["companyId"],
+        campaingId: json["campaingId"],
+        companyName: json["companyName"],
+        companyLogo: json["companyLogo"],
+        companyPhone: json["companyPhone"],
+        googleAdressLink: json["googleAdressLink"],
+        contentPicture: json["contentPicture"],
+        contentTitle: json["contentTitle"],
+        liked: json["liked"],
+        likeCount: json["likeCount"],
     );
 
     Map<String, dynamic> toJson() => {

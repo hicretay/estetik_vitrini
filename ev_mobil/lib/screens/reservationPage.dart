@@ -50,7 +50,7 @@ class _ReservationPageState extends State<ReservationPage> {
    }
 
    Future homeContentList() async{
-     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3); 
+     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3,1); 
      setState(() {
         homeContent = homeContentNewList.result;
      });
