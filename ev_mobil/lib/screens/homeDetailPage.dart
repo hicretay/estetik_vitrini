@@ -17,11 +17,12 @@ class HomeDetailPage extends StatefulWidget {
   final String companyLogo;
   final String companyName;
   final String contentTitle;
-  HomeDetailPage({Key key, this.homeDetailContent, this.homeContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle}) : super(key: key);
+  final String googleAdressLink;
+  HomeDetailPage({Key key, this.homeDetailContent, this.homeContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink}) : super(key: key);
 
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, 
-  homeContent: homeContent, campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle);
+  homeContent: homeContent, campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
@@ -32,12 +33,13 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   String companyLogo;
   String companyName;
   String contentTitle;
+  String googleAdressLink;
 
   bool _checked = false;
   int counter = 99;
 
   
-  _HomeDetailPageState({this.homeDetailContent, this.homeContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle});
+  _HomeDetailPageState({this.homeDetailContent, this.homeContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink});
   @override
   Widget build(BuildContext context) {
     print("Kampanya id $campaingId");
@@ -45,11 +47,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
     //--------------------Slider Imageları-------------------
     List<dynamic> sliderImg = [];
-    for (var item in homeDetailContent[0].contentPictures) {
+    for (var item in homeDetailContent.first.contentPictures) {
       sliderImg.add(NetworkImage(item.cPicture));
     }   
     //-------------------------------------------------------                 
-    _checked = homeContent[0].liked; // Gönderi beğenilmiş mi servisten okuyacak  
+    _checked = homeContent.first.liked; // Gönderi beğenilmiş mi servisten okuyacak  
 
     return SafeArea(
         child: Scaffold(
@@ -124,7 +126,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       width: double.infinity, //genişlik: container genişliği
                                       height: deviceHeight(context)*0.3, //container yüksekliği
                                       child: homeDetailContent == null ? circularBasic : // ana sayfa içeriği boş ise circular, ekli görsel sayısı 1 ise Image.network
-                                      sliderImg.length == 1 ? Image.network(homeDetailContent[0].contentPictures[0].cPicture): //  ekli görsel sayısı 1den fazla ise carousel 
+                                      sliderImg.length == 1 ? Image.network(homeDetailContent.first.contentPictures.first.cPicture): //  ekli görsel sayısı 1den fazla ise carousel 
                                       Carousel(
                                       borderRadius: true,
                                       radius: Radius.circular(maxSpace),
@@ -209,7 +211,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 onPressed  : () async{
                                                 final progressUHD = ProgressHUD.of(context);
                                                 progressUHD.show();
-                                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[campaingId-1].googleAdressLink)));
+                                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: googleAdressLink)));
                                                 progressUHD.dismiss(); 
                                               }),
                                         ),
@@ -254,7 +256,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       size : iconSize,
                                       color: primaryColor),
                                       SizedBox(width: minSpace),
-                                      Text("${homeDetailContent[0].likeCount} kişi tarafından favorilere eklendi"),
+                                      Text("${homeDetailContent.first.likeCount} kişi tarafından favorilere eklendi"),
                                       // counter ile gösterilecek beğeni sayısı
                                     ],
                                   ),
@@ -271,7 +273,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       ),
                                       Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text(homeDetailContent[0].campaingDetail)),
+                                        child: Text(homeDetailContent.first.campaingDetail)),
                                     ],
                                   ),
                                 ),

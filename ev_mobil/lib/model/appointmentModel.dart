@@ -1,10 +1,10 @@
 class AppointmentObject {
-  AppointmentObject({this.userId,this.companyId,this.appointmentDate,this.appointmentTimeId,this.operation, this.companyNameS, this.campaignId});
+  AppointmentObject({this.userId,this.companyId,this.appointmentDate,this.appointmentTimeId,this.operationId, this.companyNameS, this.campaignId});
   int userId; 
   int companyId; 
   String appointmentDate; 
   int appointmentTimeId;
-  int operation; 
+  int operationId; 
   int campaignId;
 
   String timeS;

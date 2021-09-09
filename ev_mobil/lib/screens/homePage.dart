@@ -196,8 +196,8 @@ class _HomePageState extends State<HomePage> {
                           pinColor      : primaryColor,
                           liked         : homeContent[index].liked,
                           onPressedPhone: () async{ 
-                                          dynamic number = homeContent[index].companyPhone.toString();
-                                          //bool res = await FlutterPhoneDirectCaller.callNumber(number);
+                                          dynamic number = homeContent[index].companyPhone.toString(); // arama ekranına yönlendirme
+                                          //bool res = await FlutterPhoneDirectCaller.callNumber(number); // direkt arama
                                           launch("tel://$number");
                                         },
                           //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
@@ -207,7 +207,8 @@ class _HomePageState extends State<HomePage> {
                           final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,
-                           campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle)));
+                           campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
+                           googleAdressLink: homeContent[index].googleAdressLink)));
                           progressUHD.dismiss();
                         },
                         //---------------------------------------------------------------------------------------------------------------------------------------------------

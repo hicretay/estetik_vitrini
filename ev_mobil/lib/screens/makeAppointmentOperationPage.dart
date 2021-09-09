@@ -230,11 +230,11 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                   for (var item in checkedOperation) {
                   print(item.id);
                   print(item.operationName);
-                  appointment.operation = item.id;
+                  appointment.operationId = item.id;
                   appointment.operationS = item.operationName;
                 }
                 final companyOperationTime = await companyOperationTimeJsnFunc([1,2]); 
-                if(appointment.operation!=null){              
+                if(appointment.operationId!=null){              
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo, appointment: appointment)));
                 }
                 else{
