@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 //-----------------------------------------
   final RefreshController refreshController = RefreshController(initialRefresh: true);
 
-  Future<bool> getData({bool isRefresh = false}) async{
+  Future<bool> getHomeData({bool isRefresh = false}) async{
     if(isRefresh){
       pageIndex = 1;
     }
@@ -66,10 +66,10 @@ class _HomePageState extends State<HomePage> {
     else{
       homeContent.addAll(result.result);
       }
-    setState(() {
-          pageIndex++;
-          totalPage = result.totalPage;
-        });
+    pageIndex++;
+    totalPage = result.totalPage;
+
+    setState(() {});
     return true;
   } else {
     return false;
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() { 
     super.initState();
-    getData();
+    getHomeData();
     companyStoryList();
     setState(() {});
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                         
                       onRefresh: ()async{
-                        final result =await getData(isRefresh: true);
+                        final result =await getHomeData(isRefresh: true);
                         if(result){
                           refreshController.refreshCompleted();
                         }
@@ -255,7 +255,7 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                       onLoading: ()async{
-                         final result =await getData(isRefresh: false);
+                         final result =await getHomeData();
                          if(result){
                            refreshController.loadComplete();
                          }
