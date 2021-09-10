@@ -220,6 +220,31 @@ class _HomePageState extends State<HomePage> {
                     child: SmartRefresher(
                       controller: refreshController,
                       enablePullUp: true,
+                      footer: CustomFooter(
+                      builder: (BuildContext context,LoadStatus mode){
+                        Widget body ;
+                        if(mode==LoadStatus.idle){
+                          body =  Text("Daha fazla kampanya yükle");
+                        }
+                        else if(mode==LoadStatus.loading){
+                          body = circularBasic;
+                        }
+                        else if(mode == LoadStatus.failed){
+                          body = Text("Yükleme hatası !");
+                        }
+                        else if(mode == LoadStatus.canLoading){
+                            body = Text("Gönderiler yükleniyor...");
+                        }
+                        else{
+                          body = Text("Akış sonu");
+                        }
+                        return Container(
+                          height: 35.0,
+                          child: Center(child:body),
+                        );
+                      },
+                    ),
+                        
                       onRefresh: ()async{
                         final result =await getData(isRefresh: true);
                         if(result){

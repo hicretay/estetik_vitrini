@@ -157,12 +157,13 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(minSpace),
+                                      //-----------------------Beğeni iconButton'ı----------------------------
                                           child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
                                             maxRadius      : deviceWidth(context)*0.05,
                                             backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
                                             child          : IconButton(
                                             iconSize       : iconSize,
-                                            icon           : Icon(LineIcons.heart,size: 18, color: _checked  ? Colors.white : primaryColor, //Seçili ise açık, değilse koyu renk verildi
+                                            icon           : Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, //Seçili ise açık, değilse koyu renk verildi
                                             ),
                                             onPressed: () {
                                                 setState(() { 
