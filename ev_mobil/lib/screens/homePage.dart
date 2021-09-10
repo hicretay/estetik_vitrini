@@ -27,16 +27,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isRefresh = false;
   List homeContent = []; 
   int pageIndex = 1;
-  int totalPage = 3;
+  int totalPage = 1;
 
   TextEditingController teSearch = TextEditingController();
 
   List companyContent;
-
-  ScrollController _scrollController = ScrollController();
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
@@ -49,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       pageIndex = 1;
     }
     else{
-      if(pageIndex >= totalPage){
+      if(pageIndex > totalPage){
         refreshController.loadNoData();
         return false;
       }
@@ -67,12 +64,12 @@ class _HomePageState extends State<HomePage> {
       homeContent = result.result;
     }
     else{
-
       homeContent.addAll(result.result);
       }
-
-    pageIndex++;
-    totalPage = result.totalPage;
+    setState(() {
+          pageIndex++;
+          totalPage = result.totalPage;
+        });
     return true;
   } else {
     return false;
@@ -83,7 +80,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() { 
     super.initState();
+    getData();
     companyStoryList();
+    setState(() {});
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
         _connectionChangeStream = connectionStatus.connectionChange.listen(connectionChanged);
   }
@@ -240,7 +239,6 @@ class _HomePageState extends State<HomePage> {
                          }
                       },
                       child: ListView.builder(
-                          controller: _scrollController,
                           shrinkWrap: true,
                           itemCount:  homeContent.length,
                           itemBuilder: (BuildContext context, int index){
