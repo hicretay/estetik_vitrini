@@ -9,11 +9,10 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 class MakeAppointmentOperationPage extends StatefulWidget {
   final AppointmentObject appointment;
   final List companyOperation;
-  final dynamic companyInfo;
-  MakeAppointmentOperationPage({Key key, this.companyOperation, this.companyInfo, this.appointment}) : super(key: key);
+  MakeAppointmentOperationPage({Key key, this.companyOperation, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,companyInfo: companyInfo, appointment: appointment);
+  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,appointment: appointment);
 }
 
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
@@ -21,8 +20,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
   List checkedOperation = [];
 
   List companyOperation;
-   dynamic companyInfo;
-  _MakeAppointmentOperationPageState({this.companyOperation,this.companyInfo, this.appointment});
+  _MakeAppointmentOperationPageState({this.companyOperation,this.appointment});
 
   Map<dynamic,bool> operationListMap = {};
 
@@ -235,7 +233,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                 }
                 final companyOperationTime = await companyOperationTimeJsnFunc([1,2]); 
                 if(appointment.operationId!=null){              
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,companyInfo: companyInfo, appointment: appointment)));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
                 }
                 else{
                   showToast(context, "Lütfen bir işlem seçiniz!");

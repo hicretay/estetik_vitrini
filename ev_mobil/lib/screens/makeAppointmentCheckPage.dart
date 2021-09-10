@@ -9,23 +9,21 @@ import 'package:estetikvitrini/settings/functions.dart';
 
 class MakeAppointmentCheckPage extends StatefulWidget {
   final AppointmentObject appointment;
-  final dynamic companyInfo;
   final int indexx;
-  MakeAppointmentCheckPage({Key key, this.companyInfo, this.appointment, this.indexx}) : super(key: key);
+  MakeAppointmentCheckPage({Key key, this.appointment, this.indexx}) : super(key: key);
 
   @override
-  _MakeAppointmentCheckPageState createState() => _MakeAppointmentCheckPageState(companyInfo: companyInfo, appointment: appointment,indexx: indexx);
+  _MakeAppointmentCheckPageState createState() => _MakeAppointmentCheckPageState( appointment: appointment);
 }
 
 class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
   TextEditingController teNote = TextEditingController();
   String teOperation;
-  int indexx;
+
 
    AppointmentObject appointment;
 
-   dynamic companyInfo;
-   _MakeAppointmentCheckPageState({this.companyInfo, this.appointment, this.indexx});
+   _MakeAppointmentCheckPageState({this.appointment});
 
   List appointmentList;
 

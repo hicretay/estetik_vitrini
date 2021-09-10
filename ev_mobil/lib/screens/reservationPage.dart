@@ -50,7 +50,7 @@ class _ReservationPageState extends State<ReservationPage> {
    }
 
    Future homeContentList() async{
-     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3,1); 
+     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3,1); /////////////
      setState(() {
         homeContent = homeContentNewList.result;
      });
@@ -163,46 +163,10 @@ class _ReservationPageState extends State<ReservationPage> {
                                        }
                                        print(companyContent[compID].id.toString());
                                        AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1);
-                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment,companyInfo: homeContent)));
+                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
                                      });
                                      },
                                      )
-                                     
-                                   ////////////////////////////////////////////////////////////
-                                  // DropdownButton(   
-                                  //    isExpanded: true,
-                                  //    hint: Center(
-                                  //    child: Text("Randevu alınacak firmayı seçiniz",
-                                  //    textAlign: TextAlign.center,
-                                  //    style    : TextStyle(
-                                  //    fontSize : 18, 
-                                  //    color    :  primaryColor,
-                                  //    )),
-                                  //    ),
-                                  //    dropdownColor: white,
-                                  //    value: selection,
-                                  //    items: companyContent.map((data){
-                                  //    return DropdownMenuItem(
-                                  //    child: SizedBox(
-                                  //    child: Center(
-                                  //    child: Text(data.companyName, textAlign: TextAlign.center,
-                                  //    style: TextStyle(color: primaryColor, fontSize: 20)),
-                                  //    ),
-                                  //    ),
-                                  //    value: data.id);
-                                  //    }).toList(),                                  
-                                  //    onChanged: (value) {
-                                  //    if (!mounted)
-                                  //    return;                                  
-                                  //    setState(() {
-                                  //      selection = value;
-                                  //      print(companyContent[selection-1].id.toString());
-                                  //      AppointmentObject appointment = AppointmentObject(companyId: companyContent[selection-1].id,userId: 1);
-                                  //      Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(indexx: companyContent[selection-1].id,appointment: appointment,companyInfo: homeContent)));
-                                  //      Navigator.of(rootContext).pop(false);
-                                  //    });
-                                  //    },
-                                  //  )
                               )
                             ],
                           );

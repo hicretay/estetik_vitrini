@@ -11,23 +11,21 @@ import 'package:line_icons/line_icons.dart';
 
 class HomeDetailPage extends StatefulWidget {
   final List homeDetailContent;
-  final List homeContent;
   final int campaingId;
   final int companyId;
   final String companyLogo;
   final String companyName;
   final String contentTitle;
   final String googleAdressLink;
-  HomeDetailPage({Key key, this.homeDetailContent, this.homeContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink}) : super(key: key);
+  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink}) : super(key: key);
 
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, 
-  homeContent: homeContent, campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink);
+  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
   List homeDetailContent;
-  List homeContent;
   int campaingId;
   int companyId ;
   String companyLogo;
@@ -39,7 +37,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   int counter = 99;
 
   
-  _HomeDetailPageState({this.homeDetailContent, this.homeContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink});
+  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink});
   @override
   Widget build(BuildContext context) {
     print("Kampanya id $campaingId");
@@ -51,7 +49,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       sliderImg.add(NetworkImage(item.cPicture));
     }   
     //-------------------------------------------------------                 
-    _checked = homeContent.first.liked; // Gönderi beğenilmiş mi servisten okuyacak  
+    _checked = false; // Gönderi beğenilmiş mi servisten okuyacak  
 
     return SafeArea(
         child: Scaffold(
@@ -231,7 +229,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: 1, companyNameS: companyName, campaignId: campaingId);
                                         final progressHUD = ProgressHUD.of(context);
                                         progressHUD.show(); 
-                                        Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(companyInfo: homeContent, appointment: appointment)));
+                                        Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(appointment: appointment)));
                                         progressHUD.dismiss();
                                       });
                                       //Buton tıklandığında randevu al sayfasına yönlendirilecek

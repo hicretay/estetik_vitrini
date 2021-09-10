@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List homeContent = []; 
   int pageIndex = 1;
-  int totalPage = 1;
+  int totalPage = -1;
 
   TextEditingController teSearch = TextEditingController();
 
@@ -230,16 +230,16 @@ class _HomePageState extends State<HomePage> {
                           body = circularBasic;
                         }
                         else if(mode == LoadStatus.failed){
-                          body = Text("Yükleme hatası !");
+                          body = Text("Akış sonu");
                         }
                         else if(mode == LoadStatus.canLoading){
                             body = Text("Gönderiler yükleniyor...");
                         }
                         else{
-                          body = Text("Akış sonu");
+                          body = Text("Yükleniyor...");
                         }
                         return Container(
-                          height: 35.0,
+                         // height: 20.0,
                           child: Center(child:body),
                         );
                       },
@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                             progressUHD.show(); 
                             final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
                             // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                             Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,homeContent: homeContent,
+                             Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
                              campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
                              googleAdressLink: homeContent[index].googleAdressLink)));
                             progressUHD.dismiss();

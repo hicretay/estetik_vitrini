@@ -11,11 +11,11 @@ import 'package:estetikvitrini/settings/functions.dart';
 
 class MakeAppointmentCalendarPage extends StatefulWidget { 
   final AppointmentObject appointment;
-  final dynamic companyInfo;
-  MakeAppointmentCalendarPage({this.companyInfo, this.appointment});
+
+  MakeAppointmentCalendarPage({this.appointment});
 
   @override
-  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(companyInfo: companyInfo , appointment: appointment);
+  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(appointment: appointment);
 }
 
 class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPage> {
@@ -33,14 +33,14 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
   }
   
 
-  dynamic companyInfo;
+
   @override
   void initState() { 
     super.initState();
     selectedEvents = {};
   }
 
-  _MakeAppointmentCalendarPageState({this.companyInfo,this.appointment});
+  _MakeAppointmentCalendarPageState({this.appointment});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -168,7 +168,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
            final progressHUD = ProgressHUD.of(context);
            progressHUD.show(); 
            final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(1);
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result,companyInfo: companyInfo, appointment: appointment)));
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
            progressHUD.dismiss();
          }
          //-------------------------------------------------------------------------------------------------

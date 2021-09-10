@@ -1,5 +1,4 @@
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
-import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -23,7 +22,6 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   TextEditingController teSearch = TextEditingController();
   List favoriContent;
-  int counter = 99;
 
   @override
   void initState() { 
@@ -87,10 +85,9 @@ class _FavoritePageState extends State<FavoritePage> {
                           final progressUHD = ProgressHUD.of(context);
                           progressUHD.show(); 
                           final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
-                          final ContentStreamJsn homeContent = await contentStreamJsnFunc(3,1);                       
                           // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
-                          homeContent: homeContent.result,campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
+                          campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
                           companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
                           contentTitle: favoriContent[index].contentTitle)));
                           progressUHD.dismiss();

@@ -9,20 +9,19 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 class MakeAppointmentTimePage extends StatefulWidget {
   final AppointmentObject appointment;
   final List companyOperationTime;
-  final dynamic companyInfo;
 
-  MakeAppointmentTimePage({Key key, this.companyOperationTime, this.companyInfo, this.appointment}) : super(key: key);
+  MakeAppointmentTimePage({Key key, this.companyOperationTime,  this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime,companyInfo: companyInfo, appointment: appointment);
+  _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime, appointment: appointment);
 }
 
 class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
   AppointmentObject appointment;
   List companyOperationTime;
-  dynamic companyInfo;
 
-  _MakeAppointmentTimePageState({this.companyOperationTime, this.companyInfo, this.appointment});
+
+  _MakeAppointmentTimePageState({this.companyOperationTime,  this.appointment});
 
   int _checked = -1;
   @override
@@ -146,7 +145,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
           final progressHUD = ProgressHUD.of(context);
           progressHUD.show();
           if(appointment.timeS!=null){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(companyInfo: companyInfo,appointment: appointment)));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(appointment: appointment)));
           }
           else{
             showToast(context, "Lütfen bir saat seçiniz!");
