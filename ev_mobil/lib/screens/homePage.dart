@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List homeContent = []; 
   int pageIndex = 1;
-  int totalPage = -1;
+  int totalPage = 1;
 
   TextEditingController teSearch = TextEditingController();
 
