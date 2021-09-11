@@ -34,7 +34,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.ae.estetikvitrini"
+        applicationId "com.ae.aynaayna"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -64,5 +64,3 @@ android {
         multiDexEnabled true
     }
 }
-
-apply plugin: 'com.google.gms.google-services'
