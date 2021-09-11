@@ -50,7 +50,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                           ),
                         ),
                         SizedBox(width: maxSpace),
-                        Text("Estetik Vitrini",
+                        Text("AynaAyna",
                           style     : TextStyle(
                           fontFamily: leadingFont, fontSize: 25, color: Colors.white),
                         ),

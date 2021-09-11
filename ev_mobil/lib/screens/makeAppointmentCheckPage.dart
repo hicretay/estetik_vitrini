@@ -66,7 +66,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                             ),
                           ),
                           SizedBox(width: maxSpace),
-                          Text("Estetik Vitrini",
+                          Text("AynaAyna",
                           style     : TextStyle(
                           fontFamily: leadingFont, 
                           fontSize  : 20, 

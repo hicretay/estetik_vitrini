@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                       cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
                       decoration: InputDecoration(
                         suffixIcon: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 30,textDirection: TextDirection.ltr),                    
-                        hintText: "Estetik Vitrini",
+                        hintText: "AynaAyna",
                         hintStyle: Theme.of(context)
                             .textTheme
                             .headline4

@@ -66,7 +66,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                           ),
                         ),
                         SizedBox(width: maxSpace),
-                        Text("Estetik Vitrini",
+                        Text("AynaAyna",
                           style     : TextStyle(
                           fontFamily: leadingFont, fontSize: 25, color: Colors.white),
                         ),
