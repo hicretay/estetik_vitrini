@@ -95,7 +95,8 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                           child: Column(
                             children: [
                             Padding(padding: const EdgeInsets.all(defaultPadding),
-                            child: GridView.builder(
+                            child: (companyOperationTime.isEmpty || companyOperationTime.length == 0) ? Center(child: Text("Uygun saat bulunamadı !")) : 
+                            GridView.builder(
                               shrinkWrap: true,                 
                               itemCount: companyOperationTime.length,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
