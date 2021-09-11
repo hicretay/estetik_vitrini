@@ -206,7 +206,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                             return SizedBox(height: minSpace);
                           },
                           ),
-                           ],
+                          ],
                           ),
                         ),
                       ),
@@ -225,11 +225,11 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                       checkedOperation.add(operationListMap.keys.toList()[i]);
                     }
                   }
-                  for (var item in checkedOperation) {
-                  print(item.id);
-                  print(item.operationName);
+                  for (var item in checkedOperation) {     
                   appointment.operationId = item.id;
                   appointment.operationS = item.operationName;
+                  print(appointment.operationId);
+                  print(appointment.operationS);
                 }
                 final companyOperationTime = await companyOperationTimeJsnFunc([1,2]); 
                 if(appointment.operationId!=null){              

@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
 //-----------------------------------------
   final RefreshController refreshController = RefreshController(initialRefresh: true);
 
-  Future<bool> getHomeData({bool isRefresh = false}) async{
-    if(isRefresh){
+  Future getHomeData(LoadStatus mode) async{
+    if(mode == LoadStatus.idle){
       pageIndex = 1;
     }
     else{
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
 
   if (response.statusCode == 200) {
     final result = contentStreamJsnFromJson(response.body);
-    if(isRefresh){
+    if(mode == LoadStatus.idle){
       homeContent = result.result;
     }
     else{
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() { 
     super.initState();
-    getHomeData();
+    getHomeData(LoadStatus.loading);
     companyStoryList();
     setState(() {});
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
@@ -139,10 +139,8 @@ class _HomePageState extends State<HomePage> {
                             .copyWith(color: primaryColor, fontFamily: leadingFont),
                         focusColor: primaryColor,
                         hoverColor: primaryColor,
-                        //border textField'ı çevreleyen yapı
-                        //width:0 ve none verilerek kaldırıldı
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
+                        border: OutlineInputBorder(  //border textField'ı çevreleyen yapı
+                          borderSide: BorderSide( //width:0 ve none verilerek kaldırıldı
                             width: 0,
                             style: BorderStyle.none,
                           ),
@@ -230,10 +228,10 @@ class _HomePageState extends State<HomePage> {
                           body = circularBasic;
                         }
                         else if(mode == LoadStatus.failed){
-                          body = Text("Akış sonu");
+                          body = Text("Yükleme hatası");
                         }
                         else if(mode == LoadStatus.canLoading){
-                            body = Text("Gönderiler yükleniyor...");
+                            body = Text("Yükleniyor...");
                         }
                         else{
                           body = Text("Yükleniyor...");
@@ -246,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                         
                       onRefresh: ()async{
-                        final result =await getHomeData(isRefresh: true);
+                        final result =await getHomeData(LoadStatus.noMore);
                         if(result){
                           refreshController.refreshCompleted();
                         }
@@ -255,7 +253,7 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                       onLoading: ()async{
-                         final result =await getHomeData();
+                         final result =await getHomeData(LoadStatus.loading);
                          if(result){
                            refreshController.loadComplete();
                          }
