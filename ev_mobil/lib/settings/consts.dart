@@ -10,7 +10,8 @@ const secondaryColor = Color(0xFFD4BDD8);
 const tertiaryColor = Color(0xff62C6C7);
 const darkWhite = Color(0xffE0E1E1);
 const lightWhite = Color(0xffF4F4F4);
-const white = Colors.white;
+const white = Colors.white; //8675A2
+const splashColor = Color(0xff8675A2);
 
 const backGroundColor1 = [primaryColor, secondaryColor];
 const backGroundColor2 = [primaryColor, tertiaryColor];

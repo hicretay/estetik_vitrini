@@ -64,11 +64,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: primaryColor,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage("assets/images/splash.jpg"),
+      color: splashColor,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/playstore.png"),
+          ),
         ),
       ),
     );
