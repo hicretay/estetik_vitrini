@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                           body = circularBasic;
                         }
                         else if(mode == LoadStatus.failed){
-                          body = Text("Yükleme hatası");
+                          body = Text("Akış sonu");
                         }
                         else if(mode == LoadStatus.canLoading){
                             body = Text("Yükleniyor...");
