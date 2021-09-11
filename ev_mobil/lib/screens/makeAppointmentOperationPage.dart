@@ -231,7 +231,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                   print(appointment.operationId);
                   print(appointment.operationS);
                 }
-                final companyOperationTime = await companyOperationTimeJsnFunc([1,2]); 
+                final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
                 if(appointment.operationId!=null){              
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
                 }

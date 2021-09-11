@@ -7,7 +7,6 @@ import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:provider/provider.dart';
 
@@ -62,7 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(children: [
                     SizedBox(height: deviceHeight(context) * 0.15), // giriş ikonu - cihaz üstü boşluk          
                          //--------------------------giriş ikonu----------------------------------
-                          Center(child: SvgPicture.asset("assets/images/logobeyaz.svg")),  
+                          Container(
+                            width: 150,
+                            child: Center(child: Image.asset("assets/images/playstore.png"))),  //SvgPicture.asset("assets/images/logobeyaz.svg")
                          //------------------------------------------------------------------
                           SizedBox(height: deviceHeight(context) * 0.05),
                           SingleChildScrollView(
