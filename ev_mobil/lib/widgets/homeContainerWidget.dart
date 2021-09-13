@@ -179,7 +179,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
           endIndent: 130.0,
           height: 1,
           color: lightWhite,
-          thickness: 2,
+          thickness: 1.5,
         ),
         SizedBox(height: maxSpace), // Post üstü - divider arası boşluk
       ],

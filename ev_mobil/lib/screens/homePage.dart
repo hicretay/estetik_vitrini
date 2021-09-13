@@ -168,28 +168,33 @@ class _HomePageState extends State<HomePage> {
                         return Column(children:[
                             GestureDetector(
                             child:  Stack(children:[
-                          Container(
-                            width: deviceWidth(context)*0.2,
-                            height: deviceWidth(context)*0.2,
+                          Container(                          
                             decoration: BoxDecoration(
-                            border: Border.all(
-                            color: darkWhite,
-                            width: 3),
+                            color: white,
                             shape: BoxShape.circle),
                             child: Container(
-                            width: deviceWidth(context)*0.21,
-                            height: deviceWidth(context)*0.21,
-                            decoration: BoxDecoration(
-                            border: Border.all(
-                            color: secondaryColor,
-                            width: 2),
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                            fit: BoxFit.contain,
-                            image: NetworkImage(companyContent[index].companyLogo),
+                              width: deviceWidth(context)*0.2,
+                              height: deviceWidth(context)*0.2,
+                              decoration: BoxDecoration(
+                              border: Border.all(
+                              color: darkWhite,
+                              width: 3),
+                              shape: BoxShape.circle),
+                              child: Container(
+                              width: deviceWidth(context)*0.21,
+                              height: deviceWidth(context)*0.21,
+                              decoration: BoxDecoration(
+                              border: Border.all(
+                              color: secondaryColor,
+                              width: 2),
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                              fit: BoxFit.contain,
+                              image: NetworkImage(companyContent[index].companyLogo),
+                                    ),
                                   ),
                                 ),
-                              ),
+                            ),
                           ),
                         ]),
                         //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
