@@ -50,6 +50,7 @@ class _SplashPageState extends State<SplashPage> {
                color: primaryColor,
                child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), 
                onPressed: () async{
+                
                exit(0);
                }),
              ],

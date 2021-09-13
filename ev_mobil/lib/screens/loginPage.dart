@@ -102,7 +102,9 @@ class _LoginPageState extends State<LoginPage> {
                                   if(userData.success == true){ // Giriş kontrolü, succes
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
                                   prefs.setString("user", username);     
-                                  prefs.setString("pass", password);    
+                                  prefs.setString("pass", password);  
+                                  prefs.setInt("userIdData", userData.result.id);  
+                                  
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
                                   progressHUD.dismiss(); 

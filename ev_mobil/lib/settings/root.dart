@@ -6,11 +6,14 @@ class Root extends StatefulWidget {
   
   static const route = '/rootPage';
 
+
+
   @override
   _RootState createState() => _RootState();
 }
 
 class _RootState extends State<Root> {
+
   @override
   Widget build(BuildContext context) {
     return Consumer<NavigationProvider>(

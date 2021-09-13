@@ -20,8 +20,6 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
-  
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -93,21 +91,27 @@ class _SettingsPageState extends State<SettingsPage> {
                         ListTileWidget(
                           text: "Estetik Vitrini Hakkında",
                           child: LineIcon(LineIcons.infoCircle,color: white),
+                        ),
+                        ListTileWidget(
+                          text: "Tema değiştir",
+                          child: Switch(
+                            onChanged: (_) async{
+                            isThemeDark = !isThemeDark;
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.setBool("isThemeDark", !isThemeDark);
+                          }, value: isThemeDark,),
                         ), 
                         ListTileWidget(
                           text: "Uygulamadan çıkış yap",
                           child: Icon(Icons.exit_to_app,color: white),
                           onTap: ()async{
+                          final progressUHD = ProgressHUD.of(context); 
+                          progressUHD.show();
                           SharedPreferences prefs = await SharedPreferences.getInstance();
                           // shared preferences nesnelerinin silinmesi                
                           prefs.remove("user");
                           prefs.remove("pass");
-                          final progressUHD = ProgressHUD.of(context); 
-                          progressUHD.show();
-                          // final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
-                          // user != null ? 
-                          // provider.logout():
-                          
+                          prefs.remove("userIdData");                        
                           Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                           progressUHD.dismiss();
                         }),

@@ -9,6 +9,7 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = "/favoritePage";
@@ -22,6 +23,7 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   TextEditingController teSearch = TextEditingController();
   List favoriContent;
+  int userIdData;
 
   @override
   void initState() { 
@@ -30,7 +32,9 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Future favoriContentList() async{
-  final FavoriCompanyJsn favoriContentNewList = await favoriCompanyJsnFunc(3); 
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  userIdData = prefs.getInt("userIdData"); 
+  final FavoriCompanyJsn favoriContentNewList = await favoriCompanyJsnFunc(userIdData); 
   setState(() {
      favoriContent = favoriContentNewList.result;
   });

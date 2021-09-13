@@ -284,23 +284,6 @@ Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc(int id) async{
 }
 //------------------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------Randevular Silme2 Fonksiyonu-------------------------------------------------
-Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc2(int id) async {
-  final response = await http.post(
-    Uri.parse(url + "Appointment/Delete"),
-    body: '{"id":' + id.toString() + '}', 
-    headers: header
-  );
-
-  if (response.statusCode == 200) {
-    final String responseString = response.body;
-    return appointmentDeleteJsnFromJson(responseString);
-  } else {
-    return null;
-  }
-}
-//----------------------------------------------------------------------------------------------------------------------------
-
 //---------------------------------------------Kullanıcı Kayıt Fonksiyonu-----------------------------------------------------
 Future<AddUserJsn> userAddJsnFunc(String nameSurname, String email, String telephone, String password, String facebookToken, String googleToken) async{
   var bodys ={};

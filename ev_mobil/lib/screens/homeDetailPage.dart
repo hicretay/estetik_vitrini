@@ -8,6 +8,7 @@ import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeDetailPage extends StatefulWidget {
   final List homeDetailContent;
@@ -35,6 +36,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   bool _checked = false;
   int counter = 99;
+
+  int userIdData;
 
   
   _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink});
@@ -224,14 +227,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   borderRadius: BorderRadius.circular(30.0),
                                   child: MaterialButton(
                                     minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                    onPressed: () {
-                                      setState(() {
-                                        AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: 1, companyNameS: companyName, campaignId: campaingId);
+                                    onPressed: () async{
+                                       SharedPreferences prefs = await SharedPreferences.getInstance();
+                                       userIdData = prefs.getInt("userIdData");                              
+                                        AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: userIdData, companyNameS: companyName, campaignId: campaingId);
                                         final progressHUD = ProgressHUD.of(context);
                                         progressHUD.show(); 
                                         Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(appointment: appointment)));
                                         progressHUD.dismiss();
-                                      });
+                                
                                       //Buton tıklandığında randevu al sayfasına yönlendirilecek
                                     },
                                     child: Row(

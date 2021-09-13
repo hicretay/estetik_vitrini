@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
@@ -32,6 +33,8 @@ class _ReservationPageState extends State<ReservationPage> {
   List homeContent;
 
   String select; // firma seçimi dropDown değeri
+
+  int userIdData;
 
   Future appointmentListFunc() async{
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
@@ -147,10 +150,10 @@ class _ReservationPageState extends State<ReservationPage> {
                                      ),
                                      value: data.companyName);
                                      }).toList(),  
-                                     onChanged: (value) {
+                                     onChanged: (value) async{
                                      if (!mounted)
                                      return;                                  
-                                     setState(() {
+                                    
                                        select = value;
                                        for (var item in companyContent) {
                                          if(item.companyName==value){
@@ -161,9 +164,11 @@ class _ReservationPageState extends State<ReservationPage> {
                                          }
                                        }
                                        print(companyContent[compID].id.toString());
-                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1, companyNameS: companyContent[compID].companyName, campaignId: 0);
+                                       SharedPreferences prefs = await SharedPreferences.getInstance();
+                                       userIdData = prefs.getInt("userIdData"); 
+                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: userIdData, companyNameS: companyContent[compID].companyName, campaignId: 0);
                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
-                                     });
+                                 
                                      },
                                      )
                               )

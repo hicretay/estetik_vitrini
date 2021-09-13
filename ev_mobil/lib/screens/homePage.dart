@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -20,7 +21,7 @@ import 'package:http/http.dart' as http;
 class HomePage extends StatefulWidget {
   static const route = "/homePage";
 
-  HomePage({Key key,}) : super(key: key);
+  HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController teSearch = TextEditingController();
 
   List companyContent;
+  int userIdData;
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
@@ -43,6 +45,8 @@ class _HomePageState extends State<HomePage> {
   final RefreshController refreshController = RefreshController(initialRefresh: true);
 
   Future getHomeData(LoadStatus mode) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+     userIdData = prefs.getInt("userIdData"); 
     if(mode == LoadStatus.idle){
       pageIndex = 1;
     }
@@ -55,7 +59,7 @@ class _HomePageState extends State<HomePage> {
 
     final response = await http.post(
     Uri.parse(url + "ContentStream/List"),
-    body: '{"userId":' + 1.toString() + ',' + '"page":' + pageIndex.toString() + '}',
+    body: '{"userId":' + userIdData.toString() + ',' + '"page":' + pageIndex.toString() + '}',
     headers: header
   );
 
@@ -110,12 +114,14 @@ class _HomePageState extends State<HomePage> {
 //-------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+    
     return  SafeArea(
         child: Scaffold(
         body: ProgressHUD(
-        child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>       
+        child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>   
+            
               Container(
-              color: Colors.white,
+              color: white,//Theme.of(context).backgroundColor,
               child: Stack(
               children: [
                   //-----------------------------BAŞLIK-------------------------------
