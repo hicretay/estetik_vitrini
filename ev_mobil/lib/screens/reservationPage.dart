@@ -4,6 +4,7 @@ import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -12,6 +13,7 @@ import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -89,7 +91,7 @@ class _ReservationPageState extends State<ReservationPage> {
         body: ProgressHUD(
           child: Builder(builder: (context)=>
               BackGroundContainer(
-              colors: backGroundColor2,
+              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor2 : backGroundColorDark,
               child: Column(
               children: [
               Padding(padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding,bottom: defaultPadding),
@@ -183,7 +185,7 @@ class _ReservationPageState extends State<ReservationPage> {
                       Expanded(
                         child: Container(
                         decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(
                         top: Radius.circular(cardCurved),
                         ),
@@ -203,6 +205,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               startingDayOfWeek: StartingDayOfWeek.monday,
                               calendarFormat: CalendarFormat.twoWeeks,
                               calendarStyle: CalendarStyle(
+                                
                                 isTodayHighlighted: true,
                                 selectedDecoration: BoxDecoration(
                                   color: primaryColor,

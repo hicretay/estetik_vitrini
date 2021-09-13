@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
@@ -10,6 +11,7 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -113,13 +115,11 @@ class _HomePageState extends State<HomePage> {
    }
 //-------------------------------------------------------------------------------------
   @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext context) {  
     return  SafeArea(
         child: Scaffold(
         body: ProgressHUD(
-        child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>   
-            
+        child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>              
               Container(
               color: Theme.of(context).backgroundColor,
               child: Stack(
@@ -131,12 +131,16 @@ class _HomePageState extends State<HomePage> {
                       controller: teSearch, //search TextEditingControllerı
                       cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
                       decoration: InputDecoration(
-                        suffixIcon: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 30,textDirection: TextDirection.ltr),                    
+                        suffixIcon: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 30,textDirection: TextDirection.ltr),                    
                         hintText: "AynaAyna",
-                        hintStyle: Theme.of(context)
+                        hintStyle: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? Theme.of(context)
                             .textTheme
                             .headline4
-                            .copyWith(color: textFieldTapped == false ? primaryColor : secondaryColor, fontFamily: leadingFont),
+                            .copyWith(color: textFieldTapped == false ? primaryColor : secondaryColor, fontFamily: leadingFont):
+                            Theme.of(context)
+                            .textTheme
+                            .headline4
+                            .copyWith(color: textFieldTapped == false ? white : darkWhite, fontFamily: leadingFont),
                         focusColor: primaryColor,
                         hoverColor: primaryColor,
                         border: OutlineInputBorder(  //border textField'ı çevreleyen yapı
@@ -213,7 +217,8 @@ class _HomePageState extends State<HomePage> {
                           child: Center(
                             child: Text(companyContent[index].companyName,              
                             overflow: TextOverflow.fade,
-                            softWrap: false),
+                            softWrap: false,
+                            style: TextStyle(color: Theme.of(context).hintColor),),
                           ),
                         ),
                       ],

@@ -1,4 +1,6 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +45,8 @@ class _RootState extends State<Root> {
               index: provider.currentTabIndex,
             ),
             bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? white : darkBg,
+              selectedItemColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? primaryColor: white,
               elevation: 10,               
               items: bottomNavigationBarItems,
               currentIndex: provider.currentTabIndex,

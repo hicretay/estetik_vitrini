@@ -18,10 +18,10 @@ Future main() async{
 }
 
 class App extends StatelessWidget {
-  final ThemeData theme = new ThemeData(fontFamily: "futura_medium_bt").copyWith();
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ThemeDataProvider>(context, listen: false).loadTheme();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NavigationProvider()),

@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
         body: ProgressHUD(
           child: Builder(builder:(context)=>
               BackGroundContainer(
-              colors: backGroundColor1,
+              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                          color: white,
+                          color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                         ),
                     child: ListView(

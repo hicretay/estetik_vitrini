@@ -1,11 +1,13 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:estetikvitrini/settings/functions.dart';
+import 'package:provider/provider.dart';
 import '../settings/consts.dart';
 
 class LocationPage extends StatefulWidget{
@@ -63,7 +65,7 @@ class _LocationPageState extends State<LocationPage> {
       body  : ProgressHUD(
         child: Builder(builder: (context)=>
           BackGroundContainer(
-          colors: backGroundColor1,
+          colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
           child : Column(
               children: [
                 Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -116,7 +118,7 @@ class _LocationPageState extends State<LocationPage> {
                   child: Container(
                     // arkaplan containerı
                     decoration: BoxDecoration(
-                      color: lightWhite,
+                      color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? lightWhite : darkBg,
                       borderRadius: BorderRadius.vertical( top: Radius.circular(maxSpace)),
                         //dikeyde yuvarlatılmış
                     ),

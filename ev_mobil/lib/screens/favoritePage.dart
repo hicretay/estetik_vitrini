@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
@@ -9,6 +10,7 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -47,7 +49,7 @@ class _FavoritePageState extends State<FavoritePage> {
         body: ProgressHUD(
           child: Builder(builder: (context)=>
               BackGroundContainer(
-              colors: backGroundColor1,
+              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(        
                 children: [
                   //-----------------------Sayfa Başlığı----------------------------
@@ -69,7 +71,7 @@ class _FavoritePageState extends State<FavoritePage> {
                   Expanded(
                     child: Container(
                         decoration: BoxDecoration(
-                        color: white,
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
                       child: ListView.builder(

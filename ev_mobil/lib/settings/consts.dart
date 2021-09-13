@@ -17,6 +17,7 @@ const darkBg = Color(0xff1D1D1B);
 const backGroundColor1 = [primaryColor, secondaryColor];
 const backGroundColor2 = [primaryColor, tertiaryColor];
 const backGroundColor3 = [darkWhite, darkWhite];
+const backGroundColorDark = [darkBg, darkBg];
 
 const leadingFont = "nouvelle_vague_final";
 const contentFont = "futura_medium_bt";
