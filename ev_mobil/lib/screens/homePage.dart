@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   List homeContent = []; 
   int pageIndex = 1;
   int totalPage = 1;
+  bool textFieldTapped = false;
 
   TextEditingController teSearch = TextEditingController();
 
@@ -100,13 +101,6 @@ class _HomePageState extends State<HomePage> {
      super.dispose();
    }
 
-  //  Future homeContentList() async{
-  //    final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(1,pageIndex); 
-  //    setState(() {
-  //       homeContent = homeContentNewList.result;
-  //    });
-  //  }
-
   Future companyStoryList() async{
    final CompanyListJsn companyNewList = await companyListJsnFunc(); 
    setState(() {
@@ -136,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                         hintStyle: Theme.of(context)
                             .textTheme
                             .headline4
-                            .copyWith(color: primaryColor, fontFamily: leadingFont),
+                            .copyWith(color: textFieldTapped == false ? primaryColor : secondaryColor, fontFamily: leadingFont),
                         focusColor: primaryColor,
                         hoverColor: primaryColor,
                         border: OutlineInputBorder(  //border textField'ı çevreleyen yapı
@@ -146,6 +140,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
+                      onTap: (){
+                       setState(() {
+                          textFieldTapped = !textFieldTapped;
+                       });
+                      },
                     ),
                   ),
                   //------------------------------------------------------------------
@@ -234,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                             body = Text("Yükleniyor...");
                         }
                         else{
-                          body = Text("Yükleniyor...");
+                          body = circularBasic;
                         }
                         return Container(
                          // height: 20.0,

@@ -127,10 +127,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                      appointment.operationId =  companyOperation[index].id;
                                      appointment.operationS =  companyOperation[index].operationName;
                                      print(appointment.operationId);
-                                     print(appointment.operationS);
-                                    //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
-                                    // operationListMap.update(operationListMap.keys.toList()[index],
-                                    //     (value) => !value);
+                                     print(appointment.operationS);                                   
                                   });
                                 },
                                 child: Container(
@@ -226,17 +223,6 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
               onPressed: ()async{
                 final progressHUD = ProgressHUD.of(context);
                 progressHUD.show();
-                //     for (var i = 0; i < companyOperation.length; i++) {
-                //     if (operationListMap.values.toList()[i]) {
-                //       checkedOperation.add(operationListMap.keys.toList()[i]);
-                //     }
-                //   }
-                //   for (var item in checkedOperation) {     
-                //   appointment.operationId = item.id;
-                //   appointment.operationS = item.operationName;
-                //   print(appointment.operationId);
-                //   print(appointment.operationS);
-                // }
                 final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
                 if(appointment.operationId!=null){              
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));

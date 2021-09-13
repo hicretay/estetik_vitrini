@@ -162,7 +162,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                          }
                                        }
                                        print(companyContent[compID].id.toString());
-                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1);
+                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: 1, companyNameS: companyContent[compID].companyName, campaignId: 0);
                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
                                      });
                                      },
