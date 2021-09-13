@@ -197,8 +197,13 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                             onPressed: () async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                                await appointmentAddJsnFunc(1, appointment.companyId, appointment.campaignId ?? 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operationId, teNote.text);
-                                await showToast(context, "Randevu başarıyla kaydedildi!");
+                                final appointmentAddData = await appointmentAddJsnFunc(1, appointment.companyId, appointment.campaignId ?? 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operationId, teNote.text);
+                                if(appointmentAddData.success == true){
+                                  await showToast(context, "Randevu başarıyla kaydedildi!");
+                                }
+                                else{
+                                  await showToast(context, "Randevu kaydı başarısız!");
+                                }
                                 await appointmentListFunc();
                                 Navigator.pop(context);
                                 Navigator.pop(context);

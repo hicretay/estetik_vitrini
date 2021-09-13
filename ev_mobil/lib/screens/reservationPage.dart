@@ -1,5 +1,4 @@
 //import 'package:dropdown_search/dropdown_search.dart';
-import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
@@ -258,10 +257,12 @@ class _ReservationPageState extends State<ReservationPage> {
                                                 onPressed: ()async{
                                                   final progressHUD = ProgressHUD.of(context);
                                                   progressHUD.show(); 
-                                                  await appointmentDeleteJsnFunc(appointmentList[index].id);
-                                                  final AppointmentDeleteJsn deleteAppointment = await appointmentDeleteJsnFunc2(appointmentList[index].id);
+                                                  final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
                                                   if(deleteAppointment.success==true){
                                                     showToast(context, "Randevu başarıyla iptal edildi!");
+                                                  }
+                                                  else{
+                                                    showToast(context, "Randevu başarıyla iptal edilemedi!");
                                                   }
                                                   await appointmentListFunc();    
                                                   Navigator.of(context).pop();                          

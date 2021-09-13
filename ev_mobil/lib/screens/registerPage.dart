@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -14,12 +15,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController txtNameSurname = TextEditingController();
   TextEditingController txtEMail = TextEditingController();
   TextEditingController txtTelephone = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtPasswordAgain = TextEditingController();
-  TextEditingController txtNameSurname = TextEditingController();
-
 
   bool checkedKVKK = false;
   bool checkedPrivacy = false;
@@ -149,10 +149,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: MaterialButton(
                             minWidth: deviceWidth(context) * 0.5, //Buton minimum genişliği
                             child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
-                            onPressed: (){
+                            onPressed: ()async{
                             final progressUHD = ProgressHUD.of(context);
                             progressUHD.show(); 
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage()));    
+                            final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", "");
+                            if(userAddData.success==true){
+                              if(txtPassword.text == txtPasswordAgain.text){
+                              Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage())); 
+                            }
+                            else{
+                              showToast(context, "Girilen şifreler birbirinden farklı !");
+                            }}
+                            else{
+                              showToast(context, "Kayıt başarısız !");
+                            }
+                            
                             progressUHD.dismiss(); 
                           }),
                         ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:estetikvitrini/JsnClass/addUserJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
@@ -299,6 +300,34 @@ Future<AppointmentDeleteJsn> appointmentDeleteJsnFunc2(int id) async {
   }
 }
 //----------------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------Kullanıcı Kayıt Fonksiyonu-----------------------------------------------------
+Future<AddUserJsn> userAddJsnFunc(String nameSurname, String email, String telephone, String password, String facebookToken, String googleToken) async{
+  var bodys ={};
+  bodys["nameSurname"]  = nameSurname;
+  bodys["email"]        = email;
+  bodys["telephone"]    = telephone;
+  bodys["password"]     = password;
+  bodys["facebookToken"]= facebookToken;
+  bodys["googleToken"]  = googleToken;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "AddUser"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return addUserJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
