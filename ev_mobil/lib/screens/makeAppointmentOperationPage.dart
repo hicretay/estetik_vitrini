@@ -18,6 +18,7 @@ class MakeAppointmentOperationPage extends StatefulWidget {
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
   AppointmentObject appointment;
   List checkedOperation = [];
+  int _checked = -1;
 
   List companyOperation;
   _MakeAppointmentOperationPageState({this.companyOperation,this.appointment});
@@ -122,9 +123,14 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                  InkWell(
                                 onTap: () {
                                   setState(() {
+                                     _checked = index;
+                                     appointment.operationId =  companyOperation[index].id;
+                                     appointment.operationS =  companyOperation[index].operationName;
+                                     print(appointment.operationId);
+                                     print(appointment.operationS);
                                     //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
-                                    operationListMap.update(operationListMap.keys.toList()[index],
-                                        (value) => !value);
+                                    // operationListMap.update(operationListMap.keys.toList()[index],
+                                    //     (value) => !value);
                                   });
                                 },
                                 child: Container(
@@ -140,7 +146,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                       end: Alignment.topRight,
                                       //operationListMap mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
                                       colors: 
-                                      operationListMap.values.toList()[index]
+                                       _checked == index 
                                           ? backGroundColor1 // true ise(seçili) ise renk koyu
                                           : backGroundColor3, // false ise seçilmemişse açık
                                     ),
@@ -162,7 +168,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                       end: Alignment.topRight,
                                             //operationListMap mapinin valuelarının index değerine göre renk belirler
                                             colors: 
-                                               operationListMap.values.toList()[index]
+                                               _checked == index
                                                ? backGroundColor1 // true ise(seçili) ise renk koyu
                                                : backGroundColor3, // false ise seçilmemişse açık
                                           ),
@@ -186,7 +192,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                             textAlign: TextAlign.center,
                                             style    : TextStyle(
                                             fontSize : 18, // operationların fontu
-                                            color: operationListMap.values.toList()[index]
+                                            color: _checked == index
                                                    ? Colors.white // seçili ise açık text
                                                    : primaryColor, // seçili değilse koyu
                                             ),
@@ -220,17 +226,17 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
               onPressed: ()async{
                 final progressHUD = ProgressHUD.of(context);
                 progressHUD.show();
-                    for (var i = 0; i < companyOperation.length; i++) {
-                    if (operationListMap.values.toList()[i]) {
-                      checkedOperation.add(operationListMap.keys.toList()[i]);
-                    }
-                  }
-                  for (var item in checkedOperation) {     
-                  appointment.operationId = item.id;
-                  appointment.operationS = item.operationName;
-                  print(appointment.operationId);
-                  print(appointment.operationS);
-                }
+                //     for (var i = 0; i < companyOperation.length; i++) {
+                //     if (operationListMap.values.toList()[i]) {
+                //       checkedOperation.add(operationListMap.keys.toList()[i]);
+                //     }
+                //   }
+                //   for (var item in checkedOperation) {     
+                //   appointment.operationId = item.id;
+                //   appointment.operationS = item.operationName;
+                //   print(appointment.operationId);
+                //   print(appointment.operationS);
+                // }
                 final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
                 if(appointment.operationId!=null){              
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
