@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/aboutPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -93,13 +95,13 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: LineIcon(LineIcons.infoCircle,color: white),
                         ),
                         ListTileWidget(
-                          text: "Tema değiştir",
+                          text: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? "Koyu temaya geç" : "Açık temaya geç",
                           child: Switch(
+                            activeColor: secondaryColor,
                             onChanged: (_) async{
-                            isThemeDark = !isThemeDark;
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setBool("isThemeDark", !isThemeDark);
-                          }, value: isThemeDark,),
+                            Provider.of<ThemeDataProvider>(context, listen: false).toggleTheme();
+                          }, 
+                          value: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme),
                         ), 
                         ListTileWidget(
                           text: "Uygulamadan çıkış yap",

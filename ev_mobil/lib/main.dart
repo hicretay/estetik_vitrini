@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/providers/jsonDataProvider.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,9 @@ Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting().then(
     (_) => runApp(
-      App(),
+      ChangeNotifierProvider<ThemeDataProvider>(
+      create: (BuildContext context) => ThemeDataProvider(),
+      child: App()),
     ),
   );
 }
@@ -27,7 +30,7 @@ class App extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return MaterialApp(
-            theme: theme,
+            theme: Provider.of<ThemeDataProvider>(context).themeColor,
             onGenerateRoute: NavigationProvider.of(context).onGenerateRoute,
             debugShowCheckedModeBanner: false,
             home: SplashPage(),

@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
         child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>   
             
               Container(
-              color: white,//Theme.of(context).backgroundColor,
+              color: Theme.of(context).backgroundColor,
               child: Stack(
               children: [
                   //-----------------------------BAŞLIK-------------------------------
