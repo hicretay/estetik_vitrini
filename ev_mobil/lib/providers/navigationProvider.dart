@@ -46,10 +46,10 @@ class NavigationProvider extends ChangeNotifier {
     HOME_PAGE: Screen(
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/ev.svg"),
+      icon: SvgPicture.asset("assets/icons/ev.svg",height: 25,width: 25,fit: BoxFit.contain),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/ev.svg"),
+        child: SvgPicture.asset("assets/icons/ev.svg",height: 25,width: 25,fit: BoxFit.contain),
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -58,11 +58,11 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     FAVORITE_PAGE: Screen(
-      icon: SvgPicture.asset("assets/icons/kalp.svg"),
+      icon: SvgPicture.asset("assets/icons/kalp.svg",height: 22,width: 22,fit: BoxFit.contain),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/kalp.svg"),
+        child: SvgPicture.asset("assets/icons/kalp.svg",height: 22,width: 22,fit: BoxFit.contain),
       ),
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
@@ -73,11 +73,11 @@ class NavigationProvider extends ChangeNotifier {
       scrollController: ScrollController(),
     ),
     RESERVATION_PAGE: Screen(
-      icon: SvgPicture.asset("assets/icons/takvim.svg"),
+      icon: SvgPicture.asset("assets/icons/takvim.svg",height: 25,width: 25,fit: BoxFit.contain),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/takvim.svg"),
+        child: SvgPicture.asset("assets/icons/takvim.svg",height: 25,width: 25,fit: BoxFit.contain),
       ),
       child: ReservationPage(),
       initialRoute: ReservationPage.route,
@@ -87,11 +87,11 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     LOCATION_PAGE: Screen(    
-      icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
+      icon: SvgPicture.asset("assets/icons/haritanoktası.svg",height: 25,width: 25,fit: BoxFit.contain),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/haritanoktası.svg"),
+        child: SvgPicture.asset("assets/icons/haritanoktası.svg",height: 25,width: 25,fit: BoxFit.contain),
       ),
       child: LocationPage(),
       initialRoute: LocationPage.route,
@@ -101,11 +101,11 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     SETTINGS_PAGE: Screen(
-      icon: SvgPicture.asset("assets/icons/ayarlar.svg"),
+      icon: SvgPicture.asset("assets/icons/ayarlar.svg",height: 25,width: 25,fit: BoxFit.contain),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/ayarlar.svg"),
+        child: SvgPicture.asset("assets/icons/ayarlar.svg",height: 25,width: 25,fit: BoxFit.contain),
       ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,

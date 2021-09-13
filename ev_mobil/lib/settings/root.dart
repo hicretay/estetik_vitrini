@@ -40,12 +40,15 @@ class _RootState extends State<Root> {
               index: provider.currentTabIndex,
             ),
             bottomNavigationBar: BottomNavigationBar(
+              elevation: 10,               
               items: bottomNavigationBarItems,
               currentIndex: provider.currentTabIndex,
               onTap: provider.setTab,
               type: BottomNavigationBarType.fixed,
               showSelectedLabels: false,
               showUnselectedLabels: false,
+              unselectedFontSize: 0,
+              selectedFontSize: 0,
             ),
           ),
         );
