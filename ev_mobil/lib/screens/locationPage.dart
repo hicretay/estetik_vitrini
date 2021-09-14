@@ -298,20 +298,23 @@ class _LocationPageState extends State<LocationPage> {
           ),
         ),
       ),
-        bottomNavigationBar: TextButtonWidget(
-        buttonText: "Uygula",
-        onPressed: (){
-          //NavigationProvider.of(context).setTab(HOME_PAGE);
-          for (var i = 0; i < counties.length; i++) {
-            if (countyMap.values.toList()[i]) {
-              checkedCounty.add(countyMap.keys.toList()[i]);
+        bottomNavigationBar: Container(
+          color: Theme.of(context).backgroundColor,
+          child: TextButtonWidget(
+          buttonText: "Uygula",
+          onPressed: (){
+            //NavigationProvider.of(context).setTab(HOME_PAGE);
+            for (var i = 0; i < counties.length; i++) {
+              if (countyMap.values.toList()[i]) {
+                checkedCounty.add(countyMap.keys.toList()[i]);
+              }
             }
-          }
-          for (var item in checkedCounty) {
-            print(item.id);
-            print(item.county);
-          }
-        }),
+            for (var item in checkedCounty) {
+              print(item.id);
+              print(item.county);
+            }
+          }),
+        ),
       ),
     );
   }

@@ -1,9 +1,11 @@
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:provider/provider.dart';
 import '../widgets/informationRowWidget.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
@@ -47,7 +49,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
         body: ProgressHUD(
           child: Builder(builder: (context)=>
               Container(
-              color: secondaryColor,
+              color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
               child: Column(
                 children: [
                   Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -102,7 +104,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                   ),
                   Expanded(
                     child: Container(decoration: BoxDecoration(
-                        color       : Colors.white,
+                        color       : Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(
                         top         : Radius.circular(cardCurved),
                         ),

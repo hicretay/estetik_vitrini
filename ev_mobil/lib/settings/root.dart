@@ -46,7 +46,7 @@ class _RootState extends State<Root> {
             ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? white : darkBg,
-              selectedItemColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? primaryColor: white,
+              selectedItemColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? white: primaryColor,
               elevation: 10,               
               items: bottomNavigationBarItems,
               currentIndex: provider.currentTabIndex,

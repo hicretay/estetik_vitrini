@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -5,6 +6,7 @@ import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {
   final AppointmentObject appointment;
@@ -32,7 +34,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
             Scaffold(
             body: 
                 Container(
-                color: secondaryColor,
+                color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
                 child: Column(
                   children: [
                     Padding(
@@ -86,7 +88,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color:Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(cardCurved),
                           ),
@@ -97,6 +99,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                             Padding(padding: const EdgeInsets.all(defaultPadding),
                             child: (companyOperationTime.isEmpty || companyOperationTime.length == 0) ? Center(child: Text("Uygun saat bulunamadı !")) : 
                             GridView.builder(
+                              
                               shrinkWrap: true,                 
                               itemCount: companyOperationTime.length,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -107,12 +110,12 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                               ), 
                               itemBuilder:  (BuildContext context, int index){
                                 return Container(
-                                color: _checked == index ? secondaryColor : white, 
+                                color: _checked == index ? secondaryColor : Theme.of(context).backgroundColor, 
                                 child: TextButton(
                                   child: Center(
                                   child: Text(companyOperationTime[index].operationStartTime,
                                        style: TextStyle(
-                                       color: primaryColor,
+                                       color: Theme.of(context).hintColor,
                                        ),
                                      ),
                                    ),
@@ -139,20 +142,23 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                 ),
               ),
           //--------------------------------RANDEVUYU TAMAMLA BUTONU-----------------------------------
-          bottomNavigationBar: TextButtonWidget(
-          buttonText: "Randevuyu Tamamla",
-          onPressed: (){
-          print(appointment.timeS);
-          final progressHUD = ProgressHUD.of(context);
-          progressHUD.show();
-          if(appointment.timeS!=null){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(appointment: appointment)));
-          }
-          else{
-            showToast(context, "Lütfen bir saat seçiniz!");
-          }
-          progressHUD.dismiss();
-          }),
+          bottomNavigationBar: Container(
+            color: Theme.of(context).backgroundColor,
+            child: TextButtonWidget(
+            buttonText: "Randevuyu Tamamla",
+            onPressed: (){
+            print(appointment.timeS);
+            final progressHUD = ProgressHUD.of(context);
+            progressHUD.show();
+            if(appointment.timeS!=null){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(appointment: appointment)));
+            }
+            else{
+              showToast(context, "Lütfen bir saat seçiniz!");
+            }
+            progressHUD.dismiss();
+            }),
+          ),
           //--------------------------------------------------------------------------------------------
           ),
         ),

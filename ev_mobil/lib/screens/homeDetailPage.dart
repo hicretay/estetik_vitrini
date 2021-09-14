@@ -1,4 +1,5 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
@@ -8,6 +9,7 @@ import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeDetailPage extends StatefulWidget {
@@ -59,7 +61,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         body: ProgressHUD(
         child: Builder(builder: (context)=>
               BackGroundContainer(
-              colors: backGroundColor1,
+              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(
               children: [
                   Padding(
@@ -109,7 +111,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   Expanded(
                     child: Container(
                         decoration: BoxDecoration(
-                        color: lightWhite,
+                        color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
                       child: SingleChildScrollView(
@@ -119,7 +121,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 LeadingRowWidget( 
                                   companyName: companyName,  
                                   companyLogo: companyLogo,  
-                                  pinColor: Colors.transparent,),//leading widgetı
+                                  pinColor: Colors.transparent,
+                                  leadingColor: Theme.of(context).hintColor),//leading widgetı
                                 Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                   child: Center(
                                     //-----------------------Carousel Containerı------------------------
@@ -196,7 +199,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 padding    : EdgeInsets.zero,
                                                 constraints: BoxConstraints(),
                                                 icon       : Icon(LineIcons.phone,
-                                                color      : primaryColor,
+                                                color      : Theme.of(context).hintColor,
                                                 size       : iconSize),
                                                 onPressed  : () {}),
                                         ),
@@ -208,7 +211,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 padding    : EdgeInsets.zero,
                                                 constraints: BoxConstraints(),
                                                 icon       : Icon(LineIcons.locationArrow,
-                                                color      : primaryColor,
+                                                color      : Theme.of(context).hintColor,
                                                 size       : iconSize),
                                                 onPressed  : () async{
                                                 final progressUHD = ProgressHUD.of(context);
@@ -257,9 +260,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                     children: [
                                       Icon(Icons.favorite, // Beğeni İcon'ı
                                       size : iconSize,
-                                      color: primaryColor),
+                                      color: Theme.of(context).hintColor),
                                       SizedBox(width: minSpace),
-                                      Text("${homeDetailContent.first.likeCount} kişi tarafından favorilere eklendi"),
+                                      Text("${homeDetailContent.first.likeCount} kişi tarafından favorilere eklendi",style: TextStyle(color:Theme.of(context).hintColor)),
                                       // counter ile gösterilecek beğeni sayısı
                                     ],
                                   ),
@@ -271,12 +274,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child    : Text(contentTitle,
-                                        style    : TextStyle(fontSize: 22, color: primaryColor),
+                                        style    : TextStyle(fontSize: 22, color: Theme.of(context).hintColor),
                                         ),
                                       ),
                                       Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text(homeDetailContent.first.campaingDetail)),
+                                        child: Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
                                     ],
                                   ),
                                 ),

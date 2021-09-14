@@ -215,6 +215,8 @@ class _ReservationPageState extends State<ReservationPage> {
                                 outsideDecoration: boxDecoration,
                                 defaultDecoration: boxDecoration,
                                 weekendDecoration: boxDecoration,
+                                defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
                                 selectedTextStyle: TextStyle(
                                   color: Colors.white,
                                 ),

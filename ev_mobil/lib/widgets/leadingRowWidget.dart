@@ -8,8 +8,9 @@ class LeadingRowWidget extends StatefulWidget {
  @required final String companyLogo; // icon resmi indexi
  @required final Color pinColor;
  @required final String companyName;
+ final Color leadingColor;
 
-  const LeadingRowWidget({Key key, this.pinColor, this.companyLogo, this.companyName});
+  const LeadingRowWidget({Key key, this.pinColor, this.companyLogo, this.companyName, this.leadingColor});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -50,7 +51,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
                 widget.companyName,
                 overflow: TextOverflow.fade,
                 softWrap: false,
-                style: TextStyle(fontSize: 17, fontFamily: headerFont)
+                style: TextStyle(fontSize: 17, fontFamily: headerFont,color: widget.leadingColor)
               ),
             ),
           ],

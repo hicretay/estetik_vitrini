@@ -1,5 +1,7 @@
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ResevationResultWidget extends StatelessWidget {
   final String companyName;
@@ -23,12 +25,12 @@ class ResevationResultWidget extends StatelessWidget {
             child: Text(date,     
             style     : TextStyle(
             fontWeight: FontWeight.bold,
-            color     : primaryColor),
+            color     : Theme.of(context).hintColor),
           ),
         ),
       ),
         Container(
-          color: lightWhite,
+          color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? lightWhite : darkBg,
           width: double.infinity,
           child: Padding(
             padding:  EdgeInsets.all(defaultPadding),
@@ -46,14 +48,14 @@ class ResevationResultWidget extends StatelessWidget {
                             companyName,
                             overflow: TextOverflow.fade,
                             softWrap: false,                          
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).hintColor),
                           ),
                         ),
                         SizedBox(height: minSpace),
                         Text(
                           operation,
-                          style: TextStyle(fontSize: 16),
-                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
+                          textAlign: TextAlign.left,                         
                         ),
                       ],
                     ),
@@ -63,12 +65,12 @@ class ResevationResultWidget extends StatelessWidget {
                           alignment: Alignment.topRight,
                           child: Text(
                             time,
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
                           ),
                         ),
                         SizedBox(width:deviceWidth(context)*0.05),
                         GestureDetector(
-                          child: Icon(Icons.clear,size: 18),
+                          child: Icon(Icons.clear,size: 18,color: Theme.of(context).hintColor),
                           onTap: onTap,
                         )
                       ],

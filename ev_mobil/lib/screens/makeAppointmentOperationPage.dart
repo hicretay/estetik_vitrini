@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -5,6 +6,7 @@ import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 class MakeAppointmentOperationPage extends StatefulWidget {
   final AppointmentObject appointment;
@@ -47,7 +49,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
             Scaffold(
             body:
                 Container(
-                color: secondaryColor,
+                color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
                 child: Column(
                   children: [
                      Padding(
@@ -101,7 +103,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(cardCurved),
                           ),
@@ -218,20 +220,23 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                 ),
               ),
               //-----------------------------------RANDEVU SAATİNİ SEÇ BUTONU-------------------------------------------
-              bottomNavigationBar: TextButtonWidget(
-              buttonText: "Randevu Saatini Seç",
-              onPressed: ()async{
-                final progressHUD = ProgressHUD.of(context);
-                progressHUD.show();
-                final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
-                if(appointment.operationId!=null){              
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
-                }
-                else{
-                  showToast(context, "Lütfen bir işlem seçiniz!");
-                }
-                progressHUD.dismiss();
-                }),
+              bottomNavigationBar: Container(
+                color: Theme.of(context).backgroundColor,
+                child: TextButtonWidget(
+                buttonText: "Randevu Saatini Seç",
+                onPressed: ()async{
+                  final progressHUD = ProgressHUD.of(context);
+                  progressHUD.show();
+                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
+                  if(appointment.operationId!=null){              
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
+                  }
+                  else{
+                    showToast(context, "Lütfen bir işlem seçiniz!");
+                  }
+                  progressHUD.dismiss();
+                  }),
+              ),
                 //--------------------------------------------------------------------------------------------------------------
           ),
         ),

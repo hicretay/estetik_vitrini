@@ -1,10 +1,12 @@
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
@@ -48,7 +50,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
           child: Builder(builder: (context)=>
               Scaffold(
                 body: Container(
-                color: secondaryColor,
+                color:  Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
                 child: Column(
                   children: [
                     Padding(
@@ -102,7 +104,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(cardCurved),
                           ),
@@ -128,6 +130,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                                outsideDecoration: boxDecoration,
                                defaultDecoration: boxDecoration,
                                weekendDecoration: boxDecoration,
+                               defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
                                selectedTextStyle: TextStyle(
                                  color: Colors.white,
                                ),
@@ -160,7 +163,9 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                   ],
                 ),
             ),
-            bottomNavigationBar: TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
+            bottomNavigationBar: Container(
+              color: Theme.of(context).backgroundColor,
+              child: TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
            //-----------------------------Randevu alınacak işlemi seçiniz butonu------------------------------
            onPressed: ()async{
            appointment.appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
@@ -172,7 +177,8 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
            progressHUD.dismiss();
          }
          //-------------------------------------------------------------------------------------------------
-              )
+                ),
+            )
             ),
           ),
         ),
