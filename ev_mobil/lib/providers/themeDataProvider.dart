@@ -12,11 +12,12 @@ ThemeData dark = ThemeData(
   backgroundColor: darkBg,
   hintColor: white,
   fontFamily: "futura_medium_bt"
+  
 );
 
 class ThemeDataProvider with ChangeNotifier{
   bool isLightTheme = true;
-  SharedPreferences _preferences;
+  static SharedPreferences _preferences;
 
   ThemeData get themeColor {
     return isLightTheme ? light : dark;
@@ -38,7 +39,7 @@ class ThemeDataProvider with ChangeNotifier{
   }
 
   void loadTheme()async{
-    await createSharedPrefObj();
+    //await createSharedPrefObj();
     isLightTheme = _preferences.getBool("themeData") ?? true;
   }
 }

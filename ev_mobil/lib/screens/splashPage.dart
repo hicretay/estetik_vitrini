@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
@@ -22,6 +24,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 1), () async{
+        Provider.of<ThemeDataProvider>(context, listen: false).loadTheme();
         if(await connectivityResult != ConnectivityResult.none){
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String user = prefs.getString("user");

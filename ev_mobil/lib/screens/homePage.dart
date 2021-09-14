@@ -87,6 +87,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() { 
     super.initState();
+     Provider.of<ThemeDataProvider>(context, listen: false).loadTheme();
     getHomeData(LoadStatus.loading);
     companyStoryList();
     setState(() {});
