@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/informationRowWidget.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
@@ -21,6 +22,7 @@ class MakeAppointmentCheckPage extends StatefulWidget {
 class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
   TextEditingController teNote = TextEditingController();
   String teOperation;
+  int userIdData;
 
 
    AppointmentObject appointment;
@@ -197,9 +199,11 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                   fontSize: 18),
                             ),
                             onPressed: () async{
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              userIdData = prefs.getInt("userIdData"); 
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                                final appointmentAddData = await appointmentAddJsnFunc(1, appointment.companyId, appointment.campaignId ?? 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operationId, teNote.text);
+                                final appointmentAddData = await appointmentAddJsnFunc(userIdData, appointment.companyId, appointment.campaignId ?? 0, appointment.appointmentDate, appointment.appointmentTimeId, appointment.operationId, teNote.text);
                                 if(appointmentAddData.success == true){
                                   await showToast(context, "Randevu başarıyla kaydedildi!");
                                 }
