@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
@@ -302,8 +303,10 @@ class _LocationPageState extends State<LocationPage> {
           color: Theme.of(context).backgroundColor,
           child: TextButtonWidget(
           buttonText: "Uygula",
-          onPressed: (){
-            //NavigationProvider.of(context).setTab(HOME_PAGE);
+          onPressed: ()async{
+            //AddUserCity servisini al
+            NavigationProvider.of(context).setTab(HOME_PAGE);
+            await showToast(context, "Seçmiş olduğunuz bölgelere akış başarıyla uygulandı");
             for (var i = 0; i < counties.length; i++) {
               if (countyMap.values.toList()[i]) {
                 checkedCounty.add(countyMap.keys.toList()[i]);

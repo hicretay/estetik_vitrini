@@ -23,6 +23,7 @@ class TextFieldWidget extends StatelessWidget {
         height: deviceHeight(context)*0.07,
         width: deviceWidth(context),
         child: TextField(
+          obscuringCharacter: "*",
           controller: textEditingController,
           keyboardType: keyboardType,
           obscureText: obscureText,

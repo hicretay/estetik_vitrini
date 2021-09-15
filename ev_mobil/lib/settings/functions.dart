@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:estetikvitrini/JsnClass/addUserCityJsn.dart';
 import 'package:estetikvitrini/JsnClass/addUserJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
@@ -305,6 +306,31 @@ Future<AddUserJsn> userAddJsnFunc(String nameSurname, String email, String telep
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return addUserJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------Kullanıcı Lokasyon Ekleme Fonksiyonu---------------------------------------------------------------
+Future<AddUserCityJsn> userAddCityJsnFunc(int userId, int cityId, int countyId) async{
+  var bodys ={};
+  bodys["userId"]  = userId;
+  bodys["cityId"]  = cityId;
+  bodys["countyId"]= countyId;
+
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "AddUser/City"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return addUserCityJsnFromJson(responseString);
   } else {
     print(response.statusCode);
     return null;

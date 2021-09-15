@@ -153,7 +153,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             final progressUHD = ProgressHUD.of(context);
                             progressUHD.show(); 
                             final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", "");
-                            if(userAddData.success==true){
+                            if(checkedKVKK == true && checkedPrivacy == true){
+                              if(userAddData.success==true){
                               if(txtPassword.text == txtPasswordAgain.text){
                               Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage())); 
                             }
@@ -163,7 +164,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             else{
                               showToast(context, "Kayıt başarısız !");
                             }
-                            
+                            }
+                            else{
+                              showToast(context, "KVKK Bildirimi ve Gizlilik Sözleşmesini Onaylayınız !");
+                            }
                             progressUHD.dismiss(); 
                           }),
                         ),

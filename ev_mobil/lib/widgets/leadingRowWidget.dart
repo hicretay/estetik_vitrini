@@ -1,6 +1,6 @@
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 
 
 class LeadingRowWidget extends StatefulWidget {
@@ -58,10 +58,10 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
         ),
         IconButton(
           // pin butonu
-          icon: Icon(FontAwesomeIcons.thumbtack,color: widget.pinColor,size: 18),
+          icon: Icon(LineIcons.star,color: widget.pinColor,size: 26),
           onPressed: (){}, // olayı parametre alındı
         ),
-       
+       SizedBox(width: deviceWidth(context)*0.01),      
       ],
     );
   }

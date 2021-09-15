@@ -107,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                   
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
+                                  showToast(context, "Giriş Başarılı!");
                                   progressHUD.dismiss(); 
                                   }
                                   else{
