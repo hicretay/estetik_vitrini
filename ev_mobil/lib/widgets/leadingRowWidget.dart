@@ -9,8 +9,9 @@ class LeadingRowWidget extends StatefulWidget {
  @required final Color pinColor;
  @required final String companyName;
  final Color leadingColor;
+ final VoidCallback starButtonOnPressed;
 
-  const LeadingRowWidget({Key key, this.pinColor, this.companyLogo, this.companyName, this.leadingColor});
+  const LeadingRowWidget({Key key, this.pinColor, this.companyLogo, this.companyName, this.leadingColor, this.starButtonOnPressed});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -59,7 +60,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
         IconButton(
           // pin butonu
           icon: Icon(LineIcons.star,color: widget.pinColor,size: 26),
-          onPressed: (){}, // olayı parametre alındı
+          onPressed: widget.starButtonOnPressed, // olayı parametre alındı
         ),
        SizedBox(width: deviceWidth(context)*0.01),      
       ],

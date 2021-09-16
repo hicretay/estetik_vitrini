@@ -9,6 +9,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/consts.dart';
 
 class LocationPage extends StatefulWidget{
@@ -25,6 +26,7 @@ class _LocationPageState extends State<LocationPage> {
   List counties = [];
   List checkedCounty = [];
   Map<dynamic,bool> countyMap = {};
+  int userIdData;
 
    Future cityList() async{
    final CityJsn cityNewList = await cityJsnFunc(); 
@@ -305,8 +307,16 @@ class _LocationPageState extends State<LocationPage> {
           buttonText: "Uygula",
           onPressed: ()async{
             //AddUserCity servisini al
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            userIdData = prefs.getInt("userIdData"); 
+            final userCityAdd = await userAddCityJsnFunc(userIdData, 1,1);
+            if(userCityAdd.success == true){
             NavigationProvider.of(context).setTab(HOME_PAGE);
             await showToast(context, "Seçmiş olduğunuz bölgelere akış başarıyla uygulandı");
+            }
+            else{
+              await showToast(context, "Seçmiş olduğunuz bölgeler daha önce seçilmiş!");
+            }
             for (var i = 0; i < counties.length; i++) {
               if (countyMap.values.toList()[i]) {
                 checkedCounty.add(countyMap.keys.toList()[i]);

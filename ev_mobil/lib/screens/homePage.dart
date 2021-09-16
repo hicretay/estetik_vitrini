@@ -2,15 +2,18 @@ import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
+import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
+import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,6 +117,15 @@ class _HomePageState extends State<HomePage> {
       companyContent = companyNewList.result;
    });
    }
+
+  //  Future refreshContentStream() async{
+  //    SharedPreferences prefs = await SharedPreferences.getInstance();
+  //    userIdData = prefs.getInt("userIdData");
+  //  final ContentStreamJsn companyNewList = await contentStreamJsnFunc(userIdData,1); 
+  //  setState(() {
+  //     homeContent = companyNewList.result;
+  //  });
+  //  }
 //-------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {  
@@ -121,41 +133,37 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
         body: ProgressHUD(
         child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>              
-              Container(
-              color: Theme.of(context).backgroundColor,
+              BackGroundContainer(
+              colors: backGroundColor1,
               child: Stack(
               children: [
                   //-----------------------------BAŞLIK-------------------------------
                   Padding(
-                    padding: const EdgeInsets.only(left: maxSpace, right: maxSpace),
-                    child: TextField(
-                      controller: teSearch, //search TextEditingControllerı
-                      cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
-                      decoration: InputDecoration(
-                        suffixIcon: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 30,textDirection: TextDirection.ltr),                    
-                        hintText: "AynaAyna",
-                        hintStyle: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? Theme.of(context)
-                            .textTheme
-                            .headline4
-                            .copyWith(color: textFieldTapped == false ? primaryColor : secondaryColor, fontFamily: leadingFont):
-                            Theme.of(context)
-                            .textTheme
-                            .headline4
-                            .copyWith(color: textFieldTapped == false ? white : darkWhite, fontFamily: leadingFont),
-                        focusColor: primaryColor,
-                        hoverColor: primaryColor,
-                        border: OutlineInputBorder(  //border textField'ı çevreleyen yapı
-                          borderSide: BorderSide( //width:0 ve none verilerek kaldırıldı
-                            width: 0,
-                            style: BorderStyle.none,
+                    padding: const EdgeInsets.all(maxSpace),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(width: deviceWidth(context)*0.6,child: Image.asset("assets/images/nameLogo.png",color: white)),
+                        Container(
+                          width: deviceWidth(context)*0.2,
+                          child: TextField(
+                            controller: teSearch, //search TextEditingControllerı
+                            cursorColor: primaryColor, // cursorColor: odaklanan imleç rengi
+                            decoration: InputDecoration(
+                              suffixIcon: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 25,textDirection: TextDirection.ltr),                    
+                              focusColor: primaryColor,
+                              hoverColor: primaryColor,
+                              border: OutlineInputBorder(  //border textField'ı çevreleyen yapı
+                                borderSide: BorderSide( //width:0 ve none verilerek kaldırıldı
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                            ),
+                            
                           ),
                         ),
-                      ),
-                      onTap: (){
-                       setState(() {
-                          textFieldTapped = !textFieldTapped;
-                       });
-                      },
+                      ],
                     ),
                   ),
                   //------------------------------------------------------------------
@@ -219,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                             child: Text(companyContent[index].companyName,              
                             overflow: TextOverflow.fade,
                             softWrap: false,
-                            style: TextStyle(color: Theme.of(context).hintColor),),
+                            style: TextStyle(color: white)),
                           ),
                         ),
                       ],
@@ -244,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                           body = circularBasic;
                         }
                         else if(mode == LoadStatus.failed){
-                          body = Text("Akış sonu");
+                          body = Text("Hepsini gördün");
                         }
                         else if(mode == LoadStatus.canLoading){
                             body = Text("Yükleniyor...");
@@ -287,7 +295,6 @@ class _HomePageState extends State<HomePage> {
                             contentPicture: homeContent[index].contentPicture,
                             cardText      : homeContent[index].contentTitle,
                             pinColor      : primaryColor,
-                            liked         : homeContent[index].liked,
                             onPressedPhone: () async{ 
                                             dynamic number = homeContent[index].companyPhone.toString(); // arama ekranına yönlendirme
                                             //bool res = await FlutterPhoneDirectCaller.callNumber(number); // direkt arama
@@ -307,14 +314,49 @@ class _HomePageState extends State<HomePage> {
                           //---------------------------------------------------------------------------------------------------------------------------------------------------
                           //-----------------------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
                           onPressedLocation: (){
-                            final progressUHD = ProgressHUD.of(context);
-                            progressUHD.show();
+                            final progressHUD = ProgressHUD.of(context);
+                            progressHUD.show();
                             int indeks = homeContent[index].companyId;
                             Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[indeks-1].googleAdressLink))); 
-                            progressUHD.dismiss();
+                            progressHUD.dismiss();
                           },
                           //-----------------------------------------------------------------------------------------------------------------------------------------------------
+                          //------------------------------LİKE BUTTON----------------------------------------
+                          likeButton: 
+                          IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
+                          onPressed: () async{
+                            final progressHUD = ProgressHUD.of(context);
+                            progressHUD.show();
+                             SharedPreferences prefs = await SharedPreferences.getInstance();
+                             userIdData = prefs.getInt("userIdData"); 
+                             LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
+                            if(likePostData.success == true || likePostData.success == false){
+                               print(likePostData.success);
+                               print(likePostData.result);
+                             }
+                             await getHomeData(LoadStatus.loading);
+                             setState(() {});
+                          
+                             print(homeContent[index].liked);
+                             progressHUD.dismiss();
+                          }),
+                          //--------------------------------------------------------------------------------------
+                          //----------------------------------------FAVORİTE BUTTON--------------------------------
+                          starButtonOnPressed: ()async{
+                            final progressHUD = ProgressHUD.of(context);
+                            progressHUD.show();
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            userIdData = prefs.getInt("userIdData"); 
+                            final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].campaingId);
+                            progressHUD.dismiss();
+                            if(favoriteAdd.success == true || favoriteAdd.success == false){
+                              print(favoriteAdd.success);
+                              print(favoriteAdd.result);
+                            }
+                            
+                          },
                         );
+                        //-------------------------------------------------------------------------------------
                         }),
                     ),
                   )

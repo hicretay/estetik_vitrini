@@ -13,6 +13,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
+import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/JsnClass/userfavoriAreaJsn.dart';
@@ -53,6 +54,23 @@ Future<ContentStreamJsn> contentStreamJsnFunc(int id, int page) async {
   final response = await http.post(
     Uri.parse(url + "ContentStream/List"),
     body: '{"userId":' + id.toString() + ',' + '"page":' + page.toString() + '}',
+    headers: header
+  );
+
+    if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return contentStreamJsnFromJson(responseString);     
+  } else {
+    return null;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------Favori Salonlar Listesi Fonksiyonu-----------------------------------------------
+Future<ContentStreamJsn> favoriteJsnFunc(int userId, int page, bool favorite) async {
+  final response = await http.post(
+    Uri.parse(url + "ContentStream/List"),
+    body: '{"userId":' + userId.toString() + ',' + '"page":' + page.toString() + ',' + '"favorite":' + favorite.toString() + '}', 
     headers: header
   );
 
@@ -337,6 +355,56 @@ Future<AddUserCityJsn> userAddCityJsnFunc(int userId, int cityId, int countyId) 
   }
 }
 //-------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------Beğeni Fonksiyonu--------------------------------------------------
+Future<LikeJsn> likeJsnFunc(int userId, int campaignId) async{
+  var bodys ={};
+  bodys["userId"]     = userId;
+  bodys["campaignId"] = campaignId;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url +  "LikeandShare/Like"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return likeJsnFromJson(responseString);
+    
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------Favorileme Fonksiyonu--------------------------------------------------
+Future<LikeJsn> favoriteAddJsnFunc(int userId, int campaignId) async{
+  var bodys ={};
+  bodys["userId"]     = userId;
+  bodys["campaignId"] = campaignId;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "CompanyList​/Favorite"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return likeJsnFromJson(responseString);
+    
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){

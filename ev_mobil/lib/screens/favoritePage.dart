@@ -1,5 +1,5 @@
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
-import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
+import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -10,6 +10,7 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
   TextEditingController teSearch = TextEditingController();
   List favoriContent;
   int userIdData;
+  bool checked = false;
 
   @override
   void initState() { 
@@ -36,7 +38,7 @@ class _FavoritePageState extends State<FavoritePage> {
   Future favoriContentList() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   userIdData = prefs.getInt("userIdData"); 
-  final FavoriCompanyJsn favoriContentNewList = await favoriCompanyJsnFunc(userIdData); 
+  final ContentStreamJsn favoriContentNewList = await favoriteJsnFunc(userIdData,1,true); 
   setState(() {
      favoriContent = favoriContentNewList.result;
   });
@@ -107,6 +109,19 @@ class _FavoritePageState extends State<FavoritePage> {
                           progressUHD.dismiss();
                         },
                         //-------------------------------------------------------------------------------------------------------------------
+                        likeButton: 
+                          IconButton( icon: favoriContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
+                          onPressed: () async{
+                             SharedPreferences prefs = await SharedPreferences.getInstance();
+                             userIdData = prefs.getInt("userIdData"); 
+                             final likePostData = await likeJsnFunc(userIdData, favoriContent[index].campaingId);
+                            if(likePostData.success == true || likePostData.success == false){
+                               print(likePostData.success);
+                               print(likePostData.result);
+                             }
+                             setState(() {});
+                          }),
+                          starButtonOnPressed: (){},
                       );
                       }),
                     ),

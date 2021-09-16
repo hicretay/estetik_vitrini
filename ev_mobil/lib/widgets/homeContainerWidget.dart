@@ -7,20 +7,17 @@ import 'leadingRowWidget.dart';
 class HomeContainerWidget extends StatefulWidget {
   //homePage sayfasında post görünümü oluşturulmasında kullanıldı
 
-
   final String cardText; // resimde yer alacak metin
   final String companyLogo; // resimde yer alacak metin
   final String companyName; // resimde yer alacak metin
   final String contentPicture;
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
-  final Widget child;
+  final Widget child, likeButton;
   final Color pinColor;
-  final bool checked;
-  final bool liked;
-  final VoidCallback onPressedLocation, onPressedPhone;
+  final VoidCallback onPressedLocation, onPressedPhone, starButtonOnPressed;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture, this.checked, this.onPressedLocation, this.liked, this.onPressedPhone})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButtonOnPressed})
       : super(key: key);
 
   @override
@@ -52,6 +49,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   pinColor: widget.pinColor,
                   companyLogo: widget.companyLogo,
                   companyName: widget.companyName,
+                  starButtonOnPressed: widget.starButtonOnPressed,
                 ),
               ),
               Flexible(
@@ -113,16 +111,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                   child: Row(
                                     children: [
                                   //------------------------------BEĞEN ICONBUTTONI-------------------------------
-                                      IconButton( icon: checked
-                                              ? Icon(Icons.favorite,
-                                                  color: primaryColor)
-                                              : Icon(LineIcons.heart,
-                                                  color: primaryColor),
-                                          onPressed: () {
-                                            setState(() {
-                                              checked = !checked;
-                                            });
-                                          }),
+                                      widget.likeButton,
                                   //------------------------------------------------------------------------------
                                   // //------------------------------PAYLAŞ ICONBUTTONI---------------------------
                                   //   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),

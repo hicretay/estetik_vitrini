@@ -69,12 +69,9 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Container(
       color: splashColor,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/playstore.png"),
-          ),
-        ),
+      child: SizedBox(
+        width: deviceWidth(context),
+        child: Image.asset("assets/images/logo.png"),
       ),
     );
   }

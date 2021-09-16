@@ -39,8 +39,10 @@ class _ReservationPageState extends State<ReservationPage> {
   int userIdData;
 
   Future appointmentListFunc() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+     userIdData = prefs.getInt("userIdData"); 
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
-    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(1,calendarDate);
+    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(userIdData,calendarDate);
     setState(() {
       appointmentList = appointmentNewList.result;
     });
@@ -54,7 +56,9 @@ class _ReservationPageState extends State<ReservationPage> {
    }
 
    Future homeContentList() async{
-     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(3,1); /////////////
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+     userIdData = prefs.getInt("userIdData"); 
+     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(userIdData,1); /////////////
      setState(() {
         homeContent = homeContentNewList.result;
      });
