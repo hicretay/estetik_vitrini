@@ -118,14 +118,14 @@ class _HomePageState extends State<HomePage> {
    });
    }
 
-  //  Future refreshContentStream() async{
-  //    SharedPreferences prefs = await SharedPreferences.getInstance();
-  //    userIdData = prefs.getInt("userIdData");
-  //  final ContentStreamJsn companyNewList = await contentStreamJsnFunc(userIdData,1); 
-  //  setState(() {
-  //     homeContent = companyNewList.result;
-  //  });
-  //  }
+   Future refreshContentStream() async{
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+     userIdData = prefs.getInt("userIdData");
+   final ContentStreamJsn companyNewList = await contentStreamJsnFunc(userIdData,0); 
+   setState(() {
+      homeContent = companyNewList.result;
+   });
+   }
 //-------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {  
@@ -327,18 +327,14 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () async{
                             final progressHUD = ProgressHUD.of(context);
                             progressHUD.show();
-                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                             userIdData = prefs.getInt("userIdData"); 
-                             LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
-                            if(likePostData.success == true || likePostData.success == false){
-                               print(likePostData.success);
-                               print(likePostData.result);
-                             }
-                             await getHomeData(LoadStatus.loading);
-                             setState(() {});
-                          
-                             print(homeContent[index].liked);
-                             progressHUD.dismiss();
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            userIdData = prefs.getInt("userIdData"); 
+                            LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
+                            print(likePostData.success);
+                            print(likePostData.result);
+                            await  getHomeData(LoadStatus.loading);
+                            await  refreshContentStream();
+                            progressHUD.dismiss();
                           }),
                           //--------------------------------------------------------------------------------------
                           //----------------------------------------FAVORİTE BUTTON--------------------------------
@@ -349,11 +345,8 @@ class _HomePageState extends State<HomePage> {
                             userIdData = prefs.getInt("userIdData"); 
                             final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].campaingId);
                             progressHUD.dismiss();
-                            if(favoriteAdd.success == true || favoriteAdd.success == false){
-                              print(favoriteAdd.success);
-                              print(favoriteAdd.result);
-                            }
-                            
+                            print(favoriteAdd.success);
+                            print(favoriteAdd.result);
                           },
                         );
                         //-------------------------------------------------------------------------------------

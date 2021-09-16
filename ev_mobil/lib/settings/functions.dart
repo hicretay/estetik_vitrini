@@ -390,7 +390,7 @@ Future<LikeJsn> favoriteAddJsnFunc(int userId, int campaignId) async{
   String body = json.encode(bodys);
 
   final response = await http.post(
-    Uri.parse(url + "CompanyList​/Favorite"),
+    Uri.parse(url + "CompanyList/Favorite"),
     body: body,
     headers: header
   );
