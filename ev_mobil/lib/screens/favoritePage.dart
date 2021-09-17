@@ -109,6 +109,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           progressHUD.dismiss();
                         },
                         //-------------------------------------------------------------------------------------------------------------------
+                        //---------------------------------------------LİKE BUTTON------------------------------------------------------
                         likeButton: 
                           IconButton( icon: favoriContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
                           onPressed: () async{
@@ -122,8 +123,10 @@ class _FavoritePageState extends State<FavoritePage> {
                              print(likePostData.success);
                              print(likePostData.result);
                           }),
+                          //------------------------------------------------------------------------------------------------------------
+                          //------------------------------------------FAVORİTE BUTTON-----------------------------------------
                           starButton: IconButton(
-                           icon: Icon(LineIcons.star,size: 26),
+                           icon: Icon(Icons.star,size: 26, color: primaryColor),
                            onPressed:  ()async{
                             final progressHUD = ProgressHUD.of(context);
                             progressHUD.show();
@@ -133,8 +136,11 @@ class _FavoritePageState extends State<FavoritePage> {
                             progressHUD.dismiss();
                             print(favoriteAdd.success);
                             print(favoriteAdd.result);
+                            favoriContentList(); 
+                            progressHUD.dismiss();
                           },
                          ),
+                         //------------------------------------------------------------------------------------------------------------
                       );
                       }),
                     ),
