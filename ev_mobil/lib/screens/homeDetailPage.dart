@@ -121,7 +121,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 LeadingRowWidget( 
                                   companyName: companyName,  
                                   companyLogo: companyLogo,  
-                                  pinColor: Colors.transparent,
                                   leadingColor: Theme.of(context).hintColor),//leading widgetı
                                 Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                   child: Center(

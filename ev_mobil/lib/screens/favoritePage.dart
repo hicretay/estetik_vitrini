@@ -122,7 +122,19 @@ class _FavoritePageState extends State<FavoritePage> {
                              print(likePostData.success);
                              print(likePostData.result);
                           }),
-                          starButtonOnPressed: (){},
+                          starButton: IconButton(
+                           icon: Icon(LineIcons.star,size: 26),
+                           onPressed:  ()async{
+                            final progressHUD = ProgressHUD.of(context);
+                            progressHUD.show();
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            userIdData = prefs.getInt("userIdData"); 
+                            final favoriteAdd = await favoriteAddJsnFunc(userIdData,  favoriContent[index].campaingId);
+                            progressHUD.dismiss();
+                            print(favoriteAdd.success);
+                            print(favoriteAdd.result);
+                          },
+                         ),
                       );
                       }),
                     ),

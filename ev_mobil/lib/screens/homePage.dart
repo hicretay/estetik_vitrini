@@ -12,6 +12,7 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -134,7 +135,7 @@ class _HomePageState extends State<HomePage> {
         body: ProgressHUD(
         child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>              
               BackGroundContainer(
-              colors: backGroundColor1,
+              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Stack(
               children: [
                   //-----------------------------BAŞLIK-------------------------------
@@ -143,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(width: deviceWidth(context)*0.6,child: Image.asset("assets/images/nameLogo.png",color: white)),
+                        SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.07, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
                         Container(
                           width: deviceWidth(context)*0.2,
                           child: TextField(
@@ -325,20 +326,21 @@ class _HomePageState extends State<HomePage> {
                           likeButton: 
                           IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
                           onPressed: () async{
-                            final progressHUD = ProgressHUD.of(context);
-                            progressHUD.show();
+                            // final progressHUD = ProgressHUD.of(context);
+                            // progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
                             LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
                             print(likePostData.success);
                             print(likePostData.result);
-                            await  getHomeData(LoadStatus.loading);
                             await  refreshContentStream();
-                            progressHUD.dismiss();
+                            //progressHUD.dismiss();
                           }),
                           //--------------------------------------------------------------------------------------
                           //----------------------------------------FAVORİTE BUTTON--------------------------------
-                          starButtonOnPressed: ()async{
+                          starButton: IconButton(
+                           icon: Icon(LineIcons.star,size: 26),
+                           onPressed:  ()async{
                             final progressHUD = ProgressHUD.of(context);
                             progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -348,6 +350,7 @@ class _HomePageState extends State<HomePage> {
                             print(favoriteAdd.success);
                             print(favoriteAdd.result);
                           },
+                         ),
                         );
                         //-------------------------------------------------------------------------------------
                         }),

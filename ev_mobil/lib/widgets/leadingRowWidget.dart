@@ -1,17 +1,15 @@
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
-
 
 class LeadingRowWidget extends StatefulWidget {
   //homePage ve favoritePage sayfalarında kullanıldı
  @required final String companyLogo; // icon resmi indexi
- @required final Color pinColor;
  @required final String companyName;
- final Color leadingColor;
- final VoidCallback starButtonOnPressed;
+ @required final Color leadingColor;
+ @required final Widget starButton;
+ 
 
-  const LeadingRowWidget({Key key, this.pinColor, this.companyLogo, this.companyName, this.leadingColor, this.starButtonOnPressed});
+  const LeadingRowWidget({Key key, this.companyLogo, this.companyName, this.leadingColor, this.starButton});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -57,11 +55,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
             ),
           ],
         ),
-        IconButton(
-          // pin butonu
-          icon: Icon(LineIcons.star,color: widget.pinColor,size: 26),
-          onPressed: widget.starButtonOnPressed, // olayı parametre alındı
-        ),
+        widget.starButton,
        SizedBox(width: deviceWidth(context)*0.01),      
       ],
     );

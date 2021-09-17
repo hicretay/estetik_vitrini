@@ -12,12 +12,12 @@ class HomeContainerWidget extends StatefulWidget {
   final String companyName; // resimde yer alacak metin
   final String contentPicture;
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
-  final Widget child, likeButton;
+  final Widget child, likeButton, starButton;
   final Color pinColor;
-  final VoidCallback onPressedLocation, onPressedPhone, starButtonOnPressed;
+  final VoidCallback onPressedLocation, onPressedPhone;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButtonOnPressed})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton})
       : super(key: key);
 
   @override
@@ -46,10 +46,9 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                 padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
                 //Leading Widgetı
                 child: LeadingRowWidget(
-                  pinColor: widget.pinColor,
                   companyLogo: widget.companyLogo,
                   companyName: widget.companyName,
-                  starButtonOnPressed: widget.starButtonOnPressed,
+                  starButton: widget.starButton,
                 ),
               ),
               Flexible(

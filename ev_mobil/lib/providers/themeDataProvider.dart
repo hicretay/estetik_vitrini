@@ -39,7 +39,6 @@ class ThemeDataProvider with ChangeNotifier{
   }
 
   void loadTheme()async{
-    //await createSharedPrefObj();
     isLightTheme = _preferences.getBool("themeData") ?? true;
   }
 }
