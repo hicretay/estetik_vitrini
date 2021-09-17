@@ -13,6 +13,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
+import 'package:estetikvitrini/JsnClass/favoriteJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
@@ -382,10 +383,10 @@ Future<LikeJsn> likeJsnFunc(int userId, int campaignId) async{
 //-------------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------Favorileme Fonksiyonu--------------------------------------------------
-Future<LikeJsn> favoriteAddJsnFunc(int userId, int campaignId) async{
+Future<FavoriteJsn> favoriteAddJsnFunc(int userId, int companyId) async{
   var bodys ={};
   bodys["userId"]     = userId;
-  bodys["campaignId"] = campaignId;
+  bodys["companyId"] = companyId;
 
   String body = json.encode(bodys);
 
@@ -397,7 +398,7 @@ Future<LikeJsn> favoriteAddJsnFunc(int userId, int campaignId) async{
 
   if (response.statusCode == 200) {
     final String responseString = response.body;
-    return likeJsnFromJson(responseString);
+    return favoriteJsnFromJson(responseString);
     
   } else {
     print(response.statusCode);

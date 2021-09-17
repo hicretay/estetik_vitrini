@@ -121,7 +121,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                 LeadingRowWidget( 
                                   companyName: companyName,  
                                   companyLogo: companyLogo,  
-                                  leadingColor: Theme.of(context).hintColor),//leading widgetı
+                                  leadingColor: Theme.of(context).hintColor,
+                                  starButton: Container()),//leading widgetı
                                 Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                   child: Center(
                                     //-----------------------Carousel Containerı------------------------

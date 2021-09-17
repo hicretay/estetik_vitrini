@@ -49,6 +49,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   companyLogo: widget.companyLogo,
                   companyName: widget.companyName,
                   starButton: widget.starButton,
+                  
                 ),
               ),
               Flexible(

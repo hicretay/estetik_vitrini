@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.07, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
+                        SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
                         Container(
                           width: deviceWidth(context)*0.2,
                           child: TextField(
@@ -345,7 +345,8 @@ class _HomePageState extends State<HomePage> {
                             progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
-                            final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].campaingId);
+                            final favoriteAdd = 
+                            await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
                             progressHUD.dismiss();
                             print(favoriteAdd.success);
                             print(favoriteAdd.result);
