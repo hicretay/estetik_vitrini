@@ -241,13 +241,16 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.only(top:58+deviceWidth(context)*0.2+20),
                     child: SmartRefresher(
+                      
                       controller: refreshController,
                       enablePullUp: true,
                       footer: CustomFooter(
+                      
+                      
                       builder: (BuildContext context,LoadStatus mode){
                         Widget body ;
                         if(mode==LoadStatus.idle){
-                          body =  Text("Daha fazla kampanya yükle");
+                          body = circularBasic;
                         }
                         else if(mode==LoadStatus.loading){
                           body = circularBasic;
@@ -256,7 +259,10 @@ class _HomePageState extends State<HomePage> {
                           body = Text("Hepsini gördün");
                         }
                         else if(mode == LoadStatus.canLoading){
-                            body = Text("Yükleniyor...");
+                            body = circularBasic;
+                        }
+                        else if(mode == LoadStatus.noMore){
+                           body = circularBasic;
                         }
                         else{
                           body = circularBasic;
@@ -277,6 +283,7 @@ class _HomePageState extends State<HomePage> {
                           refreshController.refreshFailed();
                         }
                       },
+                      
                       onLoading: ()async{
                          final result =await getHomeData(LoadStatus.loading);
                          if(result){
@@ -326,15 +333,15 @@ class _HomePageState extends State<HomePage> {
                           likeButton: 
                           IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
                           onPressed: () async{
-                            // final progressHUD = ProgressHUD.of(context);
-                            // progressHUD.show();
+                            final progressHUD = ProgressHUD.of(context);
+                            progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
                             LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
                             print(likePostData.success);
                             print(likePostData.result);
                             await  refreshContentStream();
-                            //progressHUD.dismiss();
+                            progressHUD.dismiss();
                           }),
                           //--------------------------------------------------------------------------------------
                           //----------------------------------------FAVORİTE BUTTON--------------------------------
@@ -345,8 +352,7 @@ class _HomePageState extends State<HomePage> {
                             progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
-                            final favoriteAdd = 
-                            await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
+                            final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
                             progressHUD.dismiss();
                             print(favoriteAdd.success);
                             print(favoriteAdd.result);

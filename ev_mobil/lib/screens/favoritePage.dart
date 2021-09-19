@@ -76,73 +76,78 @@ class _FavoritePageState extends State<FavoritePage> {
                         color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
-                      child: ListView.builder(
-                        itemCount: favoriContent == null ? 0 : favoriContent.length,
-                        controller: NavigationProvider.of(context)
-                        .screens[FAVORITE_PAGE]
-                        .scrollController,
-                        itemBuilder: (BuildContext context, int index){
-                          return HomeContainerWidget(
-                          companyLogo   : favoriContent[index].companyLogo,
-                          companyName   : favoriContent[index].companyName,
-                          contentPicture: favoriContent[index].contentPicture,
-                          cardText      : favoriContent[index].contentTitle,
-                          pinColor      : primaryColor,
-                          //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
-                          onPressed: () async{
-                          final progressUHD = ProgressHUD.of(context);
-                          progressUHD.show(); 
-                          final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
-                          // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
-                          campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
-                          companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                          contentTitle: favoriContent[index].contentTitle)));
-                          progressUHD.dismiss();
-                        },
-                        //--------------------------------------------------------------------------------------------------------------------
-                        //-----------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------
-                        onPressedLocation: (){
-                          final progressHUD = ProgressHUD.of(context);
-                          progressHUD.show();
-                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: favoriContent[index].googleAdressLink)));
-                          progressHUD.dismiss();
-                        },
-                        //-------------------------------------------------------------------------------------------------------------------
-                        //---------------------------------------------LİKE BUTTON------------------------------------------------------
-                        likeButton: 
-                          IconButton( icon: favoriContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
-                          onPressed: () async{
-                             final progressHUD = ProgressHUD.of(context);
-                             progressHUD.show();
-                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                             userIdData = prefs.getInt("userIdData"); 
-                             final likePostData = await likeJsnFunc(userIdData, favoriContent[index].campaingId);
-                             await favoriContentList();
-                             progressHUD.dismiss();
-                             print(likePostData.success);
-                             print(likePostData.result);
-                          }),
-                          //------------------------------------------------------------------------------------------------------------
-                          //------------------------------------------FAVORİTE BUTTON-----------------------------------------
-                          starButton: IconButton(
-                           icon: Icon(Icons.star,size: 26, color: primaryColor),
-                           onPressed:  ()async{
+                      child: RefreshIndicator(
+                        onRefresh:()=> favoriContentList(),
+                        color: primaryColor,
+                        backgroundColor: secondaryColor,
+                        child: ListView.builder(
+                          itemCount: favoriContent == null ? 0 : favoriContent.length,
+                          controller: NavigationProvider.of(context)
+                          .screens[FAVORITE_PAGE]
+                          .scrollController,
+                          itemBuilder: (BuildContext context, int index){
+                            return HomeContainerWidget(
+                            companyLogo   : favoriContent[index].companyLogo,
+                            companyName   : favoriContent[index].companyName,
+                            contentPicture: favoriContent[index].contentPicture,
+                            cardText      : favoriContent[index].contentTitle,
+                            pinColor      : primaryColor,
+                            //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
+                            onPressed: () async{
+                            final progressUHD = ProgressHUD.of(context);
+                            progressUHD.show(); 
+                            final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
+                            // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
+                            campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
+                            companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
+                            contentTitle: favoriContent[index].contentTitle)));
+                            progressUHD.dismiss();
+                          },
+                          //--------------------------------------------------------------------------------------------------------------------
+                          //-----------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------
+                          onPressedLocation: (){
                             final progressHUD = ProgressHUD.of(context);
                             progressHUD.show();
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                            userIdData = prefs.getInt("userIdData"); 
-                            final favoriteAdd = await favoriteAddJsnFunc(userIdData,  favoriContent[index].campaingId);
-                            progressHUD.dismiss();
-                            print(favoriteAdd.success);
-                            print(favoriteAdd.result);
-                            favoriContentList(); 
+                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: favoriContent[index].googleAdressLink)));
                             progressHUD.dismiss();
                           },
-                         ),
-                         //------------------------------------------------------------------------------------------------------------
-                      );
-                      }),
+                          //-------------------------------------------------------------------------------------------------------------------
+                          //---------------------------------------------LİKE BUTTON------------------------------------------------------
+                          likeButton: 
+                            IconButton( icon: favoriContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
+                            onPressed: () async{
+                               final progressHUD = ProgressHUD.of(context);
+                               progressHUD.show();
+                               SharedPreferences prefs = await SharedPreferences.getInstance();
+                               userIdData = prefs.getInt("userIdData"); 
+                               final likePostData = await likeJsnFunc(userIdData, favoriContent[index].campaingId);
+                               await favoriContentList();
+                               progressHUD.dismiss();
+                               print(likePostData.success);
+                               print(likePostData.result);
+                            }),
+                            //------------------------------------------------------------------------------------------------------------
+                            //------------------------------------------FAVORİTE BUTTON-----------------------------------------
+                            starButton: IconButton(
+                             icon: Icon(Icons.star,size: 26, color: primaryColor),
+                             onPressed:  ()async{
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show();
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              userIdData = prefs.getInt("userIdData"); 
+                              final favoriteAdd = await favoriteAddJsnFunc(userIdData,  favoriContent[index].campaingId);
+                              progressHUD.dismiss();
+                              print(favoriteAdd.success);
+                              print(favoriteAdd.result);
+                              favoriContentList(); 
+                              progressHUD.dismiss();
+                            },
+                           ),
+                           //------------------------------------------------------------------------------------------------------------
+                        );
+                        }),
+                      ),
                     ),
                   ),
                 ],
