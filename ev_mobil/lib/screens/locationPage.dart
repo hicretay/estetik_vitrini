@@ -291,7 +291,7 @@ class _LocationPageState extends State<LocationPage> {
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(height: minSpace);
                       },
-                      ): Center(child: CircularProgressIndicator(backgroundColor: primaryColor));
+                      ): Center(child: circularBasic);
                      }),                
                     ],
                     ),

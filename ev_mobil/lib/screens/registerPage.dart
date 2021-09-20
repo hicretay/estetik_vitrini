@@ -4,6 +4,7 @@ import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RegisterPage extends StatefulWidget {
   static const route = "/registerPage";
@@ -62,12 +63,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 )
               ),
                //--------------------------giriş ikonu----------------------------------
-                Center(child: Image.asset("assets/images/nameLogo.png")),  
+                Padding(
+                  padding: const EdgeInsets.all(defaultPadding*2),
+                  child: Container(
+                    width: deviceWidth(context),
+                    height: deviceWidth(context)*0.2,
+                    child: Center(child: SvgPicture.asset("assets/images/nameLogo.svg",color: white,placeholderBuilder: (context)=> circularBasic))),
+                ),  
                //------------------------------------------------------------------
-                SizedBox(height: deviceHeight(context) * 0.03),
                 SingleChildScrollView(
                   reverse: true,
-                  child: Padding(padding: const EdgeInsets.all(minSpace),
+                  child: Padding(padding: const EdgeInsets.only(left: minSpace,right: minSpace,bottom: minSpace),
                     child: Column(children: [
                        //---------------------------Ad-Soyad textField'ı---------------------------------------
                         TextFieldWidget(textEditingController: txtNameSurname,

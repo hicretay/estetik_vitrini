@@ -7,6 +7,7 @@ import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:provider/provider.dart';
 
@@ -59,15 +60,18 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: Column(children: [
-                    SizedBox(height: deviceHeight(context) * 0.15), // giriş ikonu - cihaz üstü boşluk          
+                    SizedBox(height: deviceHeight(context)*0.15),
                          //--------------------------giriş ikonu----------------------------------
-                          Container(
-                            width: 150,
-                            child: Center(child: Image.asset("assets/images/playstore.png"))),  //SvgPicture.asset("assets/images/logobeyaz.svg")
+                          Padding(
+                            padding: const EdgeInsets.all(defaultPadding*2),
+                            child: Container(
+                              width: deviceWidth(context),
+                              height: deviceWidth(context)*0.3,
+                              child: Center(child: SvgPicture.asset("assets/images/nameLogo.svg",color: white, placeholderBuilder: (context)=> circularBasic))),
+                          ), 
                          //------------------------------------------------------------------
-                          SizedBox(height: deviceHeight(context) * 0.05),
+                        // dikdörtgen olan 1228 3443  ----- tümü 3787 2985 -------- sadece yazı olan 10529 1639(6.42)
                           SingleChildScrollView(
-                            reverse: true,
                             child: Column(children: [
                              //--------------------Kullanıcı textField'ı---------------------
                             TextFieldWidget(textEditingController: txtUsername,
@@ -229,7 +233,46 @@ class _LoginPageState extends State<LoginPage> {
                                   alignment: Alignment.bottomCenter,
                                   child: TextButton(
                                   child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
-                                  onPressed: (){}, 
+                                  onPressed: (){
+                                    return showDialog(context: context, builder: (BuildContext context){
+                                    return AlertDialog(
+                                      title: Center(child: Text("SIFREMI UNUTTUM", style: TextStyle(fontFamily: leadingFont))),
+                                      content: Container(
+                                        height: 70,
+                                        child: Column(
+                                          children: [
+                                            Text("Lütfen E-Posta adresinizi giriniz: "),
+                                            SizedBox(height: minSpace),
+                                            TextField(
+                                              keyboardType: TextInputType.emailAddress,
+                                              decoration: InputDecoration(
+                                                contentPadding: EdgeInsets.all(maxSpace),
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(cardCurved),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                                         children: [
+                                           MaterialButton(
+                                           color: primaryColor,
+                                           child: Text("Gönder",style: TextStyle(fontFamily: leadingFont)), // fotoğraf çekilmeye devam edilecek
+                                           onPressed: () async{
+                                             Navigator.of(context).pop();
+                                        }),
+                                        ],
+                                         ),
+                                        
+                                      ],
+                                    );
+                                  });
+                                  }, 
                                   ),
                                 ),                          
                             ]),
