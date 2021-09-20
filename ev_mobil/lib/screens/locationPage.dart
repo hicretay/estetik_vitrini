@@ -87,18 +87,18 @@ class _LocationPageState extends State<LocationPage> {
                                   .copyWith(color: white, fontFamily: leadingFont),
                               maxLines: 2,
                             ),
-                            Align(
-                            alignment: Alignment.topRight,
-                            child: CircleAvatar(
-                            //iconun çevresini saran yapı tasarımı
-                            maxRadius: 20,
-                            backgroundColor: Colors.white,
-                            child: IconButton(
-                              iconSize: iconSize,
-                              icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
-                              onPressed:(){},
-                            ),
-                          ),)
+                          //   Align(
+                          //   alignment: Alignment.topRight,
+                          //   child: CircleAvatar(
+                          //   //iconun çevresini saran yapı tasarımı
+                          //   maxRadius: 20,
+                          //   backgroundColor: Colors.white,
+                          //   child: IconButton(
+                          //     iconSize: iconSize,
+                          //     icon: SvgPicture.asset("assets/icons/haritanoktası.svg"),
+                          //     onPressed:(){},
+                          //   ),
+                          // ),)
                           ],
                         ),
                       ),

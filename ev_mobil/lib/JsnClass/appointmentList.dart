@@ -31,6 +31,7 @@ class Result {
         this.operationName,
         this.appointmentTime,
         this.appointmentDate,
+        this.confirmed,
     });
 
     int id;
@@ -38,6 +39,7 @@ class Result {
     String operationName;
     String appointmentTime;
     String appointmentDate;
+    bool confirmed;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
@@ -45,6 +47,7 @@ class Result {
         operationName: json["operationName"],
         appointmentTime: json["appointmentTime"],
         appointmentDate: json["appointmentDate"],
+        confirmed: json["confirmed"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -53,5 +56,6 @@ class Result {
         "operationName": operationName,
         "appointmentTime": appointmentTime,
         "appointmentDate": appointmentDate,
+        "confirmed":confirmed
     };
 }

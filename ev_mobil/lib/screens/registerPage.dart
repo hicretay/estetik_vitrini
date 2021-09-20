@@ -66,8 +66,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.all(defaultPadding*2),
                   child: Container(
-                    width: deviceWidth(context),
-                    height: deviceWidth(context)*0.2,
+                    width: deviceWidth(context)*0.8,
+                    height: deviceWidth(context)*0.1,
                     child: Center(child: SvgPicture.asset("assets/images/nameLogo.svg",color: white,placeholderBuilder: (context)=> circularBasic))),
                 ),  
                //------------------------------------------------------------------

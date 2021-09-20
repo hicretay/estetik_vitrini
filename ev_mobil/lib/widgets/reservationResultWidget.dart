@@ -8,10 +8,11 @@ class ResevationResultWidget extends StatelessWidget {
   final String operation;
   final String time;
   final String date;
+  final Widget confirmButton;
   final VoidCallback onTap;
 
   const ResevationResultWidget({
-    Key key, this.companyName, this.operation, this.time, this.date, this.onTap,
+    Key key, this.companyName, this.operation, this.time, this.date, this.onTap, this.confirmButton,
   }) : super(key: key);
 
   @override
@@ -43,7 +44,7 @@ class ResevationResultWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: deviceWidth(context)*0.57,
+                          width: deviceWidth(context)*0.5,
                           child: Text(
                             companyName,
                             overflow: TextOverflow.fade,
@@ -68,6 +69,8 @@ class ResevationResultWidget extends StatelessWidget {
                             style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
                           ),
                         ),
+                        SizedBox(width:deviceWidth(context)*0.05),
+                        confirmButton,
                         SizedBox(width:deviceWidth(context)*0.05),
                         GestureDetector(
                           child: Icon(Icons.clear,size: 18,color: Theme.of(context).hintColor),
