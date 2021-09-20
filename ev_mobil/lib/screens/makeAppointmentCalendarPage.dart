@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
-
 class MakeAppointmentCalendarPage extends StatefulWidget { 
   final AppointmentObject appointment;
 
@@ -34,7 +33,6 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
     return selectedEvents[date] ?? [];
   }
   
-
 
   @override
   void initState() { 
@@ -95,9 +93,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
-                          SizedBox(
-                            height: maxSpace,
-                          )
+                          SizedBox( height: maxSpace)
                         ],
                       ),
                     ),

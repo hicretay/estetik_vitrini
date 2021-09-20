@@ -54,33 +54,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
               color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
               child: Column(
                 children: [
-                  Padding(padding: const EdgeInsets.all(defaultPadding),
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(//iconun çevresini saran yapı tasarımı
-                            maxRadius: 25,
-                            backgroundColor: Colors.white,
-                            child: IconButton(
-                            iconSize: iconSize,
-                            icon: Icon(Icons.arrow_back,color: secondaryColor),
-                            onPressed: (){ Navigator.pop(context, false);}
-                            ),
-                          ),
-                          SizedBox(width: maxSpace),
-                          Text("AynaAyna",
-                          style     : TextStyle(
-                          fontFamily: leadingFont, 
-                          fontSize  : 20, 
-                          color     : Colors.white),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  ),
+                  BackLeadingWidget(),
                   Padding(padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       children: [
@@ -235,6 +209,43 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
           ),
         ),
     ));
+  }
+}
+
+class BackLeadingWidget extends StatelessWidget {
+  const BackLeadingWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(padding: const EdgeInsets.all(defaultPadding),
+      child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            CircleAvatar(//iconun çevresini saran yapı tasarımı
+              maxRadius: 25,
+              backgroundColor: Colors.white,
+              child: IconButton(
+              iconSize: iconSize,
+              icon: Icon(Icons.arrow_back,color: secondaryColor),
+              onPressed: (){ Navigator.pop(context, false);}
+              ),
+            ),
+            SizedBox(width: maxSpace),
+            Text("AynaAyna",
+            style     : TextStyle(
+            fontFamily: leadingFont, 
+            fontSize  : 20, 
+            color     : Colors.white),
+            ),
+          ],
+        ),
+      ],
+    ),
+    );
   }
 }
 

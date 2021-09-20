@@ -338,7 +338,6 @@ Future<AddUserCityJsn> userAddCityJsnFunc(int userId, int cityId, int countyId) 
   bodys["cityId"]  = cityId;
   bodys["countyId"]= countyId;
 
-
   String body = json.encode(bodys);
 
   final response = await http.post(
@@ -395,7 +394,6 @@ Future<FavoriteJsn> favoriteAddJsnFunc(int userId, int companyId) async{
     body: body,
     headers: header
   );
-
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return favoriteJsnFromJson(responseString);
@@ -406,13 +404,11 @@ Future<FavoriteJsn> favoriteAddJsnFunc(int userId, int companyId) async{
   }
 }
 //-------------------------------------------------------------------------------------------------------------------------------
-
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
   return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.BOTTOM);
 }
 //----------------------------------------------------------------------------------------------------------------------------------
-
 //---------------------------------------Kullanıcıya Dönüt - Uyarı Dialog Fonksiyonu------------------------------------------------
   showAlert(BuildContext context, String content) { 
     return showDialog(context: context, builder: (BuildContext context){
@@ -427,9 +423,7 @@ showToast(BuildContext context, String content){
              onPressed: () async{
                Navigator.of(context).pop();
           }),
-          ],
-           ),
-          
+          ]),
         ],
       );
     });

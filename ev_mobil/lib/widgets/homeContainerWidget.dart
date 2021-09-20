@@ -6,7 +6,6 @@ import 'leadingRowWidget.dart';
 
 class HomeContainerWidget extends StatefulWidget {
   //homePage sayfasında post görünümü oluşturulmasında kullanıldı
-
   final String cardText; // resimde yer alacak metin
   final String companyLogo; // resimde yer alacak metin
   final String companyName; // resimde yer alacak metin

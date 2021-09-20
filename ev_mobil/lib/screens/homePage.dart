@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
@@ -38,9 +39,7 @@ class _HomePageState extends State<HomePage> {
   int pageIndex = 1;
   int totalPage = 1;
   bool textFieldTapped = false;
-
   TextEditingController teSearch = TextEditingController();
-
   List companyContent;
   int userIdData;
   bool liked = false;
@@ -85,10 +84,7 @@ class _HomePageState extends State<HomePage> {
     return true;
   } else {
     return false;
-  }
-  }
-
-
+  }}
   @override
   void initState() { 
     super.initState();
@@ -99,7 +95,6 @@ class _HomePageState extends State<HomePage> {
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
         _connectionChangeStream = connectionStatus.connectionChange.listen(connectionChanged);
   }
-
 
   void connectionChanged(dynamic hasConnection) {
     setState(() {
@@ -131,7 +126,8 @@ class _HomePageState extends State<HomePage> {
 //-------------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {  
-    return  SafeArea(
+    return  ColorfulSafeArea(
+      color: white,    
         child: Scaffold(
         body: ProgressHUD(
         child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>              
@@ -177,8 +173,7 @@ class _HomePageState extends State<HomePage> {
                       itemCount: companyContent.length,
                       scrollDirection: Axis.horizontal,
                       separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(width: maxSpace);
-                      },                   
+                      return SizedBox(width: maxSpace);},                   
                       itemBuilder: (BuildContext context,index){
                         return Column(children:[
                             GestureDetector(
@@ -232,22 +227,17 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(color: white)),
                           ),
                         ),
-                      ],
-                        );
-                        
+                      ]);
                       }),
                   ),
                   //--------------------------------------------------------------------------------------------
                   //------------------------------------Anasayfa Postları----------------------------------------
                   Padding(
                     padding: EdgeInsets.only(top:58+deviceWidth(context)*0.2+20),
-                    child: SmartRefresher(
-                      
+                    child: SmartRefresher(                     
                       controller: refreshController,
                       enablePullUp: true,
                       footer: CustomFooter(
-                      
-                      
                       builder: (BuildContext context,LoadStatus mode){
                         Widget body ;
                         if(mode==LoadStatus.idle){
@@ -269,7 +259,6 @@ class _HomePageState extends State<HomePage> {
                           body = circularBasic;
                         }
                         return Container(
-                         // height: 20.0,
                           child: Center(child:body),
                         );
                       },
@@ -306,7 +295,6 @@ class _HomePageState extends State<HomePage> {
                             pinColor      : primaryColor,
                             onPressedPhone: () async{ 
                                             dynamic number = homeContent[index].companyPhone.toString(); // arama ekranına yönlendirme
-                                            //bool res = await FlutterPhoneDirectCaller.callNumber(number); // direkt arama
                                             launch("tel://$number");
                                           },
                             //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
@@ -334,27 +322,21 @@ class _HomePageState extends State<HomePage> {
                           likeButton: 
                           IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
                           onPressed: () async{
-                            // final progressHUD = ProgressHUD.of(context);
-                            // progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
                             LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
                             print(likePostData.success);
                             print(likePostData.result);
                             await  refreshContentStream();
-                            //progressHUD.dismiss();
                           }),
                           //--------------------------------------------------------------------------------------
                           //----------------------------------------FAVORİTE BUTTON--------------------------------
                           starButton: IconButton(
                            icon: Icon(LineIcons.star,size: 26),
                            onPressed:  ()async{
-                            final progressHUD = ProgressHUD.of(context);
-                            progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
                             final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
-                            progressHUD.dismiss();
                             print(favoriteAdd.success);
                             print(favoriteAdd.result);
                           },

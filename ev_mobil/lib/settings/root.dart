@@ -5,17 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Root extends StatefulWidget {
-  
   static const route = '/rootPage';
-
-
-
   @override
   _RootState createState() => _RootState();
 }
 
 class _RootState extends State<Root> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<NavigationProvider>(
@@ -29,14 +24,12 @@ class _RootState extends State<Root> {
               ),
             ).toList();
         //------------------------------------------------------------
-
         // Her ekran için Navigatorı başlatır
         final screens = provider.screens.map((screen) => Navigator(
                 key: screen.navigatorState,
                 onGenerateRoute: screen.onGenerateRoute,
               ),
             ).toList();
-
         return WillPopScope(
           onWillPop: () async => provider.onWillPop(context),
           child: Scaffold(

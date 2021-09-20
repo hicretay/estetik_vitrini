@@ -108,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
                                   prefs.setString("user", username);     
                                   prefs.setString("pass", password);  
                                   prefs.setInt("userIdData", userData.result.id);  
-                                  
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
                                   NavigationProvider.of(context).setTab(LOCATION_PAGE);
                                   showToast(context, "Giriş Başarılı!");
@@ -265,10 +264,8 @@ class _LoginPageState extends State<LoginPage> {
                                            child: Text("Gönder",style: TextStyle(fontFamily: leadingFont)), // fotoğraf çekilmeye devam edilecek
                                            onPressed: () async{
                                              Navigator.of(context).pop();
-                                        }),
-                                        ],
-                                         ),
-                                        
+                                          }),
+                                        ]),
                                       ],
                                     );
                                   });
@@ -276,13 +273,12 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),                          
                             ]),
-                          )
+                      )
                   ],),
                 ),
               ),
           ],
         ),
-        
         ),
       ),
     );

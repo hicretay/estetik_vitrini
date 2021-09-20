@@ -54,22 +54,8 @@ class _FavoritePageState extends State<FavoritePage> {
               colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(        
                 children: [
-                  //-----------------------Sayfa Başlığı----------------------------
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 20,top: 20),
-                  //   child: Align(
-                  //     alignment: Alignment.topLeft, // başlık sola bitişik
-                  //     child: Text(
-                  //       "Favori\nSalonlar",
-                  //       style: Theme.of(context)
-                  //           .textTheme
-                  //           .headline3
-                  //           .copyWith(color: white, fontFamily: leadingFont),
-                  //     ),
-                  //   ),
-                  // ),
-                  Padding(padding: const EdgeInsets.all(defaultPadding),
-                  //--------------Scaffold Görünümlü header--------------
+                Padding(padding: const EdgeInsets.all(defaultPadding),
+                //--------------Scaffold Görünümlü header--------------
                 child: Padding(
                   padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding),
                   child: Column(

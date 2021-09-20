@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class GoogleMapPage extends StatefulWidget {
-
   final String locationUrl;
   GoogleMapPage({Key key, this.locationUrl}) : super(key: key);
 
@@ -23,7 +22,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                 children: [
                   CircleAvatar(
                     //iconun çevresini saran yapı tasarımı
-                    maxRadius: 25,
+                    maxRadius: 20,
                     backgroundColor: secondaryColor,
                     child: IconButton(
                       iconSize: iconSize,
@@ -33,7 +32,6 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                   ),
                   SizedBox(width: maxSpace),
                   Text("Estetik Vitrini",
-                    
                     style     : TextStyle(
                     fontFamily: leadingFont, fontSize: 25, color:primaryColor),
                   ),

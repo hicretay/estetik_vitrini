@@ -91,7 +91,7 @@ class _LocationPageState extends State<LocationPage> {
                             alignment: Alignment.topRight,
                             child: CircleAvatar(
                             //iconun çevresini saran yapı tasarımı
-                            maxRadius: 25,
+                            maxRadius: 20,
                             backgroundColor: Colors.white,
                             child: IconButton(
                               iconSize: iconSize,
@@ -99,7 +99,6 @@ class _LocationPageState extends State<LocationPage> {
                               onPressed:(){},
                             ),
                           ),)
-                          
                           ],
                         ),
                       ),
