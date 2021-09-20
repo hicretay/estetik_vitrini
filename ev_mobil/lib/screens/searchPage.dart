@@ -21,11 +21,14 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(defaultPadding),
               child: TextField(
               controller: teSearch,
                decoration: InputDecoration(
-                 suffixIcon: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 25,textDirection: TextDirection.ltr), 
+                 suffixIcon: Padding(
+                   padding: const EdgeInsets.only(right: maxSpace),
+                   child: Center(child: Align(alignment: Alignment.bottomRight,child: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 25,textDirection: TextDirection.ltr))),
+                 ), 
                  contentPadding: EdgeInsets.all(maxSpace),
                  filled: true,
                  fillColor: Colors.white,
