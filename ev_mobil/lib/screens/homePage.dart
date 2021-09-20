@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
 
   List companyContent;
   int userIdData;
+  bool liked = false;
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
@@ -333,15 +334,15 @@ class _HomePageState extends State<HomePage> {
                           likeButton: 
                           IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
                           onPressed: () async{
-                            final progressHUD = ProgressHUD.of(context);
-                            progressHUD.show();
+                            // final progressHUD = ProgressHUD.of(context);
+                            // progressHUD.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             userIdData = prefs.getInt("userIdData"); 
                             LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
                             print(likePostData.success);
                             print(likePostData.result);
                             await  refreshContentStream();
-                            progressHUD.dismiss();
+                            //progressHUD.dismiss();
                           }),
                           //--------------------------------------------------------------------------------------
                           //----------------------------------------FAVORİTE BUTTON--------------------------------
@@ -358,6 +359,16 @@ class _HomePageState extends State<HomePage> {
                             print(favoriteAdd.result);
                           },
                          ),
+                         homeDetailOntap: () async{
+                            final progressUHD = ProgressHUD.of(context);
+                            progressUHD.show(); 
+                            final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
+                            // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
+                            campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
+                            googleAdressLink: homeContent[index].googleAdressLink)));
+                            progressUHD.dismiss();
+                          },
                         );
                         //-------------------------------------------------------------------------------------
                         }),

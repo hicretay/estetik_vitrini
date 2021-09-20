@@ -14,10 +14,10 @@ class HomeContainerWidget extends StatefulWidget {
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
   final Widget child, likeButton, starButton;
   final Color pinColor;
-  final VoidCallback onPressedLocation, onPressedPhone;
+  final VoidCallback onPressedLocation, onPressedPhone, homeDetailOntap;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton, this.homeDetailOntap})
       : super(key: key);
 
   @override
@@ -58,34 +58,37 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   padding:
                       const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
                   //--------------Resmi çevreyelecek container yapısı------------------
-                  child: Container(
-                    width: deviceWidth(context),
-                    height: 320,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
-                      image: DecorationImage(
-                        fit: BoxFit.fill, // Resim containerı kaplasın
-                        image: NetworkImage(
-                          widget.contentPicture
+                  child: GestureDetector(
+                    child: Container(
+                      width: deviceWidth(context),
+                      height: 320,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
+                        image: DecorationImage(
+                          fit: BoxFit.fill, // Resim containerı kaplasın
+                          image: NetworkImage(
+                            widget.contentPicture
+                          ),
                         ),
                       ),
-                    ),
-                    //------------------------------------------------------------------
+                      //------------------------------------------------------------------
 
-                    //----------------Resim üzerinde yer alacak yapılar-----------------
-                   child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
-                            child: Padding(padding: EdgeInsets.only(left: maxSpace,bottom: deviceHeight(context)*0.01),
-                              child: Text(
-                                widget.cardText, //Kendin için bir şeyler yap metni
-                                style: TextStyle(
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
+                      //----------------Resim üzerinde yer alacak yapılar-----------------
+                     child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
+                              child: Padding(padding: EdgeInsets.only(left: maxSpace,bottom: deviceHeight(context)*0.01),
+                                child: Text(
+                                  widget.cardText, //Kendin için bir şeyler yap metni
+                                  style: TextStyle(
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
                               ),
                             ),
-                          ),
-                          //cardText ve alt container arasındaki boşluk
-                         
+                            //cardText ve alt container arasındaki boşluk
+                           
+                    ),
+                    onTap: widget.homeDetailOntap,
                   ),
                 ),
               ),

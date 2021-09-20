@@ -55,19 +55,60 @@ class _FavoritePageState extends State<FavoritePage> {
               child: Column(        
                 children: [
                   //-----------------------Sayfa Başlığı----------------------------
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20,top: 20),
-                    child: Align(
-                      alignment: Alignment.topLeft, // başlık sola bitişik
-                      child: Text(
-                        "Favori\nSalonlar",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline3
-                            .copyWith(color: white, fontFamily: leadingFont),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 20,top: 20),
+                  //   child: Align(
+                  //     alignment: Alignment.topLeft, // başlık sola bitişik
+                  //     child: Text(
+                  //       "Favori\nSalonlar",
+                  //       style: Theme.of(context)
+                  //           .textTheme
+                  //           .headline3
+                  //           .copyWith(color: white, fontFamily: leadingFont),
+                  //     ),
+                  //   ),
+                  // ),
+                  Padding(padding: const EdgeInsets.all(defaultPadding),
+                  //--------------Scaffold Görünümlü header--------------
+                child: Padding(
+                  padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding),
+                  child: Column(
+                    children: [
+                      Align(alignment: Alignment.centerLeft,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Favori\nSalonlar", //Büyük Başlık
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3
+                                  .copyWith(color: white, fontFamily: leadingFont),
+                              maxLines: 2,
+                            ),
+                            Align(
+                            alignment: Alignment.topRight,
+                            child: CircleAvatar(
+                            //iconun çevresini saran yapı tasarımı
+                            maxRadius: 20,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              iconSize: iconSize,
+                              icon: Icon(Icons.refresh,color: primaryColor),
+                              onPressed:(){
+                                favoriContentList();
+                                showToast(context, "Sayfa yenilendi");
+                              },
+                            ),
+                          ),)
+                          
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
+                ),
+                  //---------------------------------------------------
+                ),
                   //-----------------------------------------------------------------
                   //------------------------- Arkaplan containerı---------------------
                   Expanded(
@@ -145,6 +186,17 @@ class _FavoritePageState extends State<FavoritePage> {
                             },
                            ),
                            //------------------------------------------------------------------------------------------------------------
+                           homeDetailOntap: () async{
+                            final progressUHD = ProgressHUD.of(context);
+                            progressUHD.show(); 
+                            final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
+                            // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
+                            campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
+                            companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
+                            contentTitle: favoriContent[index].contentTitle)));
+                            progressUHD.dismiss();
+                          },
                         );
                         }),
                       ),
