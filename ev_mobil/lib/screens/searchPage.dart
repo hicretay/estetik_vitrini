@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
+import 'package:estetikvitrini/screens/searchResultPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class _SearchPageState extends State<SearchPage> {
       ],
     ))),
     onTap: (){
-      //Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchResultPage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchResultPage()));
     },
     );
           },

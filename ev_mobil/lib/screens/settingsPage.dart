@@ -13,15 +13,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
  static const route = "settingsPage";
-
-  SettingsPage({Key key}) : super(key: key);
-
+ SettingsPage({Key key}) : super(key: key);
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
