@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:estetikvitrini/JsnClass/addUserCityJsn.dart';
 import 'package:estetikvitrini/JsnClass/addUserJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
@@ -12,7 +11,6 @@ import 'package:estetikvitrini/JsnClass/companyOperationTime.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
-import 'package:estetikvitrini/JsnClass/favoriCompanyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriteJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
@@ -34,7 +32,7 @@ Map<String, String> header = {
   "Access-Control-Allow-Methods": "POST, OPTIONS"
 };
 
-//---------------------------------------------------Login Fonksiyonu--------------------------------------------------------------
+//---------------------------------------------------Login Fonksiyonu-------------------------------------------------------------
 Future<LoginJsn> loginJsnFunc(String userName, String password, bool social) async {
   final response = await http.post(Uri.parse(url + "LoginJsn"),
       body: '{"userName":' +'"$userName"' + ',' +'"password":' + '"$password"' + ',' + '"social":' + social.toString() + '}',
@@ -95,23 +93,6 @@ Future<ContentStreamDetailJsn> contentStreamDetailJsnFunc(int companyId, int cam
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return contentStreamDetailJsnFromJson(responseString);
-  } else {
-    return null;
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------------------
-
-//----------------------------------------------Favori Salonlar Listesi Fonksiyonu-------------------------------------------------
-Future<FavoriCompanyJsn> favoriCompanyJsnFunc(int id) async {
-  final response = await http.post(
-    Uri.parse(url + "FavoriCompany/List"),
-    body: '{"userId":' + id.toString() + '}',
-    headers: header
-  );
-
-  if (response.statusCode == 200) {
-    final String responseString = response.body;
-    return favoriCompanyJsnFromJson(responseString);
   } else {
     return null;
   }
@@ -419,7 +400,7 @@ showToast(BuildContext context, String content){
            children: [
              MaterialButton(
              color: primaryColor,
-             child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), // fotoğraf çekilmeye devam edilecek
+             child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), 
              onPressed: () async{
                Navigator.of(context).pop();
           }),

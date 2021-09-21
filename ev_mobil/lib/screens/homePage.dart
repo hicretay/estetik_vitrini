@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
   bool textFieldTapped = false;
   List companyContent;
   int userIdData;
-  bool liked = false;
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
@@ -146,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                           GestureDetector(
                             child: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 25,textDirection: TextDirection.ltr),
                             onTap: (){
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchPage()));
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
                             }),
                         ],
                       ),
@@ -206,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                           //------------------------------------------------------------------------------------------------------------------------------
                           ),
                           SizedBox(
-                            width: 75.0,
+                            width: 65.0,
                             child: Center(
                               child: Text(companyContent[index].companyName,              
                               overflow: TextOverflow.fade,
