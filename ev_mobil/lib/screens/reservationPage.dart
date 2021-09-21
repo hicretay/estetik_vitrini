@@ -266,7 +266,11 @@ class _ReservationPageState extends State<ReservationPage> {
                                     operation   : appointmentList[index].operationName,
                                     time        : appointmentList[index].appointmentTime,
                                     date        : appointmentList[index].appointmentDate,
-                                    confirmButton: Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
+                                    confirmButton: GestureDetector(child: 
+                                                   Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
+                                                   onTap: (){
+                                                     showToast(context, "Randevu onayı bekleniyor...");
+                                                   }),
                                     onTap      : ()async{
                                       showDialog(context: context, builder: (BuildContext context){
                                         return ProgressHUD(
