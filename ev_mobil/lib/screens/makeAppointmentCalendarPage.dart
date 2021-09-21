@@ -3,6 +3,7 @@ import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -51,27 +52,8 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                 color:  Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(defaultPadding),
-                      child: Row(
-                      children: [
-                        CircleAvatar(
-                          //iconun çevresini saran yapı tasarımı
-                          maxRadius: deviceWidth(context)*0.06,
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                            iconSize: iconSize,
-                            icon: Icon(Icons.arrow_back,color: secondaryColor,size: 23),
-                            onPressed: (){Navigator.pop(context, false);},
-                          ),
-                        ),
-                        SizedBox(width: maxSpace),
-                        Text("AynaAyna",
-                          style     : TextStyle(
-                          fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                        ),
-                      ],
-                    )
+                    BackLeadingWidget(
+                      backColor: secondaryColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),

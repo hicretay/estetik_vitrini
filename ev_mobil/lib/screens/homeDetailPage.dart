@@ -5,6 +5,7 @@ import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -64,28 +65,31 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
               colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(
               children: [
-                  Padding(
-                    padding: const EdgeInsets.all(defaultPadding),
-                    child: Row(
-                    children: [
-                        CircleAvatar(
-                          //iconun çevresini saran yapı tasarımı
-                            maxRadius: deviceWidth(context)*0.06,
-                            backgroundColor: Colors.white,
-                            child: IconButton(
-                            iconSize: iconSize,
-                            icon: Icon(Icons.arrow_back,color: primaryColor,size: 23),
-                            onPressed: (){Navigator.pop(context, false);},
-                          ),
-                        ),
-                        SizedBox(width: maxSpace),
-                        Text("AynaAyna",
-                          style     : TextStyle(
-                          fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                        ),
-                      ],
-                    )
-                  ),
+                BackLeadingWidget(
+                  backColor: primaryColor,
+                ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(defaultPadding),
+                  //   child: Row(
+                  //   children: [
+                  //       CircleAvatar(
+                  //         //iconun çevresini saran yapı tasarımı
+                  //           maxRadius: deviceWidth(context)*0.06,
+                  //           backgroundColor: Colors.white,
+                  //           child: IconButton(
+                  //           iconSize: iconSize,
+                  //           icon: Icon(Icons.arrow_back,color: primaryColor,size: 23),
+                  //           onPressed: (){Navigator.pop(context, false);},
+                  //         ),
+                  //       ),
+                  //       SizedBox(width: maxSpace),
+                  //       Text("AynaAyna",
+                  //         style     : TextStyle(
+                  //         fontFamily: leadingFont, fontSize: 25, color: Colors.white),
+                  //       ),
+                  //     ],
+                  //   )
+                  // ),
                   Padding(padding: const EdgeInsets.only(left: maxSpace),
                       child: Column(
                       children: [

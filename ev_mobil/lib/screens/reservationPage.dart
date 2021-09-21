@@ -90,233 +90,237 @@ class _ReservationPageState extends State<ReservationPage> {
   @override
   Widget build(BuildContext context) {
     //final rootContext = context.findRootAncestorStateOfType<NavigatorState>().context;
-    return SafeArea(
-      child: Scaffold(
-        body: ProgressHUD(
-          child: Builder(builder: (context)=>
-              BackGroundContainer(
-              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor2 : backGroundColorDark,
-              child: Column(
-              children: [
-              Padding(padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding,bottom: defaultPadding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                         Text("Randevularım",
-                          style: Theme.of(context)
-                            .textTheme
-                            .headline4
-                            .copyWith(color: white, fontFamily: leadingFont),
-                        ),
-                        CircleAvatar(//iconun çevresini saran yapı tasarımı
-                          maxRadius: deviceWidth(context)*0.06,
-                          backgroundColor: Colors.white,
-                          child: IconButton(
-                          iconSize: iconSize,
-                          icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
-                          onPressed: ()async{
-                           ///////////////////////////////////////////////////////////////////////
-                              //   if (selectedEvents[_selectedDay] != null)
-                              //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
-                              //  else {
-                              //   selectedEvents[_selectedDay] = [
-                              //     Event(operation: "islem")
-                              //   ];
-                              // }
-                           showDialog(context: context, builder: (BuildContext context){
-                             int compID = -1;
-                             return AlertDialog(
-                               actions: <Widget>[
-                                 Container(
-                                   width: deviceWidth(context),
-                                   child: 
-                                   SearchableDropdown(
-                                     menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
-                                     closeButton: null,
-                                     dialogBox: false,
-                                     isCaseSensitiveSearch: false,
-                                     style: TextStyle(color: primaryColor),
-                                     isExpanded: true,
-                                     hint: Center(
-                                     child: Text("Randevu alınacak firmayı seçiniz",
-                                     textAlign: TextAlign.center,
-                                     style    : TextStyle(
-                                     fontSize : 18, 
-                                     color    :  primaryColor,
-                                     )),
-                                     ),
-                                     value: select,
-                                     items: companyContent.map((data){
-                                     return DropdownMenuItem(
-                                     child: SizedBox(
-                                     child: Center(
-                                     child: Text(data.companyName, textAlign: TextAlign.center,
-                                     style: TextStyle(color: primaryColor, fontSize: 20)),
-                                     ),
-                                     ),
-                                     value: data.companyName);
-                                     }).toList(),  
-                                     onChanged: (value) async{
-                                     if (!mounted)
-                                     return;                                  
-                                    
-                                       select = value;
-                                       for (var item in companyContent) {
-                                         if(item.companyName==value){
-                                           compID = item.id -1;
+    return Container(
+      color: Colors.transparent,
+      child: SafeArea(
+        top: false,
+        child: Scaffold(
+          body: ProgressHUD(
+            child: Builder(builder: (context)=>
+                BackGroundContainer(
+                colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor2 : backGroundColorDark,
+                child: Column(
+                children: [
+                Padding(padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*2,bottom: defaultPadding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                           Text("Randevularım",
+                            style: Theme.of(context)
+                              .textTheme
+                              .headline4
+                              .copyWith(color: white, fontFamily: leadingFont),
+                          ),
+                          CircleAvatar(//iconun çevresini saran yapı tasarımı
+                            maxRadius: deviceWidth(context)*0.06,
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                            iconSize: iconSize,
+                            icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
+                            onPressed: ()async{
+                             ///////////////////////////////////////////////////////////////////////
+                                //   if (selectedEvents[_selectedDay] != null)
+                                //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
+                                //  else {
+                                //   selectedEvents[_selectedDay] = [
+                                //     Event(operation: "islem")
+                                //   ];
+                                // }
+                             showDialog(context: context, builder: (BuildContext context){
+                               int compID = -1;
+                               return AlertDialog(
+                                 actions: <Widget>[
+                                   Container(
+                                     width: deviceWidth(context),
+                                     child: 
+                                     SearchableDropdown(
+                                       menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
+                                       closeButton: null,
+                                       dialogBox: false,
+                                       isCaseSensitiveSearch: false,
+                                       style: TextStyle(color: primaryColor),
+                                       isExpanded: true,
+                                       hint: Center(
+                                       child: Text("Randevu alınacak firmayı seçiniz",
+                                       textAlign: TextAlign.center,
+                                       style    : TextStyle(
+                                       fontSize : 18, 
+                                       color    :  primaryColor,
+                                       )),
+                                       ),
+                                       value: select,
+                                       items: companyContent.map((data){
+                                       return DropdownMenuItem(
+                                       child: SizedBox(
+                                       child: Center(
+                                       child: Text(data.companyName, textAlign: TextAlign.center,
+                                       style: TextStyle(color: primaryColor, fontSize: 20)),
+                                       ),
+                                       ),
+                                       value: data.companyName);
+                                       }).toList(),  
+                                       onChanged: (value) async{
+                                       if (!mounted)
+                                       return;                                  
+                                      
+                                         select = value;
+                                         for (var item in companyContent) {
+                                           if(item.companyName==value){
+                                             compID = item.id -1;
+                                           }
+                                           else{
+                                             NavigationProvider.of(context).setTab(RESERVATION_PAGE);
+                                           }
                                          }
-                                         else{
-                                           NavigationProvider.of(context).setTab(RESERVATION_PAGE);
-                                         }
-                                       }
-                                       print(companyContent[compID].id.toString());
-                                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                                       userIdData = prefs.getInt("userIdData"); 
-                                       AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: userIdData, companyNameS: companyContent[compID].companyName, campaignId: 0);
-                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
-                                 
-                                     },
-                                     )
-                              )
-                            ],
-                          );
-                        });
-                       }),
-                     ),
-                   ],
-                 ),
-               ),
-                      Expanded(
-                        child: Container(
-                        decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
-                        borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(cardCurved),
-                        ),
-                      ),
-                        child  : SingleChildScrollView(
-                        physics: ScrollPhysics(),
-                        child  : Column(
-                          children: [
-                            Column(
-                              children: 
-                                [Padding(
-                                  padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
-                                  child  : TableCalendar(
-                                  locale: "tr",
-                                  focusedDay: _focusedDay,
-                                  firstDay: DateTime.utc(2010, 10, 16),
-                                  lastDay: DateTime.utc(2030, 3, 14),
-                                  shouldFillViewport: false,
-                                  startingDayOfWeek: StartingDayOfWeek.monday,
-                                  calendarFormat: CalendarFormat.twoWeeks,
-                                  calendarStyle: CalendarStyle(
-                                    isTodayHighlighted: true,
-                                    selectedDecoration: BoxDecoration(
-                                      color: primaryColor,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(minCurved),
-                                    ),
-                                    outsideDecoration: boxDecoration,
-                                    defaultDecoration: boxDecoration,
-                                    weekendDecoration: boxDecoration,
-                                    defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
-                                    outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
-                                    selectedTextStyle: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    todayDecoration: BoxDecoration(
-                                      color: secondaryColor,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(minCurved),
-                                    ),
-                                  ),
-                                  selectedDayPredicate: (day) {
-                                    return isSameDay(_selectedDay, day);
-                                  },
-                                  onDaySelected: (selectedDay, focusedDay) async{
-                                      _selectedDay = selectedDay;
-                                      _focusedDay = focusedDay;   
-                                      await appointmentListFunc();  // randevuları yenileme
-                                  },
-                                  headerStyle: HeaderStyle(
-                                    formatButtonVisible: false,
-                                    titleCentered: true,
-                                  ),
-                                  eventLoader: _getEventsForDay,
+                                         print(companyContent[compID].id.toString());
+                                         SharedPreferences prefs = await SharedPreferences.getInstance();
+                                         userIdData = prefs.getInt("userIdData"); 
+                                         AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: userIdData, companyNameS: companyContent[compID].companyName, campaignId: 0);
+                                         Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
+                                   
+                                       },
+                                       )
                                 )
-                                ),
                               ],
-                            ),
-                          
-                              RefreshIndicator(
-                                onRefresh:()=> appointmentListFunc(),
-                                color: primaryColor,
-                                backgroundColor: secondaryColor,
-                                child: ListView.builder(
-                                 // physics    : NeverScrollableScrollPhysics(),
-                                  shrinkWrap : true,
-                                  itemCount  : appointmentList == null ? 0 : appointmentList.length,
-                                  itemBuilder: (BuildContext context, int index){  
-                                  return ResevationResultWidget(
-                                  companyName : appointmentList[index].companyName,
-                                  operation   : appointmentList[index].operationName,
-                                  time        : appointmentList[index].appointmentTime,
-                                  date        : appointmentList[index].appointmentDate,
-                                  confirmButton: Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
-                                  onTap      : ()async{
-                                    showDialog(context: context, builder: (BuildContext context){
-                                      return ProgressHUD(
-                                        child: Builder(builder: (context)=>
-                                            AlertDialog(
-                                            content: Text("Randevu iptal edilsin mi?",style: TextStyle(fontFamily: contentFont)),
-                                            actions: <Widget>[
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  MaterialButton(
-                                                    color: primaryColor,
-                                                    child: Text("Evet"),
-                                                    onPressed: ()async{
-                                                      final progressHUD = ProgressHUD.of(context);
-                                                      progressHUD.show(); 
-                                                      final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
-                                                      if(deleteAppointment.success==true){
-                                                        showToast(context, "Randevu başarıyla iptal edildi!");
-                                                      }
-                                                      else{
-                                                        showToast(context, "Randevu başarıyla iptal edilemedi!");
-                                                      }
-                                                      await appointmentListFunc();    
-                                                      Navigator.of(context).pop();                          
-                                                      progressHUD.dismiss();
-                                                      }),
-                                                  SizedBox(width: deviceWidth(context)*0.01),
-                                                  MaterialButton(
-                                                    color: primaryColor,
-                                                    child: Text("Hayır"),
-                                                    onPressed: (){
-                                                      showToast(context, "Randevu iptal edilmedi!");
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                  ),
-                                              ],)
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    });
-                                  },
-                                );
-                                }),
+                            );
+                          });
+                         }),
+                       ),
+                     ],
+                   ),
+                 ),
+                        Expanded(
+                          child: Container(
+                          decoration: BoxDecoration(
+                          color: Theme.of(context).backgroundColor,
+                          borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(cardCurved),
+                          ),
+                        ),
+                          child  : SingleChildScrollView(
+                          physics: ScrollPhysics(),
+                          child  : Column(
+                            children: [
+                              Column(
+                                children: 
+                                  [Padding(
+                                    padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
+                                    child  : TableCalendar(
+                                    locale: "tr",
+                                    focusedDay: _focusedDay,
+                                    firstDay: DateTime.utc(2010, 10, 16),
+                                    lastDay: DateTime.utc(2030, 3, 14),
+                                    shouldFillViewport: false,
+                                    startingDayOfWeek: StartingDayOfWeek.monday,
+                                    calendarFormat: CalendarFormat.twoWeeks,
+                                    calendarStyle: CalendarStyle(
+                                      isTodayHighlighted: true,
+                                      selectedDecoration: BoxDecoration(
+                                        color: primaryColor,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(minCurved),
+                                      ),
+                                      outsideDecoration: boxDecoration,
+                                      defaultDecoration: boxDecoration,
+                                      weekendDecoration: boxDecoration,
+                                      defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                      outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                      selectedTextStyle: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      todayDecoration: BoxDecoration(
+                                        color: secondaryColor,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(minCurved),
+                                      ),
+                                    ),
+                                    selectedDayPredicate: (day) {
+                                      return isSameDay(_selectedDay, day);
+                                    },
+                                    onDaySelected: (selectedDay, focusedDay) async{
+                                        _selectedDay = selectedDay;
+                                        _focusedDay = focusedDay;   
+                                        await appointmentListFunc();  // randevuları yenileme
+                                    },
+                                    headerStyle: HeaderStyle(
+                                      formatButtonVisible: false,
+                                      titleCentered: true,
+                                    ),
+                                    eventLoader: _getEventsForDay,
+                                  )
+                                  ),
+                                ],
                               ),
-                  
-                          ],
+                            
+                                RefreshIndicator(
+                                  onRefresh:()=> appointmentListFunc(),
+                                  color: primaryColor,
+                                  backgroundColor: secondaryColor,
+                                  child: ListView.builder(
+                                   // physics    : NeverScrollableScrollPhysics(),
+                                    shrinkWrap : true,
+                                    itemCount  : appointmentList == null ? 0 : appointmentList.length,
+                                    itemBuilder: (BuildContext context, int index){  
+                                    return ResevationResultWidget(
+                                    companyName : appointmentList[index].companyName,
+                                    operation   : appointmentList[index].operationName,
+                                    time        : appointmentList[index].appointmentTime,
+                                    date        : appointmentList[index].appointmentDate,
+                                    confirmButton: Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
+                                    onTap      : ()async{
+                                      showDialog(context: context, builder: (BuildContext context){
+                                        return ProgressHUD(
+                                          child: Builder(builder: (context)=>
+                                              AlertDialog(
+                                              content: Text("Randevu iptal edilsin mi?",style: TextStyle(fontFamily: contentFont)),
+                                              actions: <Widget>[
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    MaterialButton(
+                                                      color: primaryColor,
+                                                      child: Text("Evet"),
+                                                      onPressed: ()async{
+                                                        final progressHUD = ProgressHUD.of(context);
+                                                        progressHUD.show(); 
+                                                        final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
+                                                        if(deleteAppointment.success==true){
+                                                          showToast(context, "Randevu başarıyla iptal edildi!");
+                                                        }
+                                                        else{
+                                                          showToast(context, "Randevu başarıyla iptal edilemedi!");
+                                                        }
+                                                        await appointmentListFunc();    
+                                                        Navigator.of(context).pop();                          
+                                                        progressHUD.dismiss();
+                                                        }),
+                                                    SizedBox(width: deviceWidth(context)*0.01),
+                                                    MaterialButton(
+                                                      color: primaryColor,
+                                                      child: Text("Hayır"),
+                                                      onPressed: (){
+                                                        showToast(context, "Randevu iptal edilmedi!");
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                ],)
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                    },
+                                  );
+                                  }),
+                                ),
+                    
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
