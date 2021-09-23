@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
+                          Align(alignment: Alignment.topLeft,child: SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white))),
                           GestureDetector(
                             child: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 25,textDirection: TextDirection.ltr),
                             onTap: (){

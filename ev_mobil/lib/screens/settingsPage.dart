@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/aboutPage.dart';
+import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -89,9 +90,12 @@ class _SettingsPageState extends State<SettingsPage> {
                           ListTileWidget(
                             text: "Gizlilik Sözleşmesi ve KVKK Bildirimi",
                             child: LineIcon(LineIcons.fileContract,color: white),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html")));
+                            },
                           ), 
                           ListTileWidget(
-                            text: "Estetik Vitrini Hakkında",
+                            text: "Ayna Ayna Hakkında",
                             child: LineIcon(LineIcons.infoCircle,color: white),
                           ),
                           ListTileWidget(

@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -21,8 +22,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtPasswordAgain = TextEditingController();
 
-  bool checkedKVKK = false;
-  bool checkedPrivacy = false;
+  bool checkedKVKK = true;
+  bool checkedPrivacy = true;
 
   @override
   Widget build(BuildContext context) {
@@ -111,32 +112,35 @@ class _RegisterPageState extends State<RegisterPage> {
                         Column(
                           //mainAxisAlignment: MainAxisAlignment.center,
                           children:[
-                            CheckboxListTile(
-                            //contentPadding: EdgeInsets.all(0),
-                            value: checkedKVKK, 
-                            title: GestureDetector(
-                              child: Text("KVKK Bildirimini onaylıyorum",
-                              style: TextStyle(
-                              color: secondaryColor,
-                              decoration: TextDecoration.underline),
-                              ),
-                              onTap: (){},),//
-                            activeColor: secondaryColor,
-                            checkColor: primaryColor,
-                            //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (value){
-                               setState(() {
-                                    checkedKVKK=value;                                  
-                                  });
-                                }),
+                            // CheckboxListTile(
+                            // //contentPadding: EdgeInsets.all(0),
+                            // value: checkedKVKK, 
+                            // title: GestureDetector(
+                            //   child: Text("KVKK Bildirimini onaylıyorum",
+                            //   style: TextStyle(
+                            //   color: secondaryColor,
+                            //   decoration: TextDecoration.underline),
+                            //   ),
+                            //   onTap: (){},),//
+                            // activeColor: secondaryColor,
+                            // checkColor: primaryColor,
+                            // //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
+                            // controlAffinity: ListTileControlAffinity.leading,
+                            // onChanged: (value){
+                            //    setState(() {
+                            //         checkedKVKK=value;                                  
+                            //       });
+                            //     }),
                             CheckboxListTile(
                             value: checkedPrivacy, 
                             title: GestureDetector(
                             child: Text("Gizlilik Sözleşmesini kabul ediyorum",
                             style: TextStyle(color: secondaryColor,
                             decoration: TextDecoration.underline)),
-                            onTap: (){},),
+                             onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html")));
+                              },
+                            ),
                             activeColor: secondaryColor,
                             checkColor: primaryColor,
                             //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
