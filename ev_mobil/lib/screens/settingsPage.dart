@@ -83,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/lisansbilgileri.html"))); 
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/lisansbilgileri.html"))); 
                               progressHUD.dismiss();
                             },
                           ), 
@@ -93,7 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html"))); 
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/gizlilikbildirimi.html"))); 
                               progressHUD.dismiss();
                             },
                           ), 
