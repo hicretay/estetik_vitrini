@@ -3,6 +3,7 @@ import 'package:estetikvitrini/screens/aboutPage.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/listTileWidget.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           ListTileWidget(
                             text: "Ayna Ayna Hakkında",
                             child: LineIcon(LineIcons.infoCircle,color: white),
+                            onTap: (){
+                              showAlert(context, "     Ayna Ayna; güzellik salonu, kuaför ve dövme salonu gibi güzellik merkezlerini arayan, kendisi için en uygun güzellik uygulamaları hakkında bilgi edinmek isteyen, bu konuda rehberliğe ihtiyaç duyan, istediği güzellik ve bakım hizmetini nereden alabileceğine karar verme aşamasında olanların kullanacağı sektörel bir sosyal medya platformudur.\n     Güzellik merkezleri bu platform içinde salonlarını açabilir; salonlarını, hizmetlerini ve tavsiyelerini müşterilerine tanıtabilir.");
+                            },
                           ),
                           ListTileWidget(
                             text: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? "Koyu temaya geç" : "Açık temaya geç",

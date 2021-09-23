@@ -6,7 +6,6 @@ import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
-import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -141,12 +140,13 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Align(alignment: Alignment.topLeft,child: SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white))),
+                          SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
                           GestureDetector(
-                            child: FaIcon(FontAwesomeIcons.search,color: Theme.of(context).hintColor,size: 25,textDirection: TextDirection.ltr),
-                            onTap: (){
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
-                            }),
+                            child: FaIcon(FontAwesomeIcons.search,color: Colors.transparent,size: 25,textDirection: TextDirection.ltr),
+                            // onTap: (){
+                            //   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
+                            // }
+                            ),
                         ],
                       ),
                     ),
