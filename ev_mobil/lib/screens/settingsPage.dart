@@ -1,5 +1,4 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/aboutPage.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -82,17 +81,20 @@ class _SettingsPageState extends State<SettingsPage> {
                             text: "Lisans Bilgileri",
                             child: LineIcon(LineIcons.fileAlt,color: white),
                             onTap: (){
-                              final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AboutPage()));
-                              progressUHD.dismiss();
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/lisansbilgileri.html"))); 
+                              progressHUD.dismiss();
                             },
                           ), 
                           ListTileWidget(
                             text: "Gizlilik Sözleşmesi ve KVKK Bildirimi",
                             child: LineIcon(LineIcons.fileContract,color: white),
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html")));
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html"))); 
+                              progressHUD.dismiss();
                             },
                           ), 
                           ListTileWidget(

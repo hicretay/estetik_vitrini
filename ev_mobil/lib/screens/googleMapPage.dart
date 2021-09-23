@@ -31,7 +31,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                     ),
                   ),
                   SizedBox(width: maxSpace),
-                  Text("Estetik Vitrini",
+                  Text("Ayna Ayna",
                     style     : TextStyle(
                     fontFamily: leadingFont, fontSize: 25, color:primaryColor),
                   ),
