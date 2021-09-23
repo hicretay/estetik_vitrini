@@ -21,11 +21,12 @@ class HomeDetailPage extends StatefulWidget {
   final String companyName;
   final String contentTitle;
   final String googleAdressLink;
-  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink}) : super(key: key);
+  final bool isLiked;
+  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked}) : super(key: key);
 
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, 
-  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink);
+  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink, isLiked: isLiked);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
@@ -36,14 +37,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   String companyName;
   String contentTitle;
   String googleAdressLink;
-
-  bool _checked = false;
-  int counter = 99;
+  bool isLiked;
 
   int userIdData;
 
   
-  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink});
+  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked});
   @override
   Widget build(BuildContext context) {
     print("Kampanya id $campaingId");
@@ -55,7 +54,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
       sliderImg.add(NetworkImage(item.cPicture));
     }   
     //-------------------------------------------------------                 
-    _checked = false; // Gönderi beğenilmiş mi servisten okuyacak  
 
     return SafeArea(
         child: Scaffold(
@@ -168,15 +166,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       //-----------------------Beğeni iconButton'ı----------------------------
                                           child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
                                             maxRadius      : deviceWidth(context)*0.05,
-                                            backgroundColor: _checked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
+                                            backgroundColor: isLiked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
                                             child          : IconButton(
                                             iconSize       : iconSize,
-                                            icon           : Icon(LineIcons.heart, color: _checked  ? Colors.white : primaryColor, //Seçili ise açık, değilse koyu renk verildi
+                                            icon           : Icon(LineIcons.heart, color: isLiked  ? Colors.white : primaryColor, //Seçili ise açık, değilse koyu renk verildi
                                             ),
                                             onPressed: () {
                                                 setState(() { 
-                                                  _checked = !_checked; //tıklandığında bool değeri tersler
-                                                  _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
+                                                  // _checked = !_checked; //tıklandığında bool değeri tersler
+                                                  // _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
                                                   },
                                                 );
                                               },

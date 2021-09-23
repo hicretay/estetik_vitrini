@@ -131,7 +131,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
                               campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
                               companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                              contentTitle: favoriContent[index].contentTitle)));
+                              contentTitle: favoriContent[index].contentTitle, isLiked: favoriContent[index].liked)));
                               progressUHD.dismiss();
                             },
                             //--------------------------------------------------------------------------------------------------------------------
