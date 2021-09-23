@@ -13,6 +13,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FavoritePage extends StatefulWidget {
   static const route = "/favoritePage";
@@ -122,6 +123,10 @@ class _FavoritePageState extends State<FavoritePage> {
                               contentPicture: favoriContent[index].contentPicture,
                               cardText      : favoriContent[index].contentTitle,
                               pinColor      : primaryColor,
+                              onPressedPhone: () async{ 
+                                              dynamic number = favoriContent[index].companyPhone.toString(); // arama ekranına yönlendirme
+                                              launch("tel://$number");
+                                            },
                               //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
                               onPressed: () async{
                               final progressUHD = ProgressHUD.of(context);
@@ -131,7 +136,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
                               campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
                               companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                              contentTitle: favoriContent[index].contentTitle, isLiked: favoriContent[index].liked)));
+                              contentTitle: favoriContent[index].contentTitle, isLiked: favoriContent[index].liked, companyPhone: favoriContent[index].companyPhone.toString(),)));
                               progressUHD.dismiss();
                             },
                             //--------------------------------------------------------------------------------------------------------------------

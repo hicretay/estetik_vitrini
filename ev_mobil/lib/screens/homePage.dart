@@ -291,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
                                campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
-                               googleAdressLink: homeContent[index].googleAdressLink, isLiked: homeContent[index].liked)));
+                               googleAdressLink: homeContent[index].googleAdressLink, isLiked: homeContent[index].liked, companyPhone: homeContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             //---------------------------------------------------------------------------------------------------------------------------------------------------

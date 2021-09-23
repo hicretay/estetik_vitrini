@@ -12,6 +12,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeDetailPage extends StatefulWidget {
   final List homeDetailContent;
@@ -22,11 +23,12 @@ class HomeDetailPage extends StatefulWidget {
   final String contentTitle;
   final String googleAdressLink;
   final bool isLiked;
-  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked}) : super(key: key);
+  final String companyPhone;
+  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked, this.companyPhone}) : super(key: key);
 
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, 
-  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink, isLiked: isLiked);
+  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink, isLiked: isLiked, companyPhone: companyPhone);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
@@ -38,11 +40,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   String contentTitle;
   String googleAdressLink;
   bool isLiked;
+  String companyPhone;
 
   int userIdData;
 
   
-  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked});
+  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked, this.companyPhone});
   @override
   Widget build(BuildContext context) {
     print("Kampanya id $campaingId");
@@ -203,7 +206,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 icon       : Icon(LineIcons.phone,
                                                 color      : Theme.of(context).hintColor,
                                                 size       : iconSize),
-                                                onPressed  : () {}),
+                                                onPressed  : () async{  
+                                                  dynamic number = companyPhone; // arama ekranına yönlendirme
+                                                  launch("tel://$number");
+                                                }),
                                         ),
                                 //------------------------------------------------------------------------
                                  //----------------------Konum iconButton'ı-------------------------------
