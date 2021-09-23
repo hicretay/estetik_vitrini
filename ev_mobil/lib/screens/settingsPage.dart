@@ -78,17 +78,27 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           SizedBox(height: defaultPadding),
                             ListTileWidget(
-                            text: "Lisans Bilgileri",
+                            text: "Lisans Sözleşmesi",
                             child: LineIcon(LineIcons.fileAlt,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/lisansbilgileri.html"))); 
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/lisanssozlesmesi.html"))); 
                               progressHUD.dismiss();
                             },
                           ), 
+                           ListTileWidget(
+                            text: "Kullanım Sözleşmesi",
+                            child: LineIcon(LineIcons.fileAlt,color: white),
+                            onTap: (){
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/kullanimsozlesmesi.html"))); 
+                              progressHUD.dismiss();
+                            },
+                          ),
                           ListTileWidget(
-                            text: "Gizlilik Sözleşmesi ve KVKK Bildirimi",
+                            text: "Gizlilik Bildirimi",
                             child: LineIcon(LineIcons.fileContract,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
