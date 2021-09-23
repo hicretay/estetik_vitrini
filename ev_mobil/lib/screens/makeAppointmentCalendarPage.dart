@@ -150,7 +150,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
            print(appointment.appointmentDate);
            final progressHUD = ProgressHUD.of(context);
            progressHUD.show(); 
-           final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(1);
+           final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
            Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
            progressHUD.dismiss();
          }
