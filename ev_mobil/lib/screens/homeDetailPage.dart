@@ -1,7 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/googleMapPage.dart';
+import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -202,7 +202,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 onPressed  : () async{
                                                 final progressUHD = ProgressHUD.of(context);
                                                 progressUHD.show();
-                                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: googleAdressLink)));
+                                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: googleAdressLink)));
                                                 progressUHD.dismiss(); 
                                               }),
                                         ),

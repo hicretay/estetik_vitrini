@@ -1,4 +1,4 @@
-import 'package:estetikvitrini/screens/googleMapPage.dart';
+import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: TextStyle(color: secondaryColor,
                             decoration: TextDecoration.underline)),
                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html")));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> WebViewWidget(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html")));
                               },
                             ),
                             activeColor: secondaryColor,

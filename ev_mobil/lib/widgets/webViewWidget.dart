@@ -2,15 +2,15 @@ import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class GoogleMapPage extends StatefulWidget {
+class WebViewWidget extends StatefulWidget {
   final String locationUrl;
-  GoogleMapPage({Key key, this.locationUrl}) : super(key: key);
+  WebViewWidget({Key key, this.locationUrl}) : super(key: key);
 
   @override
-  _GoogleMapPageState createState() => _GoogleMapPageState();
+  _WebViewWidgetState createState() => _WebViewWidgetState();
 }
 
-class _GoogleMapPageState extends State<GoogleMapPage> {
+class _WebViewWidgetState extends State<WebViewWidget> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +27,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                     child: IconButton(
                       iconSize: iconSize,
                       icon: Icon(Icons.arrow_back,color: primaryColor,size: 25),
-                      onPressed: (){Navigator.pop(context, false);},
+                      onPressed: (){Navigator.pop(context);},
                     ),
                   ),
                   SizedBox(width: maxSpace),

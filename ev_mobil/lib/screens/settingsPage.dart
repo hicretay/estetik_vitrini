@@ -1,5 +1,5 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/googleMapPage.dart';
+import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -95,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: "https://aynaayna.biz/lisanssozlesmesi.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://aynaayna.biz/lisanssozlesmesi.html")));  
                               progressHUD.dismiss();
                             },
                           ), 
@@ -105,7 +105,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: "https://aynaayna.biz/kullanimsozlesmesi.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://aynaayna.biz/kullanimsozlesmesi.html")));  
                               progressHUD.dismiss();
                             },
                           ),
@@ -115,7 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: "https://aynaayna.biz/gizlilikbildirimi.html"))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://aynaayna.biz/gizlilikbildirimi.html"))); 
                               progressHUD.dismiss();
                             },
                           ), 

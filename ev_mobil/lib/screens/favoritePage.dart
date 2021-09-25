@@ -1,7 +1,7 @@
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/googleMapPage.dart';
+import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -144,7 +144,7 @@ class _FavoritePageState extends State<FavoritePage> {
                             onPressedLocation: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show();
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: favoriContent[index].googleAdressLink)));
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: favoriContent[index].googleAdressLink)));
                               progressHUD.dismiss();
                             },
                             //-------------------------------------------------------------------------------------------------------------------

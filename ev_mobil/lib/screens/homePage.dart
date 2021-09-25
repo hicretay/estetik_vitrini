@@ -4,7 +4,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/googleMapPage.dart';
+import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show();
                               int indeks = homeContent[index].companyId;
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: homeContent[indeks-1].googleAdressLink))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: homeContent[indeks-1].googleAdressLink))); 
                               progressHUD.dismiss();
                             },
                             //-----------------------------------------------------------------------------------------------------------------------------------------------------
