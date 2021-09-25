@@ -292,7 +292,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                                           showToast(context, "Randevu başarıyla iptal edildi!");
                                                         }
                                                         else{
-                                                          showToast(context, "Randevu başarıyla iptal edilemedi!");
+                                                          showToast(context, "Randevu iptal edilemedi!");
                                                         }
                                                         await appointmentListFunc();    
                                                         Navigator.of(context).pop();                          

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';

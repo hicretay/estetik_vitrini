@@ -20,6 +20,17 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+
+   getUserName() async{
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+   String user = prefs.getString("user");
+   return user;
+   }
+
+   String user = "";
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,16 +47,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children:[
                       Column(
-                        children: 
-                          [Padding(
+                        children: [Padding(
                             padding: const EdgeInsets.only(top: defaultPadding),
-                            child: Text("Profil",
-                            style: Theme.of(context)
-                                  .textTheme
-                                  .headline3
-                                  .copyWith(color: white, fontFamily: leadingFont)),
+                            child: Column(
+                              children: [Text("Profil",
+                              style: Theme.of(context)
+                                      .textTheme
+                                      .headline3
+                                      .copyWith(color: white, fontFamily: leadingFont)),
+                                Text(user),
+                              ],
+                            ),
                           ),
-                          
                         ],
                       ),
                       
@@ -61,7 +74,6 @@ class _SettingsPageState extends State<SettingsPage> {
                             child:  Icon(Icons.person, color: primaryColor,size: 40),
                     ),
                           ),
-                          Text(""),
                           SizedBox(height: maxSpace),
                         ],
                       ),
@@ -83,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/lisanssozlesmesi.html"))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: "https://aynaayna.biz/lisanssozlesmesi.html")));  
                               progressHUD.dismiss();
                             },
                           ), 
@@ -93,7 +105,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/kullanimsozlesmesi.html"))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: "https://aynaayna.biz/kullanimsozlesmesi.html")));  
                               progressHUD.dismiss();
                             },
                           ),
@@ -103,7 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> GoogleMapPage(locationUrl: "https://aynaayna.biz/gizlilikbildirimi.html"))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GoogleMapPage(locationUrl: "https://aynaayna.biz/gizlilikbildirimi.html"))); 
                               progressHUD.dismiss();
                             },
                           ), 

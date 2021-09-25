@@ -1,9 +1,11 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/googleMapPage.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
@@ -69,28 +71,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                 BackLeadingWidget(
                   backColor: primaryColor,
                 ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(defaultPadding),
-                  //   child: Row(
-                  //   children: [
-                  //       CircleAvatar(
-                  //         //iconun çevresini saran yapı tasarımı
-                  //           maxRadius: deviceWidth(context)*0.06,
-                  //           backgroundColor: Colors.white,
-                  //           child: IconButton(
-                  //           iconSize: iconSize,
-                  //           icon: Icon(Icons.arrow_back,color: primaryColor,size: 23),
-                  //           onPressed: (){Navigator.pop(context, false);},
-                  //         ),
-                  //       ),
-                  //       SizedBox(width: maxSpace),
-                  //       Text("AynaAyna",
-                  //         style     : TextStyle(
-                  //         fontFamily: leadingFont, fontSize: 25, color: Colors.white),
-                  //       ),
-                  //     ],
-                  //   )
-                  // ),
                   Padding(padding: const EdgeInsets.only(left: maxSpace),
                       child: Column(
                       children: [
@@ -169,19 +149,17 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       //-----------------------Beğeni iconButton'ı----------------------------
                                           child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
                                             maxRadius      : deviceWidth(context)*0.05,
-                                            backgroundColor: isLiked ? primaryColor : lightWhite, // seçili ise koyu, değilse açık renk verildi
-                                            child          : IconButton(
-                                            iconSize       : iconSize,
-                                            icon           : Icon(LineIcons.heart, color: isLiked  ? Colors.white : primaryColor, //Seçili ise açık, değilse koyu renk verildi
-                                            ),
-                                            onPressed: () {
-                                                setState(() { 
-                                                  // _checked = !_checked; //tıklandığında bool değeri tersler
-                                                  // _checked ? counter++ : counter--; // seçili ise sayaç bir artar, seçim kaldırılırsa azalır
-                                                  },
-                                                );
-                                              },
-                                            ),
+                                            backgroundColor: isLiked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
+                                            child: 
+                                            IconButton( icon: isLiked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
+                                            onPressed: () async{
+                                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                                              userIdData = prefs.getInt("userIdData"); 
+                                              LikeJsn likePostData = await likeJsnFunc(userIdData, homeDetailContent.first.campaingId);
+                                              print(likePostData.success);
+                                              print(likePostData.result);
+                                              // await  refreshContentStream();
+                                            }),
                                           ),
                                         ),
                                         

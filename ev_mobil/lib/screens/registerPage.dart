@@ -22,7 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController txtPassword = TextEditingController();
   TextEditingController txtPasswordAgain = TextEditingController();
 
-  bool checkedKVKK = true;
   bool checkedPrivacy = true;
 
   @override
@@ -110,27 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         //-----------------------------------------------------------------------------------
                         Column(
-                          //mainAxisAlignment: MainAxisAlignment.center,
                           children:[
-                            // CheckboxListTile(
-                            // //contentPadding: EdgeInsets.all(0),
-                            // value: checkedKVKK, 
-                            // title: GestureDetector(
-                            //   child: Text("KVKK Bildirimini onaylıyorum",
-                            //   style: TextStyle(
-                            //   color: secondaryColor,
-                            //   decoration: TextDecoration.underline),
-                            //   ),
-                            //   onTap: (){},),//
-                            // activeColor: secondaryColor,
-                            // checkColor: primaryColor,
-                            // //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
-                            // controlAffinity: ListTileControlAffinity.leading,
-                            // onChanged: (value){
-                            //    setState(() {
-                            //         checkedKVKK=value;                                  
-                            //       });
-                            //     }),
                             CheckboxListTile(
                             value: checkedPrivacy, 
                             title: GestureDetector(
@@ -143,7 +122,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             activeColor: secondaryColor,
                             checkColor: primaryColor,
-                            //contentPadding: EdgeInsets.only(left: deviceWidth(context)*0.25),
                             controlAffinity: ListTileControlAffinity.leading,
                             onChanged: (value){
                             setState(() {
@@ -162,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             final progressUHD = ProgressHUD.of(context);
                             progressUHD.show(); 
                             final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", "");
-                            if(checkedKVKK == true && checkedPrivacy == true){
+                            if(checkedPrivacy == true){
                               if(userAddData.success==true){
                               if(txtPassword.text == txtPasswordAgain.text){
                               Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage())); 
@@ -170,8 +148,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             else{
                               showToast(context, "Girilen şifreler birbirinden farklı !");
                             }}
-                            else{
-                              showToast(context, "Kayıt başarısız !");
+                            else {
+                              showToast(context, userAddData.result);
                             }
                             }
                             else{
