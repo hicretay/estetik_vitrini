@@ -4,6 +4,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/screens/storyPage.dart';
@@ -142,10 +143,10 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
                           GestureDetector(
-                            child: FaIcon(FontAwesomeIcons.search,color: Colors.transparent,size: 25,textDirection: TextDirection.ltr),
-                            // onTap: (){
-                            //   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
-                            // }
+                            child: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 25,textDirection: TextDirection.ltr),
+                            onTap: (){
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
+                            }
                             ),
                         ],
                       ),

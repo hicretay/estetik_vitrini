@@ -45,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(25)),
                    child: ListTile(
                    title: TextField(
-                   autofocus: true,
+                   autofocus: false,
                    controller: teSearch,
                    decoration: InputDecoration(
                      hintText: "Ara",
@@ -58,9 +58,19 @@ class _SearchPageState extends State<SearchPage> {
                      borderRadius: BorderRadius.circular(cardCurved),
                      ),
                    ),
-                   onChanged: (value){
+                   onTap: (){
                     selectedCompanies.clear();
-                    setState(() {
+                     setState(() {
+                    allCompanies.forEach((element) {
+                    if(element.companyName.toLowerCase().contains(teSearch.text.toLowerCase())){
+                      selectedCompanies.add(element);
+                    }
+                  });
+                 });
+                   },
+                   onChanged: (value){
+                      selectedCompanies.clear();
+                     setState(() {
                     allCompanies.forEach((element) {
                     if(element.companyName.toLowerCase().contains(teSearch.text.toLowerCase())){
                       selectedCompanies.add(element);
@@ -93,7 +103,7 @@ class _SearchPageState extends State<SearchPage> {
                   //height: deviceHeight(context)*0.105*selectedCompanies.length,
                   decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: ListView.separated(
-                    itemCount: selectedCompanies.length,
+                    itemCount: selectedCompanies != null ? selectedCompanies.length : allCompanies,
                     itemBuilder: (BuildContext context, int index){
                     return GestureDetector(
                       child: Padding(
@@ -118,8 +128,8 @@ class _SearchPageState extends State<SearchPage> {
                       color: white,
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                      image: NetworkImage(
-                       selectedCompanies[index].companyLogo,
+                      image: NetworkImage(selectedCompanies != null ?
+                       selectedCompanies[index].companyLogo : allCompanies[index].companyLogo,
                       ),
                    ),
                   ),
@@ -131,7 +141,8 @@ class _SearchPageState extends State<SearchPage> {
             SizedBox(
                   width: deviceWidth(context)*0.63,
                   child: Text(
-                      selectedCompanies[index].companyName,
+                      selectedCompanies != null ?
+                      selectedCompanies[index].companyName : allCompanies[index].companyName,
                       overflow: TextOverflow.fade,
                       softWrap: false,
                       style: TextStyle(fontSize: 17, fontFamily: headerFont,color: primaryColor)

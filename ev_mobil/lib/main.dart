@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/providers/jsonDataProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
@@ -26,7 +25,6 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
-        ChangeNotifierProvider<JsonDataProvider>(create: (_) => JsonDataProvider()),
       ],
       child: Builder(
         builder: (context) {
