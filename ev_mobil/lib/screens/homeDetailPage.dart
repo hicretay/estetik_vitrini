@@ -1,4 +1,5 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
@@ -48,6 +49,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   
   _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked, this.companyPhone});
+  
+  Future homeDetailRefresh() async{
+   final ContentStreamDetailJsn detailNewList = await contentStreamDetailJsnFunc(companyId,campaingId); 
+   setState(() {
+      homeDetailContent = detailNewList.result;
+   });
+   }
+
   @override
   Widget build(BuildContext context) {
     print("Kampanya id $campaingId");
@@ -155,10 +164,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                             onPressed: () async{
                                               SharedPreferences prefs = await SharedPreferences.getInstance();
                                               userIdData = prefs.getInt("userIdData"); 
-                                              LikeJsn likePostData = await likeJsnFunc(userIdData, homeDetailContent.first.campaingId);
+                                              LikeJsn likePostData = await likeJsnFunc(userIdData, campaingId);
                                               print(likePostData.success);
                                               print(likePostData.result);
-                                              // await  refreshContentStream();
+                                              await homeDetailRefresh();
                                             }),
                                           ),
                                         ),

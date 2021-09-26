@@ -153,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             }
                             }
                             else{
-                              showToast(context, "KVKK Bildirimi ve Gizlilik Sözleşmesini Onaylayınız !");
+                              showToast(context, "Gizlilik Sözleşmesini Onaylayınız !");
                             }
                             progressUHD.dismiss(); 
                           }),
