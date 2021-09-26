@@ -8,6 +8,7 @@ import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationTime.dart';
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
@@ -385,6 +386,23 @@ Future<FavoriteJsn> favoriteAddJsnFunc(int userId, int companyId) async{
   }
 }
 //-------------------------------------------------------------------------------------------------------------------------------
+
+//--------------------------------------------- Firma Profil Sayfası Fonksiyonu-----------------------------------------------------
+Future<CompanyProfileJsn> companyListDetailJsnFunc(int companyId) async{
+    final response = await http.post(
+    Uri.parse(url + "CompanyList/Detail"),
+    body: '{"companyId":' + companyId.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return companyProfileJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
   return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.BOTTOM);

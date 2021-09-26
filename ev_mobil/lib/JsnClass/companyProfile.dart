@@ -1,11 +1,31 @@
 import 'dart:convert';
 
-List<CompanyProfileJsn> companyProfileJsnFromJson(String str) => List<CompanyProfileJsn>.from(json.decode(str).map((x) => CompanyProfileJsn.fromJson(x)));
+CompanyProfileJsn companyProfileJsnFromJson(String str) => CompanyProfileJsn.fromJson(json.decode(str));
 
-String companyProfileJsnToJson(List<CompanyProfileJsn> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String companyProfileJsnToJson(CompanyProfileJsn data) => json.encode(data.toJson());
 
 class CompanyProfileJsn {
     CompanyProfileJsn({
+        this.success,
+        this.result,
+    });
+
+    bool success;
+    Result result;
+
+    factory CompanyProfileJsn.fromJson(Map<String, dynamic> json) => CompanyProfileJsn(
+        success: json["success"],
+        result: Result.fromJson(json["result"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "success": success,
+        "result": result.toJson(),
+    };
+}
+
+class Result {
+    Result({
         this.id,
         this.companyName,
         this.companyLogo,
@@ -33,7 +53,7 @@ class CompanyProfileJsn {
     String web;
     List<CampaignList> campaignList;
 
-    factory CompanyProfileJsn.fromJson(Map<String, dynamic> json) => CompanyProfileJsn(
+    factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         companyName: json["companyName"],
         companyLogo: json["companyLogo"],
@@ -67,23 +87,23 @@ class CompanyProfileJsn {
 class CampaignList {
     CampaignList({
         this.campaingId,
-        this.companyName,
-        this.companyLogo,
+        this.campaingName,
+        this.campaingLogo,
     });
 
     int campaingId;
-    String companyName;
-    String companyLogo;
+    String campaingName;
+    String campaingLogo;
 
     factory CampaignList.fromJson(Map<String, dynamic> json) => CampaignList(
         campaingId: json["campaingId"],
-        companyName: json["companyName"],
-        companyLogo: json["companyLogo"],
+        campaingName: json["campaingName"],
+        campaingLogo: json["campaingLogo"],
     );
 
     Map<String, dynamic> toJson() => {
         "campaingId": campaingId,
-        "companyName": companyName,
-        "companyLogo": companyLogo,
+        "campaingName": campaingName,
+        "campaingLogo": campaingLogo,
     };
 }
