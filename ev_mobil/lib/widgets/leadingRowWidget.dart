@@ -7,9 +7,10 @@ class LeadingRowWidget extends StatefulWidget {
  @required final String companyName;
  @required final Color leadingColor;
  @required final Widget starButton;
+  @required final VoidCallback logoOnTap;
  
 
-  const LeadingRowWidget({Key key, this.companyLogo, this.companyName, this.leadingColor, this.starButton});
+  const LeadingRowWidget({Key key, this.companyLogo, this.companyName, this.leadingColor, this.starButton, this.logoOnTap});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -21,39 +22,40 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // Row içindeki widgetların yayılmasını sağlar
       children: [
-        Row(
-          children: [
-            //------------Başlıktaki firma logosu görünümü-----------
-            SizedBox(width: deviceWidth(context)*0.03), 
-            Container(
-              child: Container(
-                alignment: Alignment.topLeft,
-                width: deviceWidth(context)*0.15,
-                height: deviceWidth(context)*0.15,
-                decoration: BoxDecoration(
-                color: white,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                image: NetworkImage(
-                  widget.companyLogo,
+        GestureDetector(
+          child: Row(
+            children: [
+              //------------Başlıktaki firma logosu görünümü-----------
+              SizedBox(width: deviceWidth(context)*0.03), 
+               Container(
+                  alignment: Alignment.topLeft,
+                  width: deviceWidth(context)*0.15,
+                  height: deviceWidth(context)*0.15,
+                  decoration: BoxDecoration(
+                  color: white,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                  image: NetworkImage(
+                    widget.companyLogo,
+                  ),
+                 ),
                 ),
                ),
+              //-----------------------------------------------------
+              SizedBox(width: deviceWidth(context)*0.03), //başlık iconu - texti arası boşluk
+        
+              SizedBox(
+                width: deviceWidth(context)*0.63,
+                child: Text(
+                  widget.companyName,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: widget.leadingColor)
+                ),
               ),
-              ),
-            ),
-            //-----------------------------------------------------
-            SizedBox(width: deviceWidth(context)*0.03), //başlık iconu - texti arası boşluk
-
-            SizedBox(
-              width: deviceWidth(context)*0.63,
-              child: Text(
-                widget.companyName,
-                overflow: TextOverflow.fade,
-                softWrap: false,
-                style: TextStyle(fontSize: 17, fontFamily: headerFont,color: widget.leadingColor)
-              ),
-            ),
-          ],
+            ],
+          ),
+          onTap: widget.logoOnTap,
         ),
         widget.starButton,
        SizedBox(width: deviceWidth(context)*0.01),      

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
@@ -336,6 +338,13 @@ class _HomePageState extends State<HomePage> {
                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
                                campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
                                googleAdressLink: homeContent[index].googleAdressLink, isLiked: homeContent[index].liked, companyPhone: homeContent[index].companyPhone.toString())));
+                              progressUHD.dismiss();
+                            },
+                            logoOnTap: ()async{
+                              final progressUHD = ProgressHUD.of(context);
+                              progressUHD.show(); 
+                              final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(homeContent[index].companyId);
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                               progressUHD.dismiss();
                             },
                           );

@@ -5,6 +5,13 @@ BoxDecoration boxDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(minCurved),
 );
 
+
+BoxDecoration reservationBoxDecoration = BoxDecoration(
+  color: tertiaryColor,
+  shape: BoxShape.rectangle,
+  borderRadius: BorderRadius.circular(minCurved),
+);
+
 const primaryColor = Color(0xFF352A4D);
 const secondaryColor = Color(0xFFD4BDD8);
 const tertiaryColor = Color(0xff62C6C7);

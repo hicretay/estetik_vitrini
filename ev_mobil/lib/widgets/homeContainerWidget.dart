@@ -13,10 +13,10 @@ class HomeContainerWidget extends StatefulWidget {
   final VoidCallback onPressed; // detaylı bilgi butonu olayı
   final Widget child, likeButton, starButton;
   final Color pinColor;
-  final VoidCallback onPressedLocation, onPressedPhone, homeDetailOntap;
+  final VoidCallback onPressedLocation, onPressedPhone, homeDetailOntap, logoOnTap;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton, this.homeDetailOntap})
+      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton, this.homeDetailOntap, this.logoOnTap})
       : super(key: key);
 
   @override
@@ -48,6 +48,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   companyLogo: widget.companyLogo,
                   companyName: widget.companyName,
                   starButton: widget.starButton,
+                  logoOnTap: widget.logoOnTap,
                   
                 ),
               ),

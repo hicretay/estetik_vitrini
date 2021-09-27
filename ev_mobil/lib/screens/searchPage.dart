@@ -160,7 +160,7 @@ class _SearchPageState extends State<SearchPage> {
               onTap: ()async{
                 final progressUHD = ProgressHUD.of(context);
                 progressUHD.show();
-                final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(allCompanies[index].id);
+                final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(selectedCompanies[index].id);
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                 progressUHD.dismiss();
               },

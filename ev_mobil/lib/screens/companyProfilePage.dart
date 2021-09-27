@@ -1,7 +1,7 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
-import 'package:estetikvitrini/widgets/backleadingWidget.dart';
+import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
@@ -30,7 +30,33 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
             colors: backGroundColor1,
             child: Column(
               children: [
-                BackLeadingWidget(backColor: primaryColor),
+                Padding(padding: const EdgeInsets.all(defaultPadding),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(//iconun çevresini saran yapı tasarımı
+                        maxRadius: 20,
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                        iconSize: iconSize,
+                        icon: Icon(Icons.arrow_back,color: primaryColor),
+                        onPressed: (){ Navigator.pop(context, false);}
+                        ),
+                      ),
+                      SizedBox(width: maxSpace),
+                      Text(companyProfile.result.companyName,
+                      style     : TextStyle(
+                      fontFamily: contentFont, 
+                      fontSize  : 20, 
+                      color     : Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              ),
                 Padding(
                   padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding),
                   child: Row(
@@ -98,23 +124,47 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         //-----------------------------------------ŞİRKET BİLGİLERİ ---------------------------------------------
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
-                          child: Row(children: [Text("Telefon"), SizedBox(width: deviceWidth(context)*0.05),Text(companyProfile.result.companyPhone)]),
+                          child: Row(children: [
+                            SizedBox(width: deviceWidth(context)*0.17,child: Text("Telefon")), 
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            Text(companyProfile.result.companyPhone)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
-                          child: Row(children: [Text("WhatsApp"), SizedBox(width: deviceWidth(context)*0.05),Text(companyProfile.result.companyPhone2)]),
+                          child: Row(children: [
+                            SizedBox(width: deviceWidth(context)*0.17,child: Text("WhatsApp")), 
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            Text(companyProfile.result.companyPhone2)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
-                          child: Row(children: [Text("Web Adresi"), SizedBox(width: deviceWidth(context)*0.05),Text(companyProfile.result.web)]),
+                          child: Row(children: [
+                            SizedBox(width: deviceWidth(context)*0.17, child: Text("Web Adresi")), 
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            Text(companyProfile.result.web)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
-                          child: Row(children: [Text("E-Posta"), SizedBox(width: deviceWidth(context)*0.05),Text(companyProfile.result.eMail)]),
+                          child: Row(children: [
+                            SizedBox(width: deviceWidth(context)*0.17,child: Text("E-Posta")), 
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            Text(companyProfile.result.eMail)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
-                          child: Row(children: [Text("Konum"), SizedBox(width: deviceWidth(context)*0.05),Text("Haritalarda açmak için tıklayınız")]),
+                          child: Row(children: [
+                            SizedBox(width: deviceWidth(context)*0.17,child: Text("Konum")), 
+                            SizedBox(width: deviceWidth(context)*0.05),
+                            GestureDetector(
+                              child: Text("Haritalarda açmak için tıklayınız",
+                              style: TextStyle(color: secondaryColor,
+                              decoration: TextDecoration.underline)),
+                              onTap: (){
+                                 final progressHUD = ProgressHUD.of(context);
+                                 progressHUD.show();                             
+                                 Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: companyProfile.result.googleAdressLink))); 
+                                 progressHUD.dismiss();
+                                 })]),
                         ),
                         SizedBox(height: deviceHeight(context)*0.01),
                         //----------------------------------------KAMPANYA LİSTESİ AKIŞI--------------------------------------------
@@ -125,15 +175,21 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                           shrinkWrap: true,                 
                           itemCount: companyProfile.result.campaignList.length,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: (1 / .5),
+                            childAspectRatio: (1 / .6),
                             crossAxisCount : 2,
                             mainAxisSpacing: minSpace,
                             crossAxisSpacing: minSpace,
                           ), 
                           itemBuilder:  (BuildContext context, int index){
                             return Container(
-                              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(cardCurved)),color: secondaryColor),
-                              child: Image.network(companyProfile.result.campaignList[index].campaingLogo));
+                              child: Center(
+                                 child: ClipRRect(
+                                 borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
+                                 child: Image.network(companyProfile.result.campaignList[index].campaingLogo,
+                                 fit: BoxFit.cover)
+                                ),
+                              ),
+                            );
                           }),
                         ),
                       ]),
