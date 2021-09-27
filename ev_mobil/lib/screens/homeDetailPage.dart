@@ -1,7 +1,9 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
@@ -116,7 +118,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   companyName: companyName,  
                                   companyLogo: companyLogo,  
                                   leadingColor: Theme.of(context).hintColor,
-                                  starButton: Container()),//leading widgetı
+                                  starButton: Container(),
+                                  logoOnTap: ()async{
+                                  final progressUHD = ProgressHUD.of(context);
+                                  progressUHD.show(); 
+                                  final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(companyId);
+                                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
+                                  progressUHD.dismiss();
+                                },),//leading widgetı
                                 Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
                                   child: Center(
                                     //-----------------------Carousel Containerı------------------------

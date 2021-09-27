@@ -1,6 +1,8 @@
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
@@ -189,6 +191,13 @@ class _FavoritePageState extends State<FavoritePage> {
                               campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
                               companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
                               contentTitle: favoriContent[index].contentTitle, isLiked: favoriContent[index].liked, companyPhone: favoriContent[index].companyPhone.toString())));
+                              progressUHD.dismiss();
+                            },
+                            logoOnTap: ()async{
+                              final progressUHD = ProgressHUD.of(context);
+                              progressUHD.show(); 
+                              final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(favoriContent[index].companyId);
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                               progressUHD.dismiss();
                             },
                           );
