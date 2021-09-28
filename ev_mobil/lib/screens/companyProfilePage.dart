@@ -182,15 +182,33 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                               crossAxisSpacing: minSpace,
                             ), 
                             itemBuilder:  (BuildContext context, int index){
-                              return Container(
-                                child: Center(
-                                  child: ClipRRect(
+                              return 
+                              Center(
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
-                                  child: Image.network(companyProfile.result.campaignList[index].campaingLogo,
-                                  fit: BoxFit.cover)
-                                  ),
+                                  child: Container(
+                                    width: deviceWidth(context),
+                                    height: deviceHeight(context)*0.15,
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(companyProfile.result.campaignList[index].campaingName)),
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                      fit: BoxFit.contain,
+                                      image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
                                 ),
                               );
+                              // Container(
+                              //    width: deviceWidth(context),
+                              //   height: deviceHeight(context)*0.15,
+                              //   child: Center(
+                              //     child: ClipRRect(
+                              //     borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
+                              //     child: Image.network(companyProfile.result.campaignList[index].campaingLogo,
+                              //     fit: BoxFit.fill)
+                              //     ),
+                              //   ),
+                              // );
                             }),
                           ),
                         ),

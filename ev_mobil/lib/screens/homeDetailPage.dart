@@ -18,6 +18,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class HomeDetailPage extends StatefulWidget {
   final List homeDetailContent;
@@ -283,7 +284,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       ),
                                       Align(
                                         alignment: Alignment.bottomLeft,
-                                        child: Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
+                                        child: Html(data: homeDetailContent.first.campaingDetail)),//Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
                                     ],
                                   ),
                                 ),

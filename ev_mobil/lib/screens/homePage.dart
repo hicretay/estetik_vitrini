@@ -9,7 +9,6 @@ import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
-import 'package:estetikvitrini/screens/storyPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
@@ -200,9 +199,11 @@ class _HomePageState extends State<HomePage> {
                           onTap: ()async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show();
-                              int lastCompId = companyContent.last.id;
-                              Navigator.of(context, rootNavigator: true).push(
-                              MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyIndex: index, lastCompId: lastCompId)));
+                              //int lastCompId = companyContent.last.id;
+                              // Navigator.of(context, rootNavigator: true).push(
+                              // MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyIndex: index, lastCompId: lastCompId)));
+                              final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(companyContent[index].id);
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                               progressHUD.dismiss();
                           },
                           //------------------------------------------------------------------------------------------------------------------------------

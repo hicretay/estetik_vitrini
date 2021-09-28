@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-
 import '../settings/consts.dart';
 import 'leadingRowWidget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeContainerWidget extends StatefulWidget {
   //homePage sayfasında post görünümü oluşturulmasında kullanıldı
@@ -66,9 +66,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                         image: DecorationImage(
                           fit: BoxFit.fill, // Resim containerı kaplasın
-                          image: NetworkImage(
-                            widget.contentPicture
-                          ),
+                          image: CachedNetworkImageProvider(widget.contentPicture),
                         ),
                       ),
                       //------------------------------------------------------------------
