@@ -1,5 +1,8 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
+import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
+import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +17,7 @@ class CompanyProfilePage extends StatefulWidget {
 }
 
 class _CompanyProfilePageState extends State<CompanyProfilePage> {
-  List homeContent = []; 
+ // List homeContent = []; 
   int userIdData;
   CompanyProfileJsn companyProfile;
 
@@ -46,11 +49,15 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         ),
                       ),
                       SizedBox(width: maxSpace),
-                      Text(companyProfile.result.companyName,
-                      style     : TextStyle(
-                      fontFamily: contentFont, 
-                      fontSize  : 20, 
-                      color     : Colors.white),
+                      SizedBox(
+                        width: deviceWidth(context)*0.7,
+                        child: Text(companyProfile.result.companyName,
+                        style     : TextStyle(
+                        overflow: TextOverflow.fade,
+                        fontFamily: contentFont, 
+                        fontSize  : 20, 
+                        color     : Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -186,16 +193,29 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                               Center(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
-                                  child: Container(
-                                    width: deviceWidth(context),
-                                    height: deviceHeight(context)*0.15,
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(companyProfile.result.campaignList[index].campaingName)),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                      fit: BoxFit.contain,
-                                      image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
+                                  child: GestureDetector(
+                                    child: Container(
+                                      width: deviceWidth(context),
+                                      height: deviceHeight(context)*0.15,
+                                      child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text(companyProfile.result.campaignList[index].campaingName)),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                        fit: BoxFit.contain,
+                                        image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
+                                    onTap: ()async{
+                                      final progressUHD = ProgressHUD.of(context);
+                                      progressUHD.show(); 
+                                      final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(companyProfile.result.id, companyProfile.result.campaignList[index].campaingId);                        
+                                      // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
+                                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
+                                       campaingId: companyProfile.result.campaignList[index].campaingId, companyId: companyProfile.result.id, companyLogo: companyProfile.result.companyLogo, companyName: companyProfile.result.companyName, contentTitle: companyProfile.result.campaignList[index].campaingName,
+                                       googleAdressLink: companyProfile.result.googleAdressLink, isLiked: false, companyPhone: companyProfile.result.companyPhone)));
+                                       progressUHD.dismiss();
+                                       //////// isLiked eksik
+                                    },
+                                  ),
                                 ),
                               );
                               // Container(
