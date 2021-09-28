@@ -16,7 +16,7 @@ class BackLeadingWidget extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(//iconun çevresini saran yapı tasarımı
-              maxRadius: 25,
+              maxRadius: 20,
               backgroundColor: Colors.white,
               child: IconButton(
               iconSize: iconSize,

@@ -198,11 +198,14 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                       width: deviceWidth(context),
                                       height: deviceHeight(context)*0.15,
                                       child: Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Text(companyProfile.result.campaignList[index].campaingName)),
+                                        alignment: Alignment.bottomRight,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(bottom: minSpace,right: minSpace),
+                                          child: Text(companyProfile.result.campaignList[index].campaingName),
+                                        )),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                        fit: BoxFit.contain,
+                                        fit: BoxFit.fill,
                                         image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
                                     onTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);

@@ -21,15 +21,15 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
 
+   String user = "";
 
    getUserName() async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   String user = prefs.getString("user");
-   return user;
+   String newuser = prefs.getString("user");
+   setState(() {
+     user = newuser; 
+   });
    }
-
-   String user = "";
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 BackGroundContainer(
                 colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
                 child: Column(children: [
+                  SizedBox(height: deviceHeight(context)*0.05),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children:[
+                    children:[                    
                       Column(
                         children: [Padding(
                             padding: const EdgeInsets.only(top: defaultPadding),
@@ -64,7 +65,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       
                       Column(
                         children: [ 
-                          SizedBox(height: deviceHeight(context)*0.05),
                           CircleAvatar(
                             radius: 32,
                             backgroundColor: primaryColor,
@@ -79,7 +79,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ],
                   ),
-
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
