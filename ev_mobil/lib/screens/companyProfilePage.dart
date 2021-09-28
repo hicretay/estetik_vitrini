@@ -113,14 +113,13 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                   
                 SizedBox(height: deviceHeight(context)*0.01),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      height: deviceHeight(context),
-                      decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),
-                      color: Theme.of(context).backgroundColor),
-                      child: 
-                      Column(children: [
+                  child: Container(
+                    decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),
+                    color: Theme.of(context).backgroundColor),
+                    child: 
+                    SingleChildScrollView(
+                      child: Column(children: [
                         //-----------------------------------------ŞİRKET BİLGİLERİ ---------------------------------------------
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
@@ -160,45 +159,49 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                               style: TextStyle(color: secondaryColor,
                               decoration: TextDecoration.underline)),
                               onTap: (){
-                                 final progressHUD = ProgressHUD.of(context);
-                                 progressHUD.show();                             
-                                 Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: companyProfile.result.googleAdressLink))); 
-                                 progressHUD.dismiss();
-                                 })]),
+                                final progressHUD = ProgressHUD.of(context);
+                                progressHUD.show();                             
+                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: companyProfile.result.googleAdressLink))); 
+                                progressHUD.dismiss();
+                                })]),
                         ),
                         SizedBox(height: deviceHeight(context)*0.01),
                         //----------------------------------------KAMPANYA LİSTESİ AKIŞI--------------------------------------------
                         Padding(
                           padding: const EdgeInsets.only(left: maxSpace,right: maxSpace),
-                          child: GridView.builder(
-                          physics: ScrollPhysics(),
-                          shrinkWrap: true,                 
-                          itemCount: companyProfile.result.campaignList.length,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: (1 / .6),
-                            crossAxisCount : 2,
-                            mainAxisSpacing: minSpace,
-                            crossAxisSpacing: minSpace,
-                          ), 
-                          itemBuilder:  (BuildContext context, int index){
-                            return Container(
-                              child: Center(
-                                 child: ClipRRect(
-                                 borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
-                                 child: Image.network(companyProfile.result.campaignList[index].campaingLogo,
-                                 fit: BoxFit.cover)
+                          child: Container(
+                            child: GridView.builder(
+                            //scrollDirection: Axis.vertical,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,                 
+                            itemCount: companyProfile.result.campaignList.length,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              childAspectRatio: (1 / .6),
+                              crossAxisCount : 2,
+                              mainAxisSpacing: minSpace,
+                              crossAxisSpacing: minSpace,
+                            ), 
+                            itemBuilder:  (BuildContext context, int index){
+                              return Container(
+                                child: Center(
+                                  child: ClipRRect(
+                                  borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
+                                  child: Image.network(companyProfile.result.campaignList[index].campaingLogo,
+                                  fit: BoxFit.cover)
+                                  ),
                                 ),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         ),
+                        SizedBox(height: defaultPadding),
                       ]),
                     ),
                   ),
-                )
+                ),
               ],
             ),
-                ),
+           ),
           ),
         )),
     );

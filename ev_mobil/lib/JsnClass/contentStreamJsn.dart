@@ -40,6 +40,7 @@ class Result {
         this.contentTitle,
         this.liked,
         this.likeCount,
+        this.favoriStatus
     });
 
     int companyId;
@@ -52,6 +53,7 @@ class Result {
     String contentTitle;
     bool liked;
     int likeCount;
+    bool favoriStatus;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         companyId: json["companyId"],
@@ -64,6 +66,7 @@ class Result {
         contentTitle: json["contentTitle"],
         liked: json["liked"],
         likeCount: json["likeCount"],
+        favoriStatus: json["favoriStatus"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -77,5 +80,6 @@ class Result {
         "contentTitle": contentTitle,
         "liked": liked,
         "likeCount": likeCount,
+        "favoriStatus": favoriStatus,
     };
 }

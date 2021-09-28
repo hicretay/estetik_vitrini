@@ -321,15 +321,17 @@ class _HomePageState extends State<HomePage> {
                             //--------------------------------------------------------------------------------------
                             //----------------------------------------FAVORİTE BUTTON--------------------------------
                             starButton: IconButton(
-                             icon: Icon(LineIcons.star,size: 26),
+                             icon: homeContent[index].favoriStatus ? Icon(Icons.star,size: 26) : Icon(LineIcons.star,size: 26),
                              onPressed:  ()async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
                               final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
                               print(favoriteAdd.success);
                               print(favoriteAdd.result);
+                              await  refreshContentStream();
                             },
                            ),
+                           //--------------------------------------------------------------------------------------
                            homeDetailOntap: () async{
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD.show(); 
