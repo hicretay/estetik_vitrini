@@ -28,13 +28,12 @@ class HomeDetailPage extends StatefulWidget {
   final String companyName;
   final String contentTitle;
   final String googleAdressLink;
-  final bool isLiked;
   final String companyPhone;
-  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked, this.companyPhone}) : super(key: key);
+  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.companyPhone}) : super(key: key);
 
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, 
-  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink, isLiked: isLiked, companyPhone: companyPhone);
+  campaingId: campaingId, companyId: companyId, companyLogo: companyLogo, companyName: companyName, contentTitle: contentTitle, googleAdressLink: googleAdressLink, companyPhone: companyPhone);
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
@@ -45,16 +44,17 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
   String companyName;
   String contentTitle;
   String googleAdressLink;
-  bool isLiked;
   String companyPhone;
 
   int userIdData;
 
   
-  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.isLiked, this.companyPhone});
+  _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.companyPhone});
   
   Future homeDetailRefresh() async{
-   final ContentStreamDetailJsn detailNewList = await contentStreamDetailJsnFunc(companyId,campaingId); 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+     userIdData = prefs.getInt("userIdData"); 
+   final ContentStreamDetailJsn detailNewList = await contentStreamDetailJsnFunc(companyId,campaingId,userIdData); 
    setState(() {
       homeDetailContent = detailNewList.result;
    });
@@ -168,9 +168,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       //-----------------------Beğeni iconButton'ı----------------------------
                                           child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
                                             maxRadius      : deviceWidth(context)*0.05,
-                                            backgroundColor: isLiked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
+                                            backgroundColor: homeDetailContent.first.liked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
                                             child: 
-                                            IconButton( icon: isLiked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
+                                            IconButton( icon: homeDetailContent.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
                                             onPressed: () async{
                                               SharedPreferences prefs = await SharedPreferences.getInstance();
                                               userIdData = prefs.getInt("userIdData"); 
@@ -267,7 +267,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                       size : iconSize,
                                       color: Theme.of(context).hintColor),
                                       SizedBox(width: minSpace),
-                                      Text("${homeDetailContent.first.likeCount} kişi tarafından favorilere eklendi",style: TextStyle(color:Theme.of(context).hintColor)),
+                                      Text("${homeDetailContent.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:Theme.of(context).hintColor)),
                                       // counter ile gösterilecek beğeni sayısı
                                     ],
                                   ),

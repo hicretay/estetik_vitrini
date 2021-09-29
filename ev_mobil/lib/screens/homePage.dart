@@ -253,6 +253,7 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
+                      
                           
                         onRefresh: ()async{
                           final result =await getHomeData(LoadStatus.noMore);
@@ -290,12 +291,14 @@ class _HomePageState extends State<HomePage> {
                               //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                               onPressed: () async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
+                              progressUHD.show();
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              userIdData = prefs.getInt("userIdData"); 
+                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData);                        
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
                                campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
-                               googleAdressLink: homeContent[index].googleAdressLink, isLiked: homeContent[index].liked, companyPhone: homeContent[index].companyPhone.toString())));
+                               googleAdressLink: homeContent[index].googleAdressLink, companyPhone: homeContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -335,12 +338,14 @@ class _HomePageState extends State<HomePage> {
                            //--------------------------------------------------------------------------------------
                            homeDetailOntap: () async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId);                        
+                              progressUHD.show();
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                               userIdData = prefs.getInt("userIdData");  
+                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData);                        
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
                                campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
-                               googleAdressLink: homeContent[index].googleAdressLink, isLiked: homeContent[index].liked, companyPhone: homeContent[index].companyPhone.toString())));
+                               googleAdressLink: homeContent[index].googleAdressLink, companyPhone: homeContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             logoOnTap: ()async{

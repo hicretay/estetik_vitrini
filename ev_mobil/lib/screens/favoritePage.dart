@@ -133,12 +133,14 @@ class _FavoritePageState extends State<FavoritePage> {
                               onPressed: () async{
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD.show(); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
+                                 SharedPreferences prefs = await SharedPreferences.getInstance();
+                               userIdData = prefs.getInt("userIdData"); 
+                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId,userIdData); 
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
                               campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
                               companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                              contentTitle: favoriContent[index].contentTitle, isLiked: favoriContent[index].liked, companyPhone: favoriContent[index].companyPhone.toString())));
+                              contentTitle: favoriContent[index].contentTitle, companyPhone: favoriContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             //--------------------------------------------------------------------------------------------------------------------
@@ -185,12 +187,14 @@ class _FavoritePageState extends State<FavoritePage> {
                              homeDetailOntap: () async{
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD.show(); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId); 
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              userIdData = prefs.getInt("userIdData"); 
+                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId,userIdData); 
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
                               campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
                               companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                              contentTitle: favoriContent[index].contentTitle, isLiked: favoriContent[index].liked, companyPhone: favoriContent[index].companyPhone.toString())));
+                              contentTitle: favoriContent[index].contentTitle, companyPhone: favoriContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             logoOnTap: ()async{

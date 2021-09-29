@@ -84,10 +84,10 @@ Future<ContentStreamJsn> favoriteJsnFunc(int userId, int page, bool favorite) as
 //---------------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------Kampanya Listesi Fonksiyonu--------------------------------------------------------
-Future<ContentStreamDetailJsn> contentStreamDetailJsnFunc(int companyId, int campaingId) async {
+Future<ContentStreamDetailJsn> contentStreamDetailJsnFunc(int companyId, int campaingId, int userId) async {
   final response = await http.post(
     Uri.parse(url + "ContentStreamDetail/List"),
-    body: '{"companyId":' + companyId.toString() + ',' + '"campaingId":' + campaingId.toString() + '}',
+    body: '{"companyId":' + companyId.toString() + ',' + '"campaingId":' + campaingId.toString() + ',' + '"userId":' + userId.toString() +'}',
     headers: header
   );
 

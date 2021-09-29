@@ -7,6 +7,7 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyProfilePage extends StatefulWidget {
   final CompanyProfileJsn companyProfile;
@@ -17,7 +18,6 @@ class CompanyProfilePage extends StatefulWidget {
 }
 
 class _CompanyProfilePageState extends State<CompanyProfilePage> {
- // List homeContent = []; 
   int userIdData;
   CompanyProfileJsn companyProfile;
 
@@ -65,9 +65,9 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               ),
               ),
                 Padding(
-                  padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding),
+                  padding: EdgeInsets.only(right: deviceWidth(context)*0.05,left: deviceWidth(context)*0.05),
                   child: Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                         Align(
                           alignment: Alignment.topLeft,
@@ -95,8 +95,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                           ),
                         ),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                         Column(children: [
                         Text("Kampanya",style: TextStyle(color: white)),
@@ -210,11 +210,13 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                     onTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);
                                       progressUHD.show(); 
-                                      final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(companyProfile.result.id, companyProfile.result.campaignList[index].campaingId);                        
+                                         SharedPreferences prefs = await SharedPreferences.getInstance();
+                                     userIdData = prefs.getInt("userIdData"); 
+                                      final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(companyProfile.result.id, companyProfile.result.campaignList[index].campaingId,userIdData);                        
                                       // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
                                        campaingId: companyProfile.result.campaignList[index].campaingId, companyId: companyProfile.result.id, companyLogo: companyProfile.result.companyLogo, companyName: companyProfile.result.companyName, contentTitle: companyProfile.result.campaignList[index].campaingName,
-                                       googleAdressLink: companyProfile.result.googleAdressLink, isLiked: false, companyPhone: companyProfile.result.companyPhone)));
+                                       googleAdressLink: companyProfile.result.googleAdressLink,companyPhone: companyProfile.result.companyPhone)));
                                        progressUHD.dismiss();
                                        //////// isLiked eksik
                                     },
