@@ -94,6 +94,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                           child: Column(
                             children: [
                           SizedBox(height: defaultPadding),
+                          (companyOperation.isEmpty || companyOperation.length == 0) ? Center(child: Text("Uygun işlem bulunamadı !")) : 
                           ListView.separated(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
@@ -115,7 +116,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                   });
                                 },
                                 child: Container(
-                                  //locationların listeleneceği card genişliği
+                                  //işlemlerin listeleneceği card genişliği
                                   height: deviceHeight(context) * 0.06,
                                   width: deviceWidth(context) * 0.06,
                                   decoration: BoxDecoration(
@@ -167,17 +168,20 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                       SizedBox(width: deviceWidth(context)*0.2),
                                       //operation isimlerinin gösterildiği text
                                         Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: 
-                                            [Text( companyOperation[index].operationName, 
-                                            textAlign: TextAlign.center,
-                                            style    : TextStyle(
-                                            fontSize : 18, // operationların fontu
-                                            color: _checked == index
-                                                   ? Colors.white // seçili ise açık text
-                                                   : primaryColor, // seçili değilse koyu
-                                            ),
+                                          children: [
+                                            Center(
+                                              child: SizedBox(
+                                                width: deviceWidth(context)*0.5,
+                                                child: Text( companyOperation[index].operationName, 
+                                                style    : TextStyle(
+                                                fontSize : 18, // operationların fontu
+                                                color: _checked == index
+                                                       ? Colors.white // seçili ise açık text
+                                                       : primaryColor, // seçili değilse koyu
+                                                ),
                                       ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ],
