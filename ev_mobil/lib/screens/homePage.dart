@@ -227,6 +227,9 @@ class _HomePageState extends State<HomePage> {
                       child: SmartRefresher(                     
                         controller: refreshController,
                         enablePullUp: true,
+                        header: CustomHeader(
+                          builder: (c,m)=> circularBasic,
+                        ),
                         footer: CustomFooter(
                         builder: (BuildContext context,LoadStatus mode){
                           Widget body ;
@@ -253,8 +256,6 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
-                      
-                          
                         onRefresh: ()async{
                           final result =await getHomeData(LoadStatus.noMore);
                           if(result){

@@ -111,187 +111,192 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                         color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
-                      child: SingleChildScrollView(
-                             child: Column(
-                              children: [
-                                SizedBox(height: maxSpace),
-                                LeadingRowWidget( 
-                                  companyName: companyName,  
-                                  companyLogo: companyLogo,  
-                                  leadingColor: Theme.of(context).hintColor,
-                                  starButton: Container(),
-                                  logoOnTap: ()async{
-                                  final progressUHD = ProgressHUD.of(context);
-                                  progressUHD.show(); 
-                                  final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(companyId);
-                                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
-                                  progressUHD.dismiss();
-                                },),//leading widgetı
-                                Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
-                                  child: Center(
-                                    //-----------------------Carousel Containerı------------------------
-                                      child: Container(
-                                      width: double.infinity, //genişlik: container genişliği
-                                      height: deviceHeight(context)*0.3, //container yüksekliği
-                                      child: homeDetailContent == null ? circularBasic : // ana sayfa içeriği boş ise circular, ekli görsel sayısı 1 ise Image.network
-                                      sliderImg.length == 1 ? Image.network(homeDetailContent.first.contentPictures.first.cPicture): //  ekli görsel sayısı 1den fazla ise carousel 
-                                      Carousel(
-                                      borderRadius: true,
-                                      radius: Radius.circular(maxSpace),
-                                      boxFit: BoxFit.contain,
-                                      autoplay: false,
-                                      animationCurve: Curves.bounceInOut, // animasyon efekti
-                                      animationDuration: Duration(milliseconds: 1000), // animasyon süresi
-                                      dotSize: 6.0, //Nokta büyüklüğü
-                                      dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
-                                      dotColor: secondaryColor,
-                                      dotBgColor: Colors.transparent, //Carousel alt bar rengi
-                                      dotPosition: DotPosition.bottomCenter, // Noktaların konumu
-                                      dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
-                                      showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
-                                      indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı                                   
-                                      images: sliderImg)
-                                ),
-                              ),
-                            ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      child: FutureBuilder<Object>(
+                        future: homeDetailRefresh(),
+                        builder: (context, snapshot) {
+                          return SingleChildScrollView(
+                                 child: Column(
                                   children: [
-                                    //-----------------Alt Header-----------------------
+                                    SizedBox(height: maxSpace),
+                                    LeadingRowWidget( 
+                                      companyName: companyName,  
+                                      companyLogo: companyLogo,  
+                                      leadingColor: Theme.of(context).hintColor,
+                                      starButton: Container(),
+                                      logoOnTap: ()async{
+                                      final progressUHD = ProgressHUD.of(context);
+                                      progressUHD.show(); 
+                                      final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(companyId);
+                                      Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
+                                      progressUHD.dismiss();
+                                    },),//leading widgetı
+                                    Padding(padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace,top: maxSpace/2),
+                                      child: Center(
+                                        //-----------------------Carousel Containerı------------------------
+                                          child: Container(
+                                          width: double.infinity, //genişlik: container genişliği
+                                          height: deviceHeight(context)*0.3, //container yüksekliği
+                                          child: homeDetailContent == null ? circularBasic : // ana sayfa içeriği boş ise circular, ekli görsel sayısı 1 ise Image.network
+                                          sliderImg.length == 1 ? Image.network(homeDetailContent.first.contentPictures.first.cPicture): //  ekli görsel sayısı 1den fazla ise carousel 
+                                          Carousel(
+                                          borderRadius: true,
+                                          radius: Radius.circular(maxSpace),
+                                          boxFit: BoxFit.contain,
+                                          autoplay: false,
+                                          animationCurve: Curves.bounceInOut, // animasyon efekti
+                                          animationDuration: Duration(milliseconds: 1000), // animasyon süresi
+                                          dotSize: 6.0, //Nokta büyüklüğü
+                                          dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
+                                          dotColor: secondaryColor,
+                                          dotBgColor: Colors.transparent, //Carousel alt bar rengi
+                                          dotPosition: DotPosition.bottomCenter, // Noktaların konumu
+                                          dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
+                                          showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
+                                          indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı                                   
+                                          images: sliderImg)
+                                    ),
+                                  ),
+                                ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(minSpace),
-                                      //-----------------------Beğeni iconButton'ı----------------------------
-                                          child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
-                                            maxRadius      : deviceWidth(context)*0.05,
-                                            backgroundColor: homeDetailContent.first.liked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
-                                            child: 
-                                            IconButton( icon: homeDetailContent.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
-                                            onPressed: () async{
-                                              SharedPreferences prefs = await SharedPreferences.getInstance();
-                                              userIdData = prefs.getInt("userIdData"); 
-                                              LikeJsn likePostData = await likeJsnFunc(userIdData, campaingId);
-                                              print(likePostData.success);
-                                              print(likePostData.result);
-                                              await homeDetailRefresh();
-                                            }),
-                                          ),
+                                        //-----------------Alt Header-----------------------
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(minSpace),
+                                          //-----------------------Beğeni iconButton'ı----------------------------
+                                              child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
+                                                maxRadius      : deviceWidth(context)*0.05,
+                                                backgroundColor: homeDetailContent.first.liked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
+                                                child: 
+                                                IconButton( icon: homeDetailContent.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
+                                                onPressed: () async{
+                                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                  userIdData = prefs.getInt("userIdData"); 
+                                                  LikeJsn likePostData = await likeJsnFunc(userIdData, campaingId);
+                                                  print(likePostData.success);
+                                                  print(likePostData.result);
+                                                  await homeDetailRefresh();
+                                                }),
+                                              ),
+                                            ),
+                                            
+                                    // //-----------------------Paylaşım iconButton'ı----------------------------
+                                    //         Padding(
+                                    //           padding: const EdgeInsets.all(minSpace),
+                                    //           child: IconButton(
+                                    //                 padding    : EdgeInsets.zero,
+                                    //                 constraints: BoxConstraints(),
+                                    //                 icon       : Icon(Icons.share_outlined,
+                                    //                 color      : primaryColor,
+                                    //                 size       : iconSize),
+                                    //                 onPressed  : () {}),
+                                    //         ),
+                                    // //------------------------------------------------------------------------
+                                    //----------------------İletişim iconButton'ı-----------------------------
+                                            Padding(
+                                              padding: const EdgeInsets.all(minSpace),
+                                              child: IconButton(
+                                                    padding    : EdgeInsets.zero,
+                                                    constraints: BoxConstraints(),
+                                                    icon       : Icon(LineIcons.phone,
+                                                    color      : Theme.of(context).hintColor,
+                                                    size       : iconSize),
+                                                    onPressed  : () async{  
+                                                      dynamic number = companyPhone; // arama ekranına yönlendirme
+                                                      launch("tel://$number");
+                                                    }),
+                                            ),
+                                    //------------------------------------------------------------------------
+                                     //----------------------Konum iconButton'ı-------------------------------
+                                            Padding(
+                                              padding: const EdgeInsets.all(minSpace),
+                                              child: IconButton(
+                                                    padding    : EdgeInsets.zero,
+                                                    constraints: BoxConstraints(),
+                                                    icon       : Icon(LineIcons.locationArrow,
+                                                    color      : Theme.of(context).hintColor,
+                                                    size       : iconSize),
+                                                    onPressed  : () async{
+                                                    final progressUHD = ProgressHUD.of(context);
+                                                    progressUHD.show();
+                                                    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: googleAdressLink)));
+                                                    progressUHD.dismiss(); 
+                                                  }),
+                                            ),
+                                    //------------------------------------------------------------------------
+                                          ],
                                         ),
                                         
-                                // //-----------------------Paylaşım iconButton'ı----------------------------
-                                //         Padding(
-                                //           padding: const EdgeInsets.all(minSpace),
-                                //           child: IconButton(
-                                //                 padding    : EdgeInsets.zero,
-                                //                 constraints: BoxConstraints(),
-                                //                 icon       : Icon(Icons.share_outlined,
-                                //                 color      : primaryColor,
-                                //                 size       : iconSize),
-                                //                 onPressed  : () {}),
-                                //         ),
-                                // //------------------------------------------------------------------------
-                                //----------------------İletişim iconButton'ı-----------------------------
-                                        Padding(
-                                          padding: const EdgeInsets.all(minSpace),
-                                          child: IconButton(
-                                                padding    : EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                icon       : Icon(LineIcons.phone,
-                                                color      : Theme.of(context).hintColor,
-                                                size       : iconSize),
-                                                onPressed  : () async{  
-                                                  dynamic number = companyPhone; // arama ekranına yönlendirme
-                                                  launch("tel://$number");
-                                                }),
-                                        ),
-                                //------------------------------------------------------------------------
-                                 //----------------------Konum iconButton'ı-------------------------------
-                                        Padding(
-                                          padding: const EdgeInsets.all(minSpace),
-                                          child: IconButton(
-                                                padding    : EdgeInsets.zero,
-                                                constraints: BoxConstraints(),
-                                                icon       : Icon(LineIcons.locationArrow,
-                                                color      : Theme.of(context).hintColor,
-                                                size       : iconSize),
-                                                onPressed  : () async{
-                                                final progressUHD = ProgressHUD.of(context);
-                                                progressUHD.show();
-                                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: googleAdressLink)));
-                                                progressUHD.dismiss(); 
-                                              }),
-                                        ),
-                                //------------------------------------------------------------------------
-                                      ],
-                                    ),
+                                      //-------------------------RANDEVU AL BUTONU----------------------------
+                                      Material(
+                                      color: primaryColor,
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      child: MaterialButton(
+                                        minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
+                                        onPressed: () async{
+                                           SharedPreferences prefs = await SharedPreferences.getInstance();
+                                           userIdData = prefs.getInt("userIdData");                              
+                                            AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: userIdData, companyNameS: companyName, campaignId: campaingId);
+                                            final progressHUD = ProgressHUD.of(context);
+                                            progressHUD.show(); 
+                                            Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(appointment: appointment)));
+                                            progressHUD.dismiss();
                                     
-                                  //-------------------------RANDEVU AL BUTONU----------------------------
-                                  Material(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  child: MaterialButton(
-                                    minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                    onPressed: () async{
-                                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                                       userIdData = prefs.getInt("userIdData");                              
-                                        AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: userIdData, companyNameS: companyName, campaignId: campaingId);
-                                        final progressHUD = ProgressHUD.of(context);
-                                        progressHUD.show(); 
-                                        Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(appointment: appointment)));
-                                        progressHUD.dismiss();
-                                
-                                      //Buton tıklandığında randevu al sayfasına yönlendirilecek
-                                    },
-                                    child: Row(
-                                      children: [
-                                        //----------------------------Buton Metni------------------------------------------
-                                        Text("Randevu Al",style: Theme.of(context).textTheme.button.copyWith(color: white)),
-                                        //---------------------------------------------------------------------------------
-                                        SizedBox(width: 10), //butondaki Text ve icon arası boşluk
-                                        Icon(LineIcons.arrowRight,color: lightWhite),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                                  ],
-                                ),
-                                SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
-                                Padding(padding: const EdgeInsets.only(left: maxSpace),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.favorite, // Beğeni İcon'ı
-                                      size : iconSize,
-                                      color: Theme.of(context).hintColor),
-                                      SizedBox(width: minSpace),
-                                      Text("${homeDetailContent.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:Theme.of(context).hintColor)),
-                                      // counter ile gösterilecek beğeni sayısı
-                                    ],
-                                  ),
-                                ),
-                                //------------------Açıklama Metni----------------------
-                                Padding(padding: const EdgeInsets.all(maxSpace),
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child    : Text(contentTitle,
-                                        style    : TextStyle(fontSize: 22, color: Theme.of(context).hintColor),
+                                          //Buton tıklandığında randevu al sayfasına yönlendirilecek
+                                        },
+                                        child: Row(
+                                          children: [
+                                            //----------------------------Buton Metni------------------------------------------
+                                            Text("Randevu Al",style: Theme.of(context).textTheme.button.copyWith(color: white)),
+                                            //---------------------------------------------------------------------------------
+                                            SizedBox(width: 10), //butondaki Text ve icon arası boşluk
+                                            Icon(LineIcons.arrowRight,color: lightWhite),
+                                          ],
                                         ),
                                       ),
-                                      Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Html(data: homeDetailContent.first.campaingDetail)),//Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
-                                    ],
-                                  ),
+                                    )
+                                      ],
+                                    ),
+                                    SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
+                                    Padding(padding: const EdgeInsets.only(left: maxSpace),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.favorite, // Beğeni İcon'ı
+                                          size : iconSize,
+                                          color: Theme.of(context).hintColor),
+                                          SizedBox(width: minSpace),
+                                          Text("${homeDetailContent.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:Theme.of(context).hintColor)),
+                                          // counter ile gösterilecek beğeni sayısı
+                                        ],
+                                      ),
+                                    ),
+                                    //------------------Açıklama Metni----------------------
+                                    Padding(padding: const EdgeInsets.all(maxSpace),
+                                      child: Column(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child    : Text(contentTitle,
+                                            style    : TextStyle(fontSize: 22, color: Theme.of(context).hintColor),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Html(data: homeDetailContent.first.campaingDetail)),//Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
+                                        ],
+                                      ),
+                                    ),
+                                    //------------------------------------------------------
+                                  ],
                                 ),
-                                //------------------------------------------------------
-                              ],
-                            ),
-                         )
+                             );
+                        }
+                      )
                      
                     ),
                   ),
