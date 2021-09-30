@@ -25,11 +25,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
    getUserName() async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   String newuser = prefs.getString("user");
+   String newuser = prefs.getString("namesurname");
    setState(() {
      user = newuser; 
    });
    }
+
+   @override
+  void initState() {
+    getUserName();
+    setState(() {});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                       .textTheme
                                       .headline3
                                       .copyWith(color: white, fontFamily: leadingFont)),
-                                Text(user),
+                                Text(user,style: TextStyle(color: white,fontSize: 16)),
+                                SizedBox(height: deviceHeight(context)*0.01),
                               ],
                             ),
                           ),
@@ -144,7 +152,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             // shared preferences nesnelerinin silinmesi                
                             prefs.remove("user");
                             prefs.remove("pass");
-                            prefs.remove("userIdData");                        
+                            prefs.remove("userIdData");    
+                            prefs.remove("namesurname");                    
                             Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                             progressUHD.dismiss();
                           }),

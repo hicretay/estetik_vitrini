@@ -121,12 +121,14 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     containerColor: secondaryColor,
                     operationName: "İşlem",
                     width:  deviceWidth(context)*0.6,
-                    height: deviceWidth(context)*0.15,
-                    child: Text(appointment.operationS,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                    height: deviceWidth(context)*0.17,
+                    child: Center(
+                      child: Text(appointment.operationS,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                   InformationRowWidget(

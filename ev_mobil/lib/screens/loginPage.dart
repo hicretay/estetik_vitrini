@@ -105,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                                   final LoginJsn userData = await loginJsnFunc(username, password, false); 
                                   if(userData.success == true){ // Giriş kontrolü, succes
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  prefs.setString("namesurname", userData.result.nameSurname);
                                   prefs.setString("user", username);     
                                   prefs.setString("pass", password);  
                                   prefs.setInt("userIdData", userData.result.id);  

@@ -165,16 +165,16 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: deviceWidth(context)*0.2),
+                                      SizedBox(width: deviceWidth(context)*0.02),
                                       //operation isimlerinin gösterildiği text
                                         Row(
                                           children: [
                                             Center(
                                               child: SizedBox(
-                                                width: deviceWidth(context)*0.5,
+                                                width: deviceWidth(context)*0.7,
                                                 child: Text( companyOperation[index].operationName, 
                                                 style    : TextStyle(
-                                                fontSize : 18, // operationların fontu
+                                                fontSize : 16, // operationların fontu
                                                 color: _checked == index
                                                        ? Colors.white // seçili ise açık text
                                                        : primaryColor, // seçili değilse koyu
@@ -197,6 +197,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                             return SizedBox(height: minSpace);
                           },
                           ),
+                          SizedBox(height: deviceHeight(context)*0.01),
                           ],
                           ),
                         ),
