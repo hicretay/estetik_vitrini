@@ -185,7 +185,6 @@ class _LocationPageState extends State<LocationPage> {
                                 ),
                               SizedBox(width: deviceWidth(context)*0.06),
                                 ],
-
                               ),
                           ),
                         ),
@@ -205,8 +204,8 @@ class _LocationPageState extends State<LocationPage> {
                               //InkWell ile liste yapısının tamamı tıklanabilir hale geldi
                               child: InkWell(
                                 onTap: () {
-                                     if (!mounted)
-                                     return;
+                                  if (!mounted)
+                                  return;
                                   setState(() {
                                     //_location mapinin keyleri listeye çevrildi ve tıklandığında true olarak güncellendi
                                     countyMap.update(countyMap.keys.toList()[index],

@@ -4,6 +4,7 @@ import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/screens/searchPage.dart';
@@ -14,7 +15,6 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -138,17 +138,38 @@ class _HomePageState extends State<HomePage> {
                 children: [
                     //-----------------------------BAŞLIK-------------------------------
                     Padding(
-                      padding: EdgeInsets.only(top: deviceHeight(context)*0.05),
+                      padding: EdgeInsets.only(top: deviceHeight(context)*0.05, right: deviceHeight(context)*0.03,),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(width: deviceWidth(context)*0.6,height: deviceHeight(context)*0.04, child: SvgPicture.asset("assets/images/nameLogo.svg",color: white)),
-                          GestureDetector(
-                            child: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 25,textDirection: TextDirection.ltr),
+                          SizedBox(width: deviceWidth(context)*0.02),
+                          SizedBox(width: deviceWidth(context)*0.6, 
+                          child: Text("Estetik Vitrini", //Büyük Başlık
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    .copyWith(color: white, fontFamily: leadingFont),
+                                maxLines: 2,
+                              ),
+                          //SvgPicture.asset("assets/images/logobeyaz.svg")
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            GestureDetector(
+                            child: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 24,textDirection: TextDirection.ltr),
                             onTap: (){
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
                             }
                             ),
+                            SizedBox(width: deviceWidth(context)*0.02),
+                            GestureDetector(
+                            child: FaIcon(FontAwesomeIcons.star,color: primaryColor,size: 25,textDirection: TextDirection.ltr),
+                            onTap: (){
+                              NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                            }
+                            ),
+                          ]),
                         ],
                       ),
                     ),

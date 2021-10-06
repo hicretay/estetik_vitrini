@@ -32,7 +32,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
         //-----------------------------Postu çevreleyecek container yapısı-------------------------
         Container(
           width: double.infinity, //genişlik: container genişliği kadar
-          height: 320, //container yüksekliği
+          height: 350, //container yüksekliği
           decoration: BoxDecoration(
             color: lightWhite,
             borderRadius: BorderRadius.circular(
@@ -49,23 +49,21 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   companyName: widget.companyName,
                   starButton: widget.starButton,
                   logoOnTap: widget.logoOnTap,
-                  
                 ),
               ),
               Flexible(
                 //resim containerının yalnızca sağ ve sol boşluk veren paddingi
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                  padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: GestureDetector(
                     child: Container(
-                      width: deviceWidth(context),
-                      height: 320,
+                     width: deviceWidth(context),
+                     //height: 500,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                         image: DecorationImage(
-                          fit: BoxFit.fill, // Resim containerı kaplasın
+                          fit: BoxFit.scaleDown,
                           image: CachedNetworkImageProvider(widget.contentPicture),
                         ),
                       ),

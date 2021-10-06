@@ -189,12 +189,12 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                               crossAxisSpacing: minSpace,
                             ), 
                             itemBuilder:  (BuildContext context, int index){
-                              return 
-                              Center(
+                              return Center(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
                                   child: GestureDetector(
                                     child: Container(
+                                      
                                       width: deviceWidth(context),
                                       height: deviceHeight(context)*0.15,
                                       child: Align(
@@ -204,8 +204,9 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                           child: Text(companyProfile.result.campaignList[index].campaingName),
                                         )),
                                       decoration: BoxDecoration(
+                                        border: Border.all(),
                                         image: DecorationImage(
-                                        fit: BoxFit.fill,
+                                        //fit: BoxFit.fill,
                                         image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
                                     onTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);

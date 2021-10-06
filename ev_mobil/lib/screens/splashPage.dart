@@ -64,18 +64,14 @@ class _SplashPageState extends State<SplashPage> {
    }
   });
 }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: secondaryColor,
-      child: Padding(
-        padding: const EdgeInsets.all(defaultPadding*3),
-        child: SizedBox(
-          width: deviceWidth(context),
-          height: deviceHeight(context)*0.03,
-          child:SvgPicture.asset("assets/images/logoAll.svg",placeholderBuilder: (context)=> circularBasic,
-          ),
+      decoration: BoxDecoration(
+        color: primaryColor,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage("assets/images/splash.jpg"),
         ),
       ),
     );

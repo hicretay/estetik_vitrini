@@ -64,11 +64,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
                //--------------------------giriş ikonu----------------------------------
                 Padding(
-                  padding: const EdgeInsets.all(defaultPadding*2),
+                  padding: const EdgeInsets.only(bottom: minSpace),
                   child: Container(
-                    width: deviceWidth(context)*0.8,
-                    height: deviceWidth(context)*0.1,
-                    child: Center(child: SvgPicture.asset("assets/images/nameLogo.svg",color: white,placeholderBuilder: (context)=> circularBasic))),
+                    width: deviceWidth(context)*0.9,
+                    height: deviceWidth(context)*0.2,
+                    child: Center(child: SvgPicture.asset("assets/images/logobeyaz.svg",color: white,placeholderBuilder: (context)=> circularBasic))),
                 ),  
                //------------------------------------------------------------------
                 SingleChildScrollView(

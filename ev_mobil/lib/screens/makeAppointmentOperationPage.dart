@@ -128,7 +128,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                       end: Alignment.topRight,
                                       //operationListMap mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
                                       colors: 
-                                       _checked == index 
+                                      _checked == index 
                                           ? backGroundColor1 // true ise(seçili) ise renk koyu
                                           : backGroundColor3, // false ise seçilmemişse açık
                                     ),

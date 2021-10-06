@@ -63,11 +63,11 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: deviceHeight(context)*0.15),
                          //--------------------------giriş ikonu----------------------------------
                           Padding(
-                            padding: const EdgeInsets.all(defaultPadding*2),
+                            padding: const EdgeInsets.all(defaultPadding),
                             child: Container(
                               width: deviceWidth(context),
                               height: deviceWidth(context)*0.3,
-                              child: Center(child: SvgPicture.asset("assets/images/nameLogo.svg",color: white, placeholderBuilder: (context)=> circularBasic))),
+                              child: Center(child: SvgPicture.asset("assets/images/logobeyaz.svg",color: white, placeholderBuilder: (context)=> circularBasic))),
                           ), 
                          //------------------------------------------------------------------
                         // dikdörtgen olan 1228 3443  ----- tümü 3787 2985 -------- sadece yazı olan 10529 1639(6.42)
