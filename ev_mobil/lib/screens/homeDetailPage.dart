@@ -64,8 +64,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("Kampanya id $campaingId");
-    print("Şirket id $companyId");
 
     //--------------------Slider Imageları-------------------
     List<dynamic> sliderImg = [];

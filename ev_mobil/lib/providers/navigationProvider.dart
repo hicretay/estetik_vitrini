@@ -135,9 +135,6 @@ class NavigationProvider extends ChangeNotifier {
   }
 //-----------------------------------------------------------------------
 
-
-
-
   Future<bool> onWillPop(BuildContext context) async {
     final currentNavigatorState = currentScreen.navigatorState.currentState;
     if (currentNavigatorState.canPop()) {

@@ -7,7 +7,6 @@ import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
-import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
@@ -163,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                             GestureDetector(
                             child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
                             onTap: (){
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
+                               NavigationProvider.of(context).setTab(SEARCH_PAGE);
                             }
                             ),
                             SizedBox(width: deviceWidth(context)*0.02),
@@ -173,13 +172,6 @@ class _HomePageState extends State<HomePage> {
                               NavigationProvider.of(context).setTab(FAVORITE_PAGE);
                             }
                             ),
-                            // SizedBox(width: deviceWidth(context)*0.02),
-                            // GestureDetector(
-                            // child:  SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
-                            // onTap: (){
-                            //   NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                            // }
-                            // ),
                           ]),
                         ],
                       ),
@@ -259,7 +251,6 @@ class _HomePageState extends State<HomePage> {
                       child: SmartRefresher(                     
                         controller: refreshController,
                         enablePullUp: true,
-                        enablePullDown:true,
                         header: CustomHeader(
                           builder: (c,m)=> circularBasic,
                         ),

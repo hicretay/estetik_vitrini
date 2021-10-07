@@ -31,6 +31,7 @@ class _SearchPageState extends State<SearchPage> {
    void initState() { 
      super.initState();
      allCompaniesList();
+     
    }
 
   @override
@@ -131,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                         child: Container(
                           decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
                           child: ListView.separated(
-                            itemCount: selectedCompanies != null ? selectedCompanies.length : allCompanies,
+                            itemCount: selectedCompanies.length == 0 ? allCompanies.length : selectedCompanies.length,
                             itemBuilder: (BuildContext context, int index){
                             return GestureDetector(
                               child: Padding(
@@ -156,8 +157,8 @@ class _SearchPageState extends State<SearchPage> {
                               color: white,
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                              image: NetworkImage(selectedCompanies != null ?
-                               selectedCompanies[index].companyLogo : allCompanies[index].companyLogo,
+                              image: NetworkImage(selectedCompanies.length == 0 ?
+                              allCompanies[index].companyLogo : selectedCompanies[index].companyLogo,
                               ),
                            ),
                           ),
@@ -169,8 +170,8 @@ class _SearchPageState extends State<SearchPage> {
                     SizedBox(
                           width: deviceWidth(context)*0.63,
                           child: Text(
-                              selectedCompanies != null ?
-                              selectedCompanies[index].companyName : allCompanies[index].companyName,
+                              selectedCompanies.length == 0 ?
+                              allCompanies[index].companyName : selectedCompanies[index].companyName,
                               overflow: TextOverflow.fade,
                               softWrap: false,
                               style: TextStyle(fontSize: 17, fontFamily: headerFont,color: primaryColor)
@@ -178,7 +179,7 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ],
                 ),
-                     SizedBox(width: deviceWidth(context)*0.01),      
+                      SizedBox(width: deviceWidth(context)*0.01),      
                     ],
                   ))),
                   onTap: ()async{

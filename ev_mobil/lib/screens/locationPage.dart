@@ -1,7 +1,7 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
-import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,6 @@ class LocationPage extends StatefulWidget{
 class _LocationPageState extends State<LocationPage> {
 
   String selection;
-  
   List cities = [];
   List counties = [];
   List checkedCounty = [];
@@ -79,6 +78,34 @@ class _LocationPageState extends State<LocationPage> {
                     padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*2),
                     child: Column(
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: maxSpace),
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(//iconun çevresini saran yapı tasarımı
+                                  maxRadius: 20,
+                                  backgroundColor: Colors.white,
+                                  child: IconButton(
+                                  iconSize: iconSize,
+                                  icon: Icon(Icons.arrow_back,color: primaryColor),
+                                  onPressed: (){ Navigator.pop(context, false);}
+                                  ),
+                                ),
+                                SizedBox(width: maxSpace),
+                                Text("Estetik Vitrini",
+                                style     : TextStyle(
+                                fontFamily: leadingFont, 
+                                fontSize  : 25, 
+                                color     : Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                      ),
+                        ),
                         Align(alignment: Alignment.centerLeft,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -312,10 +339,10 @@ class _LocationPageState extends State<LocationPage> {
               //final userCityAdd = await userAddCityJsnFunc(userIdData, 1,1);
               // if(userCityAdd.success == true){
               await showToast(context, "Seçmiş olduğunuz bölgelere akış başarıyla uygulandı");
-              NavigationProvider.of(context).setTab(HOME_PAGE);
+              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
               //}
               //else{
-                await showToast(context, "Seçmiş olduğunuz bölgeler daha önce seçilmiş!");
+               // await showToast(context, "Seçmiş olduğunuz bölgeler daha önce seçilmiş!");
               //}
               for (var i = 0; i < counties.length; i++) {
                 if (countyMap.values.toList()[i]) {

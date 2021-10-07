@@ -1,9 +1,8 @@
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
+import 'package:estetikvitrini/screens/locationPage.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
-import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -109,8 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                   prefs.setString("user", username);     
                                   prefs.setString("pass", password);  
                                   prefs.setInt("userIdData", userData.result.id);  
-                                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
-                                  NavigationProvider.of(context).setTab(SEARCH_PAGE);
+                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                                   showToast(context, "Giriş Başarılı!");
                                   progressHUD.dismiss(); 
                                   }
