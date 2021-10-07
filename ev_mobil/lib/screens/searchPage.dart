@@ -120,9 +120,9 @@ class _SearchPageState extends State<SearchPage> {
                                 });
                                });
                                }),
-                                                     ),
+                              ),
                              ),
-                                                 ],
+                            ],
                            ),
                       ),
                     ),
@@ -132,6 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                         child: Container(
                           decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
                           child: ListView.separated(
+                            shrinkWrap: true,
                             itemCount: selectedCompanies.length == 0 ? allCompanies.length : selectedCompanies.length,
                             itemBuilder: (BuildContext context, int index){
                             return GestureDetector(

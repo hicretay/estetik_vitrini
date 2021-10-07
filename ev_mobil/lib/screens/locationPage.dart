@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/consts.dart';
 
 class LocationPage extends StatefulWidget{
@@ -198,8 +200,8 @@ class _LocationPageState extends State<LocationPage> {
                                         value: data.city);
                                       }).toList(),                                  
                                       onChanged: (value) {
-                                           if (!mounted)
-                                           return;                                  
+                                       if (!mounted)
+                                       return;                                  
                                        setState(() {
                                          countyMap.clear();
                                          counties.clear();
@@ -251,8 +253,7 @@ class _LocationPageState extends State<LocationPage> {
                                       begin: Alignment.topLeft,
                                       end: Alignment.topRight,
                                       //countyMap mapinin value(true - false) değerlerinin indexine göre rengi kontrol ediyor
-                                      colors: 
-                                      countyMap.values.toList()[index]
+                                      colors: countyMap.values.toList()[index]
                                           ? backGroundColor1 // true ise(seçili) ise renk koyu
                                           : backGroundColor3, // false ise seçilmemişse açık
                                     ),
@@ -339,7 +340,14 @@ class _LocationPageState extends State<LocationPage> {
               //final userCityAdd = await userAddCityJsnFunc(userIdData, 1,1);
               // if(userCityAdd.success == true){
               await showToast(context, "Seçmiş olduğunuz bölgelere akış başarıyla uygulandı");
-              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              if(prefs.getString("isFirstLogin") != null){
+                NavigationProvider.of(context).setTab(HOME_PAGE);
+              }
+              else{
+                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
+              }
+              
               //}
               //else{
                // await showToast(context, "Seçmiş olduğunuz bölgeler daha önce seçilmiş!");

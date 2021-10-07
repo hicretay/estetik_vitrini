@@ -145,7 +145,6 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Row(children: [
-                          SizedBox(width: deviceWidth(context)*0.03),
                           SizedBox(width: deviceWidth(context)*0.6, 
                           child: Text("Estetik Vitrini", //Büyük Başlık
                                 style: Theme.of(context)

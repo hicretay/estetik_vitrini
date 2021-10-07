@@ -138,7 +138,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           ListTileWidget(
                             text: "Favori Konumlar",
                             child: SvgPicture.asset("assets/icons/haritanoktası.svg",height: 25,width: 25, color: white),
-                            onTap: (){
+                            onTap: ()async{
+                             SharedPreferences prefs = await SharedPreferences.getInstance();
+                             prefs.setString("isFirstLogin", "Favori Konumlar");
                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> LocationPage()));
                             },
                           ),
