@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                                   prefs.setString("pass", password);  
                                   prefs.setInt("userIdData", userData.result.id);  
                                   Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
-                                  NavigationProvider.of(context).setTab(LOCATION_PAGE);
+                                  NavigationProvider.of(context).setTab(SEARCH_PAGE);
                                   showToast(context, "Giriş Başarılı!");
                                   progressHUD.dismiss(); 
                                   }

@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchPage extends StatefulWidget {
+   static const route = "searchPage";
   SearchPage({Key key}) : super(key: key);
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -47,7 +49,7 @@ class _SearchPageState extends State<SearchPage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(defaultPadding),
+                      padding: const EdgeInsets.all(maxSpace),
                       child: Container(
                          decoration: BoxDecoration(
                             color: white,
@@ -60,8 +62,10 @@ class _SearchPageState extends State<SearchPage> {
                               backgroundColor: Colors.transparent,
                               child: IconButton(
                                 iconSize: iconSize,
-                                icon: Icon(Icons.arrow_back,color: primaryColor,size: 35),
-                                onPressed: (){Navigator.pop(context, false);},
+                                icon: Icon(Icons.arrow_back,color: primaryColor,size: 30),
+                                onPressed: (){
+                                  NavigationProvider.of(context).setTab(HOME_PAGE);
+                                },
                               ),
                             ),
                              Flexible(
@@ -125,7 +129,6 @@ class _SearchPageState extends State<SearchPage> {
                       child: Padding(
                         padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding),
                         child: Container(
-                          //height: deviceHeight(context)*0.105*selectedCompanies.length,
                           decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
                           child: ListView.separated(
                             itemCount: selectedCompanies != null ? selectedCompanies.length : allCompanies,

@@ -194,7 +194,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                   borderRadius: BorderRadius.all(Radius.circular(cardCurved)),
                                   child: GestureDetector(
                                     child: Container(
-                                      
                                       width: deviceWidth(context),
                                       height: deviceHeight(context)*0.15,
                                       child: Align(
@@ -206,7 +205,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                       decoration: BoxDecoration(
                                         border: Border.all(),
                                         image: DecorationImage(
-                                        //fit: BoxFit.fill,
                                         image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
                                     onTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);
@@ -219,7 +217,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                        campaingId: companyProfile.result.campaignList[index].campaingId, companyId: companyProfile.result.id, companyLogo: companyProfile.result.companyLogo, companyName: companyProfile.result.companyName, contentTitle: companyProfile.result.campaignList[index].campaingName,
                                        googleAdressLink: companyProfile.result.googleAdressLink,companyPhone: companyProfile.result.companyPhone)));
                                        progressUHD.dismiss();
-                                       //////// isLiked eksik
                                     },
                                   ),
                                 ),

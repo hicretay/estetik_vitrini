@@ -15,7 +15,7 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -43,16 +43,17 @@ class _HomePageState extends State<HomePage> {
   List companyContent;
   int userIdData;
 
+
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
   StreamSubscription _connectionChangeStream;
   bool isOffline = false;
 //-----------------------------------------
   final RefreshController refreshController = RefreshController(initialRefresh: true);
 
-  Future getHomeData(LoadStatus mode) async{
+  Future<bool> getHomeData({bool isRefresh = false}) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
      userIdData = prefs.getInt("userIdData"); 
-    if(mode == LoadStatus.idle){
+    if(isRefresh){
       pageIndex = 1;
     }
     else{
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
 
   if (response.statusCode == 200) {
     final result = contentStreamJsnFromJson(response.body);
-    if(mode == LoadStatus.idle){
+    if(isRefresh){
       homeContent = result.result;
     }
     else{
@@ -84,11 +85,13 @@ class _HomePageState extends State<HomePage> {
   } else {
     return false;
   }}
+
+
   @override
   void initState() { 
     super.initState();
      Provider.of<ThemeDataProvider>(context, listen: false).loadTheme();
-    getHomeData(LoadStatus.loading);
+    //getHomeData(isRefresh: true);
     companyStoryList();
     setState(() {});
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
@@ -138,11 +141,12 @@ class _HomePageState extends State<HomePage> {
                 children: [
                     //-----------------------------BAŞLIK-------------------------------
                     Padding(
-                      padding: EdgeInsets.only(top: deviceHeight(context)*0.05, right: deviceHeight(context)*0.03,),
+                      padding: EdgeInsets.only(top: deviceHeight(context)*0.05),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          SizedBox(width: deviceWidth(context)*0.02),
+                          Row(children: [
+                          SizedBox(width: deviceWidth(context)*0.03),
                           SizedBox(width: deviceWidth(context)*0.6, 
                           child: Text("Estetik Vitrini", //Büyük Başlık
                                 style: Theme.of(context)
@@ -151,24 +155,31 @@ class _HomePageState extends State<HomePage> {
                                     .copyWith(color: white, fontFamily: leadingFont),
                                 maxLines: 2,
                               ),
-                          //SvgPicture.asset("assets/images/logobeyaz.svg")
-                          ),
+                          ),]),
+                          
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                             GestureDetector(
-                            child: FaIcon(FontAwesomeIcons.search,color: primaryColor,size: 24,textDirection: TextDirection.ltr),
+                            child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
                             onTap: (){
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchPage()));
                             }
                             ),
                             SizedBox(width: deviceWidth(context)*0.02),
                             GestureDetector(
-                            child: FaIcon(FontAwesomeIcons.star,color: primaryColor,size: 25,textDirection: TextDirection.ltr),
+                            child:  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
                             onTap: (){
                               NavigationProvider.of(context).setTab(FAVORITE_PAGE);
                             }
                             ),
+                            // SizedBox(width: deviceWidth(context)*0.02),
+                            // GestureDetector(
+                            // child:  SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
+                            // onTap: (){
+                            //   NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                            // }
+                            // ),
                           ]),
                         ],
                       ),
@@ -248,6 +259,7 @@ class _HomePageState extends State<HomePage> {
                       child: SmartRefresher(                     
                         controller: refreshController,
                         enablePullUp: true,
+                        enablePullDown:true,
                         header: CustomHeader(
                           builder: (c,m)=> circularBasic,
                         ),
@@ -261,13 +273,13 @@ class _HomePageState extends State<HomePage> {
                             body = circularBasic;
                           }
                           else if(mode == LoadStatus.failed){
-                            body = Text("Hepsini gördün");
+                            body = Text("Yükleme Hatası");
                           }
                           else if(mode == LoadStatus.canLoading){
                               body = circularBasic;
                           }
                           else if(mode == LoadStatus.noMore){
-                             body = circularBasic;
+                             body = Text("Hepsini gördün");
                           }
                           else{
                             body = circularBasic;
@@ -278,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                         onRefresh: ()async{
-                          final result =await getHomeData(LoadStatus.noMore);
+                          final result =await getHomeData(isRefresh: true);
                           if(result){
                             refreshController.refreshCompleted();
                           }
@@ -288,12 +300,12 @@ class _HomePageState extends State<HomePage> {
                         },
                         
                         onLoading: ()async{
-                           final result =await getHomeData(LoadStatus.loading);
+                           final result =await getHomeData();
                            if(result){
                              refreshController.loadComplete();
                            }
                            else{
-                             refreshController.loadFailed();
+                             refreshController.isLoading;
                            }
                         },
                         child: ListView.builder(

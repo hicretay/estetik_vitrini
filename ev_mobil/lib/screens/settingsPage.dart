@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/locationPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -7,6 +8,7 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/listTileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +57,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children:[                    
                       Column(
-                        children: [Padding(
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.only(top: defaultPadding),
                             child: Column(
                               children: [Text("Profil",
@@ -80,9 +83,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             backgroundColor: secondaryColor,
                             radius: 30,
                             child:  Icon(Icons.person, color: primaryColor,size: 40),
-                    ),
+                            ),
                           ),
-                          SizedBox(height: maxSpace),
                         ],
                       ),
                     ],
@@ -131,6 +133,13 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: LineIcon(LineIcons.infoCircle,color: white),
                             onTap: (){
                               showAlert(context, "     Ayna Ayna; güzellik salonu, kuaför ve dövme salonu gibi güzellik merkezlerini arayan, kendisi için en uygun güzellik uygulamaları hakkında bilgi edinmek isteyen, bu konuda rehberliğe ihtiyaç duyan, istediği güzellik ve bakım hizmetini nereden alabileceğine karar verme aşamasında olanların kullanacağı sektörel bir sosyal medya platformudur.\n     Güzellik merkezleri bu platform içinde salonlarını açabilir; salonlarını, hizmetlerini ve tavsiyelerini müşterilerine tanıtabilir.");
+                            },
+                          ),
+                          ListTileWidget(
+                            text: "Favori Konumlar",
+                            child: SvgPicture.asset("assets/icons/haritanoktası.svg",height: 25,width: 25, color: white),
+                            onTap: (){
+                             Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> LocationPage()));
                             },
                           ),
                           ListTileWidget(

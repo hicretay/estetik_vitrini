@@ -1,31 +1,32 @@
+import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/favoritePage.dart';
 import 'package:estetikvitrini/screens/homePage.dart';
-import 'package:estetikvitrini/screens/locationPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/screens/reservationPage.dart';
+import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/screens/settingsPage.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/model/screenProviderModel.dart';
 import 'package:estetikvitrini/widgets/exitAlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/consts.dart';
 
 const HOME_PAGE = 0;
 const FAVORITE_PAGE = 1;
 const RESERVATION_PAGE = 2;
-const LOCATION_PAGE = 3;
+const SEARCH_PAGE = 3;
 const SETTINGS_PAGE = 4;
 
 class NavigationProvider extends ChangeNotifier {
   static NavigationProvider of(BuildContext context) => Provider.of<NavigationProvider>(context, listen: false);
 
   int _currentScreenIndex = HOME_PAGE; // Başlangıç sayfası homePage
-
   int get currentTabIndex => _currentScreenIndex;
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -54,16 +55,16 @@ class NavigationProvider extends ChangeNotifier {
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
-      onGenerateRoute: (RouteSettings settings) {
-            return MaterialPageRoute(settings: settings ,builder: (_) => HomePage());
+      onGenerateRoute: (_) {
+            return MaterialPageRoute(builder: (_) => HomePage());
       },
     ),
     FAVORITE_PAGE: Screen(
-      icon: Icon(LineIcons.star,size: 30, color: primaryColor),
+      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child:Icon(LineIcons.star,size: 30,color: primaryColor),
+        child:SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
       ),
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
@@ -74,11 +75,11 @@ class NavigationProvider extends ChangeNotifier {
       scrollController: ScrollController(),
     ),
     RESERVATION_PAGE: Screen(
-      icon: SvgPicture.asset("assets/icons/takvim.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/takvim.svg",height: 25,width: 25),
+        child:SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25),
       ),
       child: ReservationPage(),
       initialRoute: ReservationPage.route,
@@ -87,26 +88,26 @@ class NavigationProvider extends ChangeNotifier {
             return MaterialPageRoute(builder: (_) => ReservationPage());
       },
     ),
-    LOCATION_PAGE: Screen(    
-      icon: SvgPicture.asset("assets/icons/haritanoktası.svg",height: 25,width: 25),
+    SEARCH_PAGE: Screen(    
+      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/haritanoktası.svg",height: 25,width: 25),
+        child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
       ),
-      child: LocationPage(),
-      initialRoute: LocationPage.route,
+      child: SearchPage(),
+      initialRoute: SearchPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (_) {
-            return MaterialPageRoute(builder: (_) => LocationPage());
+            return MaterialPageRoute(builder: (_) => SearchPage());
       },
     ),
     SETTINGS_PAGE: Screen(
-      icon: SvgPicture.asset("assets/icons/ayarlar.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/ayarlar.svg",height: 25,width: 25),
+        child: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25),
       ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
@@ -123,12 +124,18 @@ class NavigationProvider extends ChangeNotifier {
 
 //-----------------------Sayfa yönlendirme fonksiyonu---------------------
 //NavigationProvider.of(context).setTab(PAGENAME); şeklinde kullanılacak.
-  void setTab(int tab) {
+  void setTab(int tab) async{
     _currentScreenIndex = tab;
     //_currentScreenIndex: başlangıç sayfası tab değerine eşitlendi
+
+    if( _currentScreenIndex == 1){
+      favoriContentList();
+    }
     notifyListeners();
   }
 //-----------------------------------------------------------------------
+
+
 
 
   Future<bool> onWillPop(BuildContext context) async {
@@ -137,8 +144,8 @@ class NavigationProvider extends ChangeNotifier {
       currentNavigatorState.pop();
       return false;
     } else {
-      if (currentTabIndex != LOCATION_PAGE) {
-        setTab(LOCATION_PAGE);
+      if (currentTabIndex != SEARCH_PAGE) {
+        setTab(SEARCH_PAGE);
         notifyListeners();
         return false;
       } else {
@@ -151,6 +158,15 @@ class NavigationProvider extends ChangeNotifier {
   }
 }
 
+  List favoriContent;
+  int userIdData;
+
+  Future favoriContentList() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  userIdData = prefs.getInt("userIdData"); 
+  final ContentStreamJsn favoriContentNewList = await favoriteJsnFunc(userIdData,0,true); 
+  favoriContent = favoriContentNewList.result;
+}
 
 
 
