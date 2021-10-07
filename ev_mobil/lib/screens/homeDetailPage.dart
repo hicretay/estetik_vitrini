@@ -55,6 +55,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
      userIdData = prefs.getInt("userIdData"); 
    final ContentStreamDetailJsn detailNewList = await contentStreamDetailJsnFunc(companyId,campaingId,userIdData); 
+   if (!mounted)
+   return; 
    setState(() {
       homeDetailContent = detailNewList.result;
    });

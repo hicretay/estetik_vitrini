@@ -117,11 +117,10 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                 },
                                 child: Container(
                                   //işlemlerin listeleneceği card genişliği
-                                  height: deviceHeight(context) * 0.06,
-                                  width: deviceWidth(context) * 0.06,
+                                  height: 60,
                                   decoration: BoxDecoration(
                                     // Container rengi gradient ile verildi
-                                    borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
+                                    borderRadius: BorderRadius.all(Radius.circular(15)),
                                     gradient: LinearGradient(
                                       //soldan sağa doğru color listteki renkleri yaydı
                                       begin: Alignment.topLeft,
