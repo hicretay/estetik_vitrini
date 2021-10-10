@@ -31,7 +31,7 @@ class _WebViewWidgetState extends State<WebViewWidget> {
                     ),
                   ),
                   SizedBox(width: maxSpace),
-                  Text("Ayna Ayna",
+                  Text("Estetik Vitrini",
                     style     : TextStyle(
                     fontFamily: leadingFont, fontSize: 25, color:primaryColor),
                   ),

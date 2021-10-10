@@ -48,10 +48,10 @@ class NavigationProvider extends ChangeNotifier {
     HOME_PAGE: Screen(
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/ev.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/ev.svg",height: 22,width: 22),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/ev.svg",height: 25,width: 25),
+        child: SvgPicture.asset("assets/icons/ev.svg",height: 22,width: 22),
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),

@@ -164,7 +164,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             prefs.remove("user");
                             prefs.remove("pass");
                             prefs.remove("userIdData");    
-                            prefs.remove("namesurname");                    
+                            prefs.remove("namesurname");  
+                            prefs.remove("isFirstLogin");                  
                             Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                             progressUHD.dismiss();
                           }),

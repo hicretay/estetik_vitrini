@@ -4,7 +4,7 @@
    <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="AynaAyna"
+        android:label="Estetik Vitrini"
         android:icon="@mipmap/ic_launcher">
 
         <activity

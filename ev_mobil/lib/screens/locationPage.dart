@@ -93,7 +93,15 @@ class _LocationPageState extends State<LocationPage> {
                                   child: IconButton(
                                   iconSize: iconSize,
                                   icon: Icon(Icons.arrow_back,color: primaryColor),
-                                  onPressed: (){ Navigator.pop(context, false);}
+                                  onPressed: ()async{
+                                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                                    if(prefs.getString("isFirstLogin") != null){
+                                      Navigator.pop(context, false);
+                                    }
+                                    else{
+                                      return null;
+                                    }
+                                    }
                                   ),
                                 ),
                                 SizedBox(width: maxSpace),
@@ -341,8 +349,10 @@ class _LocationPageState extends State<LocationPage> {
               // if(userCityAdd.success == true){
               await showToast(context, "Seçmiş olduğunuz bölgelere akış başarıyla uygulandı");
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              if(prefs.getString("isFirstLogin") != null){
+              if(prefs.getString("isFirstLogin") != null)
+              {
                 NavigationProvider.of(context).setTab(HOME_PAGE);
+                Navigator.pop(context, false);
               }
               else{
                 Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
