@@ -33,6 +33,6 @@ class Screen {
     @required this.onGenerateRoute,
     @required this.initialRoute,
     @required this.navigatorState,
-    this.scrollController,
+    @required this.scrollController,
   });
 }

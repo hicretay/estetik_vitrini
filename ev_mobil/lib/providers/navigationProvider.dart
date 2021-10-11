@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/screens/favoritePage.dart';
 import 'package:estetikvitrini/screens/homePage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
@@ -7,14 +6,13 @@ import 'package:estetikvitrini/screens/reservationPage.dart';
 import 'package:estetikvitrini/screens/searchPage.dart';
 import 'package:estetikvitrini/screens/settingsPage.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
-import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/settings/root.dart';
 import 'package:estetikvitrini/model/screenProviderModel.dart';
 import 'package:estetikvitrini/widgets/exitAlertDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../settings/consts.dart';
 
 const HOME_PAGE = 0;
@@ -46,12 +44,13 @@ class NavigationProvider extends ChangeNotifier {
 
   final Map<int, Screen> _screens = {
     HOME_PAGE: Screen(
+      scrollController: ScrollController(),
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/ev.svg",height: 22,width: 22),
+      icon: SvgPicture.asset("assets/icons/homepage.svg",height: 30,width: 30,color: primaryColor,),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/ev.svg",height: 22,width: 22),
+        child: SvgPicture.asset("assets/icons/homepage.svg",height: 30,width: 30,color: primaryColor,),
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -60,6 +59,7 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     FAVORITE_PAGE: Screen(
+      scrollController: ScrollController(),
       icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
@@ -69,12 +69,13 @@ class NavigationProvider extends ChangeNotifier {
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
+      
       onGenerateRoute: (_) {
             return MaterialPageRoute(builder: (_) => FavoritePage());
       },
-      scrollController: ScrollController(),
     ),
     RESERVATION_PAGE: Screen(
+      scrollController: ScrollController(),
       icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
@@ -88,7 +89,8 @@ class NavigationProvider extends ChangeNotifier {
             return MaterialPageRoute(builder: (_) => ReservationPage());
       },
     ),
-    SEARCH_PAGE: Screen(    
+    SEARCH_PAGE: Screen(  
+      scrollController: ScrollController(),  
       icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
@@ -103,6 +105,7 @@ class NavigationProvider extends ChangeNotifier {
       },
     ),
     SETTINGS_PAGE: Screen(
+      scrollController: ScrollController(),
       icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25),
       title: "",
       activeIcon: CircleAvatar(
@@ -125,15 +128,29 @@ class NavigationProvider extends ChangeNotifier {
 //-----------------------Sayfa yönlendirme fonksiyonu---------------------
 //NavigationProvider.of(context).setTab(PAGENAME); şeklinde kullanılacak.
   void setTab(int tab) async{
-    _currentScreenIndex = tab;
-    //_currentScreenIndex: başlangıç sayfası tab değerine eşitlendi
-
-    if( _currentScreenIndex == 1){
-      favoriContentList();
+    if(tab == currentTabIndex){
+      _scrollToStart();
+      notifyListeners();
     }
-    notifyListeners();
+    else{
+      _currentScreenIndex = tab;
+      notifyListeners();
+    }
   }
 //-----------------------------------------------------------------------
+
+    void _scrollToStart() async{
+    await Future.delayed(const Duration(milliseconds: 300));
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
+        if (currentScreen.scrollController != null) {
+        currentScreen.scrollController.animateTo(
+        currentScreen.scrollController.position.minScrollExtent,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+      );
+    }
+  });
+  }
 
   Future<bool> onWillPop(BuildContext context) async {
     final currentNavigatorState = currentScreen.navigatorState.currentState;
@@ -141,8 +158,8 @@ class NavigationProvider extends ChangeNotifier {
       currentNavigatorState.pop();
       return false;
     } else {
-      if (currentTabIndex != SEARCH_PAGE) {
-        setTab(SEARCH_PAGE);
+      if (currentTabIndex != HOME_PAGE) {
+        setTab(HOME_PAGE);
         notifyListeners();
         return false;
       } else {
@@ -155,15 +172,6 @@ class NavigationProvider extends ChangeNotifier {
   }
 }
 
-  List favoriContent;
-  int userIdData;
-
-  Future favoriContentList() async{
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  userIdData = prefs.getInt("userIdData"); 
-  final ContentStreamJsn favoriContentNewList = await favoriteJsnFunc(userIdData,0,true); 
-  favoriContent = favoriContentNewList.result;
-}
 
 
 

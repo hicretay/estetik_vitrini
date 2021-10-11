@@ -115,9 +115,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           backgroundColor: secondaryColor,
                           child: ListView.builder(
                             itemCount: favoriContent == null ? 0 : favoriContent.length,
-                            controller: NavigationProvider.of(context)
-                            .screens[FAVORITE_PAGE]
-                            .scrollController,
+                            controller: NavigationProvider.of(context).screens[FAVORITE_PAGE].scrollController, 
                             itemBuilder: (BuildContext context, int index){
                               return HomeContainerWidget(
                               companyLogo   : favoriContent[index].companyLogo,

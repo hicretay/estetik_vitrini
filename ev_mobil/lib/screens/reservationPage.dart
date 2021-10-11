@@ -162,20 +162,19 @@ class _ReservationPageState extends State<ReservationPage> {
                                        onChanged: (value) async{
                                        if (!mounted)
                                        return;                                  
-                                      
                                          select = value;
                                          for (var item in companyContent) {
                                            if(item.companyName==value){
-                                             compID = item.id -1;
+                                             compID = item.id;
                                            }
                                            else{
                                              NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                                            }
                                          }
-                                         print(companyContent[compID].id.toString());
+                                         print(companyContent[compID].companyName.toString());
                                          SharedPreferences prefs = await SharedPreferences.getInstance();
                                          userIdData = prefs.getInt("userIdData"); 
-                                         AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: userIdData, companyNameS: companyContent[compID].companyName, campaignId: 0);
+                                         AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: userIdData, companyNameS:value, campaignId: 0);
                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
                                    
                                        },
@@ -317,7 +316,6 @@ class _ReservationPageState extends State<ReservationPage> {
                                   );
                                   }),
                                 ),
-                    
                             ],
                           ),
                         ),

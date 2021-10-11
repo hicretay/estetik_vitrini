@@ -299,6 +299,7 @@ class _HomePageState extends State<HomePage> {
                            }
                         },
                         child: ListView.builder(
+                            controller: NavigationProvider.of(context).screens[HOME_PAGE].scrollController,
                             shrinkWrap: true,
                             itemCount:  homeContent.length,
                             itemBuilder: (BuildContext context, int index){
@@ -320,9 +321,9 @@ class _HomePageState extends State<HomePage> {
                               userIdData = prefs.getInt("userIdData"); 
                               final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData);                        
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
-                               campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
-                               googleAdressLink: homeContent[index].googleAdressLink, companyPhone: homeContent[index].companyPhone.toString())));
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
+                              campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
+                              googleAdressLink: homeContent[index].googleAdressLink, companyPhone: homeContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -330,8 +331,7 @@ class _HomePageState extends State<HomePage> {
                             onPressedLocation: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show();
-                              int indeks = homeContent[index].companyId;
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: homeContent[indeks-1].googleAdressLink))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: homeContent[index].googleAdressLink))); 
                               progressHUD.dismiss();
                             },
                             //-----------------------------------------------------------------------------------------------------------------------------------------------------

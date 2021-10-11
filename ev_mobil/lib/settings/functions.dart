@@ -418,7 +418,7 @@ showToast(BuildContext context, String content){
            children: [
              MaterialButton(
              color: primaryColor,
-             child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), 
+             child: Text("Kapat",style: TextStyle(fontFamily: leadingFont, color: white)), 
              onPressed: () async{
                Navigator.of(context).pop();
           }),
