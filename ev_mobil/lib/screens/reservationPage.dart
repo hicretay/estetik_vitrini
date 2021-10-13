@@ -3,7 +3,6 @@ import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
-import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -162,16 +161,11 @@ class _ReservationPageState extends State<ReservationPage> {
                                        ),
                                        value: data.companyName);
                                        }).toList(),  
-                                       onChanged: (value) async{
-                                       if (!mounted)
-                                       return;                                  
+                                       onChanged: (value) async{                                 
                                          select = value;
                                          for (var item in companyContent) {
                                            if(item.companyName==value){
                                              compID = item.id;
-                                           }
-                                           else{
-                                             NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                                            }
                                          }
                                          SharedPreferences prefs = await SharedPreferences.getInstance();
