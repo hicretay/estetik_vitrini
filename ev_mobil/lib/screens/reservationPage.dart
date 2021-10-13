@@ -85,6 +85,9 @@ class _ReservationPageState extends State<ReservationPage> {
     appointmentListFunc();
     companyListFunc();
     homeContentList();
+    WidgetsBinding.instance.addPostFrameCallback((_){ 
+    //code will run when widget rendering complete
+  });
   }
 
   @override
@@ -171,11 +174,12 @@ class _ReservationPageState extends State<ReservationPage> {
                                              NavigationProvider.of(context).setTab(RESERVATION_PAGE);
                                            }
                                          }
-                                         print(companyContent[compID].companyName.toString());
                                          SharedPreferences prefs = await SharedPreferences.getInstance();
                                          userIdData = prefs.getInt("userIdData"); 
-                                         AppointmentObject appointment = AppointmentObject(companyId: companyContent[compID].id,userId: userIdData, companyNameS:value, campaignId: 0);
+                                         AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0);
                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
+                                         print(value);
+                                         print(compID);
                                    
                                        },
                                        )

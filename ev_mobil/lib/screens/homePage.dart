@@ -15,7 +15,6 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -327,7 +326,7 @@ class _HomePageState extends State<HomePage> {
                               progressUHD.dismiss();
                             },
                             //---------------------------------------------------------------------------------------------------------------------------------------------------
-                            //-----------------------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
+                            //--------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
                             onPressedLocation: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show();
@@ -335,9 +334,9 @@ class _HomePageState extends State<HomePage> {
                               progressHUD.dismiss();
                             },
                             //-----------------------------------------------------------------------------------------------------------------------------------------------------
-                            //------------------------------LİKE BUTTON----------------------------------------
+                            //----------------------------------------LİKE BUTTON----------------------------------------
                             likeButton: 
-                            IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
+                            IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
@@ -349,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                             //--------------------------------------------------------------------------------------
                             //----------------------------------------FAVORİTE BUTTON--------------------------------
                             starButton: IconButton(
-                             icon: homeContent[index].favoriStatus ? Icon(Icons.star,size: 26) : Icon(LineIcons.star,size: 26),
+                             icon: homeContent[index].favoriStatus ? Icon(Icons.star,size: 26) :  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
                              onPressed:  ()async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
@@ -359,7 +358,7 @@ class _HomePageState extends State<HomePage> {
                               await  refreshContentStream();
                             },
                            ),
-                           //--------------------------------------------------------------------------------------
+                           //----------------------------------------------------------------------------------------------------------------------
                            homeDetailOntap: () async{
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD.show();
@@ -380,7 +379,7 @@ class _HomePageState extends State<HomePage> {
                               progressUHD.dismiss();
                             },
                           );
-                          //-------------------------------------------------------------------------------------
+                          //-------------------------------------------------------------------------------------------------------------------------
                           }),
                       ),
                     )

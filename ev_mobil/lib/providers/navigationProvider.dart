@@ -47,10 +47,10 @@ class NavigationProvider extends ChangeNotifier {
       scrollController: ScrollController(),
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/homepage.svg",height: 30,width: 30,color: primaryColor,),
+      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor,),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/homepage.svg",height: 30,width: 30,color: primaryColor,),
+        child: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor,),
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
