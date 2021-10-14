@@ -128,10 +128,12 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding),
+                        padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding/2),
                         child: Container(
                           decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
                           child: ListView.separated(
+                            padding: EdgeInsets.all(0),
+                            controller: NavigationProvider.of(context).screens[SEARCH_PAGE].scrollController, 
                             shrinkWrap: true,
                             itemCount: selectedCompanies.length == 0 ? allCompanies.length : selectedCompanies.length,
                             itemBuilder: (BuildContext context, int index){
@@ -194,7 +196,7 @@ class _SearchPageState extends State<SearchPage> {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
-                      height: minSpace,
+                      height: 0,
                       child: Padding(
                         padding: const EdgeInsets.only(right: defaultPadding*3,left: defaultPadding*2),
                         child: Divider(

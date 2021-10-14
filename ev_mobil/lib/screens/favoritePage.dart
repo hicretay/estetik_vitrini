@@ -80,7 +80,6 @@ class _FavoritePageState extends State<FavoritePage> {
                               Align(
                               alignment: Alignment.topRight,
                               child: CircleAvatar(
-                              //iconun çevresini saran yapı tasarımı
                               maxRadius: 20,
                               backgroundColor: Colors.white,
                               child: IconButton(
@@ -91,17 +90,16 @@ class _FavoritePageState extends State<FavoritePage> {
                                   showToast(context, "Sayfa yenilendi");
                                 },
                               ),
-                            ),)
-                            
+                            ))
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                    //---------------------------------------------------
+                    //------------------------------------------------------------------
                   ),
-                    //-----------------------------------------------------------------
+                    //------------------------------------------------------------------
                     //------------------------- Arkaplan containerı---------------------
                     Expanded(
                       child: Container(
@@ -114,6 +112,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           color: primaryColor,
                           backgroundColor: secondaryColor,
                           child: ListView.builder(
+                            padding: EdgeInsets.all(0),
                             itemCount: favoriContent == null ? 0 : favoriContent.length,
                             controller: NavigationProvider.of(context).screens[FAVORITE_PAGE].scrollController, 
                             itemBuilder: (BuildContext context, int index){

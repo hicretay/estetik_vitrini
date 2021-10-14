@@ -96,6 +96,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                           ),
                       child: ListView(
+                        padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
                             ListTileWidget(
@@ -129,10 +130,10 @@ class _SettingsPageState extends State<SettingsPage> {
                             },
                           ), 
                           ListTileWidget(
-                            text: "Ayna Ayna Hakkında",
+                            text: "Estetik Vitrini Hakkında",
                             child: LineIcon(LineIcons.infoCircle,color: white),
                             onTap: (){
-                              showAlert(context, "     Ayna Ayna; güzellik salonu, kuaför ve dövme salonu gibi güzellik merkezlerini arayan, kendisi için en uygun güzellik uygulamaları hakkında bilgi edinmek isteyen, bu konuda rehberliğe ihtiyaç duyan, istediği güzellik ve bakım hizmetini nereden alabileceğine karar verme aşamasında olanların kullanacağı sektörel bir sosyal medya platformudur.\n     Güzellik merkezleri bu platform içinde salonlarını açabilir; salonlarını, hizmetlerini ve tavsiyelerini müşterilerine tanıtabilir.");
+                              showAlert(context, "     Estetik Vitrini; güzellik salonu, kuaför ve dövme salonu gibi güzellik merkezlerini arayan, kendisi için en uygun güzellik uygulamaları hakkında bilgi edinmek isteyen, bu konuda rehberliğe ihtiyaç duyan, istediği güzellik ve bakım hizmetini nereden alabileceğine karar verme aşamasında olanların kullanacağı sektörel bir sosyal medya platformudur.\n     Güzellik merkezleri bu platform içinde salonlarını açabilir; salonlarını, hizmetlerini ve tavsiyelerini müşterilerine tanıtabilir.");
                             },
                           ),
                           ListTileWidget(

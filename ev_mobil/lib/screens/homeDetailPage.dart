@@ -68,7 +68,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     //--------------------Slider Imageları-------------------
     List<dynamic> sliderImg = [];
     for (var item in homeDetailContent.first.contentPictures) {
-      sliderImg.add(NetworkImage(item.cPicture));
+      sliderImg.add(
+        InteractiveViewer(
+          child: Image.network(item.cPicture),
+          scaleEnabled: true,)
+       );
     }   
     //-------------------------------------------------------                 
 
@@ -137,7 +141,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           width: double.infinity, //genişlik: container genişliği
                                           height: deviceHeight(context)*0.3, //container yüksekliği
                                           child: homeDetailContent == null ? circularBasic : // ana sayfa içeriği boş ise circular, ekli görsel sayısı 1 ise Image.network
-                                          sliderImg.length == 1 ? Image.network(homeDetailContent.first.contentPictures.first.cPicture): //  ekli görsel sayısı 1den fazla ise carousel 
+                                          sliderImg.length == 1 ? InteractiveViewer(
+                                            scaleEnabled: true,
+                                            child: Image.network(homeDetailContent.first.contentPictures.first.cPicture)): //  ekli görsel sayısı 1den fazla ise carousel 
                                           Carousel(
                                           borderRadius: true,
                                           radius: Radius.circular(maxSpace),

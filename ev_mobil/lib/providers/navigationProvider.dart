@@ -47,10 +47,10 @@ class NavigationProvider extends ChangeNotifier {
       scrollController: ScrollController(),
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor,),
+      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor,),
+        child: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor),
       ),
       initialRoute: HomePage.route,
       navigatorState: GlobalKey<NavigatorState>(),
@@ -60,11 +60,11 @@ class NavigationProvider extends ChangeNotifier {
     ),
     FAVORITE_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: primaryColor),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child:SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
+        child:SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: primaryColor),
       ),
       child: FavoritePage(),
       initialRoute: FavoritePage.route,
@@ -76,11 +76,11 @@ class NavigationProvider extends ChangeNotifier {
     ),
     RESERVATION_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: primaryColor),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child:SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25),
+        child:SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: primaryColor),
       ),
       child: ReservationPage(),
       initialRoute: ReservationPage.route,
@@ -91,11 +91,11 @@ class NavigationProvider extends ChangeNotifier {
     ),
     SEARCH_PAGE: Screen(  
       scrollController: ScrollController(),  
-      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: primaryColor),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
+        child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: primaryColor),
       ),
       child: SearchPage(),
       initialRoute: SearchPage.route,
@@ -106,11 +106,11 @@ class NavigationProvider extends ChangeNotifier {
     ),
     SETTINGS_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25),
+      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25),
+        child: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
       ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
