@@ -275,11 +275,11 @@ class _ReservationPageState extends State<ReservationPage> {
                                               content: Text("Randevu iptal edilsin mi?",style: TextStyle(fontFamily: contentFont)),
                                               actions: <Widget>[
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                   children: [
                                                     MaterialButton(
                                                       color: primaryColor,
-                                                      child: Text("Evet"),
+                                                      child: Text("Evet",style: TextStyle(color: white)),
                                                       onPressed: ()async{
                                                         final progressHUD = ProgressHUD.of(context);
                                                         progressHUD.show(); 
@@ -294,10 +294,10 @@ class _ReservationPageState extends State<ReservationPage> {
                                                         Navigator.of(context).pop();                          
                                                         progressHUD.dismiss();
                                                         }),
-                                                    SizedBox(width: deviceWidth(context)*0.01),
+                                                    
                                                     MaterialButton(
                                                       color: primaryColor,
-                                                      child: Text("Hayır"),
+                                                      child: Text("Hayır",style: TextStyle(color: white)),
                                                       onPressed: (){
                                                         showToast(context, "Randevu iptal edilmedi!");
                                                         Navigator.of(context).pop();
