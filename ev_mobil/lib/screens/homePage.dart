@@ -144,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Row(children: [
-                          SizedBox(width: deviceWidth(context)*0.6, 
-                          child: Text("Estetik Vitrini", //Büyük Başlık
+                          SizedBox(width: 210, 
+                           child: Text("Estetik Vitrini", //Büyük Başlık
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline4
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                             GestureDetector(
                             child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
                             onTap: (){
-                               NavigationProvider.of(context).setTab(SEARCH_PAGE);
+                              NavigationProvider.of(context).setTab(SEARCH_PAGE);
                             }
                             ),
                             SizedBox(width: deviceWidth(context)*0.02),

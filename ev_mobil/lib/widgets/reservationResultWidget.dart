@@ -53,10 +53,14 @@ class ResevationResultWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: minSpace),
-                        Text(
-                          operation,
-                          style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
-                          textAlign: TextAlign.left,                         
+                        SizedBox(
+                          width: deviceWidth(context)*0.5,
+                          child: Text(
+                            operation,
+                            overflow: TextOverflow.fade,
+                            style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
+                            textAlign: TextAlign.left,                         
+                          ),
                         ),
                       ],
                     ),

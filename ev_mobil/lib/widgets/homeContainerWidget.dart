@@ -82,8 +82,6 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                     ),
                                   ),
                                 ),
-                                //cardText ve alt container arasındaki boşluk
-                               
                         ),
                       ),
                     ),

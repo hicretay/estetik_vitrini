@@ -253,7 +253,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                   color: primaryColor,
                                   backgroundColor: secondaryColor,
                                   child: ListView.builder(
-                                   // physics    : NeverScrollableScrollPhysics(),
+                                   physics    : NeverScrollableScrollPhysics(),
                                     shrinkWrap : true,
                                     itemCount  : appointmentList == null ? 0 : appointmentList.length,
                                     itemBuilder: (BuildContext context, int index){  

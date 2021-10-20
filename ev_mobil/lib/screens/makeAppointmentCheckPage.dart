@@ -123,11 +123,14 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     width:  deviceWidth(context)*0.6,
                     height: deviceWidth(context)*0.17,
                     child: Center(
-                      child: Text(appointment.operationS,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                      child: Padding(
+                        padding: EdgeInsets.all(deviceWidth(context)*0.01),
+                        child: Text(appointment.operationS,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
@@ -190,6 +193,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                   await showToast(context, "Randevu kaydı başarısız!");
                                 }
                                 await appointmentListFunc();
+                                Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);

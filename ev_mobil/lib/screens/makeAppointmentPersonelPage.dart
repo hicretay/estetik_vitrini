@@ -1,5 +1,5 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/makeAppointmentPersonelPage.dart';
+import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -9,37 +9,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
 
-class MakeAppointmentOperationPage extends StatefulWidget {
+class MakeAppointmentPersonelPage extends StatefulWidget {
   final AppointmentObject appointment;
-  final List companyOperation;
-  MakeAppointmentOperationPage({Key key, this.companyOperation, this.appointment}) : super(key: key);
+  MakeAppointmentPersonelPage({Key key, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,appointment: appointment);
+  _MakeAppointmentPersonelPageState createState() => _MakeAppointmentPersonelPageState(appointment: appointment);
 }
 
-class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
+class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPage> {
   AppointmentObject appointment;
   List checkedOperation = [];
   int _checked = -1;
 
-  List companyOperation;
-  _MakeAppointmentOperationPageState({this.companyOperation,this.appointment});
+  //List companyOperation;
+ _MakeAppointmentPersonelPageState({this.appointment});
 
-  Map<dynamic,bool> operationListMap = {};
+ // Map<dynamic,bool> operationListMap = {};
 
-   operationListFunc() {
-    setState(() {
-      for (var item in companyOperation) {
-      Map<dynamic,bool> newItem = {item:false};
-      operationListMap.addEntries(newItem.entries);
-    }
-  });
-}
+//    operationListFunc() {
+//     setState(() {
+//       for (var item in companyOperation) {
+//       Map<dynamic,bool> newItem = {item:false};
+//       operationListMap.addEntries(newItem.entries);
+//     }
+//   });
+// }
   @override
   void initState() { 
     super.initState();
-      operationListFunc();
+     // operationListFunc();
   }
 
   @override
@@ -94,12 +93,12 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                           child: Column(
                             children: [
                           SizedBox(height: defaultPadding),
-                          (companyOperation.isEmpty || companyOperation.length == 0) ? Center(child: Text("Uygun işlem bulunamadı !")) : 
+                          //(companyOperation.isEmpty || companyOperation.length == 0) ? Center(child: Text("Uygun işlem bulunamadı !")) : 
                           ListView.separated(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
                           shrinkWrap: true,
-                          itemCount: companyOperation.length, //_location mapi uzunluğu kadar
+                          itemCount: 3,//companyOperation.length, //_location mapi uzunluğu kadar
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), // yalnızca sol ve sağdan boşluk
                                 //InkWell sarmaladığı widgeta tıklanabilirlik özelliği kazandırdı
@@ -108,11 +107,11 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                  InkWell(
                                 onTap: () {
                                   setState(() {
-                                     _checked = index;
-                                     appointment.operationId =  companyOperation[index].id;
-                                     appointment.operationS =  companyOperation[index].operationName;
-                                     print(appointment.operationId);
-                                     print(appointment.operationS);                                   
+                                    //  _checked = index;
+                                    //  appointment.operationId =  companyOperation[index].id;
+                                    //  appointment.operationS =  companyOperation[index].operationName;
+                                    //  print(appointment.operationId);
+                                    //  print(appointment.operationS);                                   
                                   });
                                 },
                                 child: Container(
@@ -171,7 +170,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                             Center(
                                               child: SizedBox(
                                                 width: deviceWidth(context)*0.7,
-                                                child: Text( companyOperation[index].operationName, 
+                                                child: Text( "deneme",//companyOperation[index].operationName, 
                                                 style    : TextStyle(
                                                 fontSize : 16, // operationların fontu
                                                 color: _checked == index
@@ -209,16 +208,16 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
               bottomNavigationBar: Container(
                 color: Theme.of(context).backgroundColor,
                 child: TextButtonWidget(
-                buttonText: "Personel Seç",
+                buttonText: "Randevu Saatini Seç",
                 onPressed: ()async{
                   final progressHUD = ProgressHUD.of(context);
                   progressHUD.show();
-                  //final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
+                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
                   if(appointment.operationId!=null){              
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentPersonelPage(appointment: appointment,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
                   }
                   else{
-                    showToast(context, "Lütfen bir işlem seçiniz!");
+                    showToast(context, "Lütfen bir personel seçiniz!");
                   }
                   progressHUD.dismiss();
                   }),
