@@ -19,17 +19,6 @@ class ResevationResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-            padding: const EdgeInsets.only(left: defaultPadding),
-            child: Align(
-            alignment: Alignment.topLeft,
-            child: Text(date,     
-            style     : TextStyle(
-            fontWeight: FontWeight.bold,
-            color     : Theme.of(context).hintColor),
-          ),
-        ),
-      ),
         Container(
           color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? lightWhite : darkBg,
           width: double.infinity,

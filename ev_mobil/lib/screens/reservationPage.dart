@@ -91,6 +91,7 @@ class _ReservationPageState extends State<ReservationPage> {
   @override
   Widget build(BuildContext context) {
     //final rootContext = context.findRootAncestorStateOfType<NavigatorState>().context;
+    String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
     return Container(
       color: Colors.transparent,
       child: SafeArea(
@@ -193,8 +194,6 @@ class _ReservationPageState extends State<ReservationPage> {
                           top: Radius.circular(cardCurved),
                           ),
                         ),
-                          child  : SingleChildScrollView(
-                          physics: ScrollPhysics(),
                           child  : Column(
                             children: [
                               Column(
@@ -247,75 +246,87 @@ class _ReservationPageState extends State<ReservationPage> {
                                   ),
                                 ],
                               ),
+
+                                Padding(
+                                padding: const EdgeInsets.only(left: defaultPadding,top: defaultPadding,bottom: defaultPadding),
+                                child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(calendarDate,     
+                                style     : TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color     : Theme.of(context).hintColor),
+                                 )),
+                                ),
                             
-                                RefreshIndicator(
-                                  onRefresh:()=> appointmentListFunc(),
-                                  color: primaryColor,
-                                  backgroundColor: secondaryColor,
-                                  child: ListView.builder(
-                                   physics    : NeverScrollableScrollPhysics(),
-                                    shrinkWrap : true,
-                                    itemCount  : appointmentList == null ? 0 : appointmentList.length,
-                                    itemBuilder: (BuildContext context, int index){  
-                                    return ResevationResultWidget(
-                                    companyName : appointmentList[index].companyName,
-                                    operation   : appointmentList[index].operationName,
-                                    time        : appointmentList[index].appointmentTime,
-                                    date        : appointmentList[index].appointmentDate,
-                                    confirmButton: GestureDetector(child: 
-                                                   Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
-                                                   onTap: (){
-                                                     showToast(context, "Randevu onayı bekleniyor...");
-                                                   }),
-                                    onTap      : ()async{
-                                      showDialog(context: context, builder: (BuildContext context){
-                                        return ProgressHUD(
-                                          child: Builder(builder: (context)=>
-                                              AlertDialog(
-                                              content: Text("Randevu iptal edilsin mi?",style: TextStyle(fontFamily: contentFont)),
-                                              actions: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                  children: [
-                                                    MaterialButton(
-                                                      color: primaryColor,
-                                                      child: Text("Evet",style: TextStyle(color: white)),
-                                                      onPressed: ()async{
-                                                        final progressHUD = ProgressHUD.of(context);
-                                                        progressHUD.show(); 
-                                                        final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
-                                                        if(deleteAppointment.success==true){
-                                                          showToast(context, "Randevu başarıyla iptal edildi!");
-                                                        }
-                                                        else{
-                                                          showToast(context, "Randevu iptal edilemedi!");
-                                                        }
-                                                        await appointmentListFunc();    
-                                                        Navigator.of(context).pop();                          
-                                                        progressHUD.dismiss();
-                                                        }),
-                                                    
-                                                    MaterialButton(
-                                                      color: primaryColor,
-                                                      child: Text("Hayır",style: TextStyle(color: white)),
-                                                      onPressed: (){
-                                                        showToast(context, "Randevu iptal edilmedi!");
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                    ),
-                                                ],)
-                                              ],
+                                Flexible(
+                                  child: RefreshIndicator(
+                                    onRefresh:()=> appointmentListFunc(),
+                                    color: primaryColor,
+                                    backgroundColor: secondaryColor,
+                                    child: ListView.builder(
+                                      padding: EdgeInsets.all(0),
+                                      shrinkWrap : true,
+                                      itemCount  : appointmentList == null ? 0 : appointmentList.length,
+                                      itemBuilder: (BuildContext context, int index){  
+                                      return ResevationResultWidget(
+                                      companyName : appointmentList[index].companyName,
+                                      operation   : appointmentList[index].operationName,
+                                      time        : appointmentList[index].appointmentTime,
+                                      date        : appointmentList[index].appointmentDate,
+                                      confirmButton: GestureDetector(child: 
+                                                     Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
+                                                     onTap: (){
+                                                       showToast(context, "Randevu onayı bekleniyor...");
+                                                     }),
+                                         onTap    : ()async{
+                                        showDialog(context: context, builder: (BuildContext context){
+                                          return ProgressHUD(
+                                            child: Builder(builder: (context)=>
+                                                AlertDialog(
+                                                content: Text("Randevu iptal edilsin mi?",style: TextStyle(fontFamily: contentFont)),
+                                                actions: <Widget>[
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                    children: [
+                                                      MaterialButton(
+                                                        color: primaryColor,
+                                                        child: Text("Evet",style: TextStyle(color: white)),
+                                                        onPressed: ()async{
+                                                          final progressHUD = ProgressHUD.of(context);
+                                                          progressHUD.show(); 
+                                                          final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
+                                                          if(deleteAppointment.success==true){
+                                                            showToast(context, "Randevu başarıyla iptal edildi!");
+                                                          }
+                                                          else{
+                                                            showToast(context, "Randevu iptal edilemedi!");
+                                                          }
+                                                          await appointmentListFunc();    
+                                                          Navigator.of(context).pop();                          
+                                                          progressHUD.dismiss();
+                                                          }),
+                                                      
+                                                      MaterialButton(
+                                                        color: primaryColor,
+                                                        child: Text("Hayır",style: TextStyle(color: white)),
+                                                        onPressed: (){
+                                                          showToast(context, "Randevu iptal edilmedi!");
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                      ),
+                                                  ],)
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      });
-                                    },
-                                  );
-                                  }),
+                                          );
+                                        });
+                                      },
+                                    );
+                                    }),
+                                  ),
                                 ),
                             ],
                           ),
-                        ),
                       ),
                     )
                   ],
