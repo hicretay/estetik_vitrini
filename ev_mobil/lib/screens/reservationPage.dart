@@ -16,8 +16,6 @@ import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
-// ignore: must_be_immutable
 class ReservationPage extends StatefulWidget {
   static const route = "reservationPage";
   ReservationPage({Key key}) : super(key: key);
@@ -246,7 +244,6 @@ class _ReservationPageState extends State<ReservationPage> {
                                   ),
                                 ],
                               ),
-
                                 Padding(
                                 padding: const EdgeInsets.only(left: defaultPadding,top: defaultPadding,bottom: defaultPadding),
                                 child: Align(
