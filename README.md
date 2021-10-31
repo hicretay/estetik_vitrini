@@ -1,6 +1,8 @@
 # Ayna Ayna
 
-Ayna Ayna uygulaması, estetik merkezleri, güzellik merkezleri ve kuaförler gibi firmaların kampanyalarını yayınladığı, randevu alma işlemlerinin sağlandığı bir mobil uygulamadır. Uygulamanın Ekim 2021 tarihlerinde yayınlanması planlanmaktadır.
+Ayna Ayna uygulaması, estetik merkezleri, güzellik merkezleri ve kuaförler gibi firmaların kampanyalarını yayınladığı, randevu alma işlemlerinin sağlandığı bir mobil uygulamadır.
+
+Play Store : https://play.google.com/store/apps/details?id=com.ae.aynaayna&gl=TR
 
 Uygulama Özellikleri 
 -  Ana sayfa akış yönetimi
