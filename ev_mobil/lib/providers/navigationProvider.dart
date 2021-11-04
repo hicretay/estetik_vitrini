@@ -21,8 +21,13 @@ const RESERVATION_PAGE = 2;
 const SEARCH_PAGE = 3;
 const SETTINGS_PAGE = 4;
 
+  Color iconCol;
+
 class NavigationProvider extends ChangeNotifier {
-  static NavigationProvider of(BuildContext context) => Provider.of<NavigationProvider>(context, listen: false);
+  static NavigationProvider of(BuildContext context) { 
+    //iconCol = Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? primaryColor : white;
+    return Provider.of<NavigationProvider>(context, listen: false);
+}
 
   int _currentScreenIndex = HOME_PAGE; // Başlangıç sayfası homePage
   int get currentTabIndex => _currentScreenIndex;
@@ -42,12 +47,13 @@ class NavigationProvider extends ChangeNotifier {
     }
   }
 
+
   final Map<int, Screen> _screens = {
     HOME_PAGE: Screen(
       scrollController: ScrollController(),
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor),
+      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: iconCol),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
         child: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor),
@@ -60,7 +66,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     FAVORITE_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: primaryColor),
+      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: iconCol),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -76,7 +82,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     RESERVATION_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: primaryColor),
+      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: iconCol),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -91,7 +97,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     SEARCH_PAGE: Screen(  
       scrollController: ScrollController(),  
-      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: primaryColor),
+      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: iconCol),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -106,7 +112,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     SETTINGS_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
+      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: iconCol),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -152,7 +158,7 @@ class NavigationProvider extends ChangeNotifier {
   });
   }
 
-  Future<bool> onWillPop(BuildContext context) async {
+  Future<bool> onWillPop(BuildContext context) async { 
     final currentNavigatorState = currentScreen.navigatorState.currentState;
     if (currentNavigatorState.canPop()) {
       currentNavigatorState.pop();

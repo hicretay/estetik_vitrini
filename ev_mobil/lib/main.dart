@@ -25,6 +25,9 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider<ThemeDataProvider>(
+        create: (BuildContext context) => ThemeDataProvider(),
+        child: App()),
       ],
       child: Builder(
         builder: (context) {

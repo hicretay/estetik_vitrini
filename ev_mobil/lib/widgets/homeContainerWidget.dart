@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import '../settings/consts.dart';
@@ -25,8 +26,10 @@ class HomeContainerWidget extends StatefulWidget {
 
 class _HomeContainerWidgetState extends State<HomeContainerWidget> {
   bool checked = false;
+  
   @override
   Widget build(BuildContext context) {
+    final transformationController = TransformationController();
     return Column(
       children: [
         //-----------------------------Postu çevreleyecek container yapısı-------------------------
@@ -56,33 +59,36 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
                   //--------------Resmi çevreyelecek container yapısı------------------
                   child: GestureDetector(
-                    child: ClipRRect(
-                      child: InteractiveViewer(
-                        scaleEnabled: true,
-                        child: Container(
-                         width: deviceWidth(context),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
-                            image: DecorationImage(
-                              fit: BoxFit.scaleDown,
-                              image: CachedNetworkImageProvider(widget.contentPicture),
-                            ),
+                    child: InteractiveViewer(
+                      clipBehavior: Clip.none,
+                      transformationController: transformationController,
+                      onInteractionEnd: (details){
+                        setState(() {
+                          transformationController.toScene(Offset.zero);
+                        });
+                      },
+                      child: Container(
+                       width: deviceWidth(context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
+                          image: DecorationImage(
+                            //fit: BoxFit.scaleDown,
+                            image: CachedNetworkImageProvider(widget.contentPicture),
                           ),
-                          //------------------------------------------------------------------
-                    
-                          //----------------Resim üzerinde yer alacak yapılar-----------------
-                         child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
-                                  child: Padding(padding: EdgeInsets.only(left: maxSpace,bottom: deviceHeight(context)*0.01),
-                                    child: Text(
-                                      widget.cardText, //Kendin için bir şeyler yap metni
-                                      style: TextStyle(
-                                          color: primaryColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
-                                    ),
+                        ),
+                        //------------------------------------------------------------------
+                        //----------------Resim üzerinde yer alacak yapılar-----------------
+                       child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
+                                child: Padding(padding: EdgeInsets.only(left: maxSpace,bottom: deviceHeight(context)*0.01),
+                                  child: Text(
+                                    widget.cardText, //Kendin için bir şeyler yap metni
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
                                   ),
                                 ),
-                        ),
+                              ),
                       ),
                     ),
                     onTap: widget.homeDetailOntap,

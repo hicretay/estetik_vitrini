@@ -2,6 +2,7 @@ import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -195,8 +196,8 @@ class _ReservationPageState extends State<ReservationPage> {
                           child  : Column(
                             children: [
                               Column(
-                                children: 
-                                  [Padding(
+                                children: [ 
+                                    Padding(
                                     padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
                                     child  : TableCalendar(
                                     locale: "tr",
@@ -248,7 +249,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                 padding: const EdgeInsets.only(left: defaultPadding,top: defaultPadding,bottom: defaultPadding),
                                 child: Align(
                                 alignment: Alignment.topLeft,
-                                child: Text(calendarDate,     
+                                child: Text(calendarDate + " Randevu Listesi",     
                                 style     : TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color     : Theme.of(context).hintColor),
@@ -264,6 +265,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                       padding: EdgeInsets.all(0),
                                       shrinkWrap : true,
                                       itemCount  : appointmentList == null ? 0 : appointmentList.length,
+                                      controller: NavigationProvider.of(context).screens[RESERVATION_PAGE].scrollController,
                                       itemBuilder: (BuildContext context, int index){  
                                       return ResevationResultWidget(
                                       companyName : appointmentList[index].companyName,

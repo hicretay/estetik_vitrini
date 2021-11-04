@@ -1,12 +1,14 @@
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
    static const route = "searchPage";
@@ -57,7 +59,7 @@ class _SearchPageState extends State<SearchPage> {
               body: ProgressHUD(
                 child: Builder(builder: (context)=>
                   Container(
-                  color: secondaryColor,
+                  color:  Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ?  secondaryColor: darkBg,
                   child: Padding(
                     padding: EdgeInsets.only(top: deviceHeight(context)*0.03),
                     child: Column(
@@ -85,11 +87,10 @@ class _SearchPageState extends State<SearchPage> {
                                  Flexible(
                                    child: ListTile(
                                    title: TextField(
-                                   //focusNode: nodeFirst,
-                                   //autofocus: true,
                                    controller: teSearch,
                                    decoration: InputDecoration(
                                      hintText: "Ara",
+                                     hintStyle: TextStyle(color: primaryColor),
                                      focusedBorder: InputBorder.none,
                                      enabledBorder: InputBorder.none,
                                      contentPadding: EdgeInsets.all(maxSpace),

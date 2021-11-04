@@ -5,14 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
   backgroundColor: white,
   hintColor: darkBg,
-  fontFamily: "futura_medium_bt"
+  fontFamily: "futura_medium_bt",
 );
 
 ThemeData dark = ThemeData(
   backgroundColor: darkBg,
   hintColor: white,
-  fontFamily: "futura_medium_bt"
-  
+  fontFamily: "futura_medium_bt", 
 );
 
 class ThemeDataProvider with ChangeNotifier{

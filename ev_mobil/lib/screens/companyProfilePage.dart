@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
+import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -7,6 +8,7 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyProfilePage extends StatefulWidget {
@@ -30,7 +32,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
         body: ProgressHUD(
           child: Builder(builder: (context)=>
             BackGroundContainer(
-            colors: backGroundColor1,
+            colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
             child: Column(
               children: [
                 Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -123,7 +125,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                   child: Container(
                     decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),
-                    color: Theme.of(context).backgroundColor),
+                    color: white),
                     child: 
                     SingleChildScrollView(
                       child: Column(children: [

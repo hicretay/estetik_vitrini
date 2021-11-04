@@ -50,7 +50,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   
   _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.companyPhone});
-  
   Future homeDetailRefresh() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
      userIdData = prefs.getInt("userIdData"); 
@@ -64,14 +63,22 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-
+    final transformationController = TransformationController();
     //--------------------Slider Imageları-------------------
     List<dynamic> sliderImg = [];
     for (var item in homeDetailContent.first.contentPictures) {
+      //final transformationController = TransformationController();
       sliderImg.add(
         InteractiveViewer(
-          child: Image.network(item.cPicture),
-          scaleEnabled: true,)
+          clipBehavior: Clip.none,
+          transformationController: transformationController,
+          onInteractionEnd: (details){
+            setState(() {
+              transformationController.toScene(Offset.zero);
+            });
+          },
+          child: Container(
+            child: Image.network(item.cPicture)))
        );
     }   
     //-------------------------------------------------------                 

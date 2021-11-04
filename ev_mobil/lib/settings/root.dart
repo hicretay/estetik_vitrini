@@ -39,7 +39,10 @@ class _RootState extends State<Root> {
             ),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? white : darkBg,
-              selectedItemColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? white: primaryColor,
+              selectedItemColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? Colors.amber: Colors.pink,
+              selectedIconTheme: IconThemeData(color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? Colors.amber: Colors.pink),
+              unselectedIconTheme: IconThemeData(color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? Colors.pink: Colors.amber),
+              //fixedColor: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? Colors.amber: Colors.pink,
               elevation: 10,               
               items: bottomNavigationBarItems,
               currentIndex: provider.currentTabIndex,

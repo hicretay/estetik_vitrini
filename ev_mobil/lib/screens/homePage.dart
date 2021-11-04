@@ -89,7 +89,6 @@ class _HomePageState extends State<HomePage> {
   void initState() { 
     super.initState();
      Provider.of<ThemeDataProvider>(context, listen: false).loadTheme();
-    //getHomeData(isRefresh: true);
     companyStoryList();
     setState(() {});
     ConnectionStatusSingleton connectionStatus = ConnectionStatusSingleton.getInstance();
@@ -139,33 +138,39 @@ class _HomePageState extends State<HomePage> {
                 children: [
                     //-----------------------------BAŞLIK-------------------------------
                     Padding(
-                      padding: EdgeInsets.only(top: deviceHeight(context)*0.05),
+                      padding: EdgeInsets.only(top: deviceWidth(context)*0.1),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Row(children: [
                           SizedBox(width: 210, 
                            child: Text("Estetik Vitrini", //Büyük Başlık
-                                style: Theme.of(context)
+                                style: 
+                                 MediaQuery.of(context).size.height < 810 ? 
+                                 Theme.of(context)
+                                    .textTheme
+                                    .headline5
+                                    .copyWith(color: white, fontFamily: leadingFont)
+                                :
+                                     Theme.of(context)
                                     .textTheme
                                     .headline4
                                     .copyWith(color: white, fontFamily: leadingFont),
-                                maxLines: 2,
                               ),
-                          ),]),
+                          )]),
                           
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                             GestureDetector(
-                            child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25),
+                            child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
                             onTap: (){
                               NavigationProvider.of(context).setTab(SEARCH_PAGE);
                             }
                             ),
                             SizedBox(width: deviceWidth(context)*0.02),
                             GestureDetector(
-                            child:  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
+                            child:  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
                             onTap: (){
                               NavigationProvider.of(context).setTab(FAVORITE_PAGE);
                             }

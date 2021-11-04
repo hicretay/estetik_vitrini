@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/locationPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
@@ -96,6 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                           ),
                       child: ListView(
+                        controller: NavigationProvider.of(context).screens[SETTINGS_PAGE].scrollController,
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
