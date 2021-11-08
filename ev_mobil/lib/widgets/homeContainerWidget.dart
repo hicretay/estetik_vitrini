@@ -68,11 +68,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         });
                       },
                       child: Container(
-                       width: deviceWidth(context),
+                      width: deviceWidth(context),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(maxSpace), //Resmin kenarlarının yuvarlatılması
                           image: DecorationImage(
-                            //fit: BoxFit.scaleDown,
                             image: CachedNetworkImageProvider(widget.contentPicture),
                           ),
                         ),

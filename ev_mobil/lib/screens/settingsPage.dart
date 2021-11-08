@@ -147,15 +147,15 @@ class _SettingsPageState extends State<SettingsPage> {
                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> LocationPage()));
                             },
                           ),
-                          ListTileWidget(
-                            text: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? "Koyu temaya geç" : "Açık temaya geç",
-                            child: Switch(
-                              activeColor: secondaryColor,
-                              onChanged: (_) async{
-                              Provider.of<ThemeDataProvider>(context, listen: false).toggleTheme();
-                            }, 
-                            value: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme),
-                          ), 
+                          // ListTileWidget(
+                          //   text: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? "Koyu temaya geç" : "Açık temaya geç",
+                          //   child: Switch(
+                          //     activeColor: secondaryColor,
+                          //     onChanged: (_) async{
+                          //     Provider.of<ThemeDataProvider>(context, listen: false).toggleTheme();
+                          //   }, 
+                          //   value: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme),
+                          // ), 
                           ListTileWidget(
                             text: "Uygulamadan çıkış yap",
                             child: Icon(Icons.exit_to_app,color: white),

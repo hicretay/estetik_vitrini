@@ -69,16 +69,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     for (var item in homeDetailContent.first.contentPictures) {
       //final transformationController = TransformationController();
       sliderImg.add(
-        InteractiveViewer(
-          clipBehavior: Clip.none,
-          transformationController: transformationController,
-          onInteractionEnd: (details){
-            setState(() {
-              transformationController.toScene(Offset.zero);
-            });
-          },
-          child: Container(
-            child: Image.network(item.cPicture)))
+        Container(
+          child: Image.network(item.cPicture))
        );
     }   
     //-------------------------------------------------------                 
@@ -149,24 +141,41 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           height: deviceHeight(context)*0.3, //container yüksekliği
                                           child: homeDetailContent == null ? circularBasic : // ana sayfa içeriği boş ise circular, ekli görsel sayısı 1 ise Image.network
                                           sliderImg.length == 1 ? InteractiveViewer(
-                                            scaleEnabled: true,
+                                            panEnabled: false,
+                                            clipBehavior: Clip.none,
+                                            transformationController: transformationController,
+                                            onInteractionEnd: (details){
+                                              setState(() {
+                                                transformationController.toScene(Offset.zero);
+                                              });
+                                            },
                                             child: Image.network(homeDetailContent.first.contentPictures.first.cPicture)): //  ekli görsel sayısı 1den fazla ise carousel 
-                                          Carousel(
-                                          borderRadius: true,
-                                          radius: Radius.circular(maxSpace),
-                                          boxFit: BoxFit.contain,
-                                          autoplay: false,
-                                          animationCurve: Curves.bounceInOut, // animasyon efekti
-                                          animationDuration: Duration(milliseconds: 1000), // animasyon süresi
-                                          dotSize: 6.0, //Nokta büyüklüğü
-                                          dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
-                                          dotColor: secondaryColor,
-                                          dotBgColor: Colors.transparent, //Carousel alt bar rengi
-                                          dotPosition: DotPosition.bottomCenter, // Noktaların konumu
-                                          dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
-                                          showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
-                                          indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı                                   
-                                          images: sliderImg)
+                                          InteractiveViewer(
+                                            panEnabled: false,
+                                            clipBehavior: Clip.none,
+                                            transformationController: transformationController,
+                                            onInteractionEnd: (details){
+                                              setState(() {
+                                                transformationController.toScene(Offset.zero);
+                                              });
+                                            },
+                                            child: Carousel(
+                                            borderRadius: true,
+                                            radius: Radius.circular(maxSpace),
+                                            boxFit: BoxFit.contain,
+                                            autoplay: false,
+                                            animationCurve: Curves.bounceInOut, // animasyon efekti
+                                            animationDuration: Duration(milliseconds: 1000), // animasyon süresi
+                                            dotSize: 6.0, //Nokta büyüklüğü
+                                            dotIncreasedColor: primaryColor, // Seçili sayfa noktası rengi
+                                            dotColor: secondaryColor,
+                                            dotBgColor: Colors.transparent, //Carousel alt bar rengi
+                                            dotPosition: DotPosition.bottomCenter, // Noktaların konumu
+                                            dotVerticalPadding: 10.0, //noktaların dikey uzaklığı
+                                            showIndicator: true, // sayfa geçişi noktaları gösterilsin mi = true
+                                            indicatorBgPadding: 7.0, // noktaların Carousel zemininden uzaklığı                                   
+                                            images: sliderImg),
+                                          )
                                     ),
                                   ),
                                 ),

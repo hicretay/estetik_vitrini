@@ -55,3 +55,4 @@ var circularBasic = Center(child: CircularProgressIndicator(backgroundColor: pri
 
 bool isThemeDark = false;
 ThemeData theme = ThemeData();
+Color iconCol;

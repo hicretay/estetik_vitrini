@@ -11,7 +11,7 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
   backgroundColor: darkBg,
   hintColor: white,
-  fontFamily: "futura_medium_bt", 
+  fontFamily: "futura_medium_bt",   
 );
 
 class ThemeDataProvider with ChangeNotifier{
@@ -24,6 +24,7 @@ class ThemeDataProvider with ChangeNotifier{
 
   void toggleTheme(){
     isLightTheme = !isLightTheme;
+    isLightTheme?iconCol=darkBg:iconCol=white;
     saveTheme(isLightTheme);
     notifyListeners();
   }

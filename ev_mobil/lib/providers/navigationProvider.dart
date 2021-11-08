@@ -21,7 +21,6 @@ const RESERVATION_PAGE = 2;
 const SEARCH_PAGE = 3;
 const SETTINGS_PAGE = 4;
 
-  Color iconCol;
 
 class NavigationProvider extends ChangeNotifier {
   static NavigationProvider of(BuildContext context) { 
