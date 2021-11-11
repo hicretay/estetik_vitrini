@@ -1,6 +1,6 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/makeAppointmentPersonelPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
+import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backleadingWidget.dart';
@@ -209,13 +209,13 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
               bottomNavigationBar: Container(
                 color: Theme.of(context).backgroundColor,
                 child: TextButtonWidget(
-                buttonText: "Personel Seç",
+                buttonText: "Saat Seç",
                 onPressed: ()async{
                   final progressHUD = ProgressHUD.of(context);
                   progressHUD.show();
-                  //final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
+                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
                   if(appointment.operationId!=null){              
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentPersonelPage(appointment: appointment,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment))); //MakeAppointmentPersonelPage(appointment: appointment,)
                   }
                   else{
                     showToast(context, "Lütfen bir işlem seçiniz!");
