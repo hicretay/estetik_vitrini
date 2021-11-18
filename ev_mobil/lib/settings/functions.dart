@@ -405,7 +405,7 @@ Future<CompanyProfileJsn> companyListDetailJsnFunc(int companyId) async{
 //------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
-  return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.BOTTOM);
+  return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.CENTER);
 }
 //----------------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------Kullanıcıya Dönüt - Uyarı Dialog Fonksiyonu------------------------------------------------
