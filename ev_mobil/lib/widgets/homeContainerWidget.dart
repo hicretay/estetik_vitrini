@@ -123,12 +123,19 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                   //   onPressed: () {}),
                                   // //---------------------------------------------------------------------------
                                   //------------------------------İLETİŞİM ICONBUTTONI----------------------------
-                                    IconButton(icon: Icon(LineIcons.phone,color: primaryColor),
-                                        onPressed: widget.onPressedPhone),
+                                    IconButton(
+                                      padding: EdgeInsets.all(0),
+                                      icon: Icon(LineIcons.phone,
+                                      color: primaryColor),
+                                      onPressed: widget.onPressedPhone),
                                   //------------------------------------------------------------------------------
                                   //-----------------------------KONUM ICONBUTTONI--------------------------------
-                                    IconButton(icon: Icon(LineIcons.locationArrow,color: primaryColor,size : iconSize),
-                                        onPressed: widget.onPressedLocation)
+                                    IconButton(
+                                      padding: EdgeInsets.all(0),
+                                    icon: Icon(LineIcons.locationArrow,
+                                    color: primaryColor,
+                                    size : iconSize),
+                                    onPressed: widget.onPressedLocation)
                                   //------------------------------------------------------------------------------
                                     ],
                                   ),
@@ -144,7 +151,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                             .bodyText1
                                             .copyWith(color: primaryColor),
                                       ),
-                                      SizedBox(width: minSpace),
+                                      //SizedBox(width: minSpace),
                                       //Buton texti - icon arası boşluk
                                       Icon( LineIcons.arrowRight, // sağa ok ikonu
                                         color: primaryColor,

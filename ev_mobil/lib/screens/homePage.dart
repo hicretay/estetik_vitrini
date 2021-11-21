@@ -140,42 +140,49 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.only(top: deviceWidth(context)*0.1),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(children: [
-                          SizedBox(width: 210, 
-                           child: Text("Estetik Vitrini", //Büyük Başlık
-                                style: 
-                                 MediaQuery.of(context).size.height < 810 ? 
-                                 Theme.of(context)
-                                    .textTheme
-                                    .headline5
-                                    .copyWith(color: white, fontFamily: leadingFont)
-                                :
-                                     Theme.of(context)
-                                    .textTheme
-                                    .headline4
-                                    .copyWith(color: white, fontFamily: leadingFont),
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: maxSpace,right: maxSpace),
+                            child: SizedBox(//width: 210, 
+                             child: Text("Estetik Vitrini", //Büyük Başlık
+                                  style: 
+                                   MediaQuery.of(context).size.height < 810 ? 
+                                   Theme.of(context)
+                                      .textTheme
+                                      .headline5
+                                      .copyWith(color: white, fontFamily: leadingFont)
+                                  :
+                                       Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      .copyWith(color: white, fontFamily: leadingFont),
+                                ),
+                            ),
                           )]),
                           
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                            GestureDetector(
-                            child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
-                            onTap: (){
-                              NavigationProvider.of(context).setTab(SEARCH_PAGE);
-                            }
-                            ),
-                            SizedBox(width: deviceWidth(context)*0.02),
-                            GestureDetector(
-                            child:  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
-                            onTap: (){
-                              NavigationProvider.of(context).setTab(FAVORITE_PAGE);
-                            }
-                            ),
-                          ]),
+                          Padding(
+                            padding: const EdgeInsets.only(left: maxSpace,right: maxSpace),
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.end,
+                              //crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                              GestureDetector(
+                              child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
+                              onTap: (){
+                                NavigationProvider.of(context).setTab(SEARCH_PAGE);
+                              }
+                              ),
+                              SizedBox(width: deviceWidth(context)*0.02),
+                              GestureDetector(
+                              child:  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
+                              onTap: (){
+                                NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                              }
+                              ),
+                            ]),
+                          ),
                         ],
                       ),
                     ),
@@ -342,6 +349,7 @@ class _HomePageState extends State<HomePage> {
                             //----------------------------------------LİKE BUTTON----------------------------------------
                             likeButton: 
                             IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
+                            padding: EdgeInsets.all(0),
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 

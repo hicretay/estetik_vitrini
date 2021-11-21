@@ -62,9 +62,9 @@ class ResevationResultWidget extends StatelessWidget {
                             style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
                           ),
                         ),
-                        SizedBox(width:deviceWidth(context)*0.05),
+                        SizedBox(width:deviceWidth(context)*0.03),
                         confirmButton,
-                        SizedBox(width:deviceWidth(context)*0.05),
+                        SizedBox(width:deviceWidth(context)*0.03),
                         GestureDetector(
                           child: Icon(Icons.clear,size: 18,color: Theme.of(context).hintColor),
                           onTap: onTap,

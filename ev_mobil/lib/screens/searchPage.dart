@@ -186,7 +186,7 @@ class _SearchPageState extends State<SearchPage> {
                         SizedBox(width: deviceWidth(context)*0.03), //başlık iconu - texti arası boşluk
                           
                         SizedBox(
-                              width: deviceWidth(context)*0.63,
+                              width: deviceWidth(context)*0.60,
                               child: Text(
                                   selectedCompanies.length == 0 ?
                                   allCompanies[index].companyName : selectedCompanies[index].companyName,

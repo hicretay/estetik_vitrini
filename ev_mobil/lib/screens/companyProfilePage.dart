@@ -98,18 +98,18 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         ),
                       Row(
                         //crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                         Column(children: [
                         Text("Kampanya",style: TextStyle(color: white)),
                         Text(companyProfile.result.campaignCount.toString(),style: TextStyle(color: white)),
                       ]),
-                      SizedBox(width: deviceWidth(context)*0.1),
+                      SizedBox(width: deviceWidth(context)*0.05),
                         Column(children: [
                         Text("Beğeni",style: TextStyle(color: white)),
                         Text(companyProfile.result.likeCount.toString(),style: TextStyle(color: white)),
                       ]),
-                      SizedBox(width: deviceWidth(context)*0.1),
+                      SizedBox(width: deviceWidth(context)*0.05),
                         Column(children: [
                         Text("Favori",style: TextStyle(color: white)),
                         Text(companyProfile.result.favCount.toString(),style: TextStyle(color: white)),

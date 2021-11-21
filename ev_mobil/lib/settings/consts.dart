@@ -12,6 +12,10 @@ BoxDecoration reservationBoxDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(minCurved),
 );
 
+TextStyle leadingTextStyle = TextStyle(
+  
+);
+
 const primaryColor = Color(0xFF352A4D);
 const secondaryColor = Color(0xFFD4BDD8);
 const tertiaryColor = Color(0xff62C6C7);
