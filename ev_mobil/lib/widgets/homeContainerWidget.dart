@@ -78,8 +78,9 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         //------------------------------------------------------------------
                         //----------------Resim üzerinde yer alacak yapılar-----------------
                        child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
-                                child: Padding(padding: EdgeInsets.only(left: maxSpace,bottom: deviceHeight(context)*0.01),
+                                child: Padding(padding: EdgeInsets.only(bottom: deviceHeight(context)*0.01),
                                   child: Container(
+                                    width: deviceWidth(context),
                                     padding: EdgeInsets.all(minSpace),
                                     decoration: BoxDecoration(
                                       color: Color(0x33D4BDD8),
