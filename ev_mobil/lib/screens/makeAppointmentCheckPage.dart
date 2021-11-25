@@ -97,7 +97,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     operationName: "Tarih",
                     width: deviceWidth(context)*0.6,
                     height: deviceWidth(context)*0.15,
-                    child: Text(appointment.appointmentDate,
+                    child: Text(appointment.appointmentDate != null ? appointment.appointmentDate : "tarih",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -197,7 +197,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
-                                Navigator.pop(context);
+                                //Navigator.pop(context);
                                 //Navigator.pop(context);
                                 progressHUD.dismiss();
                             },

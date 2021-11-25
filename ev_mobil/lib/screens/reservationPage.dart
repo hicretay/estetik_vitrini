@@ -154,8 +154,8 @@ class _ReservationPageState extends State<ReservationPage> {
                        }
                        SharedPreferences prefs = await SharedPreferences.getInstance();
                        userIdData = prefs.getInt("userIdData"); 
-                       AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0);
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
+                       String appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
+                       AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0, appointmentDate: appointmentDate);
                        final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
                        print(value);
