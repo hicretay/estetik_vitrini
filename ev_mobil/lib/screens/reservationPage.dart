@@ -96,6 +96,75 @@ class _ReservationPageState extends State<ReservationPage> {
       child: SafeArea(
         top: false,
         child: Scaffold(
+          floatingActionButton: CircleAvatar(//iconun çevresini saran yapı tasarımı
+          maxRadius: deviceWidth(context)*0.06,
+          backgroundColor: primaryColor,
+          child: IconButton(
+          iconSize: iconSize,
+          icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: white),
+          onPressed: ()async{
+           ///////////////////////////////////////////////////////////////////////
+              //   if (selectedEvents[_selectedDay] != null)
+              //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
+              //  else {
+              //   selectedEvents[_selectedDay] = [
+              //     Event(operation: "islem")
+              //   ];
+              // }
+           showDialog(context: context, builder: (BuildContext context){
+             int compID = -1;
+             return AlertDialog(
+               actions: <Widget>[
+                 Container(
+                   width: deviceWidth(context),
+                   child: 
+                   SearchableDropdown(
+                     menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
+                     closeButton: null,
+                     dialogBox: false,
+                     isCaseSensitiveSearch: false,
+                     style: TextStyle(color: primaryColor),
+                     isExpanded: true,
+                     hint: Center(
+                     child: Text("Randevu alınacak firmayı seçiniz",
+                     textAlign: TextAlign.center,
+                     style    : TextStyle(
+                     fontSize : 18, 
+                     color    :  primaryColor,
+                     )),
+                     ),
+                     value: select,
+                     items: companyContent.map((data){
+                     return DropdownMenuItem(
+                     child: SizedBox(
+                     child: Center(
+                     child: Text(data.companyName, textAlign: TextAlign.center,
+                     style: TextStyle(color: primaryColor, fontSize: 20)),
+                     ),
+                     ),
+                     value: data.companyName);
+                     }).toList(),  
+                     onChanged: (value) async{                                 
+                       select = value;
+                       for (var item in companyContent) {
+                         if(item.companyName==value){
+                           compID = item.id;
+                         }
+                       }
+                       SharedPreferences prefs = await SharedPreferences.getInstance();
+                       userIdData = prefs.getInt("userIdData"); 
+                       AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0);
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
+                       print(value);
+                       print(compID);
+                     },
+                     )
+              )
+            ],
+            );
+          });
+         }),
+       ),
           body: ProgressHUD(
             child: Builder(builder: (context)=>
                 BackGroundContainer(
@@ -112,76 +181,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               .headline4
                               .copyWith(color: white, fontFamily: leadingFont),
                           ),
-                          CircleAvatar(//iconun çevresini saran yapı tasarımı
-                            maxRadius: deviceWidth(context)*0.06,
-                            backgroundColor: Colors.white,
-                            child: IconButton(
-                            iconSize: iconSize,
-                            icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: primaryColor),
-                            onPressed: ()async{
-                             ///////////////////////////////////////////////////////////////////////
-                                //   if (selectedEvents[_selectedDay] != null)
-                                //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
-                                //  else {
-                                //   selectedEvents[_selectedDay] = [
-                                //     Event(operation: "islem")
-                                //   ];
-                                // }
-                             showDialog(context: context, builder: (BuildContext context){
-                               int compID = -1;
-                               return AlertDialog(
-                                 actions: <Widget>[
-                                   Container(
-                                     width: deviceWidth(context),
-                                     child: 
-                                     SearchableDropdown(
-                                       menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
-                                       closeButton: null,
-                                       dialogBox: false,
-                                       isCaseSensitiveSearch: false,
-                                       style: TextStyle(color: primaryColor),
-                                       isExpanded: true,
-                                       hint: Center(
-                                       child: Text("Randevu alınacak firmayı seçiniz",
-                                       textAlign: TextAlign.center,
-                                       style    : TextStyle(
-                                       fontSize : 18, 
-                                       color    :  primaryColor,
-                                       )),
-                                       ),
-                                       value: select,
-                                       items: companyContent.map((data){
-                                       return DropdownMenuItem(
-                                       child: SizedBox(
-                                       child: Center(
-                                       child: Text(data.companyName, textAlign: TextAlign.center,
-                                       style: TextStyle(color: primaryColor, fontSize: 20)),
-                                       ),
-                                       ),
-                                       value: data.companyName);
-                                       }).toList(),  
-                                       onChanged: (value) async{                                 
-                                         select = value;
-                                         for (var item in companyContent) {
-                                           if(item.companyName==value){
-                                             compID = item.id;
-                                           }
-                                         }
-                                         SharedPreferences prefs = await SharedPreferences.getInstance();
-                                         userIdData = prefs.getInt("userIdData"); 
-                                         AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0);
-                                         Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCalendarPage(appointment: appointment)));
-                                         print(value);
-                                         print(compID);
-                                   
-                                       },
-                                       )
-                                )
-                              ],
-                            );
-                          });
-                         }),
-                       ),
+                          
                      ],
                    ),
                  ),

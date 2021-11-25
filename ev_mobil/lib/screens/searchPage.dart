@@ -204,7 +204,8 @@ class _SearchPageState extends State<SearchPage> {
                         final progressUHD = ProgressHUD.of(context);
                         progressUHD.show();
                         final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(selectedCompanies[index].id);
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
+                        //Navigator.push(context, MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
+                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                         progressUHD.dismiss();
                       },
                       );
