@@ -97,21 +97,9 @@ class _ReservationPageState extends State<ReservationPage> {
       child: SafeArea(
         top: false,
         child: Scaffold(
-          floatingActionButton: CircleAvatar(//iconun çevresini saran yapı tasarımı
-          maxRadius: deviceWidth(context)*0.06,
-          backgroundColor: primaryColor,
-          child: IconButton(
-          iconSize: iconSize,
-          icon: FaIcon(FontAwesomeIcons.calendar,size: 18,color: white),
-          onPressed: ()async{
-           ///////////////////////////////////////////////////////////////////////
-              //   if (selectedEvents[_selectedDay] != null)
-              //  selectedEvents[_selectedDay].add( Event(operation: "islem"));
-              //  else {
-              //   selectedEvents[_selectedDay] = [
-              //     Event(operation: "islem")
-              //   ];
-              // }
+          floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: primaryColor,
+            onPressed: ()async{
            showDialog(context: context, builder: (BuildContext context){
              int compID = -1;
              return AlertDialog(
@@ -166,8 +154,9 @@ class _ReservationPageState extends State<ReservationPage> {
             ],
             );
           });
-         }),
-       ),
+         }, 
+          label: Text("Randevu Al"),
+          icon:  FaIcon(FontAwesomeIcons.calendar,size: 18,color: white)),
           body: ProgressHUD(
             child: Builder(builder: (context)=>
                 BackGroundContainer(
