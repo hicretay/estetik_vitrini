@@ -83,7 +83,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                     width: deviceWidth(context),
                                     padding: EdgeInsets.all(minSpace),
                                     decoration: BoxDecoration(
-                                      color: Color(0x33D4BDD8),
+                                      color: secondaryTransparentColor,
                                       borderRadius: BorderRadius.all(Radius.circular(cardCurved))
                                     ),
                                     child: Text(

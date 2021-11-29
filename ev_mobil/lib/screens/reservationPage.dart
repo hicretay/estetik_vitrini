@@ -123,6 +123,7 @@ class _ReservationPageState extends State<ReservationPage> {
                      )),
                      ),
                      value: select,
+
                      items: companyContent.map((data){
                      return DropdownMenuItem(
                      child: SizedBox(
@@ -131,7 +132,8 @@ class _ReservationPageState extends State<ReservationPage> {
                      style: TextStyle(color: primaryColor, fontSize: 20)),
                      ),
                      ),
-                     value: data.companyName);
+                     value: data.companyName
+                     );
                      }).toList(),  
                      onChanged: (value) async{                                 
                        select = value;

@@ -165,6 +165,7 @@ class _LocationPageState extends State<LocationPage> {
                       ),
                       //-----------------------Itamların Listelenmesi----------------------------
                       child: ListView(
+                        padding: EdgeInsets.all(0),
                         children: [
                         SizedBox(height: defaultPadding),
                         Center(
@@ -195,7 +196,7 @@ class _LocationPageState extends State<LocationPage> {
                                               color:  Colors.white,
                                               ),),
                                       ),
-                                      dropdownColor: Colors.transparent,
+                                      dropdownColor: primaryTransparentColor,
                                       value: selection,
                                       items: cities.map((data){
                                         return DropdownMenuItem(
@@ -231,6 +232,7 @@ class _LocationPageState extends State<LocationPage> {
                         builder: (context,snapshot){                                            
                         return  counties.isNotEmpty ? 
                         ListView.separated(
+                        padding: EdgeInsets.all(0),
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
                         shrinkWrap: true,
