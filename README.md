@@ -1,8 +1,8 @@
-# Ayna Ayna
+# Estetik Vitrini
 
 Ayna Ayna uygulaması, estetik merkezleri, güzellik merkezleri ve kuaförler gibi firmaların kampanyalarını yayınladığı, randevu alma işlemlerinin sağlandığı bir mobil uygulamadır.
 
-Play Store : https://play.google.com/store/apps/details?id=com.ae.aynaayna&gl=TR
+Uygulama Play Store ve App Store'da yayınlanmıştır.
 
 Uygulama Özellikleri 
 -  Ana sayfa akış yönetimi
