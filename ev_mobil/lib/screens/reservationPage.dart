@@ -97,68 +97,75 @@ class _ReservationPageState extends State<ReservationPage> {
       child: SafeArea(
         top: false,
         child: Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            backgroundColor: primaryColor,
-            onPressed: ()async{
-           showDialog(context: context, builder: (BuildContext context){
-             int compID = -1;
-             return AlertDialog(
-               actions: <Widget>[
-                 Container(
-                   width: deviceWidth(context),
-                   child: 
-                   SearchableDropdown(
-                     menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
-                     closeButton: null,
-                     dialogBox: false,
-                     isCaseSensitiveSearch: false,
-                     style: TextStyle(color: primaryColor),
-                     isExpanded: true,
-                     hint: Center(
-                     child: Text("Randevu alınacak firmayı seçiniz",
-                     textAlign: TextAlign.center,
-                     style    : TextStyle(
-                     fontSize : 18, 
-                     color    :  primaryColor,
-                     )),
-                     ),
-                     value: select,
-
-                     items: companyContent.map((data){
-                     return DropdownMenuItem(
-                     child: SizedBox(
-                     child: Center(
-                     child: Text(data.companyName, textAlign: TextAlign.center,
-                     style: TextStyle(color: primaryColor, fontSize: 20)),
-                     ),
-                     ),
-                     value: data.companyName
-                     );
-                     }).toList(),  
-                     onChanged: (value) async{                                 
-                       select = value;
-                       for (var item in companyContent) {
-                         if(item.companyName==value){
-                           compID = item.id;
-                         }
-                       }
-                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                       userIdData = prefs.getInt("userIdData"); 
-                       String appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
-                       AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0, appointmentDate: appointmentDate);
-                       final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
-                       print(value);
-                       print(compID);
-                     },
+          resizeToAvoidBottomInset: false,
+          floatingActionButton: SingleChildScrollView(
+            child: FloatingActionButton.extended(
+              backgroundColor: primaryColor,
+              onPressed: ()async{
+             showDialog(context: context, builder: (BuildContext context){
+               int compID = -1;
+               return SingleChildScrollView(
+                 child: AlertDialog(
+                   actions: <Widget>[
+                     SingleChildScrollView(
+                       child: Container(
+                         width: deviceWidth(context),
+                         child: 
+                         SearchableDropdown(
+                           menuConstraints: BoxConstraints.tight(Size.fromHeight(deviceHeight(context)/3)),
+                           closeButton: null,
+                           dialogBox: false,
+                           isCaseSensitiveSearch: false,
+                           style: TextStyle(color: primaryColor),
+                           isExpanded: true,
+                           hint: Center(
+                           child: Text("Randevu alınacak firmayı seçiniz",
+                           textAlign: TextAlign.center,
+                           style    : TextStyle(
+                           fontSize : 18, 
+                           color    :  primaryColor,
+                           )),
+                           ),
+                           value: select,
+                     
+                           items: companyContent.map((data){
+                           return DropdownMenuItem(
+                           child: SingleChildScrollView(
+                             child: Center(
+                             child: Text(data.companyName, textAlign: TextAlign.center,
+                             style: TextStyle(color: primaryColor, fontSize: 20)),
+                             ),
+                           ),
+                           value: data.companyName
+                           );
+                           }).toList(),  
+                           onChanged: (value) async{                                 
+                             select = value;
+                             for (var item in companyContent) {
+                               if(item.companyName==value){
+                                 compID = item.id;
+                               }
+                             }
+                             SharedPreferences prefs = await SharedPreferences.getInstance();
+                             userIdData = prefs.getInt("userIdData"); 
+                             String appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
+                             AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0, appointmentDate: appointmentDate);
+                             final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
+                             print(value);
+                             print(compID);
+                           },
+                           )
+                                   ),
                      )
-              )
-            ],
-            );
-          });
-         }, 
-          label: Text("Randevu Al"),
-          icon:  FaIcon(FontAwesomeIcons.calendar,size: 18,color: white)),
+                             ],
+                             ),
+               );
+            });
+                   }, 
+            label: Text("Randevu Al"),
+            icon:  FaIcon(FontAwesomeIcons.calendar,size: 18,color: white)),
+          ),
           body: ProgressHUD(
             child: Builder(builder: (context)=>
                 BackGroundContainer(
@@ -189,56 +196,52 @@ class _ReservationPageState extends State<ReservationPage> {
                         ),
                           child  : Column(
                             children: [
-                              Column(
-                                children: [ 
-                                    Padding(
-                                    padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
-                                    child  : TableCalendar(
-                                    locale: "tr",
-                                    focusedDay: _focusedDay,
-                                    firstDay: DateTime.utc(2010, 10, 16),
-                                    lastDay: DateTime.utc(2030, 3, 14),
-                                    shouldFillViewport: false,
-                                    startingDayOfWeek: StartingDayOfWeek.monday,
-                                    calendarFormat: CalendarFormat.twoWeeks,
-                                    calendarStyle: CalendarStyle(
-                                      isTodayHighlighted: true,
-                                      selectedDecoration: BoxDecoration(
-                                        color: primaryColor,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(minCurved),
-                                      ),
-                                      outsideDecoration: boxDecoration,
-                                      defaultDecoration: boxDecoration,
-                                      weekendDecoration: boxDecoration,
-                                      defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
-                                      outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
-                                      selectedTextStyle: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                      todayDecoration: BoxDecoration(
-                                        color: secondaryColor,
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(minCurved),
-                                      ),
-                                    ),
-                                    selectedDayPredicate: (day) {
-                                      return isSameDay(_selectedDay, day);
-                                    },
-                                    onDaySelected: (selectedDay, focusedDay) async{
-                                        _selectedDay = selectedDay;
-                                        _focusedDay = focusedDay;   
-                                        await appointmentListFunc();  // randevuları yenileme
-                                    },
-                                    headerStyle: HeaderStyle(
-                                      formatButtonVisible: false,
-                                      titleCentered: true,
-                                    ),
-                                    eventLoader: _getEventsForDay,
+                              Padding(
+                              padding: const EdgeInsets.only(right: maxSpace,left: maxSpace),
+                              child  : TableCalendar(
+                              locale: "tr",
+                              focusedDay: _focusedDay,
+                              firstDay: DateTime.utc(2010, 10, 16),
+                              lastDay: DateTime.utc(2030, 3, 14),
+                              shouldFillViewport: false,
+                              startingDayOfWeek: StartingDayOfWeek.monday,
+                              calendarFormat: CalendarFormat.twoWeeks,
+                              calendarStyle: CalendarStyle(
+                                isTodayHighlighted: true,
+                                selectedDecoration: BoxDecoration(
+                                  color: primaryColor,
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(minCurved),
+                                ),
+                                outsideDecoration: boxDecoration,
+                                defaultDecoration: boxDecoration,
+                                weekendDecoration: boxDecoration,
+                                defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                selectedTextStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                todayDecoration: BoxDecoration(
+                                  color: secondaryColor,
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(minCurved),
+                                ),
+                              ),
+                              selectedDayPredicate: (day) {
+                                return isSameDay(_selectedDay, day);
+                              },
+                              onDaySelected: (selectedDay, focusedDay) async{
+                                  _selectedDay = selectedDay;
+                                  _focusedDay = focusedDay;   
+                                  await appointmentListFunc();  // randevuları yenileme
+                              },
+                              headerStyle: HeaderStyle(
+                                formatButtonVisible: false,
+                                titleCentered: true,
+                              ),
+                              eventLoader: _getEventsForDay,
                                   )
                                   ),
-                                ],
-                              ),
                                 Padding(
                                 padding: const EdgeInsets.only(left: defaultPadding,top: defaultPadding,bottom: defaultPadding),
                                 child: Align(
