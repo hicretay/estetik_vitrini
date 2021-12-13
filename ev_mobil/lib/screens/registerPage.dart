@@ -6,6 +6,7 @@ import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterPage extends StatefulWidget {
   static const route = "/registerPage";
@@ -24,10 +25,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool checkedPrivacy = true;
 
+  var maskFormatter = MaskTextInputFormatter(
+
+    mask: '+90 (###) ### ## ##', 
+    filter: { "#": RegExp(r'[0-9]')},
+    initialText: "+90");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       resizeToAvoidBottomInset: false,
       body: ProgressHUD(
         child: Builder(builder: (context)=>
@@ -79,36 +85,41 @@ class _RegisterPageState extends State<RegisterPage> {
                        //---------------------------Ad-Soyad textField'ı---------------------------------------
                         TextFieldWidget(textEditingController: txtNameSurname,
                         keyboardType: TextInputType.name,
-                        hintText    : "Ad Soyad", //ipucu metni
+                        hintText    : "Ad Soyad*", //ipucu metni
                         obscureText : false, // yazılanlar gizlenmesin
                         ),
                       //-----------------------------Eposta textField'ı----------------------------------------
                         TextFieldWidget(textEditingController: txtEMail,
                         keyboardType: TextInputType.emailAddress,
-                        hintText    : "E-Posta", //ipucu metni
+                        hintText    : "E-Posta*", //ipucu metni
                         obscureText : false, // yazılanlar gizlenmesin
                         ),
                       //-----------------------------Telefon textField'ı--------------------------------------
                         TextFieldWidget(textEditingController: txtTelephone,
                         keyboardType: TextInputType.phone,
-                        hintText    : "Telefon", //ipucu metni
+                        hintText    : "Telefon* (Başında 0 olmadan)", //ipucu metni
                         obscureText : false, // yazılanlar gizlenmesin
+                        inputFormatters: [maskFormatter],
                         ),
                       //-----------------------------Şifre textField'ı----------------------------------------
                         TextFieldWidget(
                         textEditingController: txtPassword,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText : true, // yazılanlar gizlensin
-                        hintText    : "Şifre", //ipucu metni
-                          ),
+                        hintText    : "Şifre*", //ipucu metni
+                        validator: (value) => (value ?? "").length > 2 ? null : "3 'ten küçük olmamalı"
+                        ),
                       //----------------------------Şifre tekrar textField'ı---------------------------------
                         TextFieldWidget(
                         textEditingController: txtPasswordAgain,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText : true, // yazılanlar gizlensin
-                        hintText    : "Şifre tekrar", //ipucu metni
+                        hintText    : "Şifre tekrar*", //ipucu metni
+                        validator: (value) => (value ?? "").length > 2 ? null : "3 'ten küçük olmamalı"
                         ),
                         //-----------------------------------------------------------------------------------
+                        Text("* ile işaretli alanların girilmesi zorunludur"),
+
                         Column(
                           children:[
                             CheckboxListTile(
@@ -117,8 +128,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Text("Gizlilik Sözleşmesini kabul ediyorum",
                             style: TextStyle(color: secondaryColor,
                             decoration: TextDecoration.underline)),
-                             onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> WebViewWidget(locationUrl: "http://aynaayna.biz/gizlilikbildirimi.html")));
+                            onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> WebViewWidget(locationUrl: "https://estetikvitrini.com/privacy.html")));
                               },
                             ),
                             activeColor: secondaryColor,
@@ -135,13 +146,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           color: primaryColor,
                           borderRadius: BorderRadius.circular(30.0),
                           child: MaterialButton(
-                            minWidth: deviceWidth(context) * 0.5, //Buton minimum genişliği
+                            minWidth: deviceWidth(context) * 0.5, 
                             child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                             onPressed: ()async{
+                           
                             final progressUHD = ProgressHUD.of(context);
                             progressUHD.show(); 
                             final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", "");
-                            if(checkedPrivacy == true){
+                           
+                              if(checkedPrivacy == true){
                               if(userAddData.success==true){
                               if(txtPassword.text == txtPasswordAgain.text){
                               Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage())); 

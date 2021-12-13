@@ -1,18 +1,23 @@
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController textEditingController;
   final TextInputType keyboardType;
   final bool obscureText;
+  final List<TextInputFormatter> inputFormatters;
+  final String Function(String) validator;
 
   const TextFieldWidget({
     Key key,
     this.hintText,
     this.textEditingController,
     this.keyboardType,
-    this.obscureText,
+    this.obscureText, 
+    this.inputFormatters,
+    this.validator
   }) : super(key: key);
 
   @override
@@ -22,7 +27,10 @@ class TextFieldWidget extends StatelessWidget {
       child: Container(
         height: deviceHeight(context)*0.07,
         width: deviceWidth(context),
-        child: TextField(
+        child: TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
+          inputFormatters: inputFormatters,
           obscuringCharacter: "*",
           controller: textEditingController,
           keyboardType: keyboardType,
