@@ -169,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               showToast(context, "Gizlilik Sözleşmesini Onaylayınız !"); 
                             }
 
-                            } // mission completed :)
+                            } 
 
                             else{
                               showToast(context, "Eksik Alanları Doldurunuz !"); 
