@@ -87,6 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                                  Flexible(
                                    child: ListTile(
                                    title: TextField(
+                                     cursorColor: primaryColor,
                                    controller: teSearch,
                                    decoration: InputDecoration(
                                      hintText: "Ara",

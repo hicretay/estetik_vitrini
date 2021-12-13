@@ -32,12 +32,11 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
     final transformationController = TransformationController();
     return Column(
       children: [
-        //-----------------------------Postu çevreleyecek container yapısı-------------------------
+        //-----------------------------Postu çevreleyecek container yapısı-----------------------------
         AspectRatio(
           aspectRatio: 1,
           child: Container(
             width: double.infinity, //genişlik: container genişliği kadar
-            //height: 350, //container yüksekliği
             decoration: BoxDecoration(
               color: lightWhite,
               borderRadius: BorderRadius.circular(maxSpace), //container kenarlarının yuvarlatılması
@@ -85,7 +84,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                       width: deviceWidth(context),
                                       padding: EdgeInsets.all(minSpace),
                                       decoration: BoxDecoration(
-                                        color: secondaryTransparentColor,
+                                        color: widget.cardText=="" ? Colors.transparent : secondaryTransparentColor,
                                         borderRadius: BorderRadius.all(Radius.circular(cardCurved))
                                       ),
                                       child: Text(
