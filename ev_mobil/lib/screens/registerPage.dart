@@ -149,26 +149,32 @@ class _RegisterPageState extends State<RegisterPage> {
                             minWidth: deviceWidth(context) * 0.5, 
                             child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                             onPressed: ()async{
-                           
                             final progressUHD = ProgressHUD.of(context);
                             progressUHD.show(); 
-                            final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", "");
-                           
+                            if(txtNameSurname.text != null && txtEMail.text != null && txtTelephone.text != null && txtPassword.text !=null && txtNameSurname.text != "" && txtEMail.text != "" && txtTelephone.text != "" && txtPassword.text !=""){ 
+                            final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", ""); 
                               if(checkedPrivacy == true){
-                              if(userAddData.success==true){
                               if(txtPassword.text == txtPasswordAgain.text){
+                              if(userAddData.success==true) {
                               Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage())); 
                             }
                             else{
-                              showToast(context, "Girilen şifreler birbirinden farklı !");
+                              showToast(context, userAddData.result); 
                             }}
                             else {
-                              showToast(context, userAddData.result);
+                              showToast(context, "Girilen şifreler birbirinden farklı !"); 
                             }
                             }
                             else{
-                              showToast(context, "Gizlilik Sözleşmesini Onaylayınız !");
+                              showToast(context, "Gizlilik Sözleşmesini Onaylayınız !"); 
                             }
+
+                            } // mission completed :)
+
+                            else{
+                              showToast(context, "Eksik Alanları Doldurunuz !"); 
+                            }
+
                             progressUHD.dismiss(); 
                           }),
                         ),
