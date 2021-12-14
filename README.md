@@ -1,6 +1,6 @@
 # Estetik Vitrini
 
-Ayna Ayna uygulaması, estetik merkezleri, güzellik merkezleri ve kuaförler gibi firmaların kampanyalarını yayınladığı, randevu alma işlemlerinin sağlandığı bir mobil uygulamadır.
+Estetik Vitrini uygulaması, estetik merkezleri, güzellik merkezleri ve kuaförler gibi firmaların kampanyalarını yayınladığı, randevu alma işlemlerinin sağlandığı bir mobil uygulamadır.
 
 Uygulama Play Store ve App Store'da yayınlanmıştır.
 
@@ -40,5 +40,6 @@ dependencies:<br>
   pull_to_refresh: ^2.0.0<br>
   colorful_safe_area: ^0.3.0<br>
   
-  https://user-images.githubusercontent.com/46728765/134251518-e3d42843-1708-42b9-b52c-31c12dd02e18.mp4
+  ![estetik](https://user-images.githubusercontent.com/46728765/146072644-1ee38175-85e7-4ca3-844b-d92a30751c72.gif)
+
 
