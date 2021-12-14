@@ -96,10 +96,12 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Text("Giriş",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                                 //-----------------------------GİRİŞ BUTONU ONPRESSEDİ---------------------------------------------
                                 onPressed: ()async{
-                                  String username = txtUsername.text; // Kullanıcı Adı TextField'ının texti = username
-                                  String password = txtPassword.text; // Şifre TextField'ının texti = password
                                   final progressHUD = ProgressHUD.of(context);
                                   progressHUD.show(); 
+                                  String username = txtUsername.text; // Kullanıcı Adı TextField'ının texti = username
+                                  String password = txtPassword.text; // Şifre TextField'ının texti = password
+                                  if(username != "" && password != ""){
+                                  
                                   //--------------------------------USER DATASI DOLDURULMASI---------------------------
                                   final LoginJsn userData = await loginJsnFunc(username, password, false); 
                                   if(userData.success == true){ // Giriş kontrolü, succes
@@ -114,6 +116,11 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                   else{
                                     showAlert(context, "Kullanıcı adı veya şifre yanlış!");
+                                  }
+
+                                  }
+                                  else{
+                                    showAlert(context, "Kullanıcı adı veya şifre boş geçilemez!");
                                   }
 
                                   progressHUD.dismiss(); 

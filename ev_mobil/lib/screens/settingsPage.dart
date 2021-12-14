@@ -4,7 +4,6 @@ import 'package:estetikvitrini/screens/locationPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/listTileWidget.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://aynaayna.biz/lisanssozlesmesi.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
                               progressHUD.dismiss();
                             },
                           ), 
@@ -117,7 +116,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://aynaayna.biz/kullanimsozlesmesi.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/usage.html")));  
                               progressHUD.dismiss();
                             },
                           ),
@@ -127,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://aynaayna.biz/gizlilikbildirimi.html"))); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/privacy.html"))); 
                               progressHUD.dismiss();
                             },
                           ), 
@@ -135,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             text: "Estetik Vitrini Hakkında",
                             child: LineIcon(LineIcons.infoCircle,color: white),
                             onTap: (){
-                              showAlert(context, "     Estetik Vitrini; güzellik salonu, kuaför ve dövme salonu gibi güzellik merkezlerini arayan, kendisi için en uygun güzellik uygulamaları hakkında bilgi edinmek isteyen, bu konuda rehberliğe ihtiyaç duyan, istediği güzellik ve bakım hizmetini nereden alabileceğine karar verme aşamasında olanların kullanacağı sektörel bir sosyal medya platformudur.\n     Güzellik merkezleri bu platform içinde salonlarını açabilir; salonlarını, hizmetlerini ve tavsiyelerini müşterilerine tanıtabilir.");
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/About.html"))); 
                             },
                           ),
                           ListTileWidget(
