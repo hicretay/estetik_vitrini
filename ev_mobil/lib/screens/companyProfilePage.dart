@@ -211,8 +211,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                     onTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);
                                       progressUHD.show(); 
-                                         SharedPreferences prefs = await SharedPreferences.getInstance();
-                                     userIdData = prefs.getInt("userIdData"); 
+                                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                                      userIdData = prefs.getInt("userIdData"); 
                                       final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(companyProfile.result.id, companyProfile.result.campaignList[index].campaingId,userIdData);                        
                                       // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
                                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,

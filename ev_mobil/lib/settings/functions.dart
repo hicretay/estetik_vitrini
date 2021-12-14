@@ -17,6 +17,7 @@ import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/JsnClass/userfavoriAreaJsn.dart';
+import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter/material.dart';
@@ -416,6 +417,32 @@ showToast(BuildContext context, String content){
         actions: <Widget>[
         Row(mainAxisAlignment: MainAxisAlignment.center,
            children: [
+             MaterialButton(
+             color: primaryColor,
+             child: Text("Kapat",style: TextStyle(fontFamily: leadingFont, color: white)), 
+             onPressed: () async{
+               Navigator.of(context).pop();
+          }),
+          ]),
+        ],
+      );
+    });
+  }
+//---------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------ÜYELİK UYARISI DİYALOGU------------------------------------------------------------
+  showNotMemberAlert(BuildContext context) { 
+    return showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(
+        content: Text("Devam etmek için lütfen üye olunuz !", style: TextStyle(fontFamily: contentFont)),
+        actions: <Widget>[
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+           children: [
+             MaterialButton(
+             color: primaryColor,
+             child: Text("Kayıt Ol",style: TextStyle(fontFamily: leadingFont, color: white)), 
+             onPressed: () async{
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
+          }),
              MaterialButton(
              color: primaryColor,
              child: Text("Kapat",style: TextStyle(fontFamily: leadingFont, color: white)), 

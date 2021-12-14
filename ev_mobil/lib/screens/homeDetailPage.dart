@@ -199,10 +199,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 onPressed: () async{
                                                   SharedPreferences prefs = await SharedPreferences.getInstance();
                                                   userIdData = prefs.getInt("userIdData"); 
+                                                  if(userIdData != 0){
                                                   LikeJsn likePostData = await likeJsnFunc(userIdData, campaingId);
                                                   print(likePostData.success);
                                                   print(likePostData.result);
                                                   await homeDetailRefresh();
+                                                  }
+                                                  else{
+                                                    showNotMemberAlert(context);
+                                                  }
                                                 }),
                                               ),
                                             ),
@@ -262,7 +267,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
                                         onPressed: () async{
                                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                                           userIdData = prefs.getInt("userIdData");                              
+                                           userIdData = prefs.getInt("userIdData");  
+                                           if(userIdData != 0){                            
                                             AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: userIdData, companyNameS: companyName, campaignId: campaingId);
                                             final progressHUD = ProgressHUD.of(context);
                                             progressHUD.show(); 
@@ -270,6 +276,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                             progressHUD.dismiss();
                                     
                                           //Buton tıklandığında randevu al sayfasına yönlendirilecek
+                                           }
+                                           else{
+                                              showNotMemberAlert(context);
+                                           }
                                         },
                                         child: Row(
                                           children: [

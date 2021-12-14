@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
@@ -40,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   bool textFieldTapped = false;
   List companyContent;
   int userIdData;
+  bool isLogin;
 
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
@@ -353,10 +356,16 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
+                              //isLogin = prefs.getString("namesurname") != "" || prefs.getString("namesurname") != null ? true : false; 
+                              if(userIdData != 0){//isLogin ==true
                               LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
                               print(likePostData.success);
                               print(likePostData.result);
                               await  refreshContentStream();
+                              }
+                              else{
+                                showNotMemberAlert(context);
+                              }
                             }),
                             //--------------------------------------------------------------------------------------
                             //----------------------------------------FAVORİTE BUTTON--------------------------------
@@ -365,11 +374,17 @@ class _HomePageState extends State<HomePage> {
                              onPressed:  ()async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
+                              if(userIdData != 0){
                               final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
                               print(favoriteAdd.success);
                               print(favoriteAdd.result);
                               await  refreshContentStream();
-                            },
+                            }
+                            else{
+                              showNotMemberAlert(context);
+                            }
+                            }
+                            
                            ),
                            //----------------------------------------------------------------------------------------------------------------------
                            homeDetailOntap: () async{

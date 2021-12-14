@@ -7,6 +7,7 @@ import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:provider/provider.dart';
 
@@ -138,7 +139,39 @@ class _LoginPageState extends State<LoginPage> {
                               padding: const EdgeInsets.only(left: defaultPadding*3,right: defaultPadding*3),
                               child: Divider(height: 2,color: primaryColor,thickness: 0.8,),
                             ),
-                            SizedBox(height: deviceHeight(context)*0.05),
+                            //SizedBox(height: deviceHeight(context)*0.05),
+                            Padding(padding: const EdgeInsets.only(right: defaultPadding*2,left: defaultPadding*2,bottom: minSpace),
+                            child     : Container(
+                            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                            color     : primaryColor),
+                            //--------------------------------------UYE OLMADAN DEVAM ET BUTONU---------------------------------------------
+                            child     : TextButton(
+                            style     : ButtonStyle(),
+                            child     : Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children  : [Text("Üye olmadan devam et",
+                            style     : TextStyle(
+                            color     : darkWhite,
+                            fontSize  : 15,
+                            fontFamily: contentFont)),
+                            FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white)
+                            ]),
+                            onPressed : () async{
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              final LoginJsn userData = await loginJsnFunc("", "", false); 
+                              if(userData.success == true){ // Giriş kontrolü, succes
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.setString("namesurname", userData.result.nameSurname);   
+                              prefs.setInt("userIdData", 0);   
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
+                              showToast(context, "Giriş Başarılı!");
+                              }
+                            },
+                            ),
+                            //-----------------------------------------------------------------------------------------------------------
+                          ),
+                        ),
+
                   //           Row(
                   //             mainAxisAlignment: MainAxisAlignment.center,
                   //             children:[
