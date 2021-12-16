@@ -1,6 +1,7 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/locationPage.dart';
+import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -9,6 +10,7 @@ import 'package:estetikvitrini/widgets/listTileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -53,13 +55,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
                 child: Column(children: [
                   SizedBox(height: deviceHeight(context)*0.05),
+                  BackLeadingWidget(
+                  backColor: primaryColor,
+                ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children:[                    
                       Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: defaultPadding),
+                            padding: const EdgeInsets.only(top: maxSpace),
                             child: Column(
                               children: [Text("Profil",
                               style: Theme.of(context)
@@ -96,13 +101,53 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                           ),
                       child: ListView(
-                        controller: NavigationProvider.of(context).screens[SETTINGS_PAGE].scrollController,
+                        controller: NavigationProvider.of(context).screens[LIKED_PAGE].scrollController,
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
                             ListTileWidget(
+                            text: "Kampanya İşlemleri",
+                            child: FaIcon(FontAwesomeIcons.tags,size: 16,color: white),
+                            onTap: (){
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
+                              progressHUD.dismiss();
+                            },
+                          ),
+                          ListTileWidget(
+                            text: "Gelen Randevular",
+                            child: FaIcon(FontAwesomeIcons.calendarCheck,size: 18,color: white),
+                            onTap: (){
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
+                              progressHUD.dismiss();
+                            },
+                          ),
+                          ListTileWidget(
+                            text: "Firma Bilgileri",
+                            child: FaIcon(FontAwesomeIcons.questionCircle,size: 18,color: white),
+                            onTap: (){
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD.show(); 
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
+                              progressHUD.dismiss();
+                            },
+                          ),
+                            SizedBox(height: maxSpace), //Post altı - divider arası boşluk
+                            Divider(
+                              //İki post arasında yer alan çizgi
+                              indent: 100.0,
+                              endIndent: 100.0,
+                              height: 1,
+                              color: secondaryColor,
+                              thickness: 1.5,
+                            ),
+                            SizedBox(height: minSpace), // Post üstü - divider arası boşluk
+                            ListTileWidget(
                             text: "Lisans Sözleşmesi",
-                            child: LineIcon(LineIcons.fileAlt,color: white),
+                            child: LineIcon(LineIcons.fileContract,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
@@ -110,9 +155,9 @@ class _SettingsPageState extends State<SettingsPage> {
                               progressHUD.dismiss();
                             },
                           ), 
-                           ListTileWidget(
+                          ListTileWidget(
                             text: "Kullanım Sözleşmesi",
-                            child: LineIcon(LineIcons.fileAlt,color: white),
+                            child: LineIcon(LineIcons.fileSignature,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
@@ -122,7 +167,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           ListTileWidget(
                             text: "Gizlilik Bildirimi",
-                            child: LineIcon(LineIcons.fileContract,color: white),
+                            child: LineIcon(LineIcons.file,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
@@ -171,6 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                             progressUHD.dismiss();
                           }),
+                          SizedBox(height: defaultPadding),
                         ],
                       ),
                     ),

@@ -9,7 +9,7 @@ class BackLeadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(defaultPadding),
+    return Padding(padding: const EdgeInsets.all(maxSpace),
       child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

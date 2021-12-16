@@ -9,6 +9,7 @@ import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
+import 'package:estetikvitrini/screens/settingsPage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/settings/connection.dart';
@@ -157,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                                       .headline5
                                       .copyWith(color: white, fontFamily: leadingFont)
                                   :
-                                       Theme.of(context)
+                                      Theme.of(context)
                                       .textTheme
                                       .headline4
                                       .copyWith(color: white, fontFamily: leadingFont),
@@ -172,16 +173,17 @@ class _HomePageState extends State<HomePage> {
                               //crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                               GestureDetector(
-                              child:  SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
+                              child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
                               onTap: (){
                                 NavigationProvider.of(context).setTab(SEARCH_PAGE);
                               }
                               ),
                               SizedBox(width: deviceWidth(context)*0.02),
                               GestureDetector(
-                              child:  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
+                              child:  SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
                               onTap: (){
-                                NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                                //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
+                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> SettingsPage()));
                               }
                               ),
                             ]),

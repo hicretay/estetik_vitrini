@@ -19,7 +19,7 @@ const HOME_PAGE = 0;
 const FAVORITE_PAGE = 1;
 const RESERVATION_PAGE = 2;
 const SEARCH_PAGE = 3;
-const SETTINGS_PAGE = 4;
+const LIKED_PAGE = 4;
 
 
 class NavigationProvider extends ChangeNotifier {
@@ -109,19 +109,19 @@ class NavigationProvider extends ChangeNotifier {
             return MaterialPageRoute(builder: (_) => SearchPage());
       },
     ),
-    SETTINGS_PAGE: Screen(
+    LIKED_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25, color: iconCol),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
+        child: SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25, color: primaryColor),
       ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (_) {
-            return MaterialPageRoute(builder: (_) => SettingsPage());
+            return MaterialPageRoute(builder: (_) => FavoritePage());
       },
     ),
   };
