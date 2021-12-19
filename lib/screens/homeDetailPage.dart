@@ -149,7 +149,11 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 transformationController.toScene(Offset.zero);
                                               });
                                             },
-                                            child: Image.network(homeDetailContent.first.contentPictures.first.cPicture)): //  ekli görsel sayısı 1den fazla ise carousel 
+                                            child: Container(
+                                              decoration: BoxDecoration(image: DecorationImage(
+                                                fit: BoxFit.contain,
+                                                image: NetworkImage(homeDetailContent.first.contentPictures.first.cPicture))),
+                                              )): //  ekli görsel sayısı 1den fazla ise carousel 
                                           InteractiveViewer(
                                             panEnabled: false,
                                             clipBehavior: Clip.none,

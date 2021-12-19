@@ -1,5 +1,8 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/appointmentOperationPage.dart';
+import 'package:estetikvitrini/screens/campaignOperationPage.dart';
+import 'package:estetikvitrini/screens/companyInformationPage.dart';
 import 'package:estetikvitrini/screens/locationPage.dart';
 import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
@@ -111,7 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CampaignOperationPage()));  
                               progressHUD.dismiss();
                             },
                           ),
@@ -121,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> AppointmentOperationPage()));    
                               progressHUD.dismiss();
                             },
                           ),
@@ -131,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyInformationPage()));      
                               progressHUD.dismiss();
                             },
                           ),
