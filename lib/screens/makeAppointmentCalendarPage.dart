@@ -7,6 +7,7 @@ import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -143,7 +144,9 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
             ),
             bottomNavigationBar: Container(
               color: Theme.of(context).backgroundColor,
-              child: TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
+              child: TextButtonWidget(
+                buttonText: "Randevu alınacak işlemi seçiniz",
+                icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
            //-----------------------------Randevu alınacak işlemi seçiniz butonu------------------------------
            onPressed: ()async{
            appointment.appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();

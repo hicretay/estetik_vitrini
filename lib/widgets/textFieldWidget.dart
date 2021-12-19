@@ -23,7 +23,7 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+      padding: const EdgeInsets.only(top: minSpace,right: maxSpace,left: maxSpace),
       child: Container(
         height: deviceHeight(context)*0.07,
         width: deviceWidth(context),
@@ -41,7 +41,7 @@ class TextFieldWidget extends StatelessWidget {
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(cardCurved),
+              borderRadius: BorderRadius.circular(maxSpace),
             ),
             hintText: hintText,
             hintStyle: TextStyle(
@@ -49,7 +49,7 @@ class TextFieldWidget extends StatelessWidget {
               fontSize: 17,
               fontFamily: contentFont
             ),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(maxSpace)),
           ),
         ),
       ),

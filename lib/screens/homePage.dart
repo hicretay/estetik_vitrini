@@ -169,8 +169,6 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.only(left: maxSpace,right: maxSpace),
                             child: Row(
-                              //mainAxisAlignment: MainAxisAlignment.end,
-                              //crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                               GestureDetector(
                               child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),

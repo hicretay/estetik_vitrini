@@ -7,6 +7,7 @@ import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {
@@ -128,6 +129,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
             color: Theme.of(context).backgroundColor,
             child: TextButtonWidget(
             buttonText: "Randevuyu Tamamla",
+            icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
             onPressed: (){
             print(appointment.timeS);
             final progressHUD = ProgressHUD.of(context);

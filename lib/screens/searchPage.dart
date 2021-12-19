@@ -26,6 +26,7 @@ class _SearchPageState extends State<SearchPage> {
 
    Future<CompanyListJsn> allCompaniesList() async{
    final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   if(mounted)
    setState(() {
       allCompanies = companyNewList.result;
    });

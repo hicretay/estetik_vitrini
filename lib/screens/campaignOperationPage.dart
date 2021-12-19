@@ -1,8 +1,10 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 class CampaignOperationPage extends StatefulWidget {
@@ -68,15 +70,159 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                         color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
-              
+                    child: SingleChildScrollView(
+                      child: Column(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: maxSpace),
+                          child: Container(
+                            width: deviceWidth(context),
+                            child: TextButtonWidget(
+                              buttonText: "Yeni Kampanya Oluştur",
+                              onPressed: (){},
+                            ),
+                          ),
+                        ),
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          itemBuilder: (BuildContext context, int index){
+                          return buildCampaignCard(context);
+                        })
+                      ]),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
       ),
-    );
+    ),
+  );
   }
+
+  Padding buildCampaignCard(BuildContext context) {
+    return Padding(
+    padding: const EdgeInsets.all(maxSpace),
+    child: Column(
+    children: [
+      //-----------------------------Postu çevreleyecek container yapısı-----------------------------
+      AspectRatio(
+        aspectRatio: 1.5,
+        child: Material(
+          borderRadius:  BorderRadius.circular(cardCurved),
+          elevation: 10,
+          child: Container(                           
+            width: double.infinity, 
+            decoration: BoxDecoration(
+              color: lightWhite,
+              borderRadius: BorderRadius.circular(cardCurved),
+            ),
+            child: Column(
+              children: [
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                    //--------------Resmi çevreyelecek container yapısı------------------
+                    child: Container(
+                    
+                    width: deviceWidth(context),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(maxSpace),
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/logo.png"),
+                        ),
+                      ),
+                      //------------------------------------------------------------------
+                      //----------------Resim üzerinde yer alacak yapılar-----------------
+                    child: Align(alignment: Alignment.bottomLeft, 
+                              child: Padding(padding: EdgeInsets.only(bottom: deviceHeight(context)*0.01),
+                                child: Container(
+                                  width: deviceWidth(context),
+                                  padding: EdgeInsets.all(minSpace),
+                                  decoration: BoxDecoration(
+                                    color:  secondaryTransparentColor,
+                                  ),
+                                  child: Text(
+                                    "campaign leading", 
+                                    style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+                //-------------------------------------ICONBUTTONLAR PANELİ----------------------------------------
+                Padding(
+                  padding:const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                  child: Container(
+                          width: deviceWidth(context),
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
+                          children: [
+                            //-----------------Butonların yer aldığı container--------------------
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(minSpace),
+                              ),
+                              width: double.infinity, // genişlik: container kadar
+                              height: 40,
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: Row(
+                                      children: [
+                                    //------------------------------SİLME ICONBUTTONI----------------------------
+                                      IconButton(
+                                        padding: EdgeInsets.all(0),
+                                        icon: Icon(LineIcons.trash,
+                                        color: primaryColor),
+                                        onPressed: (){},),
+                                    //------------------------------------------------------------------------------
+                                    //-----------------------------DÜZENLEME ICONBUTTONI--------------------------------
+                                      IconButton(
+                                        padding: EdgeInsets.all(0),
+                                      icon: Icon(LineIcons.edit,
+                                      color: primaryColor,
+                                      size : iconSize),
+                                      onPressed: (){},)
+                                    //------------------------------------------------------------------------------
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            //------------------------------------------------------------------
+                          ],
+                        )),
+                ),
+                //-------------------------------------------------------------------------------------------------
+                // Post ana containeri - resim containerı arası alt boşluk
+                SizedBox(height: maxSpace),
+              ],
+            ),
+          ),
+        ),
+      ),
+      //-----------------------------Post Containerı sonu------------------------------------
+      SizedBox(height: maxSpace), //Post altı - divider arası boşluk
+      Divider(
+        //İki post arasında yer alan çizgi
+        indent: 130.0,
+        endIndent: 130.0,
+        height: 1,
+        color: lightWhite,
+        thickness: 1.5,
+      ),
+      SizedBox(height: maxSpace), // Post üstü - divider arası boşluk
+    ]),
+  );
+ }
 }

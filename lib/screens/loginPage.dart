@@ -135,10 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterPage())); 
                             }, 
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: defaultPadding*3,right: defaultPadding*3),
-                              child: Divider(height: 2,color: primaryColor,thickness: 0.8,),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: defaultPadding*3,right: defaultPadding*3),
+                            //   child: Divider(height: 2,color: primaryColor,thickness: 0.8,),
+                            // ),
                             //SizedBox(height: deviceHeight(context)*0.05),
                             Padding(padding: const EdgeInsets.only(right: defaultPadding*2,left: defaultPadding*2,bottom: minSpace),
                             child     : Container(
