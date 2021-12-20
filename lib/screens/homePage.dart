@@ -215,12 +215,14 @@ class _HomePageState extends State<HomePage> {
                               shape: BoxShape.circle),
                               ),
                             Positioned(
+                              
                               left: deviceWidth(context)*0.005,
                               top: deviceWidth(context)*0.005,
                               child: Container(
                               width: deviceWidth(context)*0.19,
                               height: deviceWidth(context)*0.19,
                               decoration: BoxDecoration(
+                              color: white,
                               border: Border.all(
                               color: primaryColor,
                               width: 3),

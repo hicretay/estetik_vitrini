@@ -147,7 +147,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             },
                           ),
                             SizedBox(height: maxSpace), //Post altı - divider arası boşluk
-                                                    Divider(
+                              Divider(
                               //İki post arasında yer alan çizgi
                               indent: 100.0,
                               endIndent: 100.0,
