@@ -31,13 +31,15 @@ class Result {
         this.country,
         this.city,
         this.county,
+        this.admin,
     });
 
     int id;
     String nameSurname;
-    int country;
-    int city;
-    int county;
+    dynamic country;
+    dynamic city;
+    dynamic county;
+    bool admin;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
@@ -45,6 +47,7 @@ class Result {
         country: json["country"],
         city: json["city"],
         county: json["county"],
+        admin: json["admin"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -53,6 +56,6 @@ class Result {
         "country": country,
         "city": city,
         "county": county,
+        "admin": admin,
     };
 }
-

@@ -27,12 +27,21 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
 
    String user = "";
+   bool isAdmin = false;
 
    getUserName() async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
    String newuser = prefs.getString("namesurname");
    setState(() {
      user = newuser; 
+   });
+   }
+
+   getIsAdmin()async{
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+   bool newAdminData = prefs.getBool("isAdmin");
+   setState(() {
+     isAdmin = newAdminData; 
    });
    }
 
@@ -105,7 +114,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
-                            ListTileWidget(
+                          isAdmin == true ? 
+                            Column(children: [
+                               ListTileWidget(
                             text: "Kampanya İşlemleri",
                             child: FaIcon(FontAwesomeIcons.tags,size: 16,color: white),
                             onTap: (){
@@ -136,7 +147,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             },
                           ),
                             SizedBox(height: maxSpace), //Post altı - divider arası boşluk
-                            Divider(
+                                                    Divider(
                               //İki post arasında yer alan çizgi
                               indent: 100.0,
                               endIndent: 100.0,
@@ -144,6 +155,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: secondaryColor,
                               thickness: 1.5,
                             ),
+                          ]) : Container(),
                             SizedBox(height: minSpace), // Post üstü - divider arası boşluk
                             ListTileWidget(
                             text: "Lisans Sözleşmesi",
@@ -212,7 +224,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             prefs.remove("pass");
                             prefs.remove("userIdData");    
                             prefs.remove("namesurname");  
-                            prefs.remove("isFirstLogin");                  
+                            prefs.remove("isFirstLogin"); 
+                            prefs.remove("isAdmin");               
                             Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>LoginPage()), (route) => false);
                             progressUHD.dismiss();
                           }),

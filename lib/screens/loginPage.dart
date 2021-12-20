@@ -161,6 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                               final LoginJsn userData = await loginJsnFunc("", "", false); 
                               if(userData.success == true){ // Giriş kontrolü, succes
                               SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.setBool("isAdmin", userData.result.admin);
                               prefs.setString("namesurname", userData.result.nameSurname);   
                               prefs.setInt("userIdData", 0);   
                               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
