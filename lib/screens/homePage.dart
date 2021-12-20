@@ -137,7 +137,6 @@ class _HomePageState extends State<HomePage> {
           body: ProgressHUD(
           child: (homeContent != null && companyContent != null) ? Builder(builder: (context)=>              
                 BackGroundContainer(
-                colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
                 child: Stack(
                 children: [
                     //-----------------------------BAŞLIK-------------------------------
@@ -172,14 +171,14 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                               GestureDetector(
-                              child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: Theme.of(context).hintColor),
+                              child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: white),
                               onTap: (){
                                 NavigationProvider.of(context).setTab(SEARCH_PAGE);
                               }
                               ),
                               SizedBox(width: deviceWidth(context)*0.02),
                               GestureDetector(
-                              child:  SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
+                              child:  SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: white),
                               onTap: (){
                                 //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
                                 Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> SettingsPage()));
@@ -204,33 +203,34 @@ class _HomePageState extends State<HomePage> {
                           return Column(children:[
                               GestureDetector(
                               child:  Stack(children:[
-                            Container(                          
+                              Container(
+                              width: deviceWidth(context)*0.20,
+                              height: deviceWidth(context)*0.20,
                               decoration: BoxDecoration(
-                              color: white,
+                              gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0xff63211B), Color(0xffFA6400)]
+                              ),
                               shape: BoxShape.circle),
+                              ),
+                            Positioned(
+                              left: deviceWidth(context)*0.005,
+                              top: deviceWidth(context)*0.005,
                               child: Container(
-                                width: deviceWidth(context)*0.2,
-                                height: deviceWidth(context)*0.2,
-                                decoration: BoxDecoration(
-                                border: Border.all(
-                                color: darkWhite,
-                                width: 3),
-                                shape: BoxShape.circle),
-                                child: Container(
-                                width: deviceWidth(context)*0.21,
-                                height: deviceWidth(context)*0.21,
-                                decoration: BoxDecoration(
-                                border: Border.all(
-                                color: secondaryColor,
-                                width: 2),
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                fit: BoxFit.contain,
-                                image: NetworkImage(companyContent[index].companyLogo),
-                                      ),
+                              width: deviceWidth(context)*0.19,
+                              height: deviceWidth(context)*0.19,
+                              decoration: BoxDecoration(
+                              border: Border.all(
+                              color: primaryColor,
+                              width: 3),
+                              shape: BoxShape.circle,
+                              image: DecorationImage(                     
+                              fit: BoxFit.contain,
+                              image: NetworkImage(companyContent[index].companyLogo),
                                     ),
                                   ),
-                              ),
+                                ),
                             ),
                           ]),
                           //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
@@ -281,10 +281,10 @@ class _HomePageState extends State<HomePage> {
                             body = Text("Yükleme Hatası");
                           }
                           else if(mode == LoadStatus.canLoading){
-                              body = circularBasic;
+                            body = circularBasic;
                           }
                           else if(mode == LoadStatus.noMore){
-                             body = Text("Hepsini gördün");
+                            body = Text("Hepsini gördün");
                           }
                           else{
                             body = circularBasic;
@@ -357,8 +357,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
-                              //isLogin = prefs.getString("namesurname") != "" || prefs.getString("namesurname") != null ? true : false; 
-                              if(userIdData != 0){//isLogin ==true
+                              if(userIdData != 0){
                               LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
                               print(likePostData.success);
                               print(likePostData.result);

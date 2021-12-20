@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -5,8 +6,7 @@ class BackGroundContainer extends StatefulWidget {
   // Uygulama arka planındaki renk geçişini oluşturuyor
   // favoritePage, locationPage sayfalarında kullanıldı
   final Widget child;
-  List<Color> colors;
-  BackGroundContainer({this.child,this.colors});
+  BackGroundContainer({this.child});
 
   @override
   _BackGroundContainerState createState() => _BackGroundContainerState();
@@ -18,11 +18,12 @@ class _BackGroundContainerState extends State<BackGroundContainer> {
     return Container(
       child: widget.child,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.topRight,
-          colors: widget.colors
-        ),
+        color: primaryColor
+        // gradient: LinearGradient(
+        //   begin: Alignment.topLeft,
+        //   end: Alignment.topRight,
+        //   colors: widget.colors
+        // ),
       ),
     );
   }

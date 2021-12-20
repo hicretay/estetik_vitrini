@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -8,7 +7,6 @@ import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 class MakeAppointmentPersonelPage extends StatefulWidget {
   final AppointmentObject appointment;
@@ -50,11 +48,11 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
             Scaffold(
             body:
                 Container(
-                color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
+                color: primaryColor,
                 child: Column(
                   children: [
                      BackLeadingWidget(
-                      backColor: secondaryColor,
+                      backColor: primaryColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),

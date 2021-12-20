@@ -1,5 +1,4 @@
 import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/appointmentOperationPage.dart';
 import 'package:estetikvitrini/screens/campaignOperationPage.dart';
 import 'package:estetikvitrini/screens/companyInformationPage.dart';
@@ -16,7 +15,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -55,7 +53,6 @@ class _SettingsPageState extends State<SettingsPage> {
           body: ProgressHUD(
             child: Builder(builder:(context)=>
                 BackGroundContainer(
-                colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
                 child: Column(children: [
                   SizedBox(height: deviceHeight(context)*0.05),
                   BackLeadingWidget(

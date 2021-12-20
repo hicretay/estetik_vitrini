@@ -1,6 +1,5 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -8,7 +7,6 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyProfilePage extends StatefulWidget {
@@ -32,7 +30,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
         body: ProgressHUD(
           child: Builder(builder: (context)=>
             BackGroundContainer(
-            colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
             child: Column(
               children: [
                 Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -102,16 +99,19 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         children: [
                         Column(children: [
                         Text("Kampanya",style: TextStyle(color: white)),
+                        SizedBox(height: deviceHeight(context)*0.01),
                         Text(companyProfile.result.campaignCount.toString(),style: TextStyle(color: white)),
                       ]),
                       SizedBox(width: deviceWidth(context)*0.05),
                         Column(children: [
                         Text("Beğeni",style: TextStyle(color: white)),
+                        SizedBox(height: deviceHeight(context)*0.01),
                         Text(companyProfile.result.likeCount.toString(),style: TextStyle(color: white)),
                       ]),
                       SizedBox(width: deviceWidth(context)*0.05),
                         Column(children: [
                         Text("Favori",style: TextStyle(color: white)),
+                        SizedBox(height: deviceHeight(context)*0.01),
                         Text(companyProfile.result.favCount.toString(),style: TextStyle(color: white)),
                       ])
                        ],

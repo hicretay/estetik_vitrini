@@ -55,7 +55,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
               child: Column(
                 children: [
                   BackLeadingWidget(
-                    backColor: secondaryColor,
+                    backColor: primaryColor,
                   ),
                   Padding(padding: const EdgeInsets.only(left: 20),
                     child: Column(

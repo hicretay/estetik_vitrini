@@ -1,4 +1,3 @@
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/newCampaignPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -6,7 +5,6 @@ import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 
 class CampaignOperationPage extends StatefulWidget {
   CampaignOperationPage({Key key}) : super(key: key);
@@ -23,7 +21,6 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
         body: ProgressHUD(
         child: Builder(builder: (context)=>
               BackGroundContainer(
-              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(
               children: [
                 Padding(padding: const EdgeInsets.all(maxSpace),

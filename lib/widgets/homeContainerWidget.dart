@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import '../settings/consts.dart';
 import 'leadingRowWidget.dart';
@@ -70,10 +71,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: minSpace, right: minSpace),
                           child: AspectRatio(
-                            aspectRatio: 1.77,
+                            aspectRatio: 16/9,
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(maxSpace),
+                                borderRadius:  BorderRadius.vertical(top: Radius.circular(maxSpace)),
                                 image: DecorationImage(
                                   fit: BoxFit.fitWidth,
                                   image: CachedNetworkImageProvider(widget.contentPicture),
@@ -99,6 +100,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                       child: Text(
                         widget.cardText, 
                         style: TextStyle(
+                          fontFamily: contentFont,
                             color: primaryColor,
                             fontSize: 20),
                       ),
@@ -143,9 +145,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                       //-----------------------------KONUM ICONBUTTONI--------------------------------
                                         IconButton(
                                           padding: EdgeInsets.all(0),
-                                        icon: Icon(LineIcons.locationArrow,
-                                        color: primaryColor,
-                                        size : iconSize),
+                                        icon: SvgPicture.asset("assets/icons/pin.svg",height: 22,width: 22,color: primaryColor),
                                         onPressed: widget.onPressedLocation)
                                       //------------------------------------------------------------------------------
                                         ],

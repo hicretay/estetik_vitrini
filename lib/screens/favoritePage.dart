@@ -1,7 +1,6 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -13,7 +12,6 @@ import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,7 +55,6 @@ class _FavoritePageState extends State<FavoritePage> {
           body: ProgressHUD(
             child: Builder(builder: (context)=>
                 BackGroundContainer(
-                colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
                 child: Column(        
                   children: [
                   Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -104,7 +101,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     Expanded(
                       child: Container(
                           decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
+                          color: primaryColor,
                           borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                         ),
                         child: RefreshIndicator(

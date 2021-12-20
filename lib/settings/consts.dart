@@ -16,7 +16,7 @@ TextStyle leadingTextStyle = TextStyle(
   
 );
 
-const primaryColor = Color(0xFF352A4D);
+const primaryColor = Color(0xFF141414);
 const primaryTransparentColor = Color(0x80352A4D);
 const secondaryColor = Color(0xFFD4BDD8);
 const secondaryTransparentColor = Color(0x33D4BDD8);
@@ -33,8 +33,8 @@ const backGroundColor3 = [darkWhite, darkWhite];
 const backGroundColorDark = [darkBg, darkBg];
 
 const leadingFont = "futura_light_bt";
-const contentFont = "futura_medium_bt";
-const headerFont = "futura_medium_bt";
+const contentFont = "futura_light_bt";
+const headerFont = "futura_light_bt";
 
 deviceHeight(BuildContext context)=>
  MediaQuery.of(context).size.height;

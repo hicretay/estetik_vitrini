@@ -71,7 +71,6 @@ class _LocationPageState extends State<LocationPage> {
         body  : ProgressHUD(
           child: Builder(builder: (context)=>
             BackGroundContainer(
-            colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
             child : Column(
                 children: [
                   Padding(padding: const EdgeInsets.all(defaultPadding),
