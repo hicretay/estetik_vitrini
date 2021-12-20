@@ -52,7 +52,7 @@ class NavigationProvider extends ChangeNotifier {
       scrollController: ScrollController(),
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: iconCol),
+      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: white),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
         child: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor),
@@ -65,7 +65,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     FAVORITE_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -81,7 +81,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     RESERVATION_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -96,7 +96,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     SEARCH_PAGE: Screen(  
       scrollController: ScrollController(),  
-      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -111,7 +111,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     LIKED_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,

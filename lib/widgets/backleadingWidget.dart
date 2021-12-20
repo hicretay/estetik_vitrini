@@ -28,7 +28,7 @@ class BackLeadingWidget extends StatelessWidget {
             Text("estetik vitrini",
             style     : TextStyle(
             fontFamily: leadingFont, 
-            fontSize  : 25, 
+            fontSize  : 30, 
             color     : Colors.white),
             ),
           ],

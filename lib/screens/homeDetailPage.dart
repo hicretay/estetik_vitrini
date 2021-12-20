@@ -67,9 +67,16 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     for (var item in homeDetailContent.first.contentPictures) {
       //final transformationController = TransformationController();
       sliderImg.add(
-        Container(
-          child: Image.network(item.cPicture))
-       );
+        AspectRatio(
+          aspectRatio: 16/9,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: NetworkImage(item.cPicture)),
+              borderRadius: BorderRadius.all(Radius.circular(maxSpace))),),
+        )
+      );
     }   
     //-------------------------------------------------------                 
 
@@ -88,7 +95,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("Kampanyalar", //Büyük Başlık
+                          child: Text("kampanyalar", //Büyük Başlık
                           style: Theme.of(context)
                               .textTheme
                               .headline4
@@ -146,11 +153,16 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 transformationController.toScene(Offset.zero);
                                               });
                                             },
-                                            child: Container(
-                                              decoration: BoxDecoration(image: DecorationImage(
-                                                fit: BoxFit.contain,
-                                                image: NetworkImage(homeDetailContent.first.contentPictures.first.cPicture))),
-                                              )): //  ekli görsel sayısı 1den fazla ise carousel 
+                                            child: AspectRatio(
+                                              aspectRatio: 16/9,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.all(Radius.circular(maxSpace)),
+                                                  image: DecorationImage(
+                                                  fit: BoxFit.fitWidth,
+                                                  image: NetworkImage(homeDetailContent.first.contentPictures.first.cPicture))),
+                                                ),
+                                            )): //  ekli görsel sayısı 1den fazla ise carousel 
                                           InteractiveViewer(
                                             panEnabled: false,
                                             clipBehavior: Clip.none,
@@ -163,7 +175,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                             child: Carousel(
                                             borderRadius: true,
                                             radius: Radius.circular(maxSpace),
-                                            boxFit: BoxFit.contain,
+                                            boxFit: BoxFit.fitWidth,
                                             autoplay: false,
                                             animationCurve: Curves.bounceInOut, // animasyon efekti
                                             animationDuration: Duration(milliseconds: 1000), // animasyon süresi

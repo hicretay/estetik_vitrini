@@ -18,8 +18,8 @@ TextStyle leadingTextStyle = TextStyle(
 
 const primaryColor = Color(0xFF141414);
 const primaryTransparentColor = Color(0x80352A4D);
-const secondaryColor = Color(0xFFD4BDD8);
-const secondaryTransparentColor = Color(0x33D4BDD8);
+const secondaryColor = Color(0xFF9C7BAD);
+const secondaryTransparentColor = Color(0x339C7BAD);
 const tertiaryColor = Color(0xff62C6C7);
 const darkWhite = Color(0xffE0E1E1);
 const lightWhite = Color(0xffF4F4F4);
@@ -57,7 +57,10 @@ const iconSize = 25.0;
 int globalCompanyId = 1;
 dynamic globalHomeContentId;
 
-var circularBasic = Center(child: CircularProgressIndicator(backgroundColor: primaryColor,valueColor: AlwaysStoppedAnimation<Color>(secondaryColor)));
+var circularBasic = Center(child: Padding(
+  padding: const EdgeInsets.all(maxSpace),
+  child:   CircularProgressIndicator(backgroundColor: primaryColor,valueColor: AlwaysStoppedAnimation<Color>(secondaryColor)),
+));
 
 bool isThemeDark = false;
 ThemeData theme = ThemeData();

@@ -143,7 +143,7 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding/2),
+                            padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace/2),
                             child: Container(
                               decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
                               child: ListView.separated(

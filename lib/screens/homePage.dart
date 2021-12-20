@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Row(children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: maxSpace,right: defaultPadding),
+                            padding: const EdgeInsets.only(left: defaultPadding),
                             child: SizedBox( 
                              child: Text("estetik vitrini", //Büyük Başlık
                                   style: 
@@ -171,14 +171,14 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                               GestureDetector(
-                              child: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: white),
+                              child: SvgPicture.asset("assets/icons/search.svg",height: 27,width: 27, color: white),
                               onTap: (){
                                 NavigationProvider.of(context).setTab(SEARCH_PAGE);
                               }
                               ),
                               SizedBox(width: deviceWidth(context)*0.02),
                               GestureDetector(
-                              child:  SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: white),
+                              child:  SvgPicture.asset("assets/icons/settings.svg",height: 27,width: 27, color: white),
                               onTap: (){
                                 //NavigationProvider.of(context).setTab(FAVORITE_PAGE);
                                 Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> SettingsPage()));

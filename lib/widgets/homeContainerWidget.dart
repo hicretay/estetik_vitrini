@@ -119,7 +119,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(minSpace),
+                                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(maxSpace)),
                                 ),
                                 width: double.infinity, // genişlik: container kadar
                                 height: 40,
