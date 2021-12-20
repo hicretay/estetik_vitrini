@@ -1,4 +1,5 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
+import 'package:estetikvitrini/screens/newCampaignPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
@@ -78,7 +79,9 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                             width: deviceWidth(context),
                             child: TextButtonWidget(
                               buttonText: "Yeni Kampanya Oluştur",
-                              onPressed: (){},
+                              onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>NewCampaignPage()));
+                              },
                             ),
                           ),
                         ),
@@ -108,12 +111,12 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
     child: Column(
     children: [
       //-----------------------------Postu çevreleyecek container yapısı-----------------------------
-      AspectRatio(
-        aspectRatio: 1.5,
-        child: Material(
-          borderRadius:  BorderRadius.circular(cardCurved),
-          elevation: 10,
-          child: Container(                           
+            AspectRatio(
+            aspectRatio: 1.5,
+            child: Material(
+            borderRadius:  BorderRadius.circular(cardCurved),
+            elevation: 10,
+            child: Container(                           
             width: double.infinity, 
             decoration: BoxDecoration(
               color: lightWhite,
@@ -135,93 +138,81 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                         ),
                       ),
                       //------------------------------------------------------------------
-                      //----------------Resim üzerinde yer alacak yapılar-----------------
-                    child: Align(alignment: Alignment.bottomLeft, 
-                              child: Padding(padding: EdgeInsets.only(bottom: deviceHeight(context)*0.01),
-                                child: Container(
-                                  width: deviceWidth(context),
-                                  padding: EdgeInsets.all(minSpace),
-                                  decoration: BoxDecoration(
-                                    color:  secondaryTransparentColor,
-                                  ),
-                                  child: Text(
-                                    "campaign leading", 
-                                    style: TextStyle(
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
                     ),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                  child: Align(alignment: Alignment.bottomLeft, 
+                  child: Container(
+                    width: deviceWidth(context),
+                    padding: EdgeInsets.all(minSpace),
+                    decoration: BoxDecoration(
+                      color:  secondaryTransparentColor,
+                    ),
+                    child: Text(
+                      "campaign leading", 
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
+                  ),
+                 ),
                 ),
                 //-------------------------------------ICONBUTTONLAR PANELİ----------------------------------------
                 Padding(
                   padding:const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
                   child: Container(
-                          width: deviceWidth(context),
-                          child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
-                          children: [
-                            //-----------------Butonların yer aldığı container--------------------
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(minSpace),
-                              ),
-                              width: double.infinity, // genişlik: container kadar
-                              height: 40,
-                              child: Row(
-                                children: [
-                                  Flexible(
-                                    child: Row(
-                                      children: [
-                                    //------------------------------SİLME ICONBUTTONI----------------------------
-                                      IconButton(
-                                        padding: EdgeInsets.all(0),
-                                        icon: Icon(LineIcons.trash,
-                                        color: primaryColor),
-                                        onPressed: (){},),
-                                    //------------------------------------------------------------------------------
-                                    //-----------------------------DÜZENLEME ICONBUTTONI--------------------------------
-                                      IconButton(
-                                        padding: EdgeInsets.all(0),
-                                      icon: Icon(LineIcons.edit,
-                                      color: primaryColor,
-                                      size : iconSize),
-                                      onPressed: (){},)
-                                    //------------------------------------------------------------------------------
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                  width: deviceWidth(context),
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
+                  children: [
+                    //-----------------Butonların yer aldığı container--------------------
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(minSpace),
+                      ),
+                      width: double.infinity, // genişlik: container kadar
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Row(
+                              children: [
+                            //------------------------------SİLME ICONBUTTONI----------------------------
+                              IconButton(
+                                padding: EdgeInsets.all(0),
+                                icon: Icon(LineIcons.trash,
+                                color: primaryColor),
+                                onPressed: (){},),
+                            //------------------------------------------------------------------------------
+                            //-----------------------------DÜZENLEME ICONBUTTONI--------------------------------
+                              IconButton(
+                                padding: EdgeInsets.all(0),
+                              icon: Icon(LineIcons.edit,
+                              color: primaryColor,
+                              size : iconSize),
+                              onPressed: (){},)
+                            //------------------------------------------------------------------------------
+                              ],
                             ),
-                            //------------------------------------------------------------------
-                          ],
-                        )),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //------------------------------------------------------------------
+                  ],
+                )),
                 ),
                 //-------------------------------------------------------------------------------------------------
-                // Post ana containeri - resim containerı arası alt boşluk
                 SizedBox(height: maxSpace),
               ],
             ),
           ),
         ),
       ),
-      //-----------------------------Post Containerı sonu------------------------------------
-      SizedBox(height: maxSpace), //Post altı - divider arası boşluk
-      Divider(
-        //İki post arasında yer alan çizgi
-        indent: 130.0,
-        endIndent: 130.0,
-        height: 1,
-        color: lightWhite,
-        thickness: 1.5,
-      ),
-      SizedBox(height: maxSpace), // Post üstü - divider arası boşluk
     ]),
   );
  }

@@ -144,30 +144,31 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.only(top: deviceWidth(context)*0.1),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: maxSpace,right: maxSpace),
-                            child: SizedBox(//width: 210, 
-                             child: Text("Estetik Vitrini", //Büyük Başlık
+                            padding: const EdgeInsets.only(left: maxSpace,right: defaultPadding),
+                            child: SizedBox( 
+                             child: Text("estetik vitrini", //Büyük Başlık
                                   style: 
                                    MediaQuery.of(context).size.height < 810 ? 
                                    Theme.of(context)
                                       .textTheme
-                                      .headline5
+                                      .headline4
                                       .copyWith(color: white, fontFamily: leadingFont)
                                   :
                                       Theme.of(context)
                                       .textTheme
-                                      .headline4
+                                      .headline3
                                       .copyWith(color: white, fontFamily: leadingFont),
                                 ),
                             ),
                           )]),
                           
                           Padding(
-                            padding: const EdgeInsets.only(left: maxSpace,right: maxSpace),
+                            padding: const EdgeInsets.only(left: 0,right: maxSpace),
                             child: Row(
                               children: [
                               GestureDetector(
@@ -192,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                     //------------------------------------------------------------------
                     //---------------------------Story Paneli---------------------------
                     Padding(
-                      padding: EdgeInsets.only(left: maxSpace, right: maxSpace, top: 78),
+                      padding: EdgeInsets.only(left: maxSpace, right: maxSpace, top: 88),
                       child: ListView.separated(
                         shrinkWrap: true,
                         itemCount: companyContent.length,
@@ -260,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                     //--------------------------------------------------------------------------------------------
                     //------------------------------------Anasayfa Postları----------------------------------------
                     Padding(
-                      padding: EdgeInsets.only(top:78+deviceWidth(context)*0.2+20),
+                      padding: EdgeInsets.only(top:88+deviceWidth(context)*0.2+20),
                       child: SmartRefresher(                     
                         controller: refreshController,
                         enablePullUp: true,
@@ -351,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                             //-----------------------------------------------------------------------------------------------------------------------------------------------------
                             //----------------------------------------LİKE BUTTON----------------------------------------
                             likeButton: 
-                            IconButton( icon: homeContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
+                            IconButton( icon: homeContent[index].liked ?  SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor,) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
                             padding: EdgeInsets.all(0),
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -370,7 +371,7 @@ class _HomePageState extends State<HomePage> {
                             //--------------------------------------------------------------------------------------
                             //----------------------------------------FAVORİTE BUTTON--------------------------------
                             starButton: IconButton(
-                             icon: homeContent[index].favoriStatus ? Icon(Icons.star,size: 26) :  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
+                             icon: homeContent[index].favoriStatus ? SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: primaryColor)  :  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
                              onPressed:  ()async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 

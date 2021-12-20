@@ -25,7 +25,7 @@ class BackLeadingWidget extends StatelessWidget {
               ),
             ),
             SizedBox(width: maxSpace),
-            Text("Estetik Vitrini",
+            Text("estetik vitrini",
             style     : TextStyle(
             fontFamily: leadingFont, 
             fontSize  : 25, 

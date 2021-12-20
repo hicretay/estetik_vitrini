@@ -70,7 +70,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Favori\nSalonlar", //Büyük Başlık
+                              Text("favori salonlar", //Büyük Başlık
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline3

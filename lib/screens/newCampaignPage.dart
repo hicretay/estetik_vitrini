@@ -1,6 +1,8 @@
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/widgets/textButtonWidget.dart';
+import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ class NewCampaignPage extends StatefulWidget {
 }
 
 class _NewCampaignPageState extends State<NewCampaignPage> {
+  TextEditingController teLeading = TextEditingController();
   @override
   Widget build(BuildContext context) {
         return SafeArea(
@@ -39,7 +42,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                         ),
                       ),
                       SizedBox(width: maxSpace),
-                      Text("Firma Bilgileri",
+                      Text("Yeni Kampanya Olustur",
                       style     : TextStyle(
                       fontFamily: leadingFont, 
                       fontSize  : 25, 
@@ -68,7 +71,63 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                         color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
-              
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                            padding: const EdgeInsets.only(top: maxSpace),
+                            child: Container(
+                            width: deviceWidth(context),
+                            child: TextButtonWidget(
+                            buttonText: "Dosya Seç",
+                            onPressed: (){},
+                               ),
+                              ),
+                            ),
+                             TextFieldWidget(
+                             hintText: "Bir Başlık Giriniz",
+                             obscureText: false,
+                             inputFormatters: [],
+                             keyboardType: TextInputType.text,
+                             textEditingController: teLeading,
+                           ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: minSpace,right: maxSpace,left: maxSpace),
+                              child: TextField(   
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: teLeading,
+                              cursorColor: primaryColor,
+                              style: TextStyle(color: primaryColor, fontSize: 18),
+                              decoration: InputDecoration(
+                              hintText: "Kampanya İçeriği",
+                              hintStyle: TextStyle(
+                              color: Colors.black38,
+                              fontSize: 17,
+                              fontFamily: contentFont),
+                              contentPadding: EdgeInsets.symmetric(vertical: deviceHeight(context)*0.07, horizontal: maxSpace),
+                              border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(maxSpace),
+                               ),
+                              focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(maxSpace),
+                               ),
+                              ),
+                              ),
+                            ),
+                            Padding(
+                            padding: const EdgeInsets.only(top: maxSpace),
+                            child: Container(
+                            width: deviceWidth(context),
+                            child: TextButtonWidget(
+                            buttonText: "Kampanyayı Kaydet",
+                            onPressed: (){},
+                              ),
+                             ),
+                           ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],

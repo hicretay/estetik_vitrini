@@ -58,57 +58,56 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                   ),
                   Flexible(
                     //resim containerının yalnızca sağ ve sol boşluk veren paddingi
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
-                      //--------------Resmi çevreyelecek container yapısı------------------
-                      child: GestureDetector(
-                        child: InteractiveViewer(
-                          clipBehavior: Clip.none,
-                          transformationController: transformationController,
-                          onInteractionEnd: (details){
-                            setState(() {
-                              transformationController.toScene(Offset.zero);
-                            });
-                          },
-                          child: Container(
-                          width: deviceWidth(context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(maxSpace),
-                              image: DecorationImage(
-                                image: CachedNetworkImageProvider(widget.contentPicture),
+                    child: GestureDetector(
+                      child: InteractiveViewer(
+                        clipBehavior: Clip.none,
+                        transformationController: transformationController,
+                        onInteractionEnd: (details){
+                          setState(() {
+                            transformationController.toScene(Offset.zero);
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: minSpace, right: minSpace),
+                          child: AspectRatio(
+                            aspectRatio: 1.77,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(maxSpace),
+                                image: DecorationImage(
+                                  fit: BoxFit.fitWidth,
+                                  image: CachedNetworkImageProvider(widget.contentPicture),
+                                ),
                               ),
                             ),
-                            //------------------------------------------------------------------
-                            //----------------Resim üzerinde yer alacak yapılar-----------------
-                           child: Align(alignment: Alignment.bottomLeft, // cardText'in sol alta konumlandırılması
-                                    child: Padding(padding: EdgeInsets.only(bottom: deviceHeight(context)*0.01),
-                                      child: Container(
-                                        width: deviceWidth(context),
-                                        padding: EdgeInsets.all(minSpace),
-                                        decoration: BoxDecoration(
-                                          color: widget.cardText == "" 
-                                          ? Colors.transparent 
-                                          : secondaryTransparentColor,
-                                        ),
-                                        child: Text(
-                                          widget.cardText, 
-                                          style: TextStyle(
-                                              color: primaryColor,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                           ),
                         ),
-                        onTap: widget.homeDetailOntap,
                       ),
+                      onTap: widget.homeDetailOntap,
                     ),
                   ),
+                  widget.cardText != "" ?
+                  Padding(
+                    padding: const EdgeInsets.only(left: minSpace, right: minSpace),
+                    child: Align(alignment: Alignment.bottomLeft, 
+                    child: Container(
+                      width: deviceWidth(context),
+                      padding: EdgeInsets.all(minSpace),
+                      decoration: BoxDecoration(
+                        color: secondaryTransparentColor,
+                      ),
+                      child: Text(
+                        widget.cardText, 
+                        style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 20),
+                      ),
+                    ),
+                ),
+                  ):Container(),
                   //-------------------------------------ICONBUTTONLAR PANELİ----------------------------------------
                   Padding(
-                    padding:const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                    padding: const EdgeInsets.only(left: minSpace, right: minSpace),
                     child: Container(
                             width: deviceWidth(context),
                             child: Column(

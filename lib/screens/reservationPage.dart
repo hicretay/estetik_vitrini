@@ -182,7 +182,7 @@ class _ReservationPageState extends State<ReservationPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                           Text("Randevularım",
+                           Text("randevularım",
                             style: Theme.of(context)
                               .textTheme
                               .headline4

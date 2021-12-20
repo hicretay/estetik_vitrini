@@ -32,9 +32,9 @@ const backGroundColor2 = [primaryColor, tertiaryColor];
 const backGroundColor3 = [darkWhite, darkWhite];
 const backGroundColorDark = [darkBg, darkBg];
 
-const leadingFont = "nouvelle_vague_final";
+const leadingFont = "futura_light_bt";
 const contentFont = "futura_medium_bt";
-const headerFont = "gothic_book.tff";
+const headerFont = "futura_medium_bt";
 
 deviceHeight(BuildContext context)=>
  MediaQuery.of(context).size.height;

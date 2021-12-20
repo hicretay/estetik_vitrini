@@ -61,3 +61,7 @@ flutter:
     - family: gothic_book
       fonts:
         - asset: assets/fonts/gothic_book.ttf
+
+    - family: futura_light_bt
+      fonts:
+        - asset: assets/fonts/futura_light_bt.ttf
