@@ -34,7 +34,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
       children: [
         //-----------------------------Postu çevreleyecek container yapısı-----------------------------
         AspectRatio(
-          aspectRatio: 1,
+          aspectRatio: widget.cardText != "" ? 1.05 : 1.15,
           child: Material(
             elevation: 10,
             borderRadius:  BorderRadius.circular(maxSpace),

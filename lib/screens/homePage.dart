@@ -214,8 +214,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               shape: BoxShape.circle),
                               ),
-                            Positioned(
-                              
+                            Positioned(                           
                               left: deviceWidth(context)*0.005,
                               top: deviceWidth(context)*0.005,
                               child: Container(

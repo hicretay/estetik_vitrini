@@ -13,6 +13,7 @@ import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
 import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriteJsn.dart';
+import 'package:estetikvitrini/JsnClass/forgetPasswordJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
@@ -404,6 +405,22 @@ Future<CompanyProfileJsn> companyListDetailJsnFunc(int companyId) async{
   }
 }
 //------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------Şifremi Unuttum Fonksiyonu----------------------------------------------------
+Future<ForgetPasswordJsn> forgetPasswordJsnFunc(String eMail) async{
+    final response = await http.post(
+    Uri.parse(url + "ForgetPassword"),
+    body: '{"userName":"' + eMail + '"}',  
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return forgetPasswordJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
   return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.CENTER);

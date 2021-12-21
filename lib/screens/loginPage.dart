@@ -22,6 +22,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
+  TextEditingController txtForgetPassword = TextEditingController();
   bool isOnline = false;
   
     @override
@@ -274,39 +275,54 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
                                   onPressed: (){
                                     return showDialog(context: context, builder: (BuildContext context){
-                                    return AlertDialog(
-                                      title: Center(child: Text("SIFREMI UNUTTUM", style: TextStyle(fontFamily: leadingFont))),
-                                      content: Container(
-                                        height: 70,
-                                        child: Column(
-                                          children: [
-                                            Text("Lütfen E-Posta adresinizi giriniz: "),
-                                            SizedBox(height: minSpace),
-                                            TextField(
-                                              keyboardType: TextInputType.emailAddress,
-                                              decoration: InputDecoration(
-                                                contentPadding: EdgeInsets.all(maxSpace),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                                border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(cardCurved),
+                                    return ProgressHUD(
+                                      child: Builder(builder: (context)=>  
+                                          AlertDialog(
+                                          title: Center(child: Text("SIFREMI UNUTTUM", style: TextStyle(fontFamily: leadingFont))),
+                                          content: Container(
+                                            height: 70,
+                                            child: Column(
+                                              children: [
+                                                Text("Lütfen E-Posta adresinizi giriniz: "),
+                                                SizedBox(height: minSpace),
+                                                TextField(
+                                                  controller: txtForgetPassword,
+                                                  keyboardType: TextInputType.emailAddress,
+                                                  decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.all(maxSpace),
+                                                    filled: true,
+                                                    fillColor: Colors.white,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(cardCurved),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
+                                          ),
+                                          actions: <Widget>[
+                                          Row(mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               MaterialButton(
+                                               color: primaryColor,
+                                               child: Text("Gönder",style: TextStyle(fontFamily: leadingFont,color: white)), // fotoğraf çekilmeye devam edilecek
+                                               onPressed: () async{
+                                                 final progressHUD = ProgressHUD.of(context);
+                                                 progressHUD.show(); 
+                                                 final forgetPasswordData = await forgetPasswordJsnFunc(txtForgetPassword.text.trim());
+                                                 if(forgetPasswordData.success == true){
+                                                   showToast(context, "Lütfen mail aresinizi kontrol ediniz !");
+                                                 }
+                                                 else{
+                                                   showToast(context, "Bir hata oluştu !");
+                                                 }
+                                                 Navigator.of(context).pop();
+                                                 progressHUD.dismiss();
+                                              }),
+                                            ]),
                                           ],
                                         ),
                                       ),
-                                      actions: <Widget>[
-                                      Row(mainAxisAlignment: MainAxisAlignment.center,
-                                         children: [
-                                           MaterialButton(
-                                           color: primaryColor,
-                                           child: Text("Gönder",style: TextStyle(fontFamily: leadingFont)), // fotoğraf çekilmeye devam edilecek
-                                           onPressed: () async{
-                                             Navigator.of(context).pop();
-                                          }),
-                                        ]),
-                                      ],
                                     );
                                   });
                                   }, 
