@@ -12,9 +12,10 @@ BoxDecoration reservationBoxDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(minCurved),
 );
 
-TextStyle leadingTextStyle = TextStyle(
-  
-);
+
+Text leadingText(BuildContext context, String leading) {
+  return Text(leading,style: Theme.of(context).textTheme.headline4.copyWith(color: white, fontFamily: leadingFont));
+}
 
 const primaryColor = Color(0xFF141414);
 const primaryTransparentColor = Color(0x80352A4D);

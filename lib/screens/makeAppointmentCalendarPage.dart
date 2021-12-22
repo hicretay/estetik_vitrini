@@ -60,12 +60,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child:  Text("Randevu Al", //Büyük Başlık
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  .copyWith(color: white, fontFamily: leadingFont),
-                            ),
+                            child: leadingText(context, "randevu al")
                           ),
                           Align(
                             alignment: Alignment.topLeft,

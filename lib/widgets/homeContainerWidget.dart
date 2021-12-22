@@ -68,17 +68,14 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                             transformationController.toScene(Offset.zero);
                           });
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: minSpace, right: minSpace),
-                          child: AspectRatio(
-                            aspectRatio: 16/9,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:  BorderRadius.vertical(top: Radius.circular(maxSpace)),
-                                image: DecorationImage(
-                                  fit: BoxFit.fitWidth,
-                                  image: CachedNetworkImageProvider(widget.contentPicture),
-                                ),
+                        child: AspectRatio(
+                          aspectRatio: 1.79,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius:  BorderRadius.vertical(top: Radius.circular(maxSpace)),
+                              image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: CachedNetworkImageProvider(widget.contentPicture),
                               ),
                             ),
                           ),
