@@ -370,7 +370,7 @@ class _HomePageState extends State<HomePage> {
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
                               if(userIdData != 0){
-                              final favoriteAdd = await favoriteAddJsnFunc(userIdData,  homeContent[index].companyId);
+                              final favoriteAdd = await favoriteAddJsnFunc(userIdData, homeContent[index].companyId);
                               print(favoriteAdd.success);
                               print(favoriteAdd.result);
                               await  refreshContentStream();

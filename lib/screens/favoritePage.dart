@@ -12,7 +12,6 @@ import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -144,33 +143,45 @@ class _FavoritePageState extends State<FavoritePage> {
                             //-------------------------------------------------------------------------------------------------------------------
                             //---------------------------------------------LİKE BUTTON------------------------------------------------------
                             likeButton: 
-                              IconButton( icon: favoriContent[index].liked ? Icon(Icons.favorite,color: primaryColor) : Icon(LineIcons.heart, color: primaryColor),
+                              IconButton( icon: favoriContent[index].liked ? SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
                               onPressed: () async{
                                  final progressHUD = ProgressHUD.of(context);
                                  progressHUD.show();
                                  SharedPreferences prefs = await SharedPreferences.getInstance();
                                  userIdData = prefs.getInt("userIdData"); 
-                                 final likePostData = await likeJsnFunc(userIdData, favoriContent[index].campaingId);
-                                 await favoriContentList();
-                                 progressHUD.dismiss();
-                                 print(likePostData.success);
-                                 print(likePostData.result);
+                                 if(userIdData != 0){
+                                   final likePostData = await likeJsnFunc(userIdData, favoriContent[index].campaingId);
+                                   await favoriContentList();
+                                   progressHUD.dismiss();
+                                   print(likePostData.success);
+                                   print(likePostData.result);
+                                 }
+                                 else{
+                                   showNotMemberAlert(context);
+                                 }
+                                 
                               }),
                               //------------------------------------------------------------------------------------------------------------
                               //------------------------------------------FAVORİTE BUTTON-----------------------------------------
                               starButton: IconButton(
-                               icon:  SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: primaryColor),
+                               icon: SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: primaryColor),
                                onPressed:  ()async{
                                 final progressHUD = ProgressHUD.of(context);
                                 progressHUD.show();
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
                                 userIdData = prefs.getInt("userIdData"); 
-                                final favoriteAdd = await favoriteAddJsnFunc(userIdData,  favoriContent[index].campaingId);
+                                if(userIdData != 0){
+                                  final favoriteAdd = await favoriteAddJsnFunc(userIdData, favoriContent[index].companyId);
+                                  await favoriContentList(); 
+                                  progressHUD.dismiss();
+                                  print(favoriteAdd.success);
+                                  print(favoriteAdd.result);
                                 progressHUD.dismiss();
-                                print(favoriteAdd.success);
-                                print(favoriteAdd.result);
-                                favoriContentList(); 
-                                progressHUD.dismiss();
+                                }
+                                else{
+                                  showNotMemberAlert(context);
+                                }
+                                
                               },
                              ),
                              //------------------------------------------------------------------------------------------------------------

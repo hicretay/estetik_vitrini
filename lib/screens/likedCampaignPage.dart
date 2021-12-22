@@ -148,11 +148,17 @@ class _LikedCampaignPageState extends State<LikedCampaignPage> {
                                  progressHUD.show();
                                  SharedPreferences prefs = await SharedPreferences.getInstance();
                                  userIdData = prefs.getInt("userIdData"); 
+                                 if(userIdData != 0){
                                  final likePostData = await likeJsnFunc(userIdData, likedContent[index].campaingId);
-                                 await likedContentList();
-                                 progressHUD.dismiss();
-                                 print(likePostData.success);
-                                 print(likePostData.result);
+                                   await likedContentList();
+                                   progressHUD.dismiss();
+                                   print(likePostData.success);
+                                   print(likePostData.result);
+                                 }
+                                 else{
+                                   showNotMemberAlert(context);
+                                 }
+                                 
                               }),
                               //------------------------------------------------------------------------------------------------------------
                               //------------------------------------------FAVORİTE BUTTON-----------------------------------------
@@ -163,12 +169,18 @@ class _LikedCampaignPageState extends State<LikedCampaignPage> {
                                 progressHUD.show();
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
                                 userIdData = prefs.getInt("userIdData"); 
-                                final favoriteAdd = await favoriteAddJsnFunc(userIdData,  likedContent[index].campaingId);
-                                progressHUD.dismiss();
-                                print(favoriteAdd.success);
-                                print(favoriteAdd.result);
-                                likedContentList(); 
-                                progressHUD.dismiss();
+                                if(userIdData != 0){
+                                  final favoriteAdd = await favoriteAddJsnFunc(userIdData, likedContent[index].companyId);
+                                  await likedContentList();
+                                  progressHUD.dismiss();
+                                  print(favoriteAdd.success);
+                                  print(favoriteAdd.result);
+                                  progressHUD.dismiss();
+                                }
+                                else{
+                                  showNotMemberAlert(context);
+                                }
+                                
                               },
                              ),
                              //------------------------------------------------------------------------------------------------------------
