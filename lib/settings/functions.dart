@@ -15,6 +15,7 @@ import 'package:estetikvitrini/JsnClass/countyJsn.dart';
 import 'package:estetikvitrini/JsnClass/favoriteJsn.dart';
 import 'package:estetikvitrini/JsnClass/forgetPasswordJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
+import 'package:estetikvitrini/JsnClass/likedCampaingJsn.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/JsnClass/storyContentJsn.dart';
 import 'package:estetikvitrini/JsnClass/userfavoriAreaJsn.dart';
@@ -421,6 +422,22 @@ Future<ForgetPasswordJsn> forgetPasswordJsnFunc(String eMail) async{
   }
 }
 //-------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------beğenilen kampanyalar Listesi Fonksiyonu----------------------------------------------
+Future<LikedCampaingJsn> likedCampaingJsnFunc(int userId) async {
+    final response = await http.post(
+    Uri.parse(url + "LikedCampaing/List"),
+    body: '{"userId":' + userId.toString() + '}',
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return likedCampaingJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------Toast Mesaj Gösterme Fonksiyonu--------------------------------------------------------
 showToast(BuildContext context, String content){
   return Toast.show(content, context, backgroundColor: darkWhite,duration: 3, textColor: primaryColor,gravity: Toast.CENTER);

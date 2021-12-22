@@ -104,10 +104,10 @@ class _LocationPageState extends State<LocationPage> {
                                   ),
                                 ),
                                 SizedBox(width: maxSpace),
-                                Text("Estetik Vitrini",
+                                Text("estetik vitrini",
                                 style     : TextStyle(
                                 fontFamily: leadingFont, 
-                                fontSize  : 25, 
+                                fontSize  : 30, 
                                 color     : Colors.white),
                                 ),
                               ],
@@ -119,10 +119,10 @@ class _LocationPageState extends State<LocationPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Favori\nBölgeler", //Büyük Başlık
+                              Text("Favori Bölgeler", //Büyük Başlık
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline4
+                                    .headline3
                                     .copyWith(color: white, fontFamily: leadingFont),
                                 maxLines: 2,
                               ),

@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                             body = circularBasic;
                           }
                           else if(mode == LoadStatus.noMore){
-                            body = Text("Hepsini gördün");
+                            body = Text("Hepsini gördün",style: TextStyle(color: secondaryColor));
                           }
                           else{
                             body = circularBasic;

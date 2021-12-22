@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/screens/favoritePage.dart';
 import 'package:estetikvitrini/screens/homePage.dart';
+import 'package:estetikvitrini/screens/likedCampaignPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/screens/reservationPage.dart';
@@ -121,7 +122,7 @@ class NavigationProvider extends ChangeNotifier {
       initialRoute: SettingsPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (_) {
-            return MaterialPageRoute(builder: (_) => FavoritePage());
+            return MaterialPageRoute(builder: (_) => LikedCampaignPage());
       },
     ),
   };

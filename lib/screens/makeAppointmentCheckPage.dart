@@ -60,13 +60,12 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text( "Randevu Al",
-                            style     : TextStyle(
-                            fontFamily: leadingFont,
-                            color     : Colors.white,
-                            fontSize  : 45,
+                          child: Text("Randevu Al", //Büyük Başlık
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4
+                                  .copyWith(color: white, fontFamily: leadingFont),
                             ),
-                          ),
                         ),
                         Align(alignment: Alignment.topLeft,
                             child: Text(appointment.companyNameS, 
@@ -136,7 +135,8 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     width:  deviceWidth(context)*0.6,
                     height: deviceWidth(context)*0.3,
                     operationName: "Özel Not",
-                    child: TextField(
+                    child: TextFormField(
+                      maxLength: 250,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       controller: teNote,
