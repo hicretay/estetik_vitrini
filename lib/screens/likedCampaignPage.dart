@@ -59,7 +59,7 @@ class _LikedCampaignPageState extends State<LikedCampaignPage> {
                   Padding(padding: const EdgeInsets.all(defaultPadding),
                   //--------------Scaffold Görünümlü header--------------
                   child: Padding(
-                    padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*2),
+                    padding: const EdgeInsets.only(top: defaultPadding*2),
                     child: Column(
                       children: [
                         Align(alignment: Alignment.centerLeft,
@@ -75,18 +75,13 @@ class _LikedCampaignPageState extends State<LikedCampaignPage> {
                               ),
                               Align(
                               alignment: Alignment.topRight,
-                              child: CircleAvatar(
-                              maxRadius: 20,
-                              backgroundColor: Colors.white,
-                              child: IconButton(
-                                iconSize: iconSize,
-                                icon: Icon(Icons.refresh,color: primaryColor),
-                                onPressed:(){
+                              child: GestureDetector(                           
+                                child: SvgPicture.asset("assets/icons/refresh.svg",height: 30,width: 30, color: white),
+                                onTap:(){
                                   likedContentList();
                                   showToast(context, "Sayfa yenilendi");
                                 },
-                              ),
-                            ))
+                              ))
                             ],
                           ),
                         ),

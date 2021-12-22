@@ -152,22 +152,16 @@ class _HomePageState extends State<HomePage> {
                             child: SizedBox( 
                              child: Text("estetik vitrini", //Büyük Başlık
                                   style: 
-                                   MediaQuery.of(context).size.height < 810 ? 
-                                   Theme.of(context)
-                                      .textTheme
-                                      .headline4
-                                      .copyWith(color: white, fontFamily: leadingFont)
-                                  :
-                                      Theme.of(context)
+                                  Theme.of(context)
                                       .textTheme
                                       .headline3
-                                      .copyWith(color: white, fontFamily: leadingFont),
+                                      .copyWith(color: white, fontFamily: leadingFont)
                                 ),
                             ),
                           )]),
                           
                           Padding(
-                            padding: const EdgeInsets.only(left: 0,right: maxSpace),
+                            padding: const EdgeInsets.only(right: maxSpace),
                             child: Row(
                               children: [
                               GestureDetector(
@@ -353,7 +347,7 @@ class _HomePageState extends State<HomePage> {
                             //-----------------------------------------------------------------------------------------------------------------------------------------------------
                             //----------------------------------------LİKE BUTTON----------------------------------------
                             likeButton: 
-                            IconButton( icon: homeContent[index].liked ?  SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor,) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
+                            IconButton( icon: homeContent[index].liked ?  SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
                             padding: EdgeInsets.all(0),
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();

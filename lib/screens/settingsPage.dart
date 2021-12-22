@@ -63,45 +63,50 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Builder(builder:(context)=>
                 BackGroundContainer(
                 child: Column(children: [
-                  SizedBox(height: deviceHeight(context)*0.05),
+                  SizedBox(height: deviceHeight(context)*0.02),
                   BackLeadingWidget(
                   backColor: primaryColor,
                 ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children:[                    
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: maxSpace),
-                            child: Column(
-                              children: [Text("Profil",
-                              style: Theme.of(context)
-                                      .textTheme
-                                      .headline3
-                                      .copyWith(color: white, fontFamily: leadingFont)),
-                                Text(user,style: TextStyle(color: white,fontSize: 16)),
-                                SizedBox(height: deviceHeight(context)*0.01),
-                              ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:[                    
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: maxSpace),
+                              child: Column(
+                                children: [Text("Profil",
+                                style: Theme.of(context)
+                                        .textTheme
+                                        .headline3
+                                        .copyWith(color: white, fontFamily: leadingFont)),
+                                  Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(user,style: TextStyle(color: white,fontSize: 16))),
+                                  SizedBox(height: deviceHeight(context)*0.01),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      
-                      Column(
-                        children: [ 
-                          CircleAvatar(
-                            radius: 32,
-                            backgroundColor: primaryColor,
-                            child: CircleAvatar(
-                            backgroundColor: secondaryColor,
-                            radius: 30,
-                            child:  Icon(Icons.person, color: primaryColor,size: 40),
+                          ],
+                        ),
+                        
+                        Column(
+                          children: [ 
+                            CircleAvatar(
+                              radius: 32,
+                              backgroundColor: primaryColor,
+                              child: CircleAvatar(
+                              backgroundColor: secondaryColor,
+                              radius: 30,
+                              child:  Icon(Icons.person, color: primaryColor,size: 40),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -114,7 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
-                          isAdmin == true ? 
+                          isAdmin == false ? // true yapılacak
                             Column(children: [
                                ListTileWidget(
                             text: "Kampanya İşlemleri",

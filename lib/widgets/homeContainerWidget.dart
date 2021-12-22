@@ -135,8 +135,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                       //------------------------------İLETİŞİM ICONBUTTONI----------------------------
                                         IconButton(
                                           padding: EdgeInsets.all(0),
-                                          icon: Icon(LineIcons.phone,
-                                          color: primaryColor),
+                                          icon:  SvgPicture.asset("assets/icons/telephone.svg",height: 22,width: 22,color: primaryColor),
                                           onPressed: widget.onPressedPhone),
                                       //------------------------------------------------------------------------------
                                       //-----------------------------KONUM ICONBUTTONI--------------------------------

@@ -11,6 +11,7 @@ import 'package:estetikvitrini/widgets/homeContainerWidget.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -60,7 +61,7 @@ class _FavoritePageState extends State<FavoritePage> {
                   Padding(padding: const EdgeInsets.all(defaultPadding),
                   //--------------Scaffold Görünümlü header--------------
                   child: Padding(
-                    padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*2),
+                    padding: const EdgeInsets.only(top: defaultPadding*2),
                     child: Column(
                       children: [
                         Align(alignment: Alignment.centerLeft,
@@ -76,18 +77,13 @@ class _FavoritePageState extends State<FavoritePage> {
                               ),
                               Align(
                               alignment: Alignment.topRight,
-                              child: CircleAvatar(
-                              maxRadius: 20,
-                              backgroundColor: Colors.white,
-                              child: IconButton(
-                                iconSize: iconSize,
-                                icon: Icon(Icons.refresh,color: primaryColor),
-                                onPressed:(){
+                              child: GestureDetector(                           
+                                child: SvgPicture.asset("assets/icons/refresh.svg",height: 30,width: 30, color: white),
+                                onTap:(){
                                   favoriContentList();
                                   showToast(context, "Sayfa yenilendi");
                                 },
-                              ),
-                            ))
+                              ))
                             ],
                           ),
                         ),
@@ -163,7 +159,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               //------------------------------------------------------------------------------------------------------------
                               //------------------------------------------FAVORİTE BUTTON-----------------------------------------
                               starButton: IconButton(
-                               icon: Icon(Icons.star,size: 26, color: primaryColor),
+                               icon:  SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: primaryColor),
                                onPressed:  ()async{
                                 final progressHUD = ProgressHUD.of(context);
                                 progressHUD.show();

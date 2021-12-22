@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BackLeadingWidget extends StatelessWidget {
   final Color backColor;
@@ -9,20 +10,16 @@ class BackLeadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(maxSpace),
+    return Padding(padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
       child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            CircleAvatar(//iconun çevresini saran yapı tasarımı
-              maxRadius: 20,
-              backgroundColor: Colors.white,
-              child: IconButton(
-              iconSize: iconSize,
-              icon: Icon(Icons.arrow_back,color: backColor),
-              onPressed: (){ Navigator.pop(context, false);}
-              ),
+            IconButton(
+            iconSize: iconSize,
+            icon: SvgPicture.asset("assets/icons/back.svg",height: 27,width: 27,color: white),
+            onPressed: (){ Navigator.pop(context, false);}
             ),
             SizedBox(width: maxSpace),
             Text("estetik vitrini",

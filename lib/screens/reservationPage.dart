@@ -179,13 +179,13 @@ class _ReservationPageState extends State<ReservationPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                           Text("randevularım", //Büyük Başlık
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3
-                                    .copyWith(color: white, fontFamily: leadingFont),
-                                maxLines: 2,
-                              ),
+                    Text("randevularım", //Büyük Başlık
+                         style: Theme.of(context)
+                             .textTheme
+                             .headline3
+                             .copyWith(color: white, fontFamily: leadingFont),
+                         maxLines: 2,
+                       ),
                      ],
                    ),
                  ),
