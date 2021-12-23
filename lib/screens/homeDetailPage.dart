@@ -273,12 +273,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         ),
                                         
                                       //-------------------------RANDEVU AL BUTONU----------------------------
+                                      homeDetailContent.first.appointmentStatus == true ?
                                       Material(
                                       color: primaryColor,
                                       borderRadius: BorderRadius.circular(30.0),
                                       child: MaterialButton(
                                         minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                        onPressed: () async{
+                                        onPressed:
+                                         () async{
                                            SharedPreferences prefs = await SharedPreferences.getInstance();
                                            userIdData = prefs.getInt("userIdData");  
                                            if(userIdData != 0){                            
@@ -293,7 +295,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                            else{
                                               showNotMemberAlert(context);
                                            }
-                                        },
+                                        } ,
                                         child: Row(
                                           children: [
                                             //----------------------------Buton Metni------------------------------------------
@@ -304,7 +306,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ): Container(
+                                      width:  deviceWidth(context) * 0.4,
+                                    ),
                                       ],
                                     ),
                                     SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk

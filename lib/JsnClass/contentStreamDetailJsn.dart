@@ -31,6 +31,7 @@ class Result {
         this.campaingDetail,
         this.likeCount,
         this.liked,
+        this.appointmentStatus,
         this.contentPictures,
     });
 
@@ -39,6 +40,7 @@ class Result {
     String campaingDetail;
     int likeCount;
     bool liked;
+    bool appointmentStatus;
     List<ContentPicture> contentPictures;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -47,6 +49,7 @@ class Result {
         campaingDetail: json["campaingDetail"],
         likeCount: json["likeCount"],
         liked: json["liked"],
+        appointmentStatus: json["appointmentStatus"],
         contentPictures: List<ContentPicture>.from(json["contentPictures"].map((x) => ContentPicture.fromJson(x))),
     );
 
@@ -56,6 +59,7 @@ class Result {
         "campaingDetail": campaingDetail,
         "likeCount": likeCount,
         "liked": liked,
+        "appointmentStatus": appointmentStatus,
         "contentPictures": List<dynamic>.from(contentPictures.map((x) => x.toJson())),
     };
 }
