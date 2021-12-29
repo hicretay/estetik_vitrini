@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import '../settings/consts.dart';
 import 'leadingRowWidget.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeContainerWidget extends StatefulWidget {
   //homePage sayfasında post görünümü oluşturulmasında kullanıldı
@@ -75,7 +74,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                               borderRadius:  BorderRadius.vertical(top: Radius.circular(maxSpace)),
                               image: DecorationImage(
                                 fit: BoxFit.fitWidth,
-                                image: CachedNetworkImageProvider(widget.contentPicture),
+                                image: NetworkImage(widget.contentPicture),
                               ),
                             ),
                           ),
@@ -158,8 +157,6 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                                 .bodyText1
                                                 .copyWith(color: primaryColor),
                                           ),
-                                          //SizedBox(width: minSpace),
-                                          //Buton texti - icon arası boşluk
                                           Icon( LineIcons.arrowRight, // sağa ok ikonu
                                             color: primaryColor,
                                           ),

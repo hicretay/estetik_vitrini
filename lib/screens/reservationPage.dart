@@ -1,10 +1,8 @@
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
-import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
-import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
+import 'package:estetikvitrini/screens/companiesPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -12,7 +10,6 @@ import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -36,7 +33,7 @@ class _ReservationPageState extends State<ReservationPage> {
 
   Future appointmentListFunc() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-     userIdData = prefs.getInt("userIdData"); 
+    userIdData = prefs.getInt("userIdData"); 
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
     final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(userIdData,calendarDate);
     setState(() {
@@ -100,72 +97,73 @@ class _ReservationPageState extends State<ReservationPage> {
             child: FloatingActionButton.extended(
               backgroundColor: primaryColor,
               onPressed: ()async{
-             showDialog(context: context, builder: (BuildContext context){
-               int compID = -1;
-               return SingleChildScrollView(
-                 child: AlertDialog(
-                   actions: <Widget>[
-                     SingleChildScrollView(
-                       child: Container(
-                         width: deviceWidth(context),
-                         child: 
-                         SearchableDropdown(
-                           menuConstraints: BoxConstraints.tight(Size.fromHeight(deviceHeight(context)/3)),
-                           closeButton: null,
-                           dialogBox: false,
-                           isCaseSensitiveSearch: false,
-                           style: TextStyle(color: primaryColor),
-                           isExpanded: true,
-                           hint: Center(
-                           child: Text("Randevu alınacak firmayı seçiniz",
-                           textAlign: TextAlign.center,
-                           style    : TextStyle(
-                           fontSize : 18, 
-                           color    :  primaryColor,
-                           )),
-                           ),
-                           value: select,
-                     
-                           items: companyContent.map((data){
-                           return DropdownMenuItem(
-                           child: SingleChildScrollView(
-                             child: Center(
-                             child: Text(data.companyName, textAlign: TextAlign.center,
-                             style: TextStyle(color: primaryColor, fontSize: 20)),
-                             ),
-                           ),
-                           value: data.companyName
-                           );
-                           }).toList(),  
-                           onChanged: (value) async{                                 
-                             select = value;
-                             for (var item in companyContent) {
-                               if(item.companyName==value){
-                                 compID = item.id;
-                               }
-                             }
-                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                             userIdData = prefs.getInt("userIdData"); 
-                             if(userIdData != 0){
-                             String appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
-                             AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0, appointmentDate: appointmentDate);
-                             final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
-                             print(value);
-                             print(compID);
-                           }
-                           else{
-                             showNotMemberAlert(context);
-                           }
-                           }
+              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompaniesPage(date: calendarDate)));
+            //  showDialog(context: context, builder: (BuildContext context){
+            //    int compID = -1;
+            //    return SingleChildScrollView(
+            //      child: AlertDialog(
+            //        actions: <Widget>[
+            //          SingleChildScrollView(
+            //            child: Container(
+            //              width: deviceWidth(context),
+            //              child: 
+            //              SearchableDropdown(
+            //                menuConstraints: BoxConstraints.tight(Size.fromHeight(deviceHeight(context)/3)),
+            //                closeButton: null,
+            //                dialogBox: false,
+            //                isCaseSensitiveSearch: false,
+            //                style: TextStyle(color: primaryColor),
+            //                isExpanded: true,
+            //                hint: Center(
+            //                child: Text("Randevu alınacak firmayı seçiniz",
+            //                textAlign: TextAlign.center,
+            //                style    : TextStyle(
+            //                fontSize : 18, 
+            //                color    :  primaryColor,
+            //                )),
+            //                ),
+            //                value: select,
+
+            //                items: companyContent.map((data){
+            //                return DropdownMenuItem(
+            //                child: SingleChildScrollView(
+            //                  child: Center(
+            //                  child: Text(data.companyName, textAlign: TextAlign.center,
+            //                  style: TextStyle(color: primaryColor, fontSize: 20)),
+            //                  ),
+            //                ),
+            //                value: data.companyName
+            //                );
+            //                }).toList(),  
+            //                onChanged: (value) async{                                 
+            //                  select = value;
+            //                  for (var item in companyContent) {
+            //                    if(item.companyName==value){
+            //                      compID = item.id;
+            //                    }
+            //                  }
+            //                  SharedPreferences prefs = await SharedPreferences.getInstance();
+            //                  userIdData = prefs.getInt("userIdData"); 
+            //                  if(userIdData != 0){
+            //                  String appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
+            //                  AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0, appointmentDate: appointmentDate);
+            //                  final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
+            //                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
+            //                  print(value);
+            //                  print(compID);
+            //                }
+            //                else{
+            //                  showNotMemberAlert(context);
+            //                }
+            //                }
                            
-                           )
-                                   ),
-                     )
-                             ],
-                             ),
-               );
-            });
+            //                )
+            //                        ),
+            //          )
+            //                  ],
+            //                  ),
+            //    );
+            // });
                    }, 
             label: Text("Randevu Al"),
             icon:  FaIcon(FontAwesomeIcons.calendar,size: 18,color: white)),

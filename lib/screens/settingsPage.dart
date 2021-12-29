@@ -119,9 +119,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
-                          isAdmin == false ? // true yapılacak
+                          isAdmin == true ? 
                             Column(children: [
-                               ListTileWidget(
+                            ListTileWidget(
                             text: "Kampanya İşlemleri",
                             child: FaIcon(FontAwesomeIcons.tags,size: 16,color: white),
                             onTap: (){
