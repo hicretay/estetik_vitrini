@@ -25,7 +25,7 @@ import 'package:toast/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String url = "https://service.estetikvitrini.com/api/";
+String url = "https://servicetest.estetikvitrini.com/api/";
 
 Map<String, String> header = {
   "Content-Type": "application/json",

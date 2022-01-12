@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:connectivity/connectivity.dart';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
@@ -52,7 +53,6 @@ class _SplashPageState extends State<SplashPage> {
                color: primaryColor,
                child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), 
                onPressed: () async{
-                
                exit(0);
                }),
              ],
