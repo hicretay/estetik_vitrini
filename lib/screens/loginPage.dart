@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   static const route = "/loginPage";
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -95,23 +95,23 @@ class _LoginPageState extends State<LoginPage> {
                             //--------------------------------------------------GİRİŞ BUTONU---------------------------------------------------------------
                               child: MaterialButton(
                                 minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                child: Text("Giriş",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
+                                child: Text("Giriş",style: Theme.of(context).textTheme.button!.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                                 //-----------------------------GİRİŞ BUTONU ONPRESSEDİ---------------------------------------------
                                 onPressed: ()async{
                                   final progressHUD = ProgressHUD.of(context);
-                                  progressHUD.show(); 
+                                  progressHUD!.show(); 
                                   String username = txtUsername.text; // Kullanıcı Adı TextField'ının texti = username
                                   String password = txtPassword.text; // Şifre TextField'ının texti = password
                                   if(username != "" && password != ""){
                                   
                                   //--------------------------------USER DATASI DOLDURULMASI---------------------------
-                                  final LoginJsn userData = await loginJsnFunc(username, password, false); 
-                                  if(userData.success == true){ // Giriş kontrolü, succes
+                                  final LoginJsn? userData = await loginJsnFunc(username, password, false); 
+                                  if(userData!.success == true){ // Giriş kontrolü, succes
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                                  prefs.setString("namesurname", userData.result.nameSurname);
+                                  prefs.setString("namesurname", userData.result!.nameSurname!);
                                   prefs.setString("user", username);     
                                   prefs.setString("pass", password);  
-                                  prefs.setInt("userIdData", userData.result.id);  
+                                  prefs.setInt("userIdData", userData.result!.id!);  
                                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                                   showToast(context, "Giriş Başarılı!");
                                   progressHUD.dismiss(); 
@@ -158,12 +158,12 @@ class _LoginPageState extends State<LoginPage> {
                             ]),
                             onPressed : () async{
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
-                              final LoginJsn userData = await loginJsnFunc("", "", false); 
-                              if(userData.success == true){ // Giriş kontrolü, succes
+                              progressHUD!.show(); 
+                              final LoginJsn? userData = await loginJsnFunc("", "", false); 
+                              if(userData!.success == true){ // Giriş kontrolü, succes
                               SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setBool("isAdmin", userData.result.admin);
-                              prefs.setString("namesurname", userData.result.nameSurname);   
+                              prefs.setBool("isAdmin", userData.result!.admin!);
+                              prefs.setString("namesurname", userData.result!.nameSurname!);   
                               prefs.setInt("userIdData", 0);   
                               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                               showToast(context, "Giriş Başarılı!");
@@ -274,7 +274,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: TextButton(
                                   child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
                                   onPressed: (){
-                                    return showDialog(context: context, builder: (BuildContext context){
+                                    showDialog(context: context, builder: (BuildContext context){
                                     return ProgressHUD(
                                       child: Builder(builder: (context)=>  
                                           AlertDialog(
@@ -308,9 +308,9 @@ class _LoginPageState extends State<LoginPage> {
                                                child: Text("Gönder",style: TextStyle(fontFamily: leadingFont,color: white)), // fotoğraf çekilmeye devam edilecek
                                                onPressed: () async{
                                                  final progressHUD = ProgressHUD.of(context);
-                                                 progressHUD.show(); 
+                                                 progressHUD!.show(); 
                                                  final forgetPasswordData = await forgetPasswordJsnFunc(txtForgetPassword.text.trim());
-                                                 if(forgetPasswordData.success == true){
+                                                 if(forgetPasswordData!.success == true){
                                                    showToast(context, "Lütfen mail aresinizi kontrol ediniz !");
                                                  }
                                                  else{

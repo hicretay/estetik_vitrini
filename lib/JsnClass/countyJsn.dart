@@ -10,8 +10,8 @@ class CountyJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory CountyJsn.fromJson(Map<String, dynamic> json) => CountyJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class CountyJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -30,8 +30,8 @@ class Result {
         this.county,
     });
 
-    int id;
-    String county;
+    int? id;
+    String? county;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

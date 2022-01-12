@@ -9,27 +9,27 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MakeAppointmentOperationPage extends StatefulWidget {
-  final AppointmentObject appointment;
-  final List companyOperation;
-  MakeAppointmentOperationPage({Key key, this.companyOperation, this.appointment}) : super(key: key);
+  final AppointmentObject? appointment;
+  final List? companyOperation;
+  MakeAppointmentOperationPage({Key? key, this.companyOperation, this.appointment}) : super(key: key);
 
   @override
-  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation,appointment: appointment);
+  _MakeAppointmentOperationPageState createState() => _MakeAppointmentOperationPageState(companyOperation: companyOperation!,appointment: appointment!);
 }
 
 class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationPage> {
-  AppointmentObject appointment;
-  List checkedOperation = [];
+  AppointmentObject? appointment;
+  List? checkedOperation = [];
   int _checked = -1;
 
-  List companyOperation;
+  List? companyOperation;
   _MakeAppointmentOperationPageState({this.companyOperation,this.appointment});
 
   Map<dynamic,bool> operationListMap = {};
 
    operationListFunc() {
     setState(() {
-      for (var item in companyOperation) {
+      for (var item in companyOperation!) {
       Map<dynamic,bool> newItem = {item:false};
       operationListMap.addEntries(newItem.entries);
     }
@@ -66,7 +66,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              appointment.companyNameS, 
+                              appointment!.companyNameS!, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -88,12 +88,12 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                           child: Column(
                             children: [
                           SizedBox(height: defaultPadding),
-                          (companyOperation.isEmpty || companyOperation.length == 0) ? Center(child: Text("Uygun işlem bulunamadı !")) : 
+                          (companyOperation!.isEmpty || companyOperation!.length == 0) ? Center(child: Text("Uygun işlem bulunamadı !")) : 
                           ListView.separated(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical, //dikeyde kaydırılabilir
                           shrinkWrap: true,
-                          itemCount: companyOperation.length, //_location mapi uzunluğu kadar
+                          itemCount: companyOperation!.length, //_location mapi uzunluğu kadar
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(padding: const EdgeInsets.fromLTRB(20, 0, 20, 0), // yalnızca sol ve sağdan boşluk
                                 //InkWell sarmaladığı widgeta tıklanabilirlik özelliği kazandırdı
@@ -103,10 +103,10 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                 onTap: () {
                                   setState(() {
                                      _checked = index;
-                                     appointment.operationId =  companyOperation[index].id;
-                                     appointment.operationS =  companyOperation[index].operationName;
-                                     print(appointment.operationId);
-                                     print(appointment.operationS);                                   
+                                     appointment!.operationId =  companyOperation![index].id;
+                                     appointment!.operationS =  companyOperation![index].operationName;
+                                     print(appointment!.operationId);
+                                     print(appointment!.operationS);                                   
                                   });
                                 },
                                 child: Container(
@@ -165,7 +165,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                             Center(
                                               child: SizedBox(
                                                 width: deviceWidth(context)*0.7,
-                                                child: Text( companyOperation[index].operationName, 
+                                                child: Text( companyOperation![index].operationName, 
                                                 style    : TextStyle(
                                                 fontSize : 16, // operationların fontu
                                                 color: _checked == index
@@ -207,10 +207,11 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                 icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
                 onPressed: ()async{
                   final progressHUD = ProgressHUD.of(context);
-                  progressHUD.show();
-                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
-                  if(appointment.operationId!=null){              
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment))); //MakeAppointmentPersonelPage(appointment: appointment,)
+                  progressHUD!.show();
+                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment!.operationId]); 
+                  // ignore: unnecessary_null_comparison
+                  if(appointment!.operationId!=null){              
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime!.result,appointment: appointment!))); //MakeAppointmentPersonelPage(appointment: appointment,)
                   }
                   else{
                     showToast(context, "Lütfen bir işlem seçiniz!");

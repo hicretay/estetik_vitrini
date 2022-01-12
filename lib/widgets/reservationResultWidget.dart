@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResevationResultWidget extends StatelessWidget {
-  final String companyName;
-  final String operation;
-  final String time;
-  final String date;
-  final Widget confirmButton;
-  final VoidCallback onTap;
+  final String? companyName;
+  final String? operation;
+  final String? time;
+  final String? date;
+  final Widget? confirmButton;
+  final VoidCallback? onTap;
 
   const ResevationResultWidget({
-    Key key, this.companyName, this.operation, this.time, this.date, this.onTap, this.confirmButton,
+    Key? key, this.companyName, this.operation, this.time, this.date, this.onTap, this.confirmButton,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class ResevationResultWidget extends StatelessWidget {
                         SizedBox(
                           width: deviceWidth(context)*0.5,
                           child: Text(
-                            companyName,
+                            companyName!,
                             overflow: TextOverflow.fade,
                             softWrap: false,                          
                             style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).hintColor),
@@ -45,7 +45,7 @@ class ResevationResultWidget extends StatelessWidget {
                         SizedBox(
                           width: deviceWidth(context)*0.5,
                           child: Text(
-                            operation,
+                            operation!,
                             overflow: TextOverflow.fade,
                             style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
                             textAlign: TextAlign.left,                         
@@ -58,12 +58,12 @@ class ResevationResultWidget extends StatelessWidget {
                         Align(
                           alignment: Alignment.topRight,
                           child: Text(
-                            time,
+                            time!,
                             style: TextStyle(fontSize: 16,color: Theme.of(context).hintColor),
                           ),
                         ),
                         SizedBox(width:deviceWidth(context)*0.03),
-                        confirmButton,
+                        confirmButton!,
                         SizedBox(width:deviceWidth(context)*0.03),
                         GestureDetector(
                           child: Icon(Icons.clear,size: 18,color: Theme.of(context).hintColor),

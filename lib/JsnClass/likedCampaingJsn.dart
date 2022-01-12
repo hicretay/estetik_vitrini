@@ -10,8 +10,8 @@ class LikedCampaingJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory LikedCampaingJsn.fromJson(Map<String, dynamic> json) => LikedCampaingJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class LikedCampaingJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -39,17 +39,17 @@ class Result {
         this.favoriStatus,
     });
 
-    int companyId;
-    int campaingId;
-    String companyName;
-    String companyLogo;
-    String companyPhone;
-    String googleAdressLink;
-    String contentPicture;
-    String contentTitle;
-    bool liked;
-    int likeCount;
-    bool favoriStatus;
+    int? companyId;
+    int? campaingId;
+    String? companyName;
+    String? companyLogo;
+    String? companyPhone;
+    String? googleAdressLink;
+    String? contentPicture;
+    String? contentTitle;
+    bool? liked;
+    int? likeCount;
+    bool? favoriStatus;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         companyId: json["companyId"],

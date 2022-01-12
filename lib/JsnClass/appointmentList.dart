@@ -10,8 +10,8 @@ class AppointmentListJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory AppointmentListJsn.fromJson(Map<String, dynamic> json) => AppointmentListJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class AppointmentListJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -34,12 +34,12 @@ class Result {
         this.confirmed,
     });
 
-    int id;
-    String companyName;
-    String operationName;
-    String appointmentTime;
-    String appointmentDate;
-    bool confirmed;
+    int? id;
+    String? companyName;
+    String? operationName;
+    String? appointmentTime;
+    String? appointmentDate;
+    bool? confirmed;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

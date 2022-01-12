@@ -12,28 +12,28 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CompaniesPage extends StatefulWidget {
-  final String date;
-  CompaniesPage({Key key, this.date}) : super(key: key);
+  final String? date;
+  CompaniesPage({Key? key, this.date}) : super(key: key);
 
  @override
-  _CompaniesPageState createState() => _CompaniesPageState(date: date);
+  _CompaniesPageState createState() => _CompaniesPageState(date: date!);
 }
 class _CompaniesPageState extends State<CompaniesPage> {
   TextEditingController teSearch = TextEditingController();
   List allCompanies = [];
   List selectedCompanies = [];
   bool isFirstTime = true;
-  String date;
+  String? date;
 
   _CompaniesPageState({this.date});
 
    Future<CompanyListJsn> allCompaniesList() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   final CompanyListJsn? companyNewList = await companyListJsnFunc(); 
    if(mounted)
    setState(() {
-      allCompanies = companyNewList.result;
+      allCompanies = companyNewList!.result!;
    });
-   return companyNewList;
+   return companyNewList!;
    }
 
    @override
@@ -73,7 +73,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
                               child: Text("firmalar", 
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline4
+                                  .headline4!
                                   .copyWith(color: white, fontFamily: leadingFont),
                                 ),
                             ),
@@ -176,11 +176,11 @@ class _CompaniesPageState extends State<CompaniesPage> {
                                             ),
                                             onTap: ()async{
                                               SharedPreferences prefs = await SharedPreferences.getInstance();
-                                              int userIdData = prefs.getInt("userIdData"); 
+                                              int? userIdData = prefs.getInt("userIdData"); 
                                               if(userIdData != 0){
-                                              AppointmentObject appointment = AppointmentObject(companyId: selectedCompanies.length == 0 ? allCompanies[index].id : selectedCompanies[index].id,userId: userIdData, companyNameS: selectedCompanies.length == 0 ? allCompanies[index].companyName : selectedCompanies[index].companyName, campaignId: 0, appointmentDate: date);
-                                              final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
+                                              AppointmentObject appointment = AppointmentObject(companyId: selectedCompanies.length == 0 ? allCompanies[index].id : selectedCompanies[index].id,userId: userIdData!, companyNameS: selectedCompanies.length == 0 ? allCompanies[index].companyName : selectedCompanies[index].companyName, campaignId: 0, appointmentDate: date!);
+                                              final CompanyOperationJsn? companyOperation = await companyOperationJsnFunc(appointment.companyId!);
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation!.result, appointment: appointment)));
                                               print(selectedCompanies.length == 0 ? allCompanies[index].companyName : selectedCompanies[index].companyName);
                                               print(selectedCompanies.length == 0 ? allCompanies[index].id : selectedCompanies[index].id);
                                             }},

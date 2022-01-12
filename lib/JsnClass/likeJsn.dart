@@ -10,8 +10,8 @@ class LikeJsn {
         this.result,
     });
 
-    bool success;
-    String result;
+    bool? success;
+    String? result;
 
     factory LikeJsn.fromJson(Map<String, dynamic> json) => LikeJsn(
         success: json["success"],

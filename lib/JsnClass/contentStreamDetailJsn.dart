@@ -10,8 +10,8 @@ class ContentStreamDetailJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory ContentStreamDetailJsn.fromJson(Map<String, dynamic> json) => ContentStreamDetailJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class ContentStreamDetailJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -35,13 +35,13 @@ class Result {
         this.contentPictures,
     });
 
-    int campaingId;
-    String campaingTitle;
-    String campaingDetail;
-    int likeCount;
-    bool liked;
-    bool appointmentStatus;
-    List<ContentPicture> contentPictures;
+    int? campaingId;
+    String? campaingTitle;
+    String? campaingDetail;
+    int? likeCount;
+    bool? liked;
+    bool? appointmentStatus;
+    List<ContentPicture>? contentPictures;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         campaingId: json["campaingId"],
@@ -60,7 +60,7 @@ class Result {
         "likeCount": likeCount,
         "liked": liked,
         "appointmentStatus": appointmentStatus,
-        "contentPictures": List<dynamic>.from(contentPictures.map((x) => x.toJson())),
+        "contentPictures": List<dynamic>.from(contentPictures!.map((x) => x.toJson())),
     };
 }
 
@@ -69,7 +69,7 @@ class ContentPicture {
         this.cPicture,
     });
 
-    String cPicture;
+    String? cPicture;
 
     factory ContentPicture.fromJson(Map<String, dynamic> json) => ContentPicture(
         cPicture: json["cPicture"],

@@ -18,7 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 class FavoritePage extends StatefulWidget {
   static const route = "/favoritePage";
 
-  FavoritePage({Key key}) : super(key: key);
+  FavoritePage({Key? key}) : super(key: key);
 
   @override
   _FavoritePageState createState() => _FavoritePageState();
@@ -26,8 +26,8 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
   TextEditingController teSearch = TextEditingController();
-  List favoriContent;
-  int userIdData;
+  List? favoriContent;
+  int? userIdData;
   bool checked = false;
 
   @override
@@ -39,9 +39,9 @@ class _FavoritePageState extends State<FavoritePage> {
   Future favoriContentList() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   userIdData = prefs.getInt("userIdData"); 
-  final ContentStreamJsn favoriContentNewList = await favoriteJsnFunc(userIdData,0,true); 
+  final ContentStreamJsn? favoriContentNewList = await favoriteJsnFunc(userIdData!,0,true); 
   setState(() {
-     favoriContent = favoriContentNewList.result;
+     favoriContent = favoriContentNewList!.result;
   });
 }
 
@@ -70,7 +70,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               Text("favori salonlarım", //Büyük Başlık
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline3
+                                    .headline3!
                                     .copyWith(color: white, fontFamily: leadingFont),
                                 maxLines: 2,
                               ),
@@ -105,55 +105,55 @@ class _FavoritePageState extends State<FavoritePage> {
                           backgroundColor: secondaryColor,
                           child: ListView.builder(
                             padding: EdgeInsets.all(0),
-                            itemCount: favoriContent == null ? 0 : favoriContent.length,
+                            itemCount: favoriContent == null ? 0 : favoriContent!.length,
                             controller: NavigationProvider.of(context).screens[FAVORITE_PAGE].scrollController, 
                             itemBuilder: (BuildContext context, int index){
                               return HomeContainerWidget(
-                              companyLogo   : favoriContent[index].companyLogo,
-                              companyName   : favoriContent[index].companyName,
-                              contentPicture: favoriContent[index].contentPicture,
-                              cardText      : favoriContent[index].contentTitle,
+                              companyLogo   : favoriContent![index].companyLogo,
+                              companyName   : favoriContent![index].companyName,
+                              contentPicture: favoriContent![index].contentPicture,
+                              cardText      : favoriContent![index].contentTitle,
                               pinColor      : primaryColor,
                               onPressedPhone: () async{ 
-                                              dynamic number = favoriContent[index].companyPhone.toString(); // arama ekranına yönlendirme
+                                              dynamic number = favoriContent![index].companyPhone.toString(); // arama ekranına yönlendirme
                                               launch("tel://$number");
                                             },
                               //------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-----------------------------------------------
                               onPressed: () async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
+                              progressUHD!.show(); 
                                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                               userIdData = prefs.getInt("userIdData"); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId,userIdData); 
+                               userIdData = prefs.getInt("userIdData")!; 
+                              final ContentStreamDetailJsn? homeDetailContent = await contentStreamDetailJsnFunc(favoriContent![index].companyId, favoriContent![index].campaingId,userIdData!); 
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
-                              campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
-                              companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                              contentTitle: favoriContent[index].contentTitle, companyPhone: favoriContent[index].companyPhone.toString())));
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent?.result, 
+                              campaingId: favoriContent![index].campaingId, companyId: favoriContent![index].companyId, 
+                              companyLogo: favoriContent![index].companyLogo, companyName: favoriContent![index].companyName, 
+                              contentTitle: favoriContent![index].contentTitle, companyPhone: favoriContent![index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             //--------------------------------------------------------------------------------------------------------------------
                             //-----------------------------------------------KONUM ICONBUTTON'I----------------------------------------------------
                             onPressedLocation: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show();
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: favoriContent[index].googleAdressLink)));
+                              progressHUD!.show();
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: favoriContent![index].googleAdressLink)));
                               progressHUD.dismiss();
                             },
                             //-------------------------------------------------------------------------------------------------------------------
                             //---------------------------------------------LİKE BUTTON------------------------------------------------------
                             likeButton: 
-                              IconButton( icon: favoriContent[index].liked ? SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
+                              IconButton( icon: favoriContent![index].liked ? SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
                               onPressed: () async{
                                  final progressHUD = ProgressHUD.of(context);
-                                 progressHUD.show();
+                                 progressHUD!.show();
                                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                                 userIdData = prefs.getInt("userIdData"); 
+                                 userIdData = prefs.getInt("userIdData")!; 
                                  if(userIdData != 0){
-                                   final likePostData = await likeJsnFunc(userIdData, favoriContent[index].campaingId);
+                                   final likePostData = await likeJsnFunc(userIdData!, favoriContent![index].campaingId);
                                    await favoriContentList();
                                    progressHUD.dismiss();
-                                   print(likePostData.success);
+                                   print(likePostData!.success);
                                    print(likePostData.result);
                                  }
                                  else{
@@ -167,14 +167,14 @@ class _FavoritePageState extends State<FavoritePage> {
                                icon: SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: primaryColor),
                                onPressed:  ()async{
                                 final progressHUD = ProgressHUD.of(context);
-                                progressHUD.show();
+                                progressHUD!.show();
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                                userIdData = prefs.getInt("userIdData"); 
+                                userIdData = prefs.getInt("userIdData")!; 
                                 if(userIdData != 0){
-                                  final favoriteAdd = await favoriteAddJsnFunc(userIdData, favoriContent[index].companyId);
+                                  final favoriteAdd = await favoriteAddJsnFunc(userIdData!, favoriContent![index].companyId);
                                   await favoriContentList(); 
                                   progressHUD.dismiss();
-                                  print(favoriteAdd.success);
+                                  print(favoriteAdd!.success);
                                   print(favoriteAdd.result);
                                 progressHUD.dismiss();
                                 }
@@ -187,21 +187,21 @@ class _FavoritePageState extends State<FavoritePage> {
                              //------------------------------------------------------------------------------------------------------------
                              homeDetailOntap: () async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
+                              progressUHD!.show(); 
                               SharedPreferences prefs = await SharedPreferences.getInstance();
-                              userIdData = prefs.getInt("userIdData"); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(favoriContent[index].companyId, favoriContent[index].campaingId,userIdData); 
+                              userIdData = prefs.getInt("userIdData")!; 
+                              final ContentStreamDetailJsn? homeDetailContent = await contentStreamDetailJsnFunc(favoriContent![index].companyId, favoriContent![index].campaingId,userIdData!); 
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result, 
-                              campaingId: favoriContent[index].campaingId, companyId: favoriContent[index].companyId, 
-                              companyLogo: favoriContent[index].companyLogo, companyName: favoriContent[index].companyName, 
-                              contentTitle: favoriContent[index].contentTitle, companyPhone: favoriContent[index].companyPhone.toString())));
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent!.result, 
+                              campaingId: favoriContent![index].campaingId, companyId: favoriContent![index].companyId, 
+                              companyLogo: favoriContent![index].companyLogo, companyName: favoriContent![index].companyName, 
+                              contentTitle: favoriContent![index].contentTitle, companyPhone: favoriContent![index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             logoOnTap: ()async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
-                              final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(favoriContent[index].companyId);
+                              progressUHD!.show(); 
+                              final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(favoriContent![index].companyId);
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                               progressUHD.dismiss();
                             },

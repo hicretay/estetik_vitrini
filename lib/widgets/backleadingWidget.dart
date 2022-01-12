@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BackLeadingWidget extends StatelessWidget {
-  final Color backColor;
+  final Color? backColor;
   const BackLeadingWidget({
-    Key key, this.backColor,
+    Key? key, this.backColor,
   }) : super(key: key);
 
   @override

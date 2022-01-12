@@ -1,4 +1,4 @@
-// ignore_for_file: unrelated_type_equality_checks
+// ignore_for_file: unrelated_type_equality_checks, unnecessary_null_comparison
 import 'dart:async';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
@@ -29,7 +29,7 @@ import 'package:http/http.dart' as http;
 class HomePage extends StatefulWidget {
   static const route = "/homePage";
 
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,13 +40,14 @@ class _HomePageState extends State<HomePage> {
   int pageIndex = 1;
   int totalPage = 1;
   bool textFieldTapped = false;
-  List companyContent;
-  int userIdData;
-  bool isLogin;
+  List? companyContent;
+  int? userIdData;
+  bool? isLogin;
 
 
 //---------------------------INTERNET KONTROLÜ STREAM'I------------------------------
-  StreamSubscription _connectionChangeStream;
+  // ignore: cancel_subscriptions
+  StreamSubscription? _connectionChangeStream;
   bool isOffline = false;
 //-----------------------------------------
   final RefreshController refreshController = RefreshController(initialRefresh: true);
@@ -73,13 +74,13 @@ class _HomePageState extends State<HomePage> {
   if (response.statusCode == 200) {
     final result = contentStreamJsnFromJson(response.body);
     if(isRefresh){
-      homeContent = result.result;
+      homeContent = result.result!;
     }
     else{
-      homeContent.addAll(result.result);
+      homeContent.addAll(result.result!);
       }
     pageIndex++;
-    totalPage = result.totalPage;
+    totalPage = result.totalPage!;
 
     setState(() {});
     return true;
@@ -106,23 +107,23 @@ class _HomePageState extends State<HomePage> {
 
    @override
    void dispose() {
-     _connectionChangeStream.cancel();
+     _connectionChangeStream!.cancel();
      super.dispose();
    }
 
   Future companyStoryList() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   final CompanyListJsn? companyNewList = await companyListJsnFunc(); 
    setState(() {
-      companyContent = companyNewList.result;
+      companyContent = companyNewList!.result;
    });
    }
 
    Future refreshContentStream() async{
      SharedPreferences prefs = await SharedPreferences.getInstance();
-     userIdData = prefs.getInt("userIdData");
-   final ContentStreamJsn companyNewList = await contentStreamJsnFunc(userIdData,0); 
+     userIdData = prefs.getInt("userIdData")!;
+   final ContentStreamJsn? companyNewList = await contentStreamJsnFunc(userIdData!,0); 
    setState(() {
-      homeContent = companyNewList.result;
+      homeContent = companyNewList!.result!;
    });
    }
 //-------------------------------------------------------------------------------------
@@ -153,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                   style: 
                                   Theme.of(context)
                                       .textTheme
-                                      .headline3
+                                      .headline3!
                                       .copyWith(color: white, fontFamily: leadingFont)
                                 ),
                             ),
@@ -188,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(left: maxSpace, right: maxSpace, top: 88),
                       child: ListView.separated(
                         shrinkWrap: true,
-                        itemCount: companyContent.length,
+                        itemCount: companyContent!.length,
                         scrollDirection: Axis.horizontal,
                         separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(width: maxSpace);},                   
@@ -221,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                               shape: BoxShape.circle,
                               image: DecorationImage(                     
                               fit: BoxFit.contain,
-                              image: NetworkImage(companyContent[index].companyLogo),
+                              image: NetworkImage(companyContent![index].companyLogo),
                                     ),
                                   ),
                                 ),
@@ -230,11 +231,11 @@ class _HomePageState extends State<HomePage> {
                           //------------------------------------------------STORYE TIKLANDIĞINDA----------------------------------------------------------
                           onTap: ()async{
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show();
+                              progressHUD!.show();
                               //int lastCompId = companyContent.last.id;
                               // Navigator.of(context, rootNavigator: true).push(
                               // MaterialPageRoute(builder: (context)=>StoryPage(company: companyContent, storyIndex: index, lastCompId: lastCompId)));
-                              final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(companyContent[index].id);
+                              final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(companyContent![index].id);
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                               progressHUD.dismiss();
                           },
@@ -243,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             width: 65.0,
                             child: Center(
-                              child: Text(companyContent[index].companyName,              
+                              child: Text(companyContent![index].companyName,              
                               overflow: TextOverflow.fade,
                               softWrap: false,
                               style: TextStyle(color: white)),
@@ -263,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (c,m)=> circularBasic,
                         ),
                         footer: CustomFooter(
-                        builder: (BuildContext context,LoadStatus mode){
+                        builder: (BuildContext context,LoadStatus? mode){
                           Widget body ;
                           if(mode==LoadStatus.idle){
                             body = circularBasic;
@@ -325,12 +326,12 @@ class _HomePageState extends State<HomePage> {
                               //--------------------------------------------------------"DETAYLI BİLGİ İÇİN" BUTONU-------------------------------------------------------------
                               onPressed: () async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show();
+                              progressUHD!.show();
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData);                        
+                              final ContentStreamDetailJsn? homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData!);                        
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent!.result,
                               campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
                               googleAdressLink: homeContent[index].googleAdressLink, companyPhone: homeContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
@@ -339,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                             //--------------------------------------KONUM ICONBUTTON'I----------------------------------------------------------------------
                             onPressedLocation: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show();
+                              progressHUD!.show();
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: homeContent[index].googleAdressLink))); 
                               progressHUD.dismiss();
                             },
@@ -352,8 +353,8 @@ class _HomePageState extends State<HomePage> {
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
                               if(userIdData != 0){
-                              LikeJsn likePostData = await likeJsnFunc(userIdData, homeContent[index].campaingId);
-                              print(likePostData.success);
+                              LikeJsn? likePostData = await likeJsnFunc(userIdData!, homeContent[index].campaingId);
+                              print(likePostData!.success);
                               print(likePostData.result);
                               await  refreshContentStream();
                               }
@@ -369,8 +370,8 @@ class _HomePageState extends State<HomePage> {
                               SharedPreferences prefs = await SharedPreferences.getInstance();
                               userIdData = prefs.getInt("userIdData"); 
                               if(userIdData != 0){
-                              final favoriteAdd = await favoriteAddJsnFunc(userIdData, homeContent[index].companyId);
-                              print(favoriteAdd.success);
+                              final favoriteAdd = await favoriteAddJsnFunc(userIdData!, homeContent[index].companyId);
+                              print(favoriteAdd!.success);
                               print(favoriteAdd.result);
                               await  refreshContentStream();
                             }
@@ -383,20 +384,20 @@ class _HomePageState extends State<HomePage> {
                            //----------------------------------------------------------------------------------------------------------------------
                            homeDetailOntap: () async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show();
+                              progressUHD!.show();
                                 SharedPreferences prefs = await SharedPreferences.getInstance();
                                userIdData = prefs.getInt("userIdData");  
-                              final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData);                        
+                              final ContentStreamDetailJsn? homeDetailContent = await contentStreamDetailJsnFunc(homeContent[index].companyId, homeContent[index].campaingId,userIdData!);                        
                               // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
+                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent!.result,
                                campaingId: homeContent[index].campaingId, companyId: homeContent[index].companyId, companyLogo: homeContent[index].companyLogo, companyName: homeContent[index].companyName, contentTitle: homeContent[index].contentTitle,
                                googleAdressLink: homeContent[index].googleAdressLink, companyPhone: homeContent[index].companyPhone.toString())));
                               progressUHD.dismiss();
                             },
                             logoOnTap: ()async{
                               final progressUHD = ProgressHUD.of(context);
-                              progressUHD.show(); 
-                              final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(homeContent[index].companyId);
+                              progressUHD!.show(); 
+                              final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(homeContent[index].companyId);
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                               progressUHD.dismiss();
                             },

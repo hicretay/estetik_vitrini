@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class NewCampaignPage extends StatefulWidget {
-  NewCampaignPage({Key key}) : super(key: key);
+  NewCampaignPage({Key? key}) : super(key: key);
 
   @override
   _NewCampaignPageState createState() => _NewCampaignPageState();

@@ -19,7 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
  static const route = "settingsPage";
- SettingsPage({Key key}) : super(key: key);
+ SettingsPage({Key? key}) : super(key: key);
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -31,17 +31,17 @@ class _SettingsPageState extends State<SettingsPage> {
 
    getUserName() async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   String newuser = prefs.getString("namesurname");
+   String? newuser = prefs.getString("namesurname");
    setState(() {
-     user = newuser; 
+     user = newuser!; 
    });
    }
 
    getIsAdmin()async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
-   bool newAdminData = prefs.getBool("isAdmin");
+   bool? newAdminData = prefs.getBool("isAdmin");
    setState(() {
-     isAdmin = newAdminData; 
+     isAdmin = newAdminData!; 
    });
    }
 
@@ -80,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 children: [Text("Profil",
                                 style: Theme.of(context)
                                         .textTheme
-                                        .headline3
+                                        .headline3!
                                         .copyWith(color: white, fontFamily: leadingFont)),
                                   Align(
                                     alignment: Alignment.bottomLeft,
@@ -119,14 +119,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
-                          isAdmin == true ? 
+                          isAdmin == false ? 
                             Column(children: [
                             ListTileWidget(
                             text: "Kampanya İşlemleri",
                             child: FaIcon(FontAwesomeIcons.tags,size: 16,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
+                              progressHUD!.show(); 
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CampaignOperationPage()));  
                               progressHUD.dismiss();
                             },
@@ -136,7 +136,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: FaIcon(FontAwesomeIcons.calendarCheck,size: 18,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
+                              progressHUD!.show(); 
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> AppointmentOperationPage()));    
                               progressHUD.dismiss();
                             },
@@ -146,7 +146,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: FaIcon(FontAwesomeIcons.questionCircle,size: 18,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
+                              progressHUD!.show(); 
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyInformationPage()));      
                               progressHUD.dismiss();
                             },
@@ -167,7 +167,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: LineIcon(LineIcons.fileContract,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
+                              progressHUD!.show(); 
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/license.html")));  
                               progressHUD.dismiss();
                             },
@@ -177,7 +177,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: LineIcon(LineIcons.fileSignature,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
+                              progressHUD!.show(); 
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/usage.html")));  
                               progressHUD.dismiss();
                             },
@@ -187,7 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: LineIcon(LineIcons.file,color: white),
                             onTap: (){
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
+                              progressHUD!.show(); 
                               Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: "https://estetikvitrini.com/privacy.html"))); 
                               progressHUD.dismiss();
                             },
@@ -222,7 +222,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Icon(Icons.exit_to_app,color: white),
                             onTap: ()async{
                             final progressUHD = ProgressHUD.of(context); 
-                            progressUHD.show();
+                            progressUHD!.show();
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             // shared preferences nesnelerinin silinmesi                
                             prefs.remove("user");

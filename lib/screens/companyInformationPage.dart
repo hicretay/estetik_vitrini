@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class CompanyInformationPage extends StatefulWidget {
-  CompanyInformationPage({Key key}) : super(key: key);
+  CompanyInformationPage({Key? key}) : super(key: key);
 
   @override
   _CompanyInformationPageState createState() => _CompanyInformationPageState();

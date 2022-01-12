@@ -129,7 +129,7 @@ class NavigationProvider extends ChangeNotifier {
 
   List<Screen> get screens => _screens.values.toList();
 
-  Screen get currentScreen => _screens[_currentScreenIndex];
+  Screen? get currentScreen => _screens[_currentScreenIndex];
 
 //-----------------------Sayfa yönlendirme fonksiyonu---------------------
 //NavigationProvider.of(context).setTab(PAGENAME); şeklinde kullanılacak.
@@ -148,9 +148,10 @@ class NavigationProvider extends ChangeNotifier {
     void _scrollToStart() async{
     await Future.delayed(const Duration(milliseconds: 300));
     SchedulerBinding.instance?.addPostFrameCallback((_) {
-        if (currentScreen.scrollController != null) {
-        currentScreen.scrollController.animateTo(
-        currentScreen.scrollController.position.minScrollExtent,
+        // ignore: unnecessary_null_comparison
+        if (currentScreen!.scrollController != null) {
+        currentScreen!.scrollController.animateTo(
+        currentScreen!.scrollController.position.minScrollExtent,
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
       );
@@ -159,8 +160,8 @@ class NavigationProvider extends ChangeNotifier {
   }
 
   Future<bool> onWillPop(BuildContext context) async { 
-    final currentNavigatorState = currentScreen.navigatorState.currentState;
-    if (currentNavigatorState.canPop()) {
+    final currentNavigatorState = currentScreen!.navigatorState.currentState;
+    if (currentNavigatorState!.canPop()) {
       currentNavigatorState.pop();
       return false;
     } else {

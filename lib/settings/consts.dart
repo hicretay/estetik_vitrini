@@ -14,7 +14,7 @@ BoxDecoration reservationBoxDecoration = BoxDecoration(
 
 
 Text leadingText(BuildContext context, String leading) {
-  return Text(leading,style: Theme.of(context).textTheme.headline4.copyWith(color: white, fontFamily: leadingFont));
+  return Text(leading,style: Theme.of(context).textTheme.headline4!.copyWith(color: white, fontFamily: leadingFont));
 }
 
 const primaryColor = Color(0xFF141414);
@@ -65,4 +65,4 @@ var circularBasic = Center(child: Padding(
 
 bool isThemeDark = false;
 ThemeData theme = ThemeData();
-Color iconCol;
+Color? iconCol;

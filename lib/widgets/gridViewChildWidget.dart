@@ -2,10 +2,10 @@ import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 class GridViewChildWidget extends StatefulWidget {
-  final String time;
+  final String? time;
 
   const GridViewChildWidget({
-    Key key,
+    Key? key,
     this.time,
   }) : super(key: key);
 
@@ -23,7 +23,7 @@ class _GridViewChildWidgetState extends State<GridViewChildWidget> {
       color: isPressed ? secondaryColor : Colors.white,
       child: TextButton(
         child: Text(
-          widget.time,
+          widget.time!,
           style: TextStyle(
             color: isPressed ? Colors.white : primaryColor,
           ),

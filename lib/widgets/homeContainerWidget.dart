@@ -6,17 +6,17 @@ import 'leadingRowWidget.dart';
 
 class HomeContainerWidget extends StatefulWidget {
   //homePage sayfasında post görünümü oluşturulmasında kullanıldı
-  final String cardText; // resimde yer alacak metin
-  final String companyLogo; // resimde yer alacak metin
-  final String companyName; // resimde yer alacak metin
-  final String contentPicture;
-  final VoidCallback onPressed; // detaylı bilgi butonu olayı
-  final Widget child, likeButton, starButton;
-  final Color pinColor;
-  final VoidCallback onPressedLocation, onPressedPhone, homeDetailOntap, logoOnTap;
+  final String? cardText; // resimde yer alacak metin
+  final String? companyLogo; // resimde yer alacak metin
+  final String? companyName; // resimde yer alacak metin
+  final String? contentPicture;
+  final VoidCallback? onPressed; // detaylı bilgi butonu olayı
+  final Widget? child, likeButton, starButton;
+  final Color? pinColor;
+  final VoidCallback? onPressedLocation, onPressedPhone, homeDetailOntap, logoOnTap;
 
   const HomeContainerWidget(
-      {Key key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton, this.homeDetailOntap, this.logoOnTap})
+      {Key? key, this.cardText, this.onPressed, this.child, this.pinColor, this.companyLogo, this.companyName, this.contentPicture,this.onPressedLocation, this.onPressedPhone, this.likeButton, this.starButton, this.homeDetailOntap, this.logoOnTap})
       : super(key: key);
 
   @override
@@ -50,10 +50,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                     padding: const EdgeInsets.only(top: maxSpace, bottom: maxSpace),
                     //Leading Widgetı
                     child: LeadingRowWidget(
-                      companyLogo: widget.companyLogo,
-                      companyName: widget.companyName,
-                      starButton: widget.starButton,
-                      logoOnTap: widget.logoOnTap,
+                      companyLogo: widget.companyLogo!,
+                      companyName: widget.companyName!,
+                      starButton: widget.starButton!,
+                      logoOnTap: widget.logoOnTap!,
                     ),
                   ),
                   Flexible(
@@ -74,7 +74,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                               borderRadius:  BorderRadius.vertical(top: Radius.circular(maxSpace)),
                               image: DecorationImage(
                                 fit: BoxFit.fitWidth,
-                                image: NetworkImage(widget.contentPicture),
+                                image: NetworkImage(widget.contentPicture!),
                               ),
                             ),
                           ),
@@ -94,7 +94,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         color: secondaryTransparentColor,
                       ),
                       child: Text(
-                        widget.cardText, 
+                        widget.cardText!, 
                         style: TextStyle(
                           fontFamily: contentFont,
                             color: primaryColor,
@@ -125,7 +125,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                       child: Row(
                                         children: [
                                       //------------------------------BEĞEN ICONBUTTONI-------------------------------
-                                          widget.likeButton,
+                                          widget.likeButton!,
                                       //------------------------------------------------------------------------------
                                       // //------------------------------PAYLAŞ ICONBUTTONI---------------------------
                                       //   IconButton(icon: Icon(Icons.share_outlined,color: primaryColor),
@@ -154,7 +154,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                             "Detaylı Bilgi İçin",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyText1
+                                                .bodyText1!
                                                 .copyWith(color: primaryColor),
                                           ),
                                           Icon( LineIcons.arrowRight, // sağa ok ikonu

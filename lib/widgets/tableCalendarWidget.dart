@@ -4,9 +4,9 @@ import 'package:table_calendar/table_calendar.dart';
 
 // ignore: must_be_immutable
 class TableCalendarWidget extends StatefulWidget {
-  final CalendarFormat calendarFormat;
+  final CalendarFormat? calendarFormat;
   TableCalendarWidget({this.calendarFormat});
-  String selectedDay;
+  late String selectedDay;
 
   @override
   _TableCalendarWidgetState createState() => _TableCalendarWidgetState();
@@ -15,7 +15,7 @@ class TableCalendarWidget extends StatefulWidget {
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
-  Map<DateTime, List<Event>> selectedEvents;
+  late Map<DateTime, List<Event>> selectedEvents;
 
   List<Event> _getEventsForDay(DateTime date) {
     return selectedEvents[date] ?? [];
@@ -36,7 +36,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
       lastDay: DateTime.utc(2030, 3, 14),
       shouldFillViewport: false,
       startingDayOfWeek: StartingDayOfWeek.monday,
-      calendarFormat: widget.calendarFormat,
+      calendarFormat: widget.calendarFormat!,
       calendarStyle: CalendarStyle(
         isTodayHighlighted: true,
         selectedDecoration: BoxDecoration(
@@ -75,8 +75,8 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
 }
 
 class Event {
-  final String operation;
+  final String? operation;
   Event({this.operation});
 
-  String toString() => this.operation;
+  String toString() => this.operation!;
 }

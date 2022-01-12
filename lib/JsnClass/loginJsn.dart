@@ -10,8 +10,8 @@ class LoginJsn {
         this.result,
     });
 
-    bool success;
-    Result result;
+    bool? success;
+    Result? result;
 
     factory LoginJsn.fromJson(Map<String, dynamic> json) => LoginJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class LoginJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": result.toJson(),
+        "result": result!.toJson(),
     };
 }
 
@@ -34,12 +34,12 @@ class Result {
         this.admin,
     });
 
-    int id;
-    String nameSurname;
+    int? id;
+    String? nameSurname;
     dynamic country;
     dynamic city;
     dynamic county;
-    bool admin;
+    bool? admin;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

@@ -7,7 +7,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 
 class CampaignOperationPage extends StatefulWidget {
-  CampaignOperationPage({Key key}) : super(key: key);
+  CampaignOperationPage({Key? key}) : super(key: key);
 
   @override
   _CampaignOperationPageState createState() => _CampaignOperationPageState();

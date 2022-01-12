@@ -15,7 +15,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class ReservationPage extends StatefulWidget {
   static const route = "reservationPage";
-  ReservationPage({Key key}) : super(key: key);
+  ReservationPage({Key? key}) : super(key: key);
 
   @override
   _ReservationPageState createState() => _ReservationPageState();
@@ -23,37 +23,37 @@ class ReservationPage extends StatefulWidget {
 
 class _ReservationPageState extends State<ReservationPage> {
   TextEditingController teSearch = TextEditingController();
-  List appointmentList;
-  List companyContent;
-  List homeContent;
+  List? appointmentList;
+  List? companyContent;
+  List? homeContent;
 
-  String select; // firma seçimi dropDown değeri
+  String? select; // firma seçimi dropDown değeri
 
-  int userIdData;
+  int? userIdData;
 
   Future appointmentListFunc() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     userIdData = prefs.getInt("userIdData"); 
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
-    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(userIdData,calendarDate);
+    final AppointmentListJsn? appointmentNewList = await appointmentListJsnFunc(userIdData!,calendarDate);
     setState(() {
-      appointmentList = appointmentNewList.result;
+      appointmentList = appointmentNewList!.result;
     });
   }
 
   Future companyListFunc() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   final CompanyListJsn? companyNewList = await companyListJsnFunc(); 
    setState(() {
-      companyContent = companyNewList.result;
+      companyContent = companyNewList!.result;
    });
    }
 
    Future homeContentList() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
      userIdData = prefs.getInt("userIdData"); 
-     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(userIdData,0); 
+     final ContentStreamJsn? homeContentNewList = await contentStreamJsnFunc(userIdData!,0); 
      setState(() {
-        homeContent = homeContentNewList.result;
+        homeContent = homeContentNewList!.result;
      });
    }
 
@@ -65,11 +65,11 @@ class _ReservationPageState extends State<ReservationPage> {
     // DateTime.utc(2022, 9, 10):[Event(operation: "işlem"),],
   };
 
-  List<Event> _getEventsForDay(DateTime date) {
-    return selectedEvents[date] ?? [
-    // Event(operation: "deneme"),
-    ];
-  }
+  // List<Event>? _getEventsForDay(DateTime date) {
+  //   return selectedEvents[date] ?? [
+  //   // Event(operation: "deneme"),
+  //   ];
+  // }
 
   @override
   void initState() { 
@@ -78,7 +78,7 @@ class _ReservationPageState extends State<ReservationPage> {
     appointmentListFunc();
     companyListFunc();
     homeContentList();
-    WidgetsBinding.instance.addPostFrameCallback((_){ 
+    WidgetsBinding.instance!.addPostFrameCallback((_){ 
     //code will run when widget rendering complete
   });
   }
@@ -180,7 +180,7 @@ class _ReservationPageState extends State<ReservationPage> {
                     Text("randevularım", //Büyük Başlık
                          style: Theme.of(context)
                              .textTheme
-                             .headline3
+                             .headline3!
                              .copyWith(color: white, fontFamily: leadingFont),
                          maxLines: 2,
                        ),
@@ -240,7 +240,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                 formatButtonVisible: false,
                                 titleCentered: true,
                               ),
-                              eventLoader: _getEventsForDay,
+                              //eventLoader: _getEventsForDay,
                                   )
                                   ),
                                 Padding(
@@ -262,16 +262,16 @@ class _ReservationPageState extends State<ReservationPage> {
                                     child: ListView.builder(
                                       padding: EdgeInsets.all(0),
                                       shrinkWrap : true,
-                                      itemCount  : appointmentList == null ? 0 : appointmentList.length,
+                                      itemCount  : appointmentList == null ? 0 : appointmentList!.length,
                                       controller: NavigationProvider.of(context).screens[RESERVATION_PAGE].scrollController,
                                       itemBuilder: (BuildContext context, int index){  
                                       return ResevationResultWidget(
-                                      companyName : appointmentList[index].companyName,
-                                      operation   : appointmentList[index].operationName,
-                                      time        : appointmentList[index].appointmentTime,
-                                      date        : appointmentList[index].appointmentDate,
+                                      companyName : appointmentList![index].companyName,
+                                      operation   : appointmentList![index].operationName,
+                                      time        : appointmentList![index].appointmentTime,
+                                      date        : appointmentList![index].appointmentDate,
                                       confirmButton: GestureDetector(child: 
-                                                     Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
+                                                     Icon(Icons.check_box_rounded,size: 18,color: appointmentList![index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
                                                      onTap: (){
                                                        showToast(context, "Randevu onayı bekleniyor...");
                                                      }),
@@ -290,9 +290,9 @@ class _ReservationPageState extends State<ReservationPage> {
                                                         child: Text("Evet",style: TextStyle(color: white)),
                                                         onPressed: ()async{
                                                           final progressHUD = ProgressHUD.of(context);
-                                                          progressHUD.show(); 
-                                                          final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
-                                                          if(deleteAppointment.success==true){
+                                                          progressHUD!.show(); 
+                                                          final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList![index].id);
+                                                          if(deleteAppointment!.success==true){
                                                             showToast(context, "Randevu başarıyla iptal edildi!");
                                                           }
                                                           else{
@@ -338,7 +338,7 @@ class _ReservationPageState extends State<ReservationPage> {
 }
 class Event {
   final String operation;
-  Event({this.operation});
+  Event({required this.operation});
 
   String toString() => this.operation;
 }

@@ -10,8 +10,8 @@ class ForgetPasswordJsn {
         this.result,
     });
 
-    bool success;
-    bool result;
+    bool? success;
+    bool? result;
 
     factory ForgetPasswordJsn.fromJson(Map<String, dynamic> json) => ForgetPasswordJsn(
         success: json["success"],

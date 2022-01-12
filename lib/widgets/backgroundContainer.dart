@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class BackGroundContainer extends StatefulWidget {
   // Uygulama arka planındaki renk geçişini oluşturuyor
   // favoritePage, locationPage sayfalarında kullanıldı
-  final Widget child;
+  final Widget? child;
   BackGroundContainer({this.child});
 
   @override

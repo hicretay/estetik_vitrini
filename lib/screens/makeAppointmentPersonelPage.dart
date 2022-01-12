@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -9,15 +11,15 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MakeAppointmentPersonelPage extends StatefulWidget {
-  final AppointmentObject appointment;
-  MakeAppointmentPersonelPage({Key key, this.appointment}) : super(key: key);
+  final AppointmentObject? appointment;
+  MakeAppointmentPersonelPage({Key? key, this.appointment}) : super(key: key);
 
   @override
   _MakeAppointmentPersonelPageState createState() => _MakeAppointmentPersonelPageState(appointment: appointment);
 }
 
 class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPage> {
-  AppointmentObject appointment;
+  AppointmentObject? appointment;
   List checkedOperation = [];
   int _checked = -1;
 
@@ -65,7 +67,7 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              appointment.companyNameS, 
+                              appointment!.companyNameS!, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -206,10 +208,10 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
                 icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
                 onPressed: ()async{
                   final progressHUD = ProgressHUD.of(context);
-                  progressHUD.show();
-                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
-                  if(appointment.operationId!=null){              
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
+                  progressHUD!.show();
+                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment!.operationId]); 
+                  if(appointment!.operationId!=null){              
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime!.result,appointment: appointment!)));
                   }
                   else{
                     showToast(context, "Lütfen bir personel seçiniz!");

@@ -10,8 +10,8 @@ class StoryContentJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory StoryContentJsn.fromJson(Map<String, dynamic> json) => StoryContentJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class StoryContentJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -31,9 +31,9 @@ class Result {
         this.storyContent,
     });
 
-    int id;
-    String storyContentPicture;
-    String storyContent;
+    int? id;
+    String? storyContentPicture;
+    String? storyContent;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewWidget extends StatefulWidget {
-  final String locationUrl;
-  WebViewWidget({Key key, this.locationUrl}) : super(key: key);
+  final String? locationUrl;
+  WebViewWidget({Key? key, this.locationUrl}) : super(key: key);
 
   @override
   _WebViewWidgetState createState() => _WebViewWidgetState();

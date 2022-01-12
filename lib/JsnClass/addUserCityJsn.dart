@@ -10,8 +10,8 @@ class AddUserCityJsn {
         this.result,
     });
 
-    bool success;
-    String result;
+    bool? success;
+    String? result;
 
     factory AddUserCityJsn.fromJson(Map<String, dynamic> json) => AddUserCityJsn(
         success: json["success"],

@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  final String hintText;
-  final TextEditingController textEditingController;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final List<TextInputFormatter> inputFormatters;
-  final String Function(String) validator;
+  final String? hintText;
+  final TextEditingController? textEditingController;
+  final TextInputType? keyboardType;
+  final bool? obscureText;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
 
   const TextFieldWidget({
-    Key key,
+    Key? key,
     this.hintText,
     this.textEditingController,
     this.keyboardType,
@@ -29,12 +29,12 @@ class TextFieldWidget extends StatelessWidget {
         width: deviceWidth(context),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: validator,
+          validator: validator!,
           inputFormatters: inputFormatters,
           obscuringCharacter: "*",
           controller: textEditingController,
           keyboardType: keyboardType,
-          obscureText: obscureText,
+          obscureText: obscureText!,
           cursorColor: primaryColor,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(maxSpace),

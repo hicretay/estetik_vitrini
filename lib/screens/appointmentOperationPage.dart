@@ -6,7 +6,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 
 class AppointmentOperationPage extends StatefulWidget {
-  AppointmentOperationPage({Key key}) : super(key: key);
+  AppointmentOperationPage({Key? key}) : super(key: key);
 
 
   @override

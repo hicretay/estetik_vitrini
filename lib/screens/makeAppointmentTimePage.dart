@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:estetikvitrini/screens/makeAppointmentCheckPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -9,18 +11,18 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MakeAppointmentTimePage extends StatefulWidget {
-  final AppointmentObject appointment;
-  final List companyOperationTime;
+  final AppointmentObject? appointment;
+  final List? companyOperationTime;
 
-  MakeAppointmentTimePage({Key key, this.companyOperationTime,  this.appointment}) : super(key: key);
+  MakeAppointmentTimePage({Key? key, this.companyOperationTime,  this.appointment}) : super(key: key);
 
   @override
   _MakeAppointmentTimePageState createState() => _MakeAppointmentTimePageState(companyOperationTime: companyOperationTime, appointment: appointment);
 }
 
 class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
-  AppointmentObject appointment;
-  List companyOperationTime;
+  AppointmentObject? appointment;
+  List? companyOperationTime;
 
 
   _MakeAppointmentTimePageState({this.companyOperationTime,  this.appointment});
@@ -51,7 +53,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              appointment.companyNameS, 
+                              appointment!.companyNameS!, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -73,11 +75,11 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                           child: Column(
                             children: [
                             Padding(padding: const EdgeInsets.all(defaultPadding),
-                            child: (companyOperationTime.isEmpty || companyOperationTime.length == 0) ? Center(child: Text("Uygun saat bulunamadı !")) : 
+                            child: (companyOperationTime!.isEmpty || companyOperationTime!.length == 0) ? Center(child: Text("Uygun saat bulunamadı !")) : 
                             GridView.builder(
                               
                               shrinkWrap: true,                 
-                              itemCount: companyOperationTime.length,
+                              itemCount: companyOperationTime!.length,
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 childAspectRatio: (1 / .5),
                                 crossAxisCount : 4,
@@ -89,7 +91,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                                 color: _checked == index ? secondaryColor : Theme.of(context).backgroundColor, 
                                 child: TextButton(
                                   child: Center(
-                                  child: Text(companyOperationTime[index].operationStartTime,
+                                  child: Text(companyOperationTime![index].operationStartTime,
                                        style: TextStyle(
                                        color: Theme.of(context).hintColor,
                                        ),
@@ -99,9 +101,9 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                                     setState(() {
                                       //butona basıldığında değeri günceller
                                       _checked = index;
-                                      appointment.appointmentTimeId = companyOperationTime[index].id;
-                                      appointment.timeS = companyOperationTime[index].operationStartTime;
-                                      print(companyOperationTime[index].id.toString());
+                                      appointment!.appointmentTimeId = companyOperationTime![index].id;
+                                      appointment!.timeS = companyOperationTime![index].operationStartTime;
+                                      print(companyOperationTime![index].id.toString());
 
                                     });
                                   },
@@ -124,10 +126,10 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
             buttonText: "Randevuyu Tamamla",
             icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
             onPressed: (){
-            print(appointment.timeS);
+            print(appointment!.timeS);
             final progressHUD = ProgressHUD.of(context);
-            progressHUD.show();
-            if(appointment.timeS!=null){
+            progressHUD!.show();
+            if(appointment!.timeS!=null){
             Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentCheckPage(appointment: appointment)));
             }
             else{

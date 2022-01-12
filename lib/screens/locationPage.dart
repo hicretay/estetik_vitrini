@@ -21,28 +21,28 @@ class LocationPage extends StatefulWidget{
 
 class _LocationPageState extends State<LocationPage> {
 
-  String selection;
+  String? selection;
   List cities = [];
   List counties = [];
   List checkedCounty = [];
   Map<dynamic,bool> countyMap = {};
-  int userIdData;
+  int? userIdData;
 
    Future cityList() async{
-   final CityJsn cityNewList = await cityJsnFunc(); 
+   final CityJsn? cityNewList = await cityJsnFunc(); 
    if (!mounted)
    return;
    setState(() {
-      cities = cityNewList.result;
+      cities = cityNewList!.result!;
    });
  }
    
    Future countyList() async{
-   final CountyJsn countiesNewList = await countyJsnFunc(selection ==null ? "İSTANBUL" : selection); 
+   final CountyJsn? countiesNewList = await countyJsnFunc(selection == null ? "İSTANBUL" : selection!); 
    if (!mounted)
    return;
    setState(() {     
-      counties = countiesNewList.result;
+      counties = countiesNewList!.result!;
       for (var temp in counties) {
         Map<dynamic,bool> newItem = {temp:false};
         countyMap.addEntries(newItem.entries);
@@ -122,7 +122,7 @@ class _LocationPageState extends State<LocationPage> {
                               Text("Favori Bölgeler", //Büyük Başlık
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline3
+                                    .headline3!
                                     .copyWith(color: white, fontFamily: leadingFont),
                                 maxLines: 2,
                               ),
@@ -145,7 +145,7 @@ class _LocationPageState extends State<LocationPage> {
                           child: Text("Lütfen en az bir tane bölge seçiniz.", // Alt Başlık
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle1
+                                .subtitle1!
                                 .copyWith(color: white),
                           ),
                         ),
@@ -213,7 +213,7 @@ class _LocationPageState extends State<LocationPage> {
                                        setState(() {
                                          countyMap.clear();
                                          counties.clear();
-                                         selection = value;
+                                         selection = value as String?;
                                        });
                                        },
                                ),

@@ -10,7 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SearchPage extends StatefulWidget {
    static const route = "searchPage";
-  SearchPage({Key key}) : super(key: key);
+  SearchPage({Key? key}) : super(key: key);
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -21,11 +21,11 @@ class _SearchPageState extends State<SearchPage> {
   List selectedCompanies = [];
   bool isFirstTime = true;
 
-   Future<CompanyListJsn> allCompaniesList() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   Future<CompanyListJsn?> allCompaniesList() async{
+   final CompanyListJsn? companyNewList = await companyListJsnFunc(); 
    if(mounted)
    setState(() {
-      allCompanies = companyNewList.result;
+      allCompanies = companyNewList!.result!;
    });
    return companyNewList;
    }
@@ -38,7 +38,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<CompanyListJsn>(
+    return FutureBuilder<CompanyListJsn?>(
       future: allCompaniesList(),
       builder: (context, snapshot) {
         if(snapshot.hasError){
@@ -201,8 +201,8 @@ class _SearchPageState extends State<SearchPage> {
                       ))),
                       onTap: ()async{
                         final progressUHD = ProgressHUD.of(context);
-                        progressUHD.show();
-                        final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(selectedCompanies[index].id);
+                        progressUHD!.show();
+                        final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(selectedCompanies[index].id);
                         Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                         progressUHD.dismiss();
                       },

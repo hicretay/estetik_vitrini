@@ -2,14 +2,14 @@ import 'package:estetikvitrini/settings/consts.dart';
 import 'package:flutter/material.dart';
 
 class InformationRowWidget extends StatefulWidget {
-  final String operationName;
-  final double width;
-  final double height;
-  final Widget child;
-  final Color containerColor;
+  final String? operationName;
+  final double? width;
+  final double? height;
+  final Widget? child;
+  final Color? containerColor;
 
   const InformationRowWidget(
-      {Key key, this.operationName, this.width, this.height, this.child, this.containerColor});
+      {Key? key, this.operationName, this.width, this.height, this.child, this.containerColor});
 
   @override
   _InformationRowWidgetState createState() => _InformationRowWidgetState();
