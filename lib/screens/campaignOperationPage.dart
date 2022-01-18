@@ -185,7 +185,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                                 color: primaryColor),
                                 onPressed: (){},),
                             //------------------------------------------------------------------------------
-                            //-----------------------------DÜZENLEME ICONBUTTONI--------------------------------
+                            //-----------------------------ONAYLAMA ICONBUTTONI--------------------------------
                               IconButton(
                                 padding: EdgeInsets.all(0),
                               icon: Icon(LineIcons.edit,

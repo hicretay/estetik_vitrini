@@ -5,6 +5,7 @@ import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
+import 'package:estetikvitrini/JsnClass/companyAppointmentListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationTime.dart';
@@ -221,8 +222,8 @@ Future<CompanyOperationTimeJsn?> companyOperationTimeJsnFunc(List id) async {
 }
 //----------------------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------Randevular Listesi Fonksiyonu-------------------------------------------------
-Future<AppointmentListJsn?> appointmentListJsnFunc(int userId, String appointmentDate) async {
+//-----------------------------------------------Kullanıcının Randevuları Listesi Fonksiyonu-------------------------------------------------
+Future<AppointmentListJsn?> appointmentListJsnFunc(int userId, String? appointmentDate) async {
   final response = await http.post(
     Uri.parse(url + "Appointment/List"),
     body: '{"userId":' + userId.toString() + ',' +  '"appointmentDate":' + '"$appointmentDate"' + '}', 
@@ -232,6 +233,22 @@ Future<AppointmentListJsn?> appointmentListJsnFunc(int userId, String appointmen
   if (response.statusCode == 200) {
     final String responseString = response.body;
     return appointmentListJsnFromJson(responseString);
+  } else {
+    return null;
+  }
+}
+//-----------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------Firma Sahibinin Randevuları Listesi Fonksiyonu-------------------------------------------------
+Future<CompanyAppointmentListJsn?> appointmentCompanyListJsnFunc(int userId, String? appointmentDate) async {
+  final response = await http.post(
+    Uri.parse(url + "Appointment/CompanyList"),
+    body: '{"userId":' + userId.toString() + ',' +  '"appointmentDate":' + '"$appointmentDate"' + '}', 
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return companyAppointmentListJsnFromJson(responseString);
   } else {
     return null;
   }
@@ -288,6 +305,30 @@ Future<AppointmentDeleteJsn?> appointmentDeleteJsnFunc(int id) async{
   }
 }
 //------------------------------------------------------------------------------------------------------------------------
+
+//--------------------------------------------- Randevu Onaylama Fonksiyonu-----------------------------------------------------
+Future<AppointmentDeleteJsn?> appointmentApproveJsnFunc(int id) async{
+  var bodys ={};
+  bodys["id"] = id;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "Appointment/CompanyConfirm"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return appointmentDeleteJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------
+
 
 //---------------------------------------------Kullanıcı Kayıt Fonksiyonu-----------------------------------------------------
 Future<AddUserJsn?> userAddJsnFunc(String nameSurname, String email, String telephone, String password, String facebookToken, String googleToken) async{

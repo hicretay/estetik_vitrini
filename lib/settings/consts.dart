@@ -17,6 +17,10 @@ Text leadingText(BuildContext context, String leading) {
   return Text(leading,style: Theme.of(context).textTheme.headline4!.copyWith(color: white, fontFamily: leadingFont));
 }
 
+TextStyle reservationText(BuildContext context){
+  return TextStyle(fontFamily: leadingFont,fontSize: 17);
+}
+
 const primaryColor = Color(0xFF141414);
 const primaryTransparentColor = Color(0x80352A4D);
 const secondaryColor = Color(0xFF9C7BAD);

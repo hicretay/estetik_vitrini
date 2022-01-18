@@ -29,7 +29,6 @@ class TextFieldWidget extends StatelessWidget {
         width: deviceWidth(context),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: validator!,
           inputFormatters: inputFormatters,
           obscuringCharacter: "*",
           controller: textEditingController,
