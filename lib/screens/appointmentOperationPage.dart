@@ -373,7 +373,7 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                                       IconButton(
                                         padding: EdgeInsets.all(0),
                                       icon: Icon(LineIcons.checkSquare,
-                                      color: primaryColor,
+                                      color: appointmentList![index].confirmed == true ? Colors.green : primaryColor,
                                       size : iconSize),
                                       onPressed : ()async{
                                         showDialog(context: context, builder: (BuildContext context){
