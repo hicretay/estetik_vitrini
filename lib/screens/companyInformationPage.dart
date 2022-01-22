@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
@@ -6,15 +7,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class CompanyInformationPage extends StatefulWidget {
-  CompanyInformationPage({Key? key}) : super(key: key);
+  final CompanyProfileJsn? companyProfile;
+  CompanyInformationPage({Key? key, this.companyProfile}) : super(key: key);
 
   @override
-  _CompanyInformationPageState createState() => _CompanyInformationPageState();
+  _CompanyInformationPageState createState() => _CompanyInformationPageState(companyProfile: companyProfile);
 }
 
 class _CompanyInformationPageState extends State<CompanyInformationPage> {
+  CompanyProfileJsn? companyProfile;
+  _CompanyInformationPageState({this.companyProfile});
 
   TextEditingController teCompanyName = TextEditingController();
+  TextEditingController teEPosta = TextEditingController();
+  TextEditingController teTel1 = TextEditingController();
+  TextEditingController teTel2= TextEditingController();
+  TextEditingController teWeb = TextEditingController();
+  TextEditingController teGoogleAddress = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
         return SafeArea(
@@ -55,7 +65,7 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("companyManager / companyName",  
+                          child: Text(companyProfile!.result!.companyName!,  
                           style: TextStyle(color: Colors.white,fontSize: 20),
                           ),
                         ),
@@ -77,7 +87,7 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
                             height: deviceHeight(context)*0.15,
                             decoration: BoxDecoration(
                             image: DecorationImage(
-                            image: AssetImage("assets/images/logo.png")))),
+                            image: NetworkImage(companyProfile!.result!.companyLogo!)))),
                         ),
                         Container(
                           width: deviceWidth(context),
@@ -87,46 +97,46 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
                           ),
                         ),
                         TextFieldWidget(
-                          hintText: "Firma İsmi",
+                          hintText: companyProfile!.result!.companyName == null || companyProfile!.result!.companyName == "" ? "Firma Adı" : companyProfile!.result!.companyName,
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
                           textEditingController: teCompanyName,
                         ),
                         TextFieldWidget(
-                          hintText: "Firma E-Posta",
+                          hintText: companyProfile!.result!.eMail == null || companyProfile!.result!.eMail == "" ? "Firma E-Posta" : companyProfile!.result!.eMail,
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
-                          textEditingController: teCompanyName,
+                          textEditingController: teEPosta,
                         ),
                         TextFieldWidget(
-                          hintText: "Firma Telefon - 1",
+                          hintText: companyProfile!.result!.companyPhone == null ||  companyProfile!.result!.companyPhone == "" ? "Firma Telefonu" :  companyProfile!.result!.companyPhone,
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
-                          textEditingController: teCompanyName,
+                          textEditingController: teTel1,
                         ),
                         TextFieldWidget(
-                          hintText: "Firma Telefon - 2",
+                          hintText: companyProfile!.result!.companyPhone2 == null || companyProfile!.result!.companyPhone2 == "" ? "Firma Telefonu 2" : companyProfile!.result!.companyPhone2,
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
-                          textEditingController: teCompanyName,
+                          textEditingController: teTel2,
                         ),
                         TextFieldWidget(
-                          hintText: "Firma Google Linki",
+                          hintText: companyProfile!.result!.web == null || companyProfile!.result!.web == "" ? "Firma Google Linki" : companyProfile!.result!.web,
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
-                          textEditingController: teCompanyName,
+                          textEditingController: teWeb,
                         ),
                         TextFieldWidget(
-                          hintText: "Firma Adresi",
+                          hintText: companyProfile!.result!.googleAdressLink == null || companyProfile!.result!.googleAdressLink == "" ? "Firma Adresi" : companyProfile!.result!.googleAdressLink,
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
-                          textEditingController: teCompanyName,
+                          textEditingController: teGoogleAddress,
                         ),
                         Container(
                           width: deviceWidth(context),

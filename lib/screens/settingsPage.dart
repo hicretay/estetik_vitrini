@@ -150,10 +150,11 @@ class _SettingsPageState extends State<SettingsPage> {
                           ListTileWidget(
                             text: "Firma Bilgileri",
                             child: FaIcon(FontAwesomeIcons.questionCircle,size: 18,color: white),
-                            onTap: (){
+                            onTap: ()async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD!.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyInformationPage()));      
+                              final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(1); // companyContent![index].id
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyInformationPage(companyProfile: companyProfile)));      
                               progressHUD.dismiss();
                             },
                           ),
