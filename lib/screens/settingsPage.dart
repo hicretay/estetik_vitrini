@@ -1,8 +1,10 @@
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:estetikvitrini/screens/appointmentOperationPage.dart';
 import 'package:estetikvitrini/screens/campaignOperationPage.dart';
 import 'package:estetikvitrini/screens/companyInformationPage.dart';
 import 'package:estetikvitrini/screens/locationPage.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
@@ -124,10 +126,14 @@ class _SettingsPageState extends State<SettingsPage> {
                             ListTileWidget(
                             text: "Kampanya İşlemleri",
                             child: FaIcon(FontAwesomeIcons.tags,size: 16,color: white),
-                            onTap: (){
+                            onTap: ()async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD!.show(); 
-                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CampaignOperationPage()));  
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              // ignore: unused_local_variable
+                              int? userIdData = prefs.getInt("userIdData"); 
+                              final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(1); //userIdData
+                              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CampaignOperationPage(companyProfile: companyProfile,)));  
                               progressHUD.dismiss();
                             },
                           ),

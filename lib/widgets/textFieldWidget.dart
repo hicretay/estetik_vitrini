@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool? obscureText;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
+  final VoidCallback? onTap;
 
   const TextFieldWidget({
     Key? key,
@@ -17,7 +18,8 @@ class TextFieldWidget extends StatelessWidget {
     this.keyboardType,
     this.obscureText, 
     this.inputFormatters,
-    this.validator
+    this.validator, 
+    this.onTap
   }) : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class TextFieldWidget extends StatelessWidget {
         width: deviceWidth(context),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          onTap: onTap,
           inputFormatters: inputFormatters,
           obscuringCharacter: "*",
           controller: textEditingController,

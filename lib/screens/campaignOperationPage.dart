@@ -1,3 +1,4 @@
+import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/screens/newCampaignPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -7,13 +8,18 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 
 class CampaignOperationPage extends StatefulWidget {
-  CampaignOperationPage({Key? key}) : super(key: key);
+  final CompanyProfileJsn? companyProfile;
+
+  CampaignOperationPage({Key? key, this.companyProfile}) : super(key: key);
 
   @override
-  _CampaignOperationPageState createState() => _CampaignOperationPageState();
+  _CampaignOperationPageState createState() => _CampaignOperationPageState(companyProfile: companyProfile);
 }
 
 class _CampaignOperationPageState extends State<CampaignOperationPage> {
+  CompanyProfileJsn? companyProfile;
+  _CampaignOperationPageState({this.companyProfile});
+
   @override
   Widget build(BuildContext context) {
         return SafeArea(
@@ -39,7 +45,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                         ),
                       ),
                       SizedBox(width: maxSpace),
-                      Text("Kampanya Islemleri",
+                      Text("Kampanya İşlemleri",
                       style     : TextStyle(
                       fontFamily: leadingFont, 
                       fontSize  : 25, 
@@ -54,7 +60,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("companyManager / companyName",  
+                          child: Text(companyProfile!.result!.companyName!,  
                           style: TextStyle(color: Colors.white,fontSize: 20),
                           ),
                         ),
@@ -85,9 +91,13 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                         ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 3,
+                          itemCount: companyProfile!.result!.campaignList!.length,
                           itemBuilder: (BuildContext context, int index){
-                          return buildCampaignCard(context);
+                          return buildCampaignCard(
+                            context, 
+                            companyProfile!.result!.campaignList![index].campaingLogo!,
+                            companyProfile!.result!.campaignList![index].campaingName!,
+                          );
                         })
                       ]),
                     ),
@@ -102,7 +112,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
   );
   }
 
-  Padding buildCampaignCard(BuildContext context) {
+  Padding buildCampaignCard(BuildContext context, String campaignImage, String campaignLeading) {
     return Padding(
     padding: const EdgeInsets.all(maxSpace),
     child: Column(
@@ -131,7 +141,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(maxSpace),
                         image: DecorationImage(
-                          image: AssetImage("assets/images/logo.png"),
+                          image: NetworkImage(campaignImage)
                         ),
                       ),
                       //------------------------------------------------------------------
@@ -148,7 +158,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                       color:  secondaryTransparentColor,
                     ),
                     child: Text(
-                      "campaign leading", 
+                      campaignLeading, 
                       style: TextStyle(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
