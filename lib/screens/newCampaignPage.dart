@@ -9,6 +9,7 @@ import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class NewCampaignPage extends StatefulWidget {
@@ -86,6 +87,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                           children: [
                             imagesList != null ?
                             ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
                               itemCount: imagesList.length,
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index){
@@ -167,7 +169,8 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
 
     setState(() {
       if(selected != null){
-        selectedImage = File(selected.path);       
+        //selectedImage = File(selected.path);   
+        imageCrop(File(selected.path)); 
       }
     });   
     if(selectedImage != null){
@@ -175,5 +178,20 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
     base64Image = imageToBase64(selectedImage!);
     }
   }
-  
+
+  void imageCrop(File image) async{
+  File? croppedImage = await ImageCropper.cropImage(
+  sourcePath: image.path,
+  //aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+  aspectRatioPresets: [
+    CropAspectRatioPreset.ratio16x9
+  ]
+);
+
+  if(croppedImage != null){
+    setState(() {
+      selectedImage = croppedImage;
+    });
+  }
+ }
 }
