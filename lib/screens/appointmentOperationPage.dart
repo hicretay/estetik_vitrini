@@ -121,17 +121,9 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                             onRefresh:()=> appointmentListFunc(),
                                   color: primaryColor,
                                   backgroundColor: secondaryColor,
-                            child: FutureBuilder<dynamic>(
-                              future: appointmentListFunc(),
-                              builder: (context, snapshot) {
-                                if(snapshot.hasError){
-                                  return Center(child: Text("Hata Oluştu"));
-                                }
-                                else{
-                                  if(snapshot.hasData){
-                                  dynamic appointmentData = snapshot.requireData;
-                                  return SingleChildScrollView(
-                                  child: Column(children: [
+                            child: SingleChildScrollView(
+                                  child: appointmentList == null ? circularBasic :
+                                  Column(children: [
                                     Padding(
                                       padding: EdgeInsets.only(top: deviceHeight(context)*0.01),
                                       child: GestureDetector(
@@ -159,28 +151,24 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                                   ListView.builder(
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
-                                    itemCount: appointmentData.length == null ? 0 :appointmentData.length,
+                                    itemCount: appointmentList == null ? 0 : appointmentList!.length,
                                     itemBuilder: (BuildContext context, int index){
                                     return Center(
                                       child: buildAppointmentCard(
                                         context, 
                                         index,
-                                        appointmentData![index].customerName, 
-                                        appointmentData![index].operationName, 
-                                        appointmentData![index].appointmentTime, 
-                                        appointmentData![index].phone, 
-                                        appointmentData![index].appointmentDate,
-                                        appointmentData),
+                                        appointmentList![index].customerName, 
+                                        appointmentList![index].operationName, 
+                                        appointmentList![index].appointmentTime, 
+                                        appointmentList![index].phone, 
+                                        appointmentList![index].appointmentDate,
+                                        appointmentList),
                                     );
                                   })
                                   ],),
-                                );
-                                }
-                                else{
-                                  return circularBasic;
-                                }
-                              }
-                            }),
+                                ),
+                     
+                         
                           ),
                         ),
                       ),
