@@ -126,26 +126,52 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                                   Column(children: [
                                     Padding(
                                       padding: EdgeInsets.only(top: deviceHeight(context)*0.01),
-                                      child: GestureDetector(
-                                        child: Padding(
-                                          padding:  EdgeInsets.only(left: maxSpace),
-                                          child: Container(
-                                            width: deviceWidth(context)/2.5,
-                                            height: deviceHeight(context)*0.04,
-                                          child:Center(
-                                            child: Text("Tarihe Göre Listele",style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 17,
-                                              fontFamily: contentFont
-                                            )),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.grey),
-                                            borderRadius: BorderRadius.all(Radius.circular(minSpace))
-                                          ),
-                                          ),
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(left: maxSpace),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            GestureDetector(
+                                              child: Container(
+                                                width: deviceWidth(context)/2.5,
+                                                height: deviceHeight(context)*0.04,
+                                              child: Center(
+                                                child: Text("Tümünü Listele",style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 17,
+                                                  fontFamily: contentFont
+                                                )),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.grey),
+                                                borderRadius: BorderRadius.all(Radius.circular(minSpace))
+                                              ),
+                                              ),
+                                              onTap: (){
+                                                date = null;
+                                                appointmentListFunc();
+                                              },
+                                            ),
+                                            GestureDetector(
+                                              child: Container(
+                                                width: deviceWidth(context)/2.5,
+                                                height: deviceHeight(context)*0.04,
+                                              child: Center(
+                                                child: Text("Tarihe Göre Listele",style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 17,
+                                                  fontFamily: contentFont
+                                                )),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.grey),
+                                                borderRadius: BorderRadius.all(Radius.circular(minSpace))
+                                              ),
+                                              ),
+                                              onTap: ()=> pickDate(context),
+                                            ),
+                                          ],
                                         ),
-                                        onTap: ()=> pickDate(context),
                                       ),
                                     ),
                                   ListView.builder(
@@ -167,8 +193,6 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                                   })
                                   ],),
                                 ),
-                     
-                         
                           ),
                         ),
                       ),
@@ -458,7 +482,7 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
   if(newDate == null) return;
   setState(() {
     date = newDate;
-    //appointmentListFunc();
+    appointmentListFunc();
   });
    
  }
