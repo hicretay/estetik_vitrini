@@ -36,7 +36,6 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
   
   int? userIdData;
   File? selectedImage; // seçilen fotoğraf
-  File? existingImage; // firmanın var olan logosu
   String? base64Image; // base64'e dönüşmüş fotoğraf
 
   @override
@@ -125,6 +124,7 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
                           padding: const EdgeInsets.all(maxSpace),
                           child: Center(
                             child: CircleAvatar(
+                              backgroundColor: Colors.white,
                               radius: 80,
                               backgroundImage: selectedImage != null ? FileImage(selectedImage!) : null,
                               child: selectedImage == null ? Image.network(companyProfile!.result!.companyLogo!) : null
@@ -231,7 +231,9 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
         selectedImage = File(selected.path);
       }
     });
+    if(selectedImage != null){
     base64Image = imageToBase64(selectedImage!);
-    //print(base64Image);
+    print(base64Image);
+    }
   }
 }

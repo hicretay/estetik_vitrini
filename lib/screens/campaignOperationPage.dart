@@ -1,11 +1,13 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/screens/newCampaignPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CampaignOperationPage extends StatefulWidget {
   final CompanyProfileJsn? companyProfile;
@@ -19,6 +21,16 @@ class CampaignOperationPage extends StatefulWidget {
 class _CampaignOperationPageState extends State<CampaignOperationPage> {
   CompanyProfileJsn? companyProfile;
   _CampaignOperationPageState({this.companyProfile});
+
+  Future refreshCampaignList() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // ignore: unused_local_variable
+    int? userIdData = prefs.getInt("userIdData"); 
+    final CompanyProfileJsn? companyNewProfile = await companyListDetailJsnFunc(1); //userIdData
+    setState(() {
+      companyProfile = companyNewProfile!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,32 +86,37 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                         color: Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: maxSpace),
-                          child: Container(
-                            width: deviceWidth(context),
-                            child: TextButtonWidget(
-                              buttonText: "Yeni Kampanya Oluştur",
-                              onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>NewCampaignPage()));
-                              },
+                    child: RefreshIndicator(
+                      onRefresh:()=> refreshCampaignList(),
+                      color: primaryColor,
+                      backgroundColor: secondaryColor,
+                      child: SingleChildScrollView(
+                        child: Column(children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: maxSpace),
+                            child: Container(
+                              width: deviceWidth(context),
+                              child: TextButtonWidget(
+                                buttonText: "Yeni Kampanya Oluştur",
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>NewCampaignPage()));
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: companyProfile!.result!.campaignList!.length,
-                          itemBuilder: (BuildContext context, int index){
-                          return buildCampaignCard(
-                            context, 
-                            companyProfile!.result!.campaignList![index].campaingLogo!,
-                            companyProfile!.result!.campaignList![index].campaingName!,
-                          );
-                        })
-                      ]),
+                          ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: companyProfile!.result!.campaignList!.length,
+                            itemBuilder: (BuildContext context, int index){
+                            return buildCampaignCard(
+                              context, 
+                              companyProfile!.result!.campaignList![index].campaingLogo!,
+                              companyProfile!.result!.campaignList![index].campaingName!,
+                            );
+                          })
+                        ]),
+                      ),
                     ),
                   ),
                 ),

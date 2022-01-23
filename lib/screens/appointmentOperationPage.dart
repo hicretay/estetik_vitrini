@@ -143,6 +143,7 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                                                 )),
                                               ),
                                               decoration: BoxDecoration(
+                                                color: secondaryColor,
                                                 border: Border.all(color: Colors.grey),
                                                 borderRadius: BorderRadius.all(Radius.circular(minSpace))
                                               ),
@@ -164,6 +165,7 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
                                                 )),
                                               ),
                                               decoration: BoxDecoration(
+                                                color: secondaryColor,
                                                 border: Border.all(color: Colors.grey),
                                                 borderRadius: BorderRadius.all(Radius.circular(minSpace))
                                               ),
