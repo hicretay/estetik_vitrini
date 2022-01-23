@@ -28,8 +28,8 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
         return "";
       }
       else{
-        String a = (date!.day <= 9 ? "0"+date!.day.toString() :  date!.day.toString())+"."+ (date!.month <= 9 ? "0"+date!.month.toString() :  date!.month.toString()) +"."+date!.year.toString();
-        return a;
+        return (date!.day <= 9 ? "0"+date!.day.toString() :  date!.day.toString())+"."+ 
+        (date!.month <= 9 ? "0"+date!.month.toString() :  date!.month.toString()) +"."+date!.year.toString();
       }
     }
 

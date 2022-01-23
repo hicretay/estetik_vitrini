@@ -1,10 +1,19 @@
+// ignore_for_file: unnecessary_null_comparison
+
+import 'dart:io';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:path/path.dart';
+// import 'package:path_provider/path_provider.dart';
 
 class CompanyInformationPage extends StatefulWidget {
   final CompanyProfileJsn? companyProfile;
@@ -24,6 +33,38 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
   TextEditingController teTel2= TextEditingController();
   TextEditingController teWeb = TextEditingController();
   TextEditingController teGoogleAddress = TextEditingController();
+  
+  int? userIdData;
+  File? selectedImage; // seçilen fotoğraf
+  File? existingImage; // firmanın var olan logosu
+  String? base64Image; // base64'e dönüşmüş fotoğraf
+
+  @override
+  void initState() {
+    teCompanyName.text = (companyProfile!.result!.companyName == null || companyProfile!.result!.companyName == "" ? "" : companyProfile!.result!.companyName)!;
+    teEPosta.text = (companyProfile!.result!.eMail == null || companyProfile!.result!.eMail == "" ? "" : companyProfile!.result!.eMail)!;
+    teTel1.text = (companyProfile!.result!.companyPhone == null ||  companyProfile!.result!.companyPhone == "" ? "" :  companyProfile!.result!.companyPhone)!;
+    teTel2.text = (companyProfile!.result!.companyPhone2 == null || companyProfile!.result!.companyPhone2 == "" ? "" : companyProfile!.result!.companyPhone2)!;
+    teWeb.text = (companyProfile!.result!.web == null || companyProfile!.result!.web == "" ? "" : companyProfile!.result!.web)!;
+    teGoogleAddress.text = (companyProfile!.result!.googleAdressLink == null || companyProfile!.result!.googleAdressLink == "" ? "" : companyProfile!.result!.googleAdressLink)!;
+
+    // setState(() {
+    //   if(base64Image == null){
+    //     existingImage = File(companyProfile!.result!.companyLogo!);                                
+    //     imageToBase64(existingImage!);
+    //     print(existingImage);
+    //   }
+    // });
+    super.initState();
+  }
+
+  // Future<File?> fileFromImageUrl() async {
+  //   final response = await http.get(Uri.parse(companyProfile!.result!.companyLogo!));
+  //   final documentDirectory = await getApplicationDocumentsDirectory();
+  //   existingImage = File(join(documentDirectory.path, "image.png"));
+  //   existingImage!.writeAsBytesSync(response.bodyBytes);
+  //   return existingImage;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,67 +123,91 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
                       child: ListView(children: [
                         Padding(
                           padding: const EdgeInsets.all(maxSpace),
-                          child: Container(
-                            width: deviceWidth(context),
-                            height: deviceHeight(context)*0.15,
-                            decoration: BoxDecoration(
-                            image: DecorationImage(
-                            image: NetworkImage(companyProfile!.result!.companyLogo!)))),
+                          child: Center(
+                            child: CircleAvatar(
+                              radius: 80,
+                              backgroundImage: selectedImage != null ? FileImage(selectedImage!) : null,
+                              child: selectedImage == null ? Image.network(companyProfile!.result!.companyLogo!) : null
+                            ),
+                          )
                         ),
                         Container(
                           width: deviceWidth(context),
                           child: TextButtonWidget(
                             buttonText: "Firma Logosu Seçiniz",
-                            onPressed: (){},
+                            onPressed: (){
+                              setSelectedImage();
+                            },
                           ),
                         ),
                         TextFieldWidget(
-                          hintText: companyProfile!.result!.companyName == null || companyProfile!.result!.companyName == "" ? "Firma Adı" : companyProfile!.result!.companyName,
+                          hintText: "Firma Adı",
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
                           textEditingController: teCompanyName,
                         ),
                         TextFieldWidget(
-                          hintText: companyProfile!.result!.eMail == null || companyProfile!.result!.eMail == "" ? "Firma E-Posta" : companyProfile!.result!.eMail,
+                          hintText: "Firma E-Posta",
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
                           textEditingController: teEPosta,
                         ),
                         TextFieldWidget(
-                          hintText: companyProfile!.result!.companyPhone == null ||  companyProfile!.result!.companyPhone == "" ? "Firma Telefonu" :  companyProfile!.result!.companyPhone,
+                          hintText: "Firma Telefonu",
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
                           textEditingController: teTel1,
                         ),
                         TextFieldWidget(
-                          hintText: companyProfile!.result!.companyPhone2 == null || companyProfile!.result!.companyPhone2 == "" ? "Firma Telefonu 2" : companyProfile!.result!.companyPhone2,
+                          hintText: "Firma Telefonu 2",
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
                           textEditingController: teTel2,
                         ),
                         TextFieldWidget(
-                          hintText: companyProfile!.result!.web == null || companyProfile!.result!.web == "" ? "Firma Google Linki" : companyProfile!.result!.web,
-                          obscureText: false,
-                          inputFormatters: [],
-                          keyboardType: TextInputType.text,
-                          textEditingController: teWeb,
-                        ),
-                        TextFieldWidget(
-                          hintText: companyProfile!.result!.googleAdressLink == null || companyProfile!.result!.googleAdressLink == "" ? "Firma Adresi" : companyProfile!.result!.googleAdressLink,
+                          hintText: "Firma Google Linki",
                           obscureText: false,
                           inputFormatters: [],
                           keyboardType: TextInputType.text,
                           textEditingController: teGoogleAddress,
                         ),
+                        TextFieldWidget(
+                          hintText: "Firma Web Adresi",
+                          obscureText: false,
+                          inputFormatters: [],
+                          keyboardType: TextInputType.text,
+                          textEditingController: teWeb,
+                        ),
                         Container(
                           width: deviceWidth(context),
                           child: TextButtonWidget(
                             buttonText: "Firma Bilgilerini Kaydet",
-                            onPressed: (){},
+                            onPressed: ()async{
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              userIdData = prefs.getInt("userIdData")!; 
+                              final progressHUD = ProgressHUD.of(context);
+                              progressHUD!.show(); 
+                              final companyData = await companyInfUpdateJsnFunc(
+                                 1, 
+                                 teCompanyName.text, 
+                                 base64Image != null ? base64Image : null,
+                                 teTel1.text, 
+                                 teTel2.text, 
+                                 teGoogleAddress.text, 
+                                 teEPosta.text, 
+                                 teWeb.text);
+                              if(companyData!.success == true){
+                                showToast(context, "Firma Bilgileri Güncellendi!");
+                              }
+                              else{
+                                showToast(context, "Bir hata oluştu!");
+                              }
+                              progressHUD.dismiss();
+                            },
                           ),
                         ),
                       ]),
@@ -155,5 +220,18 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
         ),
       ),
     );
+  }
+
+  void setSelectedImage() async{
+    final picker = ImagePicker();
+    final selected = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if(selected != null){
+        selectedImage = File(selected.path);
+      }
+    });
+    base64Image = imageToBase64(selectedImage!);
+    //print(base64Image);
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:estetikvitrini/JsnClass/addUserCityJsn.dart';
 import 'package:estetikvitrini/JsnClass/addUserJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentAddJsn.dart';
@@ -6,6 +7,7 @@ import 'package:estetikvitrini/JsnClass/appointmentDeleteJsn.dart';
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/cityJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyAppointmentListJsn.dart';
+import 'package:estetikvitrini/JsnClass/companyInfUpdateJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyOperationTime.dart';
@@ -536,3 +538,51 @@ showToast(BuildContext context, String content){
     });
   }
 //---------------------------------------------------------------------------------------------------------------------------------
+
+//-----------------------------------------------Firma Bilgileri Güncelleme Fonk---------------------------------------------------
+Future<CompanyInfUpdateJsn?> companyInfUpdateJsnFunc(
+  int id, 
+  String companyName, 
+  String? companyLogo, 
+  String companyPhone, 
+  String companyPhone2, 
+  String googleAdressLink, 
+  String eMail, 
+  String address) async{
+
+  var bodys ={};
+  bodys["id"]               = id;
+  bodys["companyName"]      = companyName;
+  bodys["companyLogo"]      = companyLogo;
+  bodys["companyPhone"]     = companyPhone;
+  bodys["companyPhone2"]    = companyPhone2;
+  bodys["googleAdressLink"] = googleAdressLink;
+  bodys["eMail"]            = eMail;
+  bodys["address"]          = address;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "CompanyList/Update"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return companyInfUpdateJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//----------------------------------------------------------------------------------------------------------------------------------
+
+//-----------------------Resmi base64'e dönüştürme(encode)----------------------
+String imageToBase64(File imagePath) {
+  var imageBytes = imagePath.readAsBytesSync();
+  var encodedImage = base64.encode(imageBytes);
+  //encodedImage: base64' e dönüşmüş resim
+  return encodedImage;
+}
+//------------------------------------------------------------------------------
