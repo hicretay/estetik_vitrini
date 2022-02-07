@@ -1,7 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
-
 import 'dart:io';
-
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -26,7 +24,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
   int? userIdData;
   File? selectedImage; // seçilen fotoğraf
   String? base64Image; // base64'e dönüşmüş fotoğraf
-  List<File?> imagesList = [];
+  List<String> imagesList = []; // base64 resimler listesi
   
   @override
   Widget build(BuildContext context) {
@@ -146,7 +144,18 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                             width: deviceWidth(context),
                             child: TextButtonWidget(
                             buttonText: "Kampanyayı Kaydet",
-                            onPressed: (){},
+                            onPressed: () async{
+                              final progressUHD = ProgressHUD.of(context);
+                              progressUHD!.show(); 
+                              final addCampaignData = await campaignAddJsnFunc(0,1,"","",teLeading.text,teContent.text,imagesList);
+                              if(addCampaignData!.success == true){
+                                showToast(context, "Kampanya başarıyla kaydedildi !");
+                              }
+                              else{
+                                showToast(context, "Kampanya kaydı başarısız !");
+                              }
+                              progressUHD.dismiss();
+                            },
                               ),
                              ),
                            ),
@@ -174,8 +183,9 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
       }
     });   
     if(selectedImage != null){
-    imagesList.add(selectedImage!);
+  
     base64Image = imageToBase64(selectedImage!);
+    imagesList.add(base64Image!);
     }
   }
 

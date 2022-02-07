@@ -71,7 +71,6 @@ class _SearchPageState extends State<SearchPage> {
                                child: Row(
                                  children: [
                                   CircleAvatar(
-                                  //iconun çevresini saran yapı tasarımı
                                   maxRadius: 25,
                                   backgroundColor: Colors.transparent,
                                   child: IconButton(

@@ -578,6 +578,35 @@ Future<CompanyInfUpdateJsn?> companyInfUpdateJsnFunc(
 }
 //----------------------------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------Yeni Kampanya Oluşturma Fonksiyonu-----------------------------------------------------
+Future<AddUserJsn?> campaignAddJsnFunc(int id, int companyId, String campaignStartDate, String campaignEndDate, String campaingTitle, String campaingDetail, List<String> campaingImage) async{
+  var bodys ={};
+  bodys["id"]               = id;
+  bodys["companyId"]        = companyId;
+  bodys["campaignStartDate"]= campaignStartDate;
+  bodys["campaignEndDate"]  = campaignEndDate;
+  bodys["campaingTitle"]    = campaingTitle;
+  bodys["campaingDetail"]   = campaingDetail;
+  bodys["campaingImage"]    = campaingImage;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "ContentStream/Add"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return addUserJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 //-----------------------Resmi base64'e dönüştürme(encode)----------------------
 String imageToBase64(File imagePath) {
   var imageBytes = imagePath.readAsBytesSync();
