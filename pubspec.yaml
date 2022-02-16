@@ -21,6 +21,7 @@ dependencies:
   flutter_svg: ^0.23.0+1
   flutter_svg_provider: ^0.1.9
   fluttertoast: ^8.0.8
+  flutter_quill: ^1.3.3
   font_awesome_flutter: ^9.1.0
   http: ^0.13.3
   image_cropper: ^1.4.1

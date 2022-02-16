@@ -607,6 +607,29 @@ Future<AddUserJsn?> campaignAddJsnFunc(int id, int companyId, String campaignSta
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+//--------------------------------------------- Kampanya Silme Fonksiyonu-----------------------------------------------------
+Future<AppointmentDeleteJsn?> campaignDeleteJsnFunc(int id) async{
+  var bodys ={};
+  bodys["id"] = id;
+
+  String body = json.encode(bodys);
+
+  final response = await http.post(
+    Uri.parse(url + "ContentStream/Delete"),
+    body: body,
+    headers: header
+  );
+
+  if (response.statusCode == 200) {
+    final String responseString = response.body;
+    return appointmentDeleteJsnFromJson(responseString);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+//------------------------------------------------------------------------------------------------------------------------
+
 //-----------------------Resmi base64'e dönüştürme(encode)----------------------
 String imageToBase64(File imagePath) {
   var imageBytes = imagePath.readAsBytesSync();

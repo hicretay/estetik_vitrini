@@ -109,11 +109,133 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                             shrinkWrap: true,
                             itemCount: companyProfile!.result!.campaignList!.length,
                             itemBuilder: (BuildContext context, int index){
-                            return buildCampaignCard(
-                              context, 
-                              companyProfile!.result!.campaignList![index].campaingLogo!,
-                              companyProfile!.result!.campaignList![index].campaingName!,
-                            );
+                            return Padding(
+                            padding: const EdgeInsets.all(maxSpace),
+                            child: Column(
+                            children: [
+                              //-----------------------------Postu çevreleyecek container yapısı-----------------------------
+                                    AspectRatio(
+                                    aspectRatio: 1.25,
+                                    child: Material(
+                                    borderRadius:  BorderRadius.circular(cardCurved),
+                                    elevation: 10,
+                                    child: Container(                           
+                                    width: double.infinity, 
+                                    decoration: BoxDecoration(
+                                      color: lightWhite,
+                                      borderRadius: BorderRadius.circular(cardCurved),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding),
+                                          //--------------Resmi çevreyelecek container yapısı------------------
+                                          child: Container(
+                                            child: AspectRatio(
+                                              aspectRatio: 1.79,
+                                              child: Container(
+                                              width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(maxSpace),topRight: Radius.circular(maxSpace)),
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.fitWidth,
+                                                    image: NetworkImage(companyProfile!.result!.campaignList![index].campaingLogo!)
+                                                  ),
+                                                ),
+                                                //------------------------------------------------------------------
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                                            child: Align(alignment: Alignment.bottomLeft, 
+                                            child: Container(
+                                              width: deviceWidth(context),
+                                              padding: EdgeInsets.all(minSpace),
+                                              decoration: BoxDecoration(
+                                                color:  secondaryTransparentColor,
+                                              ),
+                                              child: Text(
+                                                companyProfile!.result!.campaignList![index].campaingName!, 
+                                                style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                            ),
+                                            ),
+                                          ),
+                                        ),
+                                        //-------------------------------------ICONBUTTONLAR PANELİ----------------------------------------
+                                        Padding(
+                                          padding:const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
+                                          child: Container(
+                                          width: deviceWidth(context),
+                                          child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
+                                          children: [
+                                            //-----------------Butonların yer aldığı container--------------------
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(minSpace),
+                                              ),
+                                              width: double.infinity, // genişlik: container kadar
+                                              height: 40,
+                                              child: Row(
+                                                children: [
+                                                  Flexible(
+                                                    child: Row(
+                                                      children: [
+                                                    //------------------------------SİLME ICONBUTTONI----------------------------
+                                                      IconButton(
+                                                        padding: EdgeInsets.all(0),
+                                                        icon: Icon(LineIcons.trash,
+                                                        color: primaryColor),
+                                                        onPressed: ()async{
+                                                          final progressHUD = ProgressHUD.of(context);
+                                                          progressHUD!.show(); 
+                                                          final deleteCampaign =await campaignDeleteJsnFunc(companyProfile!.result!.campaignList![index].campaingId!);
+                                                          if(deleteCampaign!.success==true){
+                                                            showToast(context, "Kampanya başarıyla silindi!");
+                                                          }
+                                                          else{
+                                                            showToast(context, "Kampanya silinemedi!");
+                                                          }
+                                                          await refreshCampaignList();    
+                                                          progressHUD.dismiss();
+                        
+                                                        }),
+                                                    //------------------------------------------------------------------------------
+                                                    //-----------------------------ONAYLAMA ICONBUTTONI--------------------------------
+                                                      IconButton(
+                                                        padding: EdgeInsets.all(0),
+                                                      icon: Icon(LineIcons.edit,
+                                                      color: primaryColor,
+                                                      size : iconSize),
+                                                      onPressed: (){},)
+                                                    //------------------------------------------------------------------------------
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            //------------------------------------------------------------------
+                                          ],
+                                        )),
+                                        ),
+                                        //----------------------------------------------------------------------
+                                        //SizedBox(height: maxSpace),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          );
                           })
                         ]),
                       ),
@@ -128,116 +250,4 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
     ),
   );
   }
-
-  Padding buildCampaignCard(BuildContext context, String campaignImage, String campaignLeading) {
-    return Padding(
-    padding: const EdgeInsets.all(maxSpace),
-    child: Column(
-    children: [
-      //-----------------------------Postu çevreleyecek container yapısı-----------------------------
-            AspectRatio(
-            aspectRatio: 1.5,
-            child: Material(
-            borderRadius:  BorderRadius.circular(cardCurved),
-            elevation: 10,
-            child: Container(                           
-            width: double.infinity, 
-            decoration: BoxDecoration(
-              color: lightWhite,
-              borderRadius: BorderRadius.circular(cardCurved),
-            ),
-            child: Column(
-              children: [
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
-                    //--------------Resmi çevreyelecek container yapısı------------------
-                    child: Container(
-                    
-                    width: deviceWidth(context),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(maxSpace),
-                        image: DecorationImage(
-                          image: NetworkImage(campaignImage)
-                        ),
-                      ),
-                      //------------------------------------------------------------------
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
-                  child: Align(alignment: Alignment.bottomLeft, 
-                  child: Container(
-                    width: deviceWidth(context),
-                    padding: EdgeInsets.all(minSpace),
-                    decoration: BoxDecoration(
-                      color:  secondaryTransparentColor,
-                    ),
-                    child: Text(
-                      campaignLeading, 
-                      style: TextStyle(
-                          color: primaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                    ),
-                  ),
-                 ),
-                ),
-                //-------------------------------------ICONBUTTONLAR PANELİ----------------------------------------
-                Padding(
-                  padding:const EdgeInsets.only(left: defaultPadding, right: defaultPadding),
-                  child: Container(
-                  width: deviceWidth(context),
-                  child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end, //Tüm widgetlar container altına konumlandırılsın
-                  children: [
-                    //-----------------Butonların yer aldığı container--------------------
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(minSpace),
-                      ),
-                      width: double.infinity, // genişlik: container kadar
-                      height: 40,
-                      child: Row(
-                        children: [
-                          Flexible(
-                            child: Row(
-                              children: [
-                            //------------------------------SİLME ICONBUTTONI----------------------------
-                              IconButton(
-                                padding: EdgeInsets.all(0),
-                                icon: Icon(LineIcons.trash,
-                                color: primaryColor),
-                                onPressed: (){},),
-                            //------------------------------------------------------------------------------
-                            //-----------------------------ONAYLAMA ICONBUTTONI--------------------------------
-                              IconButton(
-                                padding: EdgeInsets.all(0),
-                              icon: Icon(LineIcons.edit,
-                              color: primaryColor,
-                              size : iconSize),
-                              onPressed: (){},)
-                            //------------------------------------------------------------------------------
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    //------------------------------------------------------------------
-                  ],
-                )),
-                ),
-                //-------------------------------------------------------------------------------------------------
-                SizedBox(height: maxSpace),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ]),
-  );
- }
 }

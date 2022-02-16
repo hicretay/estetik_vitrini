@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/widgets.dart' as widgets;
 
 class NewCampaignPage extends StatefulWidget {
   NewCampaignPage({Key? key}) : super(key: key);
@@ -21,10 +22,16 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
   TextEditingController teLeading = TextEditingController();
   TextEditingController teContent= TextEditingController();
 
+  // QuillController _quillController = QuillController.basic();
+  // final FocusNode editorFocusNode = FocusNode();
+
   int? userIdData;
   File? selectedImage; // seçilen fotoğraf
   String? base64Image; // base64'e dönüşmüş fotoğraf
-  List<String> imagesList = []; // base64 resimler listesi
+  List<String> base64imagesList = []; // base64 resimler listesi
+  List<File> imageList = []; // seçilip kırpılmış resimler listesi
+
+  final ImagePicker imgpicker = ImagePicker();
   
   @override
   Widget build(BuildContext context) {
@@ -51,7 +58,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                         ),
                       ),
                       SizedBox(width: maxSpace),
-                      Text("Yeni Kampanya Olustur",
+                      widgets.Text("Yeni Kampanya Olustur",
                       style     : TextStyle(
                       fontFamily: leadingFont, 
                       fontSize  : 25, 
@@ -66,7 +73,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("companyManager / companyName",  
+                          child: widgets.Text("companyManager / companyName",  
                           style: TextStyle(color: Colors.white,fontSize: 20),
                           ),
                         ),
@@ -78,21 +85,42 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                     child: Container(
                         decoration: BoxDecoration(
                         color: Theme.of(context).backgroundColor,
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),
                       ),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            imagesList != null ?
+                            base64imagesList != null ?
                             ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: imagesList.length,
+                              itemCount: imageList.length,
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index){
-                                return Container(
-                                  width: deviceWidth(context)*0.8,
-                                  height: deviceHeight(context)*0.3,
-                                decoration: BoxDecoration(image: DecorationImage(image: FileImage(selectedImage!))),
+                                return Padding(
+                                  padding: const EdgeInsets.all(defaultPadding),
+                                  child: AspectRatio(
+                                    aspectRatio: 16/9,
+                                    child: Container(
+                                      width: deviceWidth(context)*0.8,
+                                      height: deviceHeight(context)*0.3,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(Radius.circular(maxSpace)),
+                                        color: secondaryTransparentColor,
+                                        image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          image: FileImage(imageList[index]))),
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: IconButton(
+                                          icon: Icon(Icons.cancel_outlined,size: 30, color: primaryColor),
+                                          onPressed: (){
+                                              print(index.toString() + " silindi");
+                                              imageList.removeAt(index);
+                                              setState(() {});
+                                          }, 
+                                      )),
+                                    ),
+                                  ),
                                 );
 
                             })
@@ -103,7 +131,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                             width: deviceWidth(context),
                             child: TextButtonWidget(
                             buttonText: "Fotoğraf Ekle",
-                            onPressed: () => setSelectedImage(),
+                            onPressed: () => setSelectedImage(), // openImages(),
                                ),
                               ),
                             ),
@@ -131,12 +159,23 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                               contentPadding: EdgeInsets.symmetric(vertical: deviceHeight(context)*0.07, horizontal: maxSpace),
                               border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(maxSpace),
-                               ),
+                              ),
                               focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(maxSpace),
-                               ),
                               ),
                               ),
+                              ),
+                            //   child: QuillEditor(
+                            //   controller: _quillController,
+                            //   scrollable: true,
+                            //   scrollController: ScrollController(),
+                            //   focusNode: editorFocusNode,
+                            //   padding: EdgeInsets.all(5),
+                            //   autoFocus: true,
+                            //   readOnly: false,
+                            //   expands: false,
+                            //   placeholder: "compose_email",
+                            // )
                             ),
                             Padding(
                             padding: const EdgeInsets.only(top: maxSpace),
@@ -147,7 +186,8 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                             onPressed: () async{
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD!.show(); 
-                              final addCampaignData = await campaignAddJsnFunc(0,1,"","",teLeading.text,teContent.text,imagesList);
+                              final addCampaignData = await campaignAddJsnFunc(0,1,"","",teLeading.text,teContent.text,base64imagesList);
+                              print(addCampaignData);
                               if(addCampaignData!.success == true){
                                 showToast(context, "Kampanya başarıyla kaydedildi !");
                               }
@@ -157,8 +197,8 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                               progressUHD.dismiss();
                             },
                               ),
-                             ),
-                           ),
+                            ),
+                            ),
                           ],
                         ),
                       ),
@@ -178,21 +218,20 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
 
     setState(() {
       if(selected != null){
-        //selectedImage = File(selected.path);   
-        imageCrop(File(selected.path)); 
+        selectedImage = File(selected.path);  
+        imageCrop(selectedImage!); 
+        imageList.add(selectedImage!);
+        base64Image = imageToBase64(selectedImage!);
+        base64imagesList.add(base64Image!);
       }
     });   
-    if(selectedImage != null){
-  
-    base64Image = imageToBase64(selectedImage!);
-    imagesList.add(base64Image!);
-    }
   }
+
+  
 
   void imageCrop(File image) async{
   File? croppedImage = await ImageCropper.cropImage(
   sourcePath: image.path,
-  //aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
   aspectRatioPresets: [
     CropAspectRatioPreset.ratio16x9
   ]
@@ -204,4 +243,20 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
     });
   }
  }
+
+// openImages() async {
+// try {
+//     var pickedfiles = await imgpicker.pickMultiImage();
+//     //you can use ImageCourse.camera for Camera capture
+//     if(pickedfiles != null){
+//         imagefiles = pickedfiles;
+//         setState(() {
+//         });
+//     }else{
+//         print("No image is selected.");
+//     }
+// }catch (e) {
+//     print("error while picking file.");
+// }
+//   }
 }
