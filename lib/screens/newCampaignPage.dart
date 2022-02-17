@@ -116,6 +116,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                                           onPressed: (){
                                               print(index.toString() + " silindi");
                                               imageList.removeAt(index);
+                                              base64imagesList.removeAt(index);
                                               setState(() {});
                                           }, 
                                       )),
