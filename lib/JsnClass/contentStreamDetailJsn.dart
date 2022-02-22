@@ -33,6 +33,8 @@ class Result {
         this.liked,
         this.appointmentStatus,
         this.contentPictures,
+        this.campaignStartDate,
+        this.campaignEndDate
     });
 
     int? campaingId;
@@ -42,6 +44,8 @@ class Result {
     bool? liked;
     bool? appointmentStatus;
     List<ContentPicture>? contentPictures;
+    String? campaignEndDate;
+    String? campaignStartDate;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         campaingId: json["campaingId"],
@@ -51,6 +55,8 @@ class Result {
         liked: json["liked"],
         appointmentStatus: json["appointmentStatus"],
         contentPictures: List<ContentPicture>.from(json["contentPictures"].map((x) => ContentPicture.fromJson(x))),
+        campaignStartDate: json["campaignStartDate"],
+        campaignEndDate: json["campaignEndDate"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -61,6 +67,8 @@ class Result {
         "liked": liked,
         "appointmentStatus": appointmentStatus,
         "contentPictures": List<dynamic>.from(contentPictures!.map((x) => x.toJson())),
+        "campaignStartDate": campaignStartDate,
+        "campaignEndDate": campaignEndDate
     };
 }
 

@@ -1,23 +1,34 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, must_be_immutable
 import 'dart:io';
-import 'package:estetikvitrini/settings/consts.dart';
-import 'package:estetikvitrini/settings/functions.dart';
-import 'package:estetikvitrini/widgets/backgroundContainer.dart';
-import 'package:estetikvitrini/widgets/textButtonWidget.dart';
-import 'package:estetikvitrini/widgets/textFieldWidget.dart';
+
+import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class NewCampaignPage extends StatefulWidget {
-  NewCampaignPage({Key? key}) : super(key: key);
+import 'package:estetikvitrini/settings/consts.dart';
+import 'package:estetikvitrini/settings/functions.dart';
+import 'package:estetikvitrini/widgets/backgroundContainer.dart';
+import 'package:estetikvitrini/widgets/textButtonWidget.dart';
+import 'package:estetikvitrini/widgets/textFieldWidget.dart';
+
+class UpdateCampaignPage extends StatefulWidget {
+  final String? campaignTitle, campaignleading;
+  final String? campaignStartDate, campaignEndDate;
+  List<ContentPicture>? pictures;
+  
+  UpdateCampaignPage({
+    Key? key,
+    required this.campaignleading,
+    required this.pictures, this.campaignTitle, this.campaignStartDate, this.campaignEndDate,
+  }) : super(key: key);
 
   @override
-  _NewCampaignPageState createState() => _NewCampaignPageState();
+  _UpdateCampaignPageState createState() => _UpdateCampaignPageState();
 }
 
-class _NewCampaignPageState extends State<NewCampaignPage> {
+class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
   TextEditingController teLeading = TextEditingController();
   TextEditingController teContent= TextEditingController();
 
@@ -26,20 +37,39 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
   String? base64Image; // base64'e dönüşmüş fotoğraf
   List<String> base64imagesList = []; // base64 resimler listesi
   List<File> imageList = []; // seçilip kırpılmış resimler listesi
-  //late Key contentKey;
 
   final ImagePicker imgpicker = ImagePicker();
 
-    DateTime? startdDate;
+    DateTime? startDate;
     DateTime? finishedDate;
 
+    @override
+    void initState() { 
+      super.initState();
+      setState(() {
+        teLeading.text = widget.campaignTitle!;
+        teContent.text = widget.campaignleading!;
+
+
+        getStartDate();
+        getFinishedDate();
+
+      });
+    }
+
     String getStartDate(){
-      if(startdDate == null){
+  
+      if(startDate == null){
         return "";
       }
       else{
-        return (startdDate!.day <= 9 ? "0"+startdDate!.day.toString() :  startdDate!.day.toString())+"."+ 
-        (startdDate!.month <= 9 ? "0"+startdDate!.month.toString() :  startdDate!.month.toString()) +"."+startdDate!.year.toString();
+            String formattedStartDate = (startDate!.day <= 9 ? "0"+startDate!.day.toString() :  startDate!.day.toString())+"."+ 
+        (startDate!.month <= 9 ? "0"+startDate!.month.toString() :  startDate!.month.toString()) +"."+startDate!.year.toString();
+      setState(() {
+        formattedStartDate = widget.campaignStartDate!;
+        print(widget.campaignStartDate!);
+      });
+        return formattedStartDate;
       }
     }
   
@@ -54,7 +84,6 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
     }
   @override
   Widget build(BuildContext context) {
-        //var keyEditor;
         return SafeArea(
         child: Scaffold(
         body: ProgressHUD(
@@ -78,7 +107,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                         ),
                       ),
                       SizedBox(width: maxSpace),
-                      Text("Yeni Kampanya Olustur",
+                      Text("Kampanyayı Düzenle",
                       style     : TextStyle(
                       fontFamily: leadingFont, 
                       fontSize  : 25, 
@@ -113,7 +142,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                             base64imagesList != null ?
                             ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: imageList.length,
+                              itemCount: widget.pictures!.length,
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index){
                                 return Padding(
@@ -128,7 +157,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                                         color: secondaryTransparentColor,
                                         image: DecorationImage(
                                           fit: BoxFit.fitWidth,
-                                          image: FileImage(imageList[index]))),
+                                          image: NetworkImage(widget.pictures![index].cPicture!))),
                                       child: Align(
                                         alignment: Alignment.topRight,
                                         child: IconButton(
@@ -281,7 +310,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                               
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD!.show(); 
-                              final addCampaignData = await campaignAddJsnFunc(0,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text,base64imagesList);
+                              final addCampaignData = await campaignAddJsnFunc(1,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text,base64imagesList);
                               print(addCampaignData);
                               if(addCampaignData!.success == true){
                                 showToast(context, "Kampanya başarıyla kaydedildi !");
@@ -339,27 +368,11 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
   }
  }
 
-// openImages() async {
-// try {
-//     var pickedfiles = await imgpicker.pickMultiImage();
-//     //you can use ImageCourse.camera for Camera capture
-//     if(pickedfiles != null){
-//         imagefiles = pickedfiles;
-//         setState(() {
-//         });
-//     }else{
-//         print("No image is selected.");
-//     }
-// }catch (e) {
-//     print("error while picking file.");
-// }
-//   }
-
  Future pickStartDate(BuildContext context) async{
    final initialDate = DateTime.now();
    final newDate = await showDatePicker(
      context: context, 
-     initialDate: startdDate ?? initialDate, 
+     initialDate: startDate ?? initialDate, 
      firstDate: DateTime(DateTime.now().year -1), 
      lastDate: DateTime(DateTime.now().year + 1),
      builder: (context, child) {
@@ -383,7 +396,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
 
   if(newDate == null) return;
   setState(() {
-    startdDate = newDate;
+    startDate = newDate;
   });
    
  }
