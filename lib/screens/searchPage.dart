@@ -30,11 +30,11 @@ class _SearchPageState extends State<SearchPage> {
    return companyNewList;
    }
 
-   @override
-   void initState() { 
-     super.initState();
-     allCompaniesList();    
-   }
+  //  @override
+  //  void initState() { 
+  //    super.initState();
+  //    allCompaniesList();    
+  //  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +176,7 @@ class _SearchPageState extends State<SearchPage> {
                                   image: NetworkImage(selectedCompanies.length == 0 ?
                                   allCompanies[index].companyLogo : selectedCompanies[index].companyLogo,
                                   ),
-                               ),
+                                ),
                               ),
                               ),
                         ),

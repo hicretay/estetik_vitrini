@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NewCampaignPage extends StatefulWidget {
   NewCampaignPage({Key? key}) : super(key: key);
@@ -27,6 +28,16 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
   List<String> base64imagesList = []; // base64 resimler listesi
   List<File> imageList = []; // seçilip kırpılmış resimler listesi
   //late Key contentKey;
+
+   String user = "";
+
+   getUserName() async{
+   SharedPreferences prefs = await SharedPreferences.getInstance();
+   String? newuser = prefs.getString("namesurname");
+   setState(() {
+     user = newuser!; 
+   });
+   }
 
   final ImagePicker imgpicker = ImagePicker();
 
@@ -93,7 +104,7 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("companyManager / companyName",  
+                          child: Text(user,  
                           style: TextStyle(color: Colors.white,fontSize: 20),
                           ),
                         ),
@@ -281,14 +292,20 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                               
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD!.show(); 
+                              if(getStartDate() != "" && getFinishedDate() != "" && teLeading.text != "" && base64imagesList != null && base64imagesList != [] ){
                               final addCampaignData = await campaignAddJsnFunc(0,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text,base64imagesList);
                               print(addCampaignData);
                               if(addCampaignData!.success == true){
                                 showToast(context, "Kampanya başarıyla kaydedildi !");
+                                Navigator.of(context).pop();
                               }
                               else{
                                 showToast(context, "Kampanya kaydı başarısız !");
                               }
+                              }
+                              else{
+                              showToast(context, "Lütfen boş alanları doldurunuz!");
+                            }
                               progressUHD.dismiss();
                             },
                               ),

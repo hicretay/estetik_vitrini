@@ -223,7 +223,7 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
     children: [
       //-----------------------------Postu çevreleyecek container yapısı-----------------------------
       AspectRatio(
-        aspectRatio: 1.6,
+        aspectRatio: 1.5,
         child: Material(
           borderRadius:  BorderRadius.circular(cardCurved),
           elevation: 10,

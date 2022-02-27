@@ -1,7 +1,7 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
-import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
+//import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/screens/newCampaignPage.dart';
-import 'package:estetikvitrini/screens/updateCampaignPage.dart';
+//import 'package:estetikvitrini/screens/updateCampaignPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -35,7 +35,13 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
     });
   }
 
-
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      refreshCampaignList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +95,7 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                     child: Container(
                         decoration: BoxDecoration(
                         color: Theme.of(context).backgroundColor,
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),
                       ),
                     child: RefreshIndicator(
                       onRefresh:()=> refreshCampaignList(),
@@ -202,14 +208,47 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                                                         onPressed: ()async{
                                                           final progressHUD = ProgressHUD.of(context);
                                                           progressHUD!.show(); 
-                                                          final deleteCampaign =await campaignDeleteJsnFunc(companyProfile!.result!.campaignList![index].campaingId!);
-                                                          if(deleteCampaign!.success==true){
-                                                            showToast(context, "Kampanya başarıyla silindi!");
-                                                          }
-                                                          else{
-                                                            showToast(context, "Kampanya silinemedi!");
-                                                          }
-                                                          await refreshCampaignList();    
+                                                          showDialog(context: context, builder: (BuildContext context){
+                                                          return ProgressHUD(
+                                                            child: Builder(builder: (context)=>
+                                                                AlertDialog(
+                                                                content: Text("Kampanya silinsin mi?",style: TextStyle(fontFamily: contentFont)),
+                                                                actions: <Widget>[
+                                                                  Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                    children: [
+                                                                      MaterialButton(
+                                                                        color: primaryColor,
+                                                                        child: Text("Evet",style: TextStyle(color: white)),
+                                                                        onPressed: ()async{
+                                                                          final progressHUD = ProgressHUD.of(context);
+                                                                          progressHUD!.show(); 
+                                                                          final deleteCampaign =await campaignDeleteJsnFunc(companyProfile!.result!.campaignList![index].campaingId!);
+                                                                          if(deleteCampaign!.success==true){
+                                                                            showToast(context, "Kampanya başarıyla silindi!");
+                                                                          }
+                                                                          else{
+                                                                            showToast(context, "Kampanya silinemedi!");
+                                                                          }
+                                                                          await refreshCampaignList();    
+                                                                          Navigator.of(context).pop();                          
+                                                                          progressHUD.dismiss();
+                                                                          }),
+                                                                      
+                                                                      MaterialButton(
+                                                                        color: primaryColor,
+                                                                        child: Text("Hayır",style: TextStyle(color: white)),
+                                                                        onPressed: (){
+                                                                          showToast(context, "Kampanya silinmedi!");
+                                                                          Navigator.of(context).pop();
+                                                                        },
+                                                                      ),
+                                                                  ],)
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        });
                                                           progressHUD.dismiss();
                         
                                                         }),
@@ -221,20 +260,21 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                                                       color: primaryColor,
                                                       size : iconSize),
                                                       onPressed: ()async{
-                                                        final ContentStreamDetailJsn? companyDetailData = await contentStreamDetailJsnFunc(companyProfile!.result!.id!, companyProfile!.result!.campaignList![index].campaingId!, 1);     
-                                                        List<dynamic> sliderImg = [];
-                                                        for (var item in companyDetailData!.result!.first.contentPictures!) {
-                                                          sliderImg.add(item);
-                                                        }
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context)  => UpdateCampaignPage(
-                                                          pictures: companyDetailData.result!.first.contentPictures,
-                                                          campaignTitle: companyDetailData.result!.first.campaingTitle, 
-                                                          campaignleading: companyDetailData.result!.first.campaingDetail,
-                                                          campaignStartDate: companyDetailData.result!.first.campaignStartDate,
-                                                          campaignEndDate: companyDetailData.result!.first.campaignEndDate,
-                                                        )));
+                                                        // final ContentStreamDetailJsn? companyDetailData = await contentStreamDetailJsnFunc(companyProfile!.result!.id!, companyProfile!.result!.campaignList![index].campaingId!, 1);     
+                                                        // List<dynamic> sliderImg = [];
+                                                        // for (var item in companyDetailData!.result!.first.contentPictures!) {
+                                                        //   sliderImg.add(item);
+                                                        // }
+                                                        // Navigator.push(context, MaterialPageRoute(builder: (context)  => UpdateCampaignPage(
+                                                        //   pictures: companyDetailData.result!.first.contentPictures,
+                                                        //   campaignTitle: companyDetailData.result!.first.campaingTitle, 
+                                                        //   campaignleading: companyDetailData.result!.first.campaingDetail,
+                                                        //   campaignStartDate: companyDetailData.result!.first.campaignStartDate,
+                                                        //   campaignEndDate: companyDetailData.result!.first.campaignEndDate,
+                                                        // )));
 
-                                                      },)
+                                                      },
+                                                      )
                                                     //------------------------------------------------------------------------------
                                                       ],
                                                     ),

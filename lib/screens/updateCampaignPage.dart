@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison, must_be_immutable
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
@@ -43,9 +44,23 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
     DateTime? startDate;
     DateTime? finishedDate;
 
+  String netwimageToBase64(File imagePath) {
+  var imageBytes = imagePath.readAsBytesSync();
+  var encodedImage = base64.encode(imageBytes);
+  //encodedImage: base64' e dönüşmüş resim
+  return encodedImage;
+}
+
+  Future netwimageToBase()async{
+    String base64Image = netwimageToBase64(File(widget.pictures![0].cPicture!));
+    print(base64Image);
+
+  }
+
     @override
     void initState() { 
       super.initState();
+      netwimageToBase();
       setState(() {
         teLeading.text = widget.campaignTitle!;
         teContent.text = widget.campaignleading!;
