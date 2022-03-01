@@ -111,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                   prefs.setString("namesurname", userData.result!.nameSurname!);
                                   prefs.setString("user", username);     
                                   prefs.setString("pass", password);  
+                                  prefs.setBool("isAdmin", userData.result!.admin!);
                                   prefs.setInt("userIdData", userData.result!.id!);  
                                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                                   showToast(context, "Giriş Başarılı!");
@@ -159,15 +160,13 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed : () async{
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD!.show(); 
-                              final LoginJsn? userData = await loginJsnFunc("", "", false); 
-                              if(userData!.success == true){ // Giriş kontrolü, succes
                               SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setBool("isAdmin", userData.result!.admin!);
-                              prefs.setString("namesurname", userData.result!.nameSurname!);   
+                              prefs.setBool("isAdmin", false);
+                              prefs.setString("namesurname", "Deneme Hesabı");   
                               prefs.setInt("userIdData", 0);   
                               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                               showToast(context, "Giriş Başarılı!");
-                              }
+                              progressHUD.dismiss();
                             },
                             ),
                             //-----------------------------------------------------------------------------------------------------------

@@ -369,7 +369,7 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
   
 
   void imageCrop(File image) async{
-  File? croppedImage = await ImageCropper.cropImage(
+  File? croppedImage = await ImageCropper().cropImage(
   sourcePath: image.path,
   aspectRatioPresets: [
     CropAspectRatioPreset.ratio16x9

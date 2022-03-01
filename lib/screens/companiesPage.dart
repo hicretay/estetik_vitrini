@@ -175,15 +175,23 @@ class _CompaniesPageState extends State<CompaniesPage> {
                                               ),
                                             ),
                                             onTap: ()async{
+                                              final progressHUD = ProgressHUD.of(context);
+                                              progressHUD!.show(); 
                                               SharedPreferences prefs = await SharedPreferences.getInstance();
                                               int? userIdData = prefs.getInt("userIdData"); 
-                                              if(userIdData != 0){
+                                              //if(userIdData != 0){
                                               AppointmentObject appointment = AppointmentObject(companyId: selectedCompanies.length == 0 ? allCompanies[index].id : selectedCompanies[index].id,userId: userIdData!, companyNameS: selectedCompanies.length == 0 ? allCompanies[index].companyName : selectedCompanies[index].companyName, campaignId: 0, appointmentDate: date!);
                                               final CompanyOperationJsn? companyOperation = await companyOperationJsnFunc(appointment.companyId!);
                                               Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation!.result, appointment: appointment)));
                                               print(selectedCompanies.length == 0 ? allCompanies[index].companyName : selectedCompanies[index].companyName);
                                               print(selectedCompanies.length == 0 ? allCompanies[index].id : selectedCompanies[index].id);
-                                            }},
+                                              progressHUD.dismiss();
+                                            // }
+                                            // else{ 
+                                            //   showNotMemberAlert(context);
+                                            //   progressHUD.dismiss();
+                                            // }
+                                            },
                                           ),
                                       );
                                     },

@@ -179,6 +179,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                               userIdData = prefs.getInt("userIdData"); 
                               final progressHUD = ProgressHUD.of(context);
                               progressHUD!.show(); 
+                              if(userIdData != 0){
                                 final appointmentAddData = await appointmentAddJsnFunc(userIdData!, appointment.companyId!, appointment.campaignId! == null ? 0 : appointment.campaignId!, appointment.appointmentDate!, appointment.appointmentTimeId!, appointment.operationId!, teNote.text);
                                 if(appointmentAddData!.success == true){
                                   await showToast(context, "Randevu başarıyla kaydedildi!");
@@ -194,6 +195,11 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                                 //Navigator.pop(context);
                                 //Navigator.pop(context);
                                 progressHUD.dismiss();
+                              }
+                              else{
+                                showNotMemberAlert(context);
+                                progressHUD.dismiss();
+                              }
                             },
                           ),
                         ),
