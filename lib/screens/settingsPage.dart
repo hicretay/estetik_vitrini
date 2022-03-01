@@ -121,7 +121,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.all(0),
                         children: [
                           SizedBox(height: defaultPadding),
-                          isAdmin == false ? 
+                         // isAdmin == false ? 
                             Column(children: [
                             ListTileWidget(
                             text: "Kampanya İşlemleri",
@@ -167,7 +167,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: secondaryColor,
                               thickness: 1.5,
                             ),
-                          ]) : Container(),
+                          ]) ,//: Container(),
                             SizedBox(height: minSpace), // Post üstü - divider arası boşluk
                             ListTileWidget(
                             text: "Lisans Sözleşmesi",
