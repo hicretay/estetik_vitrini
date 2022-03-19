@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                               width: 3),
                               shape: BoxShape.circle,
                               image: DecorationImage(                     
-                              fit: BoxFit.contain,
+                              fit: BoxFit.cover,
                               image: NetworkImage(companyContent![index].companyLogo),
                                     ),
                                   ),

@@ -126,8 +126,14 @@ class _CompanyInformationPageState extends State<CompanyInformationPage> {
                             child: CircleAvatar(
                               backgroundColor: Colors.white,
                               radius: 80,
-                              backgroundImage: selectedImage != null ? FileImage(selectedImage!) : null,
-                              child: selectedImage == null ? Image.network(companyProfile!.result!.companyLogo!) : null
+                             // backgroundImage: selectedImage != null ? FileImage(selectedImage!,scale: 2) : null,
+
+                              child: selectedImage == null ? Image.network(companyProfile!.result!.companyLogo!,fit: BoxFit.cover,) : 
+                              Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(shape: BoxShape.circle),
+                                child: Image.file(selectedImage!,fit: BoxFit.cover))
                             ),
                           )
                         ),

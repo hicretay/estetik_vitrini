@@ -1,6 +1,7 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 //import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/screens/newCampaignPage.dart';
+import 'package:estetikvitrini/screens/updateCampaignPage.dart';
 //import 'package:estetikvitrini/screens/updateCampaignPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../JsnClass/contentStreamDetailJsn.dart';
 
 
 class CampaignOperationPage extends StatefulWidget {
@@ -260,18 +263,18 @@ class _CampaignOperationPageState extends State<CampaignOperationPage> {
                                                       color: primaryColor,
                                                       size : iconSize),
                                                       onPressed: ()async{
-                                                        // final ContentStreamDetailJsn? companyDetailData = await contentStreamDetailJsnFunc(companyProfile!.result!.id!, companyProfile!.result!.campaignList![index].campaingId!, 1);     
-                                                        // List<dynamic> sliderImg = [];
-                                                        // for (var item in companyDetailData!.result!.first.contentPictures!) {
-                                                        //   sliderImg.add(item);
-                                                        // }
-                                                        // Navigator.push(context, MaterialPageRoute(builder: (context)  => UpdateCampaignPage(
-                                                        //   pictures: companyDetailData.result!.first.contentPictures,
-                                                        //   campaignTitle: companyDetailData.result!.first.campaingTitle, 
-                                                        //   campaignleading: companyDetailData.result!.first.campaingDetail,
-                                                        //   campaignStartDate: companyDetailData.result!.first.campaignStartDate,
-                                                        //   campaignEndDate: companyDetailData.result!.first.campaignEndDate,
-                                                        // )));
+                                                        final ContentStreamDetailJsn? companyDetailData = await contentStreamDetailJsnFunc(companyProfile!.result!.id!, companyProfile!.result!.campaignList![index].campaingId!, 1);     
+                                                        List<dynamic> sliderImg = [];
+                                                        for (var item in companyDetailData!.result!.first.contentPictures!) {
+                                                          sliderImg.add(item);
+                                                        }
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context)  => UpdateCampaignPage(
+                                                          pictures: companyDetailData.result!.first.contentPictures,
+                                                          campaignTitle: companyDetailData.result!.first.campaingTitle, 
+                                                          campaignleading: companyDetailData.result!.first.campaingDetail,
+                                                          campaignStartDate: companyDetailData.result!.first.campaignStartDate,
+                                                          campaignEndDate: companyDetailData.result!.first.campaignEndDate,
+                                                        )));
 
                                                       },
                                                       )

@@ -11,6 +11,8 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../JsnClass/imageModel.dart';
+
 class NewCampaignPage extends StatefulWidget {
   NewCampaignPage({Key? key}) : super(key: key);
 
@@ -26,8 +28,11 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
   File? selectedImage; // seçilen fotoğraf
   String? base64Image; // base64'e dönüşmüş fotoğraf
   List<String> base64imagesList = []; // base64 resimler listesi
-  List<File> imageList = []; // seçilip kırpılmış resimler listesi
+  List<File> imageList = []; // localden seçilip kırpılmış resimler listesi
   //late Key contentKey;
+
+   CampaingImage singleImage = CampaingImage();
+   List<CampaingImage> campaingImage = [];
 
    String user = "";
 
@@ -292,8 +297,19 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
                               
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD!.show(); 
+                              
+
+                              // CampaingImage singleImage = CampaingImage(
+                              //   campaingPicture: ,
+                              //   mainPicture: false,
+                              //   pictureActive: true,
+                              //   pictureId: 1
+                              // );
+
+                              campaingImage.add(singleImage);
+
                               if(getStartDate() != "" && getFinishedDate() != "" && teLeading.text != "" && base64imagesList != null && base64imagesList != [] ){
-                              final addCampaignData = await campaignAddJsnFunc(0,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text,base64imagesList);
+                              final addCampaignData = await campaignAddJsnFunc(0,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text,campaingImage);
                               print(addCampaignData);
                               if(addCampaignData!.success == true){
                                 showToast(context, "Kampanya başarıyla kaydedildi !");
@@ -334,6 +350,13 @@ class _NewCampaignPageState extends State<NewCampaignPage> {
         imageCrop(selectedImage!); 
         imageList.add(selectedImage!);
         base64Image = imageToBase64(selectedImage!);
+        // singleImage = CampaingImage(
+        //   campaingPicture: base64Image,
+        //   mainPicture: false,
+        //   pictureActive: true,
+        //   pictureId: 1
+        // );
+        // campaingImage.add(singleImage);
         base64imagesList.add(base64Image!);
       }
     });   

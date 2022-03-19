@@ -28,7 +28,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
-String url = "https://service.estetikvitrini.com/api/";
+import '../JsnClass/imageModel.dart';
+
+String url = "https://servicetest.estetikvitrini.com/api/";
 
 Map<String, String> header = {
   "Content-Type": "application/json",
@@ -579,7 +581,7 @@ Future<CompanyInfUpdateJsn?> companyInfUpdateJsnFunc(
 //----------------------------------------------------------------------------------------------------------------------------------
 
 //---------------------------------------------Yeni Kampanya Oluşturma Fonksiyonu-----------------------------------------------------
-Future<AddUserJsn?> campaignAddJsnFunc(int id, int companyId, String campaignStartDate, String campaignEndDate, String campaingTitle, String campaingDetail, List<String> campaingImage) async{
+Future<AddUserJsn?> campaignAddJsnFunc(int id, int companyId, String campaignStartDate, String campaignEndDate, String campaingTitle, String campaingDetail, List<CampaingImage> campaingImage) async{
   var bodys ={};
   bodys["id"]               = id;
   bodys["companyId"]        = companyId;
@@ -598,7 +600,7 @@ Future<AddUserJsn?> campaignAddJsnFunc(int id, int companyId, String campaignSta
   );
 
   if (response.statusCode == 200) {
-    final String responseString = response.body;
+    final String responseString = response.body; 
     return addUserJsnFromJson(responseString);
   } else {
     print(response.statusCode);

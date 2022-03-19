@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
-
+import 'package:estetikvitrini/JsnClass/imageModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:estetikvitrini/widgets/textFieldWidget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UpdateCampaignPage extends StatefulWidget {
   final String? campaignTitle, campaignleading;
@@ -38,8 +38,12 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
   String? base64Image; // base64'e dönüşmüş fotoğraf
   List<String> base64imagesList = []; // base64 resimler listesi
   List<File> imageList = []; // seçilip kırpılmış resimler listesi
+  List<CampaingImage> campaingImage = [];
+  CampaingImage singleImage = CampaingImage();
 
   final ImagePicker imgpicker = ImagePicker();
+
+   
 
     DateTime? startDate;
     DateTime? finishedDate;
@@ -60,12 +64,10 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
     @override
     void initState() { 
       super.initState();
-      netwimageToBase();
+     // netwimageToBase();
       setState(() {
         teLeading.text = widget.campaignTitle!;
         teContent.text = widget.campaignleading!;
-
-
         getStartDate();
         getFinishedDate();
 
@@ -173,6 +175,43 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
                                         image: DecorationImage(
                                           fit: BoxFit.fitWidth,
                                           image: NetworkImage(widget.pictures![index].cPicture!))),
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: IconButton(
+                                          icon: Icon(Icons.cancel_outlined,size: 30, color: primaryColor),
+                                          onPressed: (){
+                                              print(index.toString() + " silindi");
+                                              //imageList.removeAt(index);
+                                             // base64imagesList.removeAt(index);
+                                            widget.pictures!.removeAt(index);
+                                              setState(() {});
+                                          }, 
+                                      )),
+                                    ),
+                                  ),
+                                );
+
+                            })
+                            : Container(),
+                            selectedImage != null ?
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: imageList.length,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index){
+                                return Padding(
+                                  padding: const EdgeInsets.all(defaultPadding),
+                                  child: AspectRatio(
+                                    aspectRatio: 16/9,
+                                    child: Container(
+                                      width: deviceWidth(context)*0.8,
+                                      height: deviceHeight(context)*0.3,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(Radius.circular(maxSpace)),
+                                        color: secondaryTransparentColor,
+                                        image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          image: FileImage(imageList[index]))),
                                       child: Align(
                                         alignment: Alignment.topRight,
                                         child: IconButton(
@@ -325,7 +364,8 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
                               
                               final progressUHD = ProgressHUD.of(context);
                               progressUHD!.show(); 
-                              final addCampaignData = await campaignAddJsnFunc(1,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text,base64imagesList);
+                              final addCampaignData = await 
+                              campaignAddJsnFunc(1,1,getStartDate(),getFinishedDate(),teLeading.text,teContent.text, campaingImage);
                               print(addCampaignData);
                               if(addCampaignData!.success == true){
                                 showToast(context, "Kampanya başarıyla kaydedildi !");
@@ -361,6 +401,16 @@ class _UpdateCampaignPageState extends State<UpdateCampaignPage> {
         imageCrop(selectedImage!); 
         imageList.add(selectedImage!);
         base64Image = imageToBase64(selectedImage!);
+        
+
+        singleImage = CampaingImage(
+          campaingPicture: base64Image,
+          mainPicture: false,
+          pictureActive: true,
+          pictureId: 0
+        );
+        campaingImage.add(singleImage);
+
         base64imagesList.add(base64Image!);
       }
     });   
