@@ -79,7 +79,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
+                          color: passivePurple,
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(cardCurved),
                           ),
@@ -153,7 +153,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                                color: lightWhite,
+                                                color: passivePurple,
                                                 width: 4.5 ),// mor dairenin genişliği
                                           ),
                                         ),
@@ -170,7 +170,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
                                                 fontSize : 16, // operationların fontu
                                                 color: _checked == index
                                                        ? Colors.white // seçili ise açık text
-                                                       : primaryColor, // seçili değilse koyu
+                                                       : darkWhite, // seçili değilse koyu
                                                 ),
                                       ),
                                               ),
@@ -201,7 +201,7 @@ class _MakeAppointmentOperationPageState extends State<MakeAppointmentOperationP
               ),
               //-----------------------------------RANDEVU SAATİNİ SEÇ BUTONU-------------------------------------------
               bottomNavigationBar: Container(
-                color: Theme.of(context).backgroundColor,
+                color: passivePurple,
                 child: TextButtonWidget(
                 buttonText: "Saat Seç",
                 icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),

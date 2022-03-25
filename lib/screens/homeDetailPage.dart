@@ -115,7 +115,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   Expanded(
                     child: Container(
                         decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
+                        color: passivePurple,//Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
                       child: FutureBuilder<dynamic>(
@@ -206,9 +206,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           //-----------------------Beğeni iconButton'ı----------------------------
                                               child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
                                                 maxRadius      : deviceWidth(context)*0.05,
-                                                backgroundColor: homeDetailContent!.first.liked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
+                                                backgroundColor: homeDetailContent!.first.liked ? primaryColor : passivePurple, // seçili ise koyu, değilse açık renk verildi
                                                 child: 
-                                                IconButton( icon: homeDetailContent!.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
+                                                IconButton( icon: homeDetailContent!.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: darkWhite),
                                                 onPressed: () async{
                                                   SharedPreferences prefs = await SharedPreferences.getInstance();
                                                   userIdData = prefs.getInt("userIdData")!; 
@@ -244,7 +244,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                     padding    : EdgeInsets.zero,
                                                     constraints: BoxConstraints(),
                                                     icon       : Icon(LineIcons.phone,
-                                                    color      : Theme.of(context).hintColor,
+                                                    color      : darkWhite,
                                                     size       : iconSize),
                                                     onPressed  : () async{  
                                                       dynamic number = companyPhone; // arama ekranına yönlendirme
@@ -259,7 +259,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                     padding    : EdgeInsets.zero,
                                                     constraints: BoxConstraints(),
                                                     icon       : Icon(LineIcons.locationArrow,
-                                                    color      : Theme.of(context).hintColor,
+                                                    color      : darkWhite,
                                                     size       : iconSize),
                                                     onPressed  : () async{
                                                     final progressUHD = ProgressHUD.of(context);
@@ -302,7 +302,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                             Text("Randevu Al",style: Theme.of(context).textTheme.button!.copyWith(color: white)),
                                             //---------------------------------------------------------------------------------
                                             SizedBox(width: 10), //butondaki Text ve icon arası boşluk
-                                            Icon(LineIcons.arrowRight,color: lightWhite),
+                                            Icon(LineIcons.arrowRight,color: passivePurple),
                                           ],
                                         ),
                                       ),
@@ -317,9 +317,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         children: [
                                           Icon(Icons.favorite, // Beğeni İcon'ı
                                           size : iconSize,
-                                          color: Theme.of(context).hintColor),
+                                          color: darkWhite),
                                           SizedBox(width: minSpace),
-                                          Text("${homeDetailContent!.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:Theme.of(context).hintColor)),
+                                          Text("${homeDetailContent!.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:darkWhite)),
                                           // counter ile gösterilecek beğeni sayısı
                                         ],
                                       ),
@@ -331,7 +331,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           Align(
                                             alignment: Alignment.bottomLeft,
                                             child    : Text(contentTitle!,
-                                            style    : TextStyle(fontSize: 22, color: Theme.of(context).hintColor),
+                                            style    : TextStyle(fontSize: 22, color: darkWhite),
                                             ),
                                           ),
                                           Align(

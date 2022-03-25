@@ -230,7 +230,7 @@ class _AppointmentOperationPageState extends State<AppointmentOperationPage> {
           child: Container(                           
             width: double.infinity, 
             decoration: BoxDecoration(
-              color: lightWhite,
+              color: passivePurple,
               borderRadius: BorderRadius.circular(cardCurved),
             ),
             child: Column(

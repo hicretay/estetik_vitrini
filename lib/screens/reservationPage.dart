@@ -125,7 +125,7 @@ class _ReservationPageState extends State<ReservationPage> {
                         Expanded(
                           child: Container(
                           decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
+                          color: passivePurple,
                           borderRadius: BorderRadius.vertical(
                           top: Radius.circular(cardCurved),
                           ),
@@ -143,17 +143,19 @@ class _ReservationPageState extends State<ReservationPage> {
                               startingDayOfWeek: StartingDayOfWeek.monday,
                               calendarFormat: CalendarFormat.twoWeeks,
                               calendarStyle: CalendarStyle(
+                                
                                 isTodayHighlighted: true,
                                 selectedDecoration: BoxDecoration(
                                   color: primaryColor,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(minCurved),
                                 ),
+                                
                                 outsideDecoration: boxDecoration,
                                 defaultDecoration: boxDecoration,
                                 weekendDecoration: boxDecoration,
-                                defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
-                                outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                defaultTextStyle: TextStyle(color: darkWhite),
+                                outsideTextStyle: TextStyle(color: darkWhite),
                                 selectedTextStyle: TextStyle(
                                   color: Colors.white,
                                 ),

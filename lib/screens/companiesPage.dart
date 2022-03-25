@@ -90,7 +90,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
                       Expanded(
                         child: Container(
                             decoration: BoxDecoration(
-                            color: Theme.of(context).backgroundColor,
+                            color: passivePurple,
                             borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),
                           ),
                           child: Padding(
@@ -137,7 +137,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
                                        ),
                                    trailing: IconButton(
                                    icon: FaIcon(FontAwesomeIcons.search,
-                                   color: Theme.of(context).hintColor,size: 20,
+                                   color: darkWhite,size: 20,
                                    textDirection: TextDirection.ltr),
                                    onPressed: (){
                                        selectedCompanies.clear();
@@ -162,14 +162,14 @@ class _CompaniesPageState extends State<CompaniesPage> {
                                               height: deviceHeight(context) * 0.06,
                                               width: deviceWidth(context) * 0.06,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(15)),color: darkWhite,
+                                                borderRadius: BorderRadius.all(Radius.circular(15)),color: primaryColor,
                                               ),
                                               child: Center(
                                                 child: Text(selectedCompanies.length == 0 ? allCompanies[index].companyName : selectedCompanies[index].companyName,  
                                                 textAlign: TextAlign.center,
                                                 style    : TextStyle(
                                                 fontSize : 18, 
-                                                color: primaryColor
+                                                color: darkWhite
                                                 ),
                                                 ),
                                               ),

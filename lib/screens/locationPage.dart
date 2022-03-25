@@ -158,7 +158,7 @@ class _LocationPageState extends State<LocationPage> {
                     child: Container(
                       // arkaplan containerı
                       decoration: BoxDecoration(
-                        color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? lightWhite : darkBg,
+                        color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? passivePurple : darkBg,
                         borderRadius: BorderRadius.vertical( top: Radius.circular(maxSpace)),
                           //dikeyde yuvarlatılmış
                       ),
@@ -294,7 +294,7 @@ class _LocationPageState extends State<LocationPage> {
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                                color: lightWhite,
+                                                color: passivePurple,
                                                 width: 4.5 ),// mor dairenin genişliği
                                           ),
                                         ),

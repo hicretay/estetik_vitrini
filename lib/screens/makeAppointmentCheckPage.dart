@@ -76,7 +76,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                   ),
                   Expanded(
                     child: Container(decoration: BoxDecoration(
-                        color       : Theme.of(context).backgroundColor,
+                        color       : passivePurple,
                         borderRadius: BorderRadius.vertical(
                         top         : Radius.circular(cardCurved),
                         ),
@@ -86,7 +86,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
               padding: const EdgeInsets.all(defaultPadding),
               child: Column(children: [
                   InformationRowWidget(
-                    containerColor: secondaryColor,
+                    containerColor: Colors.black26,
                     operationName: "Tarih",
                     width: deviceWidth(context)*0.6,
                     height: deviceWidth(context)*0.15,
@@ -98,7 +98,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     ),
                   ),
                   InformationRowWidget(
-                    containerColor: secondaryColor,
+                    containerColor: Colors.black26,
                     width:  deviceWidth(context)*0.6,
                     height: deviceWidth(context)*0.15,
                     operationName: "Saat",
@@ -111,7 +111,7 @@ class _MakeAppointmentCheckPageState extends State<MakeAppointmentCheckPage> {
                     ),
                   ),
                   InformationRowWidget(
-                    containerColor: secondaryColor,
+                    containerColor: Colors.black26,
                     operationName: "İşlem",
                     width:  deviceWidth(context)*0.6,
                     height: deviceWidth(context)*0.17,

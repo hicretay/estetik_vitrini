@@ -143,7 +143,7 @@ class _SearchPageState extends State<SearchPage> {
                           child: Padding(
                             padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace/2),
                             child: Container(
-                              decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
+                              decoration: BoxDecoration(color: passivePurple,borderRadius: BorderRadius.all(Radius.circular(20))),
                               child: ListView.separated(
                                 padding: EdgeInsets.all(0),
                                 controller: NavigationProvider.of(context).screens[SEARCH_PAGE].scrollController, 
@@ -190,7 +190,7 @@ class _SearchPageState extends State<SearchPage> {
                                   allCompanies[index].companyName : selectedCompanies[index].companyName,
                                   overflow: TextOverflow.fade,
                                   softWrap: false,
-                                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: primaryColor)
+                                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: darkWhite)
                               ),
                         ),
                       ],

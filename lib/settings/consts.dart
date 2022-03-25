@@ -21,20 +21,21 @@ TextStyle reservationText(BuildContext context){
   return TextStyle(fontFamily: leadingFont,fontSize: 17);
 }
 
-const primaryColor = Color(0xFF141414);
+const primaryColor = Color(0xFF0F0F1E); //Color(0xFF141414); #0F0F1E Ana zemin rengi
 const primaryTransparentColor = Color(0x80352A4D);
 const secondaryColor = Color(0xFF9C7BAD);
-const secondaryTransparentColor = Color(0x339C7BAD);
+const secondaryTransparentColor = Color.fromARGB(255, 60, 60, 70);//Color(0x339C7BAD);
 const tertiaryColor = Color(0xff62C6C7);
+const passivePurple =Color.fromARGB(255, 60, 60, 70); // kartların rengi
+const lightWhite = Color(0xffF4F4F4); //light mod için kart rengi
 const darkWhite = Color(0xffE0E1E1);
-const lightWhite = Color(0xffF4F4F4);
 const white = Colors.white;
 const splashColor = Color(0xff8675A2);
 const darkBg = Color(0xff1D1D1B);
 
-const backGroundColor1 = [primaryColor, secondaryColor];
+const backGroundColor1 = [primaryColor, splashColor];
 const backGroundColor2 = [primaryColor, tertiaryColor];
-const backGroundColor3 = [darkWhite, darkWhite];
+const backGroundColor3 = [primaryColor, primaryColor];
 const backGroundColorDark = [darkBg, darkBg];
 
 const leadingFont = "futura_light_bt";

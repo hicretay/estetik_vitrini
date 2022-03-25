@@ -347,7 +347,7 @@ class _HomePageState extends State<HomePage> {
                             //-----------------------------------------------------------------------------------------------------------------------------------------------------
                             //----------------------------------------LİKE BUTTON----------------------------------------
                             likeButton: 
-                            IconButton( icon: homeContent[index].liked ?  SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color: primaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25),
+                            IconButton( icon: homeContent[index].liked ?  SvgPicture.asset("assets/icons/heart-focus.svg",height: 22,width: 22,color:secondaryColor) : SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25,color:white),
                             padding: EdgeInsets.all(0),
                             onPressed: () async{
                               SharedPreferences prefs = await SharedPreferences.getInstance();

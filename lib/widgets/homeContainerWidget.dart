@@ -40,7 +40,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
             child: Container(
               width: double.infinity, //genişlik: container genişliği kadar
               decoration: BoxDecoration(
-                color: lightWhite,
+                color: passivePurple,
                 borderRadius: BorderRadius.circular(maxSpace), //container kenarlarının yuvarlatılması
               ),
               child: Column(
@@ -97,7 +97,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                         widget.cardText!, 
                         style: TextStyle(
                           fontFamily: contentFont,
-                            color: primaryColor,
+                            color: Colors.white,
                             fontSize: 20),
                       ),
                     ),
@@ -114,7 +114,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                               //-----------------Butonların yer aldığı container--------------------
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color:secondaryTransparentColor, // Colors.white,
                                   borderRadius: BorderRadius.vertical(bottom: Radius.circular(maxSpace)),
                                 ),
                                 width: double.infinity, // genişlik: container kadar
@@ -134,13 +134,13 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                       //------------------------------İLETİŞİM ICONBUTTONI----------------------------
                                         IconButton(
                                           padding: EdgeInsets.all(0),
-                                          icon:  SvgPicture.asset("assets/icons/telephone.svg",height: 22,width: 22,color: primaryColor),
+                                          icon:  SvgPicture.asset("assets/icons/telephone.svg",height: 22,width: 22,color: darkWhite),
                                           onPressed: widget.onPressedPhone),
                                       //------------------------------------------------------------------------------
                                       //-----------------------------KONUM ICONBUTTONI--------------------------------
                                         IconButton(
                                           padding: EdgeInsets.all(0),
-                                        icon: SvgPicture.asset("assets/icons/pin.svg",height: 22,width: 22,color: primaryColor),
+                                        icon: SvgPicture.asset("assets/icons/pin.svg",height: 22,width: 22,color: darkWhite),
                                         onPressed: widget.onPressedLocation)
                                       //------------------------------------------------------------------------------
                                         ],
@@ -155,10 +155,10 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyText1!
-                                                .copyWith(color: primaryColor),
+                                                .copyWith(color: darkWhite),
                                           ),
                                           Icon( LineIcons.arrowRight, // sağa ok ikonu
-                                            color: primaryColor,
+                                            color: darkWhite,
                                           ),
                                         ],
                                       ),
@@ -185,7 +185,7 @@ class _HomeContainerWidgetState extends State<HomeContainerWidget> {
           indent: 130.0,
           endIndent: 130.0,
           height: 1,
-          color: lightWhite,
+          color: passivePurple,
           thickness: 1.5,
         ),
         SizedBox(height: maxSpace), // Post üstü - divider arası boşluk

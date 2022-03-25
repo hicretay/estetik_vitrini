@@ -154,7 +154,7 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                                color: lightWhite,
+                                                color: passivePurple,
                                                 width: 4.5 ),// mor dairenin genişliği
                                           ),
                                         ),

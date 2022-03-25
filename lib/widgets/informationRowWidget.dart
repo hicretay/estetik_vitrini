@@ -25,7 +25,7 @@ class _InformationRowWidgetState extends State<InformationRowWidget> {
           children: [
             Text(
               "${widget.operationName}:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Theme.of(context).hintColor),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: darkWhite),
             ),
             Container(
               width: widget.width,

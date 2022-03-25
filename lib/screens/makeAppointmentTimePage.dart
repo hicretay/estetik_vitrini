@@ -66,7 +66,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color:Theme.of(context).backgroundColor,
+                          color:passivePurple,
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(cardCurved),
                           ),
@@ -88,12 +88,12 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
                               ), 
                               itemBuilder:  (BuildContext context, int index){
                                 return Container(
-                                color: _checked == index ? secondaryColor : Theme.of(context).backgroundColor, 
+                                color: _checked == index ? secondaryColor : passivePurple, 
                                 child: TextButton(
                                   child: Center(
                                   child: Text(companyOperationTime![index].operationStartTime,
                                        style: TextStyle(
-                                       color: Theme.of(context).hintColor,
+                                       color: darkWhite,
                                        ),
                                      ),
                                    ),
@@ -121,7 +121,7 @@ class _MakeAppointmentTimePageState extends State<MakeAppointmentTimePage> {
               ),
           //--------------------------------RANDEVUYU TAMAMLA BUTONU-----------------------------------
           bottomNavigationBar: Container(
-            color: Theme.of(context).backgroundColor,
+            color: passivePurple,
             child: TextButtonWidget(
             buttonText: "Randevuyu Tamamla",
             icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),

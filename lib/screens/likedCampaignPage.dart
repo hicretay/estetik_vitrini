@@ -163,7 +163,7 @@ class _LikedCampaignPageState extends State<LikedCampaignPage> {
                               //------------------------------------------------------------------------------------------------------------
                               //------------------------------------------FAVORİTE BUTTON-----------------------------------------
                               starButton: IconButton(
-                               icon: likedContent![index].favoriStatus ? SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: primaryColor)  :  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25),
+                               icon: likedContent![index].favoriStatus ? SvgPicture.asset("assets/icons/star-focus.svg",height: 22,width: 22,color: secondaryColor)  :  SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: white),
                                onPressed:  ()async{
                                 final progressHUD = ProgressHUD.of(context);
                                 progressHUD!.show();
