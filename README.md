@@ -40,6 +40,5 @@ dependencies:<br>
   pull_to_refresh: ^2.0.0<br>
   colorful_safe_area: ^0.3.0<br>
   
-  ![estetik](https://user-images.githubusercontent.com/46728765/146072644-1ee38175-85e7-4ca3-844b-d92a30751c72.gif)
-
+  <img src="https://user-images.githubusercontent.com/46728765/146072644-1ee38175-85e7-4ca3-844b-d92a30751c72.gif" width="350">
 
