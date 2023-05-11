@@ -10,8 +10,8 @@ class ContentStreamDetailJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory ContentStreamDetailJsn.fromJson(Map<String, dynamic> json) => ContentStreamDetailJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class ContentStreamDetailJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -31,15 +31,21 @@ class Result {
         this.campaingDetail,
         this.likeCount,
         this.liked,
+        this.appointmentStatus,
         this.contentPictures,
+        this.campaignStartDate,
+        this.campaignEndDate
     });
 
-    int campaingId;
-    String campaingTitle;
-    String campaingDetail;
-    int likeCount;
-    bool liked;
-    List<ContentPicture> contentPictures;
+    int? campaingId;
+    String? campaingTitle;
+    String? campaingDetail;
+    int? likeCount;
+    bool? liked;
+    bool? appointmentStatus;
+    List<ContentPicture>? contentPictures;
+    String? campaignEndDate;
+    String? campaignStartDate;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         campaingId: json["campaingId"],
@@ -47,7 +53,10 @@ class Result {
         campaingDetail: json["campaingDetail"],
         likeCount: json["likeCount"],
         liked: json["liked"],
+        appointmentStatus: json["appointmentStatus"],
         contentPictures: List<ContentPicture>.from(json["contentPictures"].map((x) => ContentPicture.fromJson(x))),
+        campaignStartDate: json["campaignStartDate"],
+        campaignEndDate: json["campaignEndDate"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -56,7 +65,10 @@ class Result {
         "campaingDetail": campaingDetail,
         "likeCount": likeCount,
         "liked": liked,
-        "contentPictures": List<dynamic>.from(contentPictures.map((x) => x.toJson())),
+        "appointmentStatus": appointmentStatus,
+        "contentPictures": List<dynamic>.from(contentPictures!.map((x) => x.toJson())),
+        "campaignStartDate": campaignStartDate,
+        "campaignEndDate": campaignEndDate
     };
 }
 
@@ -65,7 +77,7 @@ class ContentPicture {
         this.cPicture,
     });
 
-    String cPicture;
+    String? cPicture;
 
     factory ContentPicture.fromJson(Map<String, dynamic> json) => ContentPicture(
         cPicture: json["cPicture"],

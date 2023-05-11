@@ -1,5 +1,4 @@
 import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -7,17 +6,17 @@ import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 
 class MakeAppointmentCalendarPage extends StatefulWidget { 
-  final AppointmentObject appointment;
+  final AppointmentObject? appointment;
 
   MakeAppointmentCalendarPage({this.appointment});
 
   @override
-  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(appointment: appointment);
+  _MakeAppointmentCalendarPageState createState() => _MakeAppointmentCalendarPageState(appointment: appointment!);
 }
 
 class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPage> {
@@ -28,7 +27,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
 
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
-    Map<DateTime, List<Event>> selectedEvents;
+  late  Map<DateTime, List<Event>> selectedEvents;
 
   List<Event> _getEventsForDay(DateTime date) {
     return selectedEvents[date] ?? [];
@@ -41,7 +40,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
     selectedEvents = {};
   }
 
-  _MakeAppointmentCalendarPageState({this.appointment});
+  _MakeAppointmentCalendarPageState({required this.appointment});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,11 +48,11 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
           child: Builder(builder: (context)=>
               Scaffold(
                 body: Container(
-                color:  Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
+                color:  primaryColor,
                 child: Column(
                   children: [
                     BackLeadingWidget(
-                      backColor: secondaryColor,
+                      backColor: primaryColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
@@ -61,17 +60,12 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child:  Text("Randevu Al", //Büyük Başlık
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  .copyWith(color: white, fontFamily: leadingFont),
-                            ),
+                            child: leadingText(context, "randevu al")
                           ),
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              appointment.companyNameS, 
+                              appointment.companyNameS!, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -143,15 +137,17 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
             ),
             bottomNavigationBar: Container(
               color: Theme.of(context).backgroundColor,
-              child: TextButtonWidget(buttonText: "Randevu alınacak işlemi seçiniz",
+              child: TextButtonWidget(
+                buttonText: "Randevu alınacak işlemi seçiniz",
+                icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
            //-----------------------------Randevu alınacak işlemi seçiniz butonu------------------------------
            onPressed: ()async{
            appointment.appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
            print(appointment.appointmentDate);
            final progressHUD = ProgressHUD.of(context);
-           progressHUD.show(); 
-           final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
-           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
+           progressHUD!.show(); 
+           final CompanyOperationJsn? companyOperation = await companyOperationJsnFunc(appointment.companyId!);
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>MakeAppointmentOperationPage(companyOperation: companyOperation!.result, appointment: appointment)));
            progressHUD.dismiss();
          }
          //-------------------------------------------------------------------------------------------------
@@ -165,7 +161,7 @@ class _MakeAppointmentCalendarPageState extends State<MakeAppointmentCalendarPag
 }
 class Event {
   final String operation;
-  Event({this.operation});
+  Event({required this.operation});
 
   String toString() => this.operation;
 }

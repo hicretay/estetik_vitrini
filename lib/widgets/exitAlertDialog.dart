@@ -15,7 +15,7 @@ class ExitAlertDialog extends StatelessWidget {
             Navigator.of(context).pop(false);
           },
           child: Text("Hayır",
-            style: Theme.of(context).textTheme.button.copyWith(
+            style: Theme.of(context).textTheme.button!.copyWith(
             fontWeight: FontWeight.normal,color: white),
           ),
         ),
@@ -25,7 +25,7 @@ class ExitAlertDialog extends StatelessWidget {
             exit(0);
           },
           child: Text("Evet",
-          style: Theme.of(context).textTheme.button.copyWith(
+          style: Theme.of(context).textTheme.button!.copyWith(
           fontWeight: FontWeight.normal,color: white)),
         ),
       ],

@@ -10,8 +10,8 @@ class CompanyOperationTimeJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory CompanyOperationTimeJsn.fromJson(Map<String, dynamic> json) => CompanyOperationTimeJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class CompanyOperationTimeJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -31,9 +31,9 @@ class Result {
         this.operationEndTime,
     });
 
-    int id;
-    String operationStartTime;
-    String operationEndTime;
+    int? id;
+    String? operationStartTime;
+    String? operationEndTime;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

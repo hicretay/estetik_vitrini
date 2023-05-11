@@ -5,7 +5,7 @@ class Company {
         this.companyLogo,
     });
 
-    int id;
-    String companyName;
-    String companyLogo;
+    int? id;
+    String? companyName;
+    String? companyLogo;
 }

@@ -5,12 +5,12 @@ class LeadingRowWidget extends StatefulWidget {
   //homePage ve favoritePage sayfalarında kullanıldı
  @required final String companyLogo; // icon resmi indexi
  @required final String companyName;
- @required final Color leadingColor;
+  final Color? leadingColor;
  @required final Widget starButton;
   @required final VoidCallback logoOnTap;
  
 
-  const LeadingRowWidget({Key key, this.companyLogo, this.companyName, this.leadingColor, this.starButton, this.logoOnTap});
+  const LeadingRowWidget({Key? key, required this.companyLogo, required this.companyName,  this.leadingColor, required this.starButton, required this.logoOnTap});
 
   @override
   _LeadingRowWidgetState createState() => _LeadingRowWidgetState();
@@ -50,7 +50,7 @@ class _LeadingRowWidgetState extends State<LeadingRowWidget> {
                   widget.companyName,
                   overflow: TextOverflow.fade,
                   softWrap: false,
-                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: widget.leadingColor)
+                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: Colors.white) // widget.leadingColor firma adı rengi düzenleniyor.
                 ),
               ),
             ],

@@ -26,13 +26,13 @@ class Screen {
 
   Screen({
     //@required verilmesi zorunlu parametreler
-    @required this.activeIcon,
-    @required this.title,
-    @required this.icon,
-    @required this.child,
-    @required this.onGenerateRoute,
-    @required this.initialRoute,
-    @required this.navigatorState,
-    @required this.scrollController,
+    required this.activeIcon,
+    required this.title,
+    required this.icon,
+    required this.child,
+    required this.onGenerateRoute,
+    required this.initialRoute,
+    required this.navigatorState,
+    required this.scrollController,
   });
 }

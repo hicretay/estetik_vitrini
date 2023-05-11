@@ -1,6 +1,7 @@
 import 'dart:io'; 
-import 'dart:async'; 
-import 'package:connectivity/connectivity.dart';
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart'; 
 
 class ConnectionStatusSingleton {
     static final ConnectionStatusSingleton _singleton = new ConnectionStatusSingleton._internal();

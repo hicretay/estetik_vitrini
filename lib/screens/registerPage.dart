@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -10,7 +12,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterPage extends StatefulWidget {
   static const route = "/registerPage";
-  RegisterPage({Key key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -107,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         keyboardType: TextInputType.visiblePassword,
                         obscureText : true, // yazılanlar gizlensin
                         hintText    : "Şifre*", //ipucu metni
-                        validator: (value) => (value ?? "").length > 2 ? null : "3 'ten küçük olmamalı"
+                        validator: (value) => (value)!.length > 2 ? "null" : "3 'ten küçük olmamalı"
                         ),
                       //----------------------------Şifre tekrar textField'ı---------------------------------
                         TextFieldWidget(
@@ -115,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         keyboardType: TextInputType.visiblePassword,
                         obscureText : true, // yazılanlar gizlensin
                         hintText    : "Şifre tekrar*", //ipucu metni
-                        validator: (value) => (value ?? "").length > 2 ? null : "3 'ten küçük olmamalı"
+                        validator: (value) => (value)!.length > 2 ? "null" : "3 'ten küçük olmamalı"
                         ),
                         //-----------------------------------------------------------------------------------
                         Text("* ile işaretli alanların girilmesi zorunludur"),
@@ -137,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             controlAffinity: ListTileControlAffinity.leading,
                             onChanged: (value){
                             setState(() {
-                                checkedPrivacy = value;
+                                checkedPrivacy = value!;
                               });
                             }),
                           ],
@@ -147,19 +149,19 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(30.0),
                           child: MaterialButton(
                             minWidth: deviceWidth(context) * 0.5, 
-                            child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
+                            child: Text("Kayıt Ol",style: Theme.of(context).textTheme.button!.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                             onPressed: ()async{
                             final progressUHD = ProgressHUD.of(context);
-                            progressUHD.show(); 
+                            progressUHD!.show(); 
                             if(txtNameSurname.text != null && txtEMail.text != null && txtTelephone.text != null && txtPassword.text !=null && txtNameSurname.text != "" && txtEMail.text != "" && txtTelephone.text != "" && txtPassword.text !=""){ 
                             final userAddData = await userAddJsnFunc(txtNameSurname.text, txtEMail.text, txtTelephone.text, txtPassword.text, "", ""); 
                               if(checkedPrivacy == true){
                               if(txtPassword.text == txtPasswordAgain.text){
-                              if(userAddData.success==true) {
+                              if(userAddData!.success==true) {
                               Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage())); 
                             }
                             else{
-                              showToast(context, userAddData.result); 
+                              showToast(context, userAddData.result!); 
                             }}
                             else {
                               showToast(context, "Girilen şifreler birbirinden farklı !"); 

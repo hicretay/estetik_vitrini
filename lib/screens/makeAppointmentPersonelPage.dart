@@ -1,4 +1,5 @@
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:estetikvitrini/screens/makeAppointmentTimePage.dart';
 import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/settings/consts.dart';
@@ -7,18 +8,18 @@ import 'package:estetikvitrini/widgets/backleadingWidget.dart';
 import 'package:estetikvitrini/widgets/textButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MakeAppointmentPersonelPage extends StatefulWidget {
-  final AppointmentObject appointment;
-  MakeAppointmentPersonelPage({Key key, this.appointment}) : super(key: key);
+  final AppointmentObject? appointment;
+  MakeAppointmentPersonelPage({Key? key, this.appointment}) : super(key: key);
 
   @override
   _MakeAppointmentPersonelPageState createState() => _MakeAppointmentPersonelPageState(appointment: appointment);
 }
 
 class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPage> {
-  AppointmentObject appointment;
+  AppointmentObject? appointment;
   List checkedOperation = [];
   int _checked = -1;
 
@@ -49,11 +50,11 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
             Scaffold(
             body:
                 Container(
-                color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? secondaryColor : darkBg,
+                color: primaryColor,
                 child: Column(
                   children: [
                      BackLeadingWidget(
-                      backColor: secondaryColor,
+                      backColor: primaryColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
@@ -61,17 +62,12 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
                         children: [
                           Align(
                             alignment: Alignment.topLeft,
-                            child:  Text("Randevu Al", //Büyük Başlık
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline4
-                                  .copyWith(color: white, fontFamily: leadingFont),
-                            ),
+                            child: leadingText(context, "randevu al")
                           ),
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              appointment.companyNameS, 
+                              appointment!.companyNameS!, 
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -158,7 +154,7 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                                color: lightWhite,
+                                                color: passivePurple,
                                                 width: 4.5 ),// mor dairenin genişliği
                                           ),
                                         ),
@@ -209,12 +205,13 @@ class _MakeAppointmentPersonelPageState extends State<MakeAppointmentPersonelPag
                 color: Theme.of(context).backgroundColor,
                 child: TextButtonWidget(
                 buttonText: "Randevu Saatini Seç",
+                icon: FaIcon(FontAwesomeIcons.arrowRight,size: 18,color: white),
                 onPressed: ()async{
                   final progressHUD = ProgressHUD.of(context);
-                  progressHUD.show();
-                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment.operationId]); 
-                  if(appointment.operationId!=null){              
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime.result,appointment: appointment)));
+                  progressHUD!.show();
+                  final companyOperationTime = await companyOperationTimeJsnFunc([appointment!.operationId]); 
+                  if(appointment!.operationId!=null){              
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentTimePage(companyOperationTime: companyOperationTime!.result,appointment: appointment!)));
                   }
                   else{
                     showToast(context, "Lütfen bir personel seçiniz!");

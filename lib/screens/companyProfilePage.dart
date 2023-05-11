@@ -1,6 +1,5 @@
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/homeDetailPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
@@ -8,20 +7,19 @@ import 'package:estetikvitrini/widgets/backgroundContainer.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyProfilePage extends StatefulWidget {
-  final CompanyProfileJsn companyProfile;
-  CompanyProfilePage({Key key, this.companyProfile}) : super(key: key);
+  final CompanyProfileJsn? companyProfile;
+  CompanyProfilePage({Key? key, this.companyProfile}) : super(key: key);
 
   @override
   _CompanyProfilePageState createState() => _CompanyProfilePageState(companyProfile: companyProfile);
 }
 
 class _CompanyProfilePageState extends State<CompanyProfilePage> {
-  int userIdData;
-  CompanyProfileJsn companyProfile;
+  late int userIdData;
+  CompanyProfileJsn? companyProfile;
 
   _CompanyProfilePageState({this.companyProfile});
 
@@ -32,7 +30,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
         body: ProgressHUD(
           child: Builder(builder: (context)=>
             BackGroundContainer(
-            colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
             child: Column(
               children: [
                 Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -53,7 +50,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                       SizedBox(width: maxSpace),
                       SizedBox(
                         width: deviceWidth(context)*0.7,
-                        child: Text(companyProfile.result.companyName,
+                        child: Text(companyProfile!.result!.companyName!,
                         style     : TextStyle(
                         overflow: TextOverflow.fade,
                         fontFamily: contentFont, 
@@ -83,14 +80,14 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                 color: white,
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                image: NetworkImage(companyProfile.result.companyLogo ?? circularBasic)
+                                image: NetworkImage(companyProfile!.result!.companyLogo!)
                                ),
                               ),
                               ),
                               SizedBox(
                                 width: deviceWidth(context)*0.3,
                                 child: Center(
-                                child: Text(companyProfile.result.companyName,
+                                child: Text(companyProfile!.result!.companyName!,
                                 style: TextStyle(color: white),
                                 overflow: TextOverflow.fade))),
                             ],
@@ -102,17 +99,20 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         children: [
                         Column(children: [
                         Text("Kampanya",style: TextStyle(color: white)),
-                        Text(companyProfile.result.campaignCount.toString(),style: TextStyle(color: white)),
+                        SizedBox(height: deviceHeight(context)*0.01),
+                        Text(companyProfile!.result!.campaignCount.toString(),style: TextStyle(color: white)),
                       ]),
                       SizedBox(width: deviceWidth(context)*0.05),
                         Column(children: [
                         Text("Beğeni",style: TextStyle(color: white)),
-                        Text(companyProfile.result.likeCount.toString(),style: TextStyle(color: white)),
+                        SizedBox(height: deviceHeight(context)*0.01),
+                        Text(companyProfile!.result!.likeCount.toString(),style: TextStyle(color: white)),
                       ]),
                       SizedBox(width: deviceWidth(context)*0.05),
                         Column(children: [
                         Text("Favori",style: TextStyle(color: white)),
-                        Text(companyProfile.result.favCount.toString(),style: TextStyle(color: white)),
+                        SizedBox(height: deviceHeight(context)*0.01),
+                        Text(companyProfile!.result!.favCount.toString(),style: TextStyle(color: white)),
                       ])
                        ],
                       )
@@ -135,28 +135,28 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                           child: Row(children: [
                             SizedBox(width: deviceWidth(context)*0.17,child: Text("Telefon")), 
                             SizedBox(width: deviceWidth(context)*0.05),
-                            Text(companyProfile.result.companyPhone)]),
+                            Text(companyProfile!.result!.companyPhone!)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
                           child: Row(children: [
                             SizedBox(width: deviceWidth(context)*0.17,child: Text("WhatsApp")), 
                             SizedBox(width: deviceWidth(context)*0.05),
-                            Text(companyProfile.result.companyPhone2)]),
+                            Text(companyProfile!.result!.companyPhone2!)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
                           child: Row(children: [
                             SizedBox(width: deviceWidth(context)*0.17, child: Text("Web Adresi")), 
                             SizedBox(width: deviceWidth(context)*0.05),
-                            Text(companyProfile.result.web)]),
+                            Text(companyProfile!.result!.web!)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
                           child: Row(children: [
                             SizedBox(width: deviceWidth(context)*0.17,child: Text("E-Posta")), 
                             SizedBox(width: deviceWidth(context)*0.05),
-                            Text(companyProfile.result.eMail)]),
+                            Text(companyProfile!.result!.eMail!)]),
                         ),
                         Padding(
                           padding:  EdgeInsets.only(left: deviceWidth(context)*0.1,top: deviceWidth(context)*0.03),
@@ -169,8 +169,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                               decoration: TextDecoration.underline)),
                               onTap: (){
                                 final progressHUD = ProgressHUD.of(context);
-                                progressHUD.show();                             
-                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: companyProfile.result.googleAdressLink))); 
+                                progressHUD!.show();                             
+                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: companyProfile!.result!.googleAdressLink!))); 
                                 progressHUD.dismiss();
                                 })]),
                         ),
@@ -183,7 +183,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                             //scrollDirection: Axis.vertical,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,                 
-                            itemCount: companyProfile.result.campaignList.length,
+                            itemCount: companyProfile!.result!.campaignList!.length,
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               childAspectRatio: (1 / .6),
                               crossAxisCount : 2,
@@ -202,22 +202,22 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                         alignment: Alignment.bottomRight,
                                         child: Padding(
                                           padding: const EdgeInsets.only(bottom: minSpace,right: minSpace),
-                                          child: Text(companyProfile.result.campaignList[index].campaingName),
+                                          child: Text(companyProfile!.result!.campaignList![index].campaingName!),
                                         )),
                                       decoration: BoxDecoration(
                                         border: Border.all(),
                                         image: DecorationImage(
-                                        image: NetworkImage(companyProfile.result.campaignList[index].campaingLogo)))),
+                                        image: NetworkImage(companyProfile!.result!.campaignList![index].campaingLogo!)))),
                                     onTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);
-                                      progressUHD.show(); 
+                                      progressUHD!.show(); 
                                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                                      userIdData = prefs.getInt("userIdData"); 
-                                      final ContentStreamDetailJsn homeDetailContent = await contentStreamDetailJsnFunc(companyProfile.result.id, companyProfile.result.campaignList[index].campaingId,userIdData);                        
+                                      userIdData = prefs.getInt("userIdData")!; 
+                                      final ContentStreamDetailJsn? homeDetailContent = await contentStreamDetailJsnFunc(companyProfile!.result!.id!, companyProfile!.result!.campaignList![index].campaingId!,userIdData);                        
                                       // "Detaylı Bilgi İçin" butouna basıldığında detay sayfasına yönlendirecek
-                                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent.result,
-                                       campaingId: companyProfile.result.campaignList[index].campaingId, companyId: companyProfile.result.id, companyLogo: companyProfile.result.companyLogo, companyName: companyProfile.result.companyName, contentTitle: companyProfile.result.campaignList[index].campaingName,
-                                       googleAdressLink: companyProfile.result.googleAdressLink,companyPhone: companyProfile.result.companyPhone)));
+                                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> HomeDetailPage(homeDetailContent: homeDetailContent!.result,
+                                       campaingId: companyProfile!.result!.campaignList![index].campaingId, companyId: companyProfile!.result!.id, companyLogo: companyProfile!.result!.companyLogo, companyName: companyProfile!.result!.companyName!, contentTitle: companyProfile!.result!.campaignList![index].campaingName,
+                                       googleAdressLink: companyProfile!.result!.googleAdressLink,companyPhone: companyProfile!.result!.companyPhone)));
                                        progressUHD.dismiss();
                                     },
                                   ),

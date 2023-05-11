@@ -16,7 +16,7 @@ ThemeData dark = ThemeData(
 
 class ThemeDataProvider with ChangeNotifier{
   bool isLightTheme = true;
-  static SharedPreferences _preferences;
+  static SharedPreferences? _preferences;
 
   ThemeData get themeColor {
     return isLightTheme ? light : dark;
@@ -35,10 +35,10 @@ class ThemeDataProvider with ChangeNotifier{
   }
 
   void saveTheme(bool value){
-    _preferences.setBool("themeData", value);
+    _preferences!.setBool("themeData", value);
   }
 
   void loadTheme()async{
-    isLightTheme = _preferences.getBool("themeData") ?? true;
+    isLightTheme = _preferences!.getBool("themeData") ?? true;
   }
 }

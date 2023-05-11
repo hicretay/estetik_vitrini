@@ -10,8 +10,8 @@ class CityJsn {
         this.result,
     });
 
-    bool success;
-    List<Result> result;
+    bool? success;
+    List<Result>? result;
 
     factory CityJsn.fromJson(Map<String, dynamic> json) => CityJsn(
         success: json["success"],
@@ -20,7 +20,7 @@ class CityJsn {
 
     Map<String, dynamic> toJson() => {
         "success": success,
-        "result": List<dynamic>.from(result.map((x) => x.toJson())),
+        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
     };
 }
 
@@ -30,8 +30,8 @@ class Result {
         this.city,
     });
 
-    int id;
-    String city;
+    int? id;
+    String? city;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

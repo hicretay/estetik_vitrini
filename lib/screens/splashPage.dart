@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:connectivity/connectivity.dart';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:estetikvitrini/JsnClass/loginJsn.dart';
 import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
@@ -26,8 +27,8 @@ class _SplashPageState extends State<SplashPage> {
         Provider.of<ThemeDataProvider>(context, listen: false).loadTheme();
         if(await connectivityResult != ConnectivityResult.none){
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        String user = prefs.getString("user");
-        String pass = prefs.getString("pass");
+        String? user = prefs.getString("user");
+        String? pass = prefs.getString("pass");
 
         if(user==null){
           Navigator.of(context).pop();
@@ -35,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
         }
         else{
           // ignore: unused_local_variable
-          final LoginJsn userData = await loginJsnFunc(user, pass, false); 
+          final LoginJsn? userData = await loginJsnFunc(user, pass!, false); 
           Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>Root()));
         }
         }
@@ -52,7 +53,6 @@ class _SplashPageState extends State<SplashPage> {
                color: primaryColor,
                child: Text("Kapat",style: TextStyle(fontFamily: leadingFont)), 
                onPressed: () async{
-                
                exit(0);
                }),
              ],

@@ -10,8 +10,8 @@ class FavoriteJsn {
         this.result,
     });
 
-    bool success;
-    String result;
+    bool? success;
+    String? result;
 
     factory FavoriteJsn.fromJson(Map<String, dynamic> json) => FavoriteJsn(
         success: json["success"],

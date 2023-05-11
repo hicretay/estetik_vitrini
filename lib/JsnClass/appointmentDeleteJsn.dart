@@ -9,7 +9,7 @@ class AppointmentDeleteJsn {
         this.success,
     });
 
-    bool success;
+    bool? success;
 
     factory AppointmentDeleteJsn.fromJson(Map<String, dynamic> json) => AppointmentDeleteJsn(
         success: json["success"],

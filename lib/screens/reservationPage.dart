@@ -1,11 +1,8 @@
 import 'package:estetikvitrini/JsnClass/appointmentList.dart';
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
-import 'package:estetikvitrini/JsnClass/companyOperationJsn.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamJsn.dart';
-import 'package:estetikvitrini/model/appointmentModel.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
-import 'package:estetikvitrini/screens/makeAppointmentOperationPage.dart';
+import 'package:estetikvitrini/screens/companiesPage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:estetikvitrini/widgets/backgroundContainer.dart';
@@ -13,14 +10,12 @@ import 'package:estetikvitrini/widgets/reservationResultWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ReservationPage extends StatefulWidget {
   static const route = "reservationPage";
-  ReservationPage({Key key}) : super(key: key);
+  ReservationPage({Key? key}) : super(key: key);
 
   @override
   _ReservationPageState createState() => _ReservationPageState();
@@ -28,37 +23,37 @@ class ReservationPage extends StatefulWidget {
 
 class _ReservationPageState extends State<ReservationPage> {
   TextEditingController teSearch = TextEditingController();
-  List appointmentList;
-  List companyContent;
-  List homeContent;
+  List? appointmentList;
+  List? companyContent;
+  List? homeContent;
 
-  String select; // firma seçimi dropDown değeri
+  String? select; // firma seçimi dropDown değeri
 
-  int userIdData;
+  int? userIdData;
 
   Future appointmentListFunc() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-     userIdData = prefs.getInt("userIdData"); 
+    userIdData = prefs.getInt("userIdData"); 
     String calendarDate = (_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
-    final AppointmentListJsn appointmentNewList = await appointmentListJsnFunc(userIdData,calendarDate);
+    final AppointmentListJsn? appointmentNewList = await appointmentListJsnFunc(userIdData!,calendarDate);
     setState(() {
-      appointmentList = appointmentNewList.result;
+      appointmentList = appointmentNewList!.result;
     });
   }
 
   Future companyListFunc() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   final CompanyListJsn? companyNewList = await companyListJsnFunc(); 
    setState(() {
-      companyContent = companyNewList.result;
+      companyContent = companyNewList!.result;
    });
    }
 
    Future homeContentList() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
      userIdData = prefs.getInt("userIdData"); 
-     final ContentStreamJsn homeContentNewList = await contentStreamJsnFunc(userIdData,0); 
+     final ContentStreamJsn? homeContentNewList = await contentStreamJsnFunc(userIdData!,0); 
      setState(() {
-        homeContent = homeContentNewList.result;
+        homeContent = homeContentNewList!.result;
      });
    }
 
@@ -70,11 +65,11 @@ class _ReservationPageState extends State<ReservationPage> {
     // DateTime.utc(2022, 9, 10):[Event(operation: "işlem"),],
   };
 
-  List<Event> _getEventsForDay(DateTime date) {
-    return selectedEvents[date] ?? [
-    // Event(operation: "deneme"),
-    ];
-  }
+  // List<Event>? _getEventsForDay(DateTime date) {
+  //   return selectedEvents[date] ?? [
+  //   // Event(operation: "deneme"),
+  //   ];
+  // }
 
   @override
   void initState() { 
@@ -83,7 +78,7 @@ class _ReservationPageState extends State<ReservationPage> {
     appointmentListFunc();
     companyListFunc();
     homeContentList();
-    WidgetsBinding.instance.addPostFrameCallback((_){ 
+    WidgetsBinding.instance!.addPostFrameCallback((_){ 
     //code will run when widget rendering complete
   });
   }
@@ -102,100 +97,35 @@ class _ReservationPageState extends State<ReservationPage> {
             child: FloatingActionButton.extended(
               backgroundColor: primaryColor,
               onPressed: ()async{
-             showDialog(context: context, builder: (BuildContext context){
-               int compID = -1;
-               return SingleChildScrollView(
-                 child: AlertDialog(
-                   actions: <Widget>[
-                     SingleChildScrollView(
-                       child: Container(
-                         width: deviceWidth(context),
-                         child: 
-                         SearchableDropdown(
-                           menuConstraints: BoxConstraints.tight(Size.fromHeight(deviceHeight(context)/3)),
-                           closeButton: null,
-                           dialogBox: false,
-                           isCaseSensitiveSearch: false,
-                           style: TextStyle(color: primaryColor),
-                           isExpanded: true,
-                           hint: Center(
-                           child: Text("Randevu alınacak firmayı seçiniz",
-                           textAlign: TextAlign.center,
-                           style    : TextStyle(
-                           fontSize : 18, 
-                           color    :  primaryColor,
-                           )),
-                           ),
-                           value: select,
-                     
-                           items: companyContent.map((data){
-                           return DropdownMenuItem(
-                           child: SingleChildScrollView(
-                             child: Center(
-                             child: Text(data.companyName, textAlign: TextAlign.center,
-                             style: TextStyle(color: primaryColor, fontSize: 20)),
-                             ),
-                           ),
-                           value: data.companyName
-                           );
-                           }).toList(),  
-                           onChanged: (value) async{                                 
-                             select = value;
-                             for (var item in companyContent) {
-                               if(item.companyName==value){
-                                 compID = item.id;
-                               }
-                             }
-                             SharedPreferences prefs = await SharedPreferences.getInstance();
-                             userIdData = prefs.getInt("userIdData"); 
-                             if(userIdData != 0){
-                             String appointmentDate=(_selectedDay.day <= 9 ? "0"+_selectedDay.day.toString() :  _selectedDay.day.toString())+"."+ (_selectedDay.month <= 9 ? "0"+_selectedDay.month.toString() :  _selectedDay.month.toString()) +"."+_selectedDay.year.toString();
-                             AppointmentObject appointment = AppointmentObject(companyId: compID,userId: userIdData, companyNameS: value, campaignId: 0, appointmentDate: appointmentDate);
-                             final CompanyOperationJsn companyOperation = await companyOperationJsnFunc(appointment.companyId);
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=> MakeAppointmentOperationPage(companyOperation: companyOperation.result, appointment: appointment)));
-                             print(value);
-                             print(compID);
-                           }
-                           else{
-                             showNotMemberAlert(context);
-                           }
-                           }
-                           
-                           )
-                                   ),
-                     )
-                             ],
-                             ),
-               );
-            });
-                   }, 
+              
+              Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompaniesPage(date: calendarDate)));
+            }, 
             label: Text("Randevu Al"),
             icon:  FaIcon(FontAwesomeIcons.calendar,size: 18,color: white)),
           ),
           body: ProgressHUD(
             child: Builder(builder: (context)=>
                 BackGroundContainer(
-                colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor2 : backGroundColorDark,
                 child: Column(
                 children: [
                 Padding(padding: const EdgeInsets.only(left: defaultPadding,right: defaultPadding,top: defaultPadding*2,bottom: defaultPadding),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                           Text("Randevularım",
-                            style: Theme.of(context)
-                              .textTheme
-                              .headline4
-                              .copyWith(color: white, fontFamily: leadingFont),
-                          ),
-                          
+                    Text("randevularım", //Büyük Başlık
+                         style: Theme.of(context)
+                             .textTheme
+                             .headline3!
+                             .copyWith(color: white, fontFamily: leadingFont),
+                         maxLines: 2,
+                       ),
                      ],
                    ),
                  ),
                         Expanded(
                           child: Container(
                           decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
+                          color: passivePurple,
                           borderRadius: BorderRadius.vertical(
                           top: Radius.circular(cardCurved),
                           ),
@@ -213,17 +143,19 @@ class _ReservationPageState extends State<ReservationPage> {
                               startingDayOfWeek: StartingDayOfWeek.monday,
                               calendarFormat: CalendarFormat.twoWeeks,
                               calendarStyle: CalendarStyle(
+                                
                                 isTodayHighlighted: true,
                                 selectedDecoration: BoxDecoration(
                                   color: primaryColor,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(minCurved),
                                 ),
+                                
                                 outsideDecoration: boxDecoration,
                                 defaultDecoration: boxDecoration,
                                 weekendDecoration: boxDecoration,
-                                defaultTextStyle: TextStyle(color: Theme.of(context).hintColor),
-                                outsideTextStyle: TextStyle(color: Theme.of(context).hintColor),
+                                defaultTextStyle: TextStyle(color: darkWhite),
+                                outsideTextStyle: TextStyle(color: darkWhite),
                                 selectedTextStyle: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -245,7 +177,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                 formatButtonVisible: false,
                                 titleCentered: true,
                               ),
-                              eventLoader: _getEventsForDay,
+                              //eventLoader: _getEventsForDay,
                                   )
                                   ),
                                 Padding(
@@ -267,16 +199,16 @@ class _ReservationPageState extends State<ReservationPage> {
                                     child: ListView.builder(
                                       padding: EdgeInsets.all(0),
                                       shrinkWrap : true,
-                                      itemCount  : appointmentList == null ? 0 : appointmentList.length,
+                                      itemCount  : appointmentList == null ? 0 : appointmentList!.length,
                                       controller: NavigationProvider.of(context).screens[RESERVATION_PAGE].scrollController,
                                       itemBuilder: (BuildContext context, int index){  
                                       return ResevationResultWidget(
-                                      companyName : appointmentList[index].companyName,
-                                      operation   : appointmentList[index].operationName,
-                                      time        : appointmentList[index].appointmentTime,
-                                      date        : appointmentList[index].appointmentDate,
+                                      companyName : appointmentList![index].companyName,
+                                      operation   : appointmentList![index].operationName,
+                                      time        : appointmentList![index].appointmentTime,
+                                      date        : appointmentList![index].appointmentDate,
                                       confirmButton: GestureDetector(child: 
-                                                     Icon(Icons.check_box_rounded,size: 18,color: appointmentList[index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
+                                                     Icon(Icons.check_box_rounded,size: 18,color: appointmentList![index].confirmed ? tertiaryColor  : Theme.of(context).hintColor),
                                                      onTap: (){
                                                        showToast(context, "Randevu onayı bekleniyor...");
                                                      }),
@@ -295,9 +227,9 @@ class _ReservationPageState extends State<ReservationPage> {
                                                         child: Text("Evet",style: TextStyle(color: white)),
                                                         onPressed: ()async{
                                                           final progressHUD = ProgressHUD.of(context);
-                                                          progressHUD.show(); 
-                                                          final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList[index].id);
-                                                          if(deleteAppointment.success==true){
+                                                          progressHUD!.show(); 
+                                                          final deleteAppointment =await appointmentDeleteJsnFunc(appointmentList![index].id);
+                                                          if(deleteAppointment!.success==true){
                                                             showToast(context, "Randevu başarıyla iptal edildi!");
                                                           }
                                                           else{
@@ -343,7 +275,7 @@ class _ReservationPageState extends State<ReservationPage> {
 }
 class Event {
   final String operation;
-  Event({this.operation});
+  Event({required this.operation});
 
   String toString() => this.operation;
 }

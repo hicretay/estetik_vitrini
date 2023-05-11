@@ -9,7 +9,7 @@ class AppointmentAddJsn {
         this.success,
     });
 
-    bool success;
+    bool? success;
 
     factory AppointmentAddJsn.fromJson(Map<String, dynamic> json) => AppointmentAddJsn(
         success: json["success"],

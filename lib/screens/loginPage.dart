@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   static const route = "/loginPage";
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -22,6 +22,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
+  TextEditingController txtForgetPassword = TextEditingController();
   bool isOnline = false;
   
     @override
@@ -94,23 +95,24 @@ class _LoginPageState extends State<LoginPage> {
                             //--------------------------------------------------GİRİŞ BUTONU---------------------------------------------------------------
                               child: MaterialButton(
                                 minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                child: Text("Giriş",style: Theme.of(context).textTheme.button.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
+                                child: Text("Giriş",style: Theme.of(context).textTheme.button!.copyWith(color: white,fontFamily: contentFont,fontSize: 20)),
                                 //-----------------------------GİRİŞ BUTONU ONPRESSEDİ---------------------------------------------
                                 onPressed: ()async{
                                   final progressHUD = ProgressHUD.of(context);
-                                  progressHUD.show(); 
+                                  progressHUD!.show(); 
                                   String username = txtUsername.text; // Kullanıcı Adı TextField'ının texti = username
                                   String password = txtPassword.text; // Şifre TextField'ının texti = password
                                   if(username != "" && password != ""){
                                   
                                   //--------------------------------USER DATASI DOLDURULMASI---------------------------
-                                  final LoginJsn userData = await loginJsnFunc(username, password, false); 
-                                  if(userData.success == true){ // Giriş kontrolü, succes
+                                  final LoginJsn? userData = await loginJsnFunc(username, password, false); 
+                                  if(userData!.success == true){ // Giriş kontrolü, succes
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                                  prefs.setString("namesurname", userData.result.nameSurname);
+                                  prefs.setString("namesurname", userData.result!.nameSurname!);
                                   prefs.setString("user", username);     
                                   prefs.setString("pass", password);  
-                                  prefs.setInt("userIdData", userData.result.id);  
+                                  prefs.setBool("isAdmin", userData.result!.admin!);
+                                  prefs.setInt("userIdData", userData.result!.id!);  
                                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                                   showToast(context, "Giriş Başarılı!");
                                   progressHUD.dismiss(); 
@@ -135,10 +137,10 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterPage())); 
                             }, 
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: defaultPadding*3,right: defaultPadding*3),
-                              child: Divider(height: 2,color: primaryColor,thickness: 0.8,),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: defaultPadding*3,right: defaultPadding*3),
+                            //   child: Divider(height: 2,color: primaryColor,thickness: 0.8,),
+                            // ),
                             //SizedBox(height: deviceHeight(context)*0.05),
                             Padding(padding: const EdgeInsets.only(right: defaultPadding*2,left: defaultPadding*2,bottom: minSpace),
                             child     : Container(
@@ -157,15 +159,14 @@ class _LoginPageState extends State<LoginPage> {
                             ]),
                             onPressed : () async{
                               final progressHUD = ProgressHUD.of(context);
-                              progressHUD.show(); 
-                              final LoginJsn userData = await loginJsnFunc("", "", false); 
-                              if(userData.success == true){ // Giriş kontrolü, succes
+                              progressHUD!.show(); 
                               SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setString("namesurname", userData.result.nameSurname);   
+                              prefs.setBool("isAdmin", false);
+                              prefs.setString("namesurname", "Deneme Hesabı");   
                               prefs.setInt("userIdData", 0);   
                               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LocationPage()), (route) => false);
                               showToast(context, "Giriş Başarılı!");
-                              }
+                              progressHUD.dismiss();
                             },
                             ),
                             //-----------------------------------------------------------------------------------------------------------
@@ -272,40 +273,55 @@ class _LoginPageState extends State<LoginPage> {
                                   child: TextButton(
                                   child: Text("Şifremi Unuttum",style: TextStyle(color: secondaryColor,fontFamily: contentFont,fontSize: 16)),
                                   onPressed: (){
-                                    return showDialog(context: context, builder: (BuildContext context){
-                                    return AlertDialog(
-                                      title: Center(child: Text("SIFREMI UNUTTUM", style: TextStyle(fontFamily: leadingFont))),
-                                      content: Container(
-                                        height: 70,
-                                        child: Column(
-                                          children: [
-                                            Text("Lütfen E-Posta adresinizi giriniz: "),
-                                            SizedBox(height: minSpace),
-                                            TextField(
-                                              keyboardType: TextInputType.emailAddress,
-                                              decoration: InputDecoration(
-                                                contentPadding: EdgeInsets.all(maxSpace),
-                                                filled: true,
-                                                fillColor: Colors.white,
-                                                border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(cardCurved),
+                                    showDialog(context: context, builder: (BuildContext context){
+                                    return ProgressHUD(
+                                      child: Builder(builder: (context)=>  
+                                          AlertDialog(
+                                          title: Center(child: Text("SIFREMI UNUTTUM", style: TextStyle(fontFamily: leadingFont))),
+                                          content: Container(
+                                            height: 70,
+                                            child: Column(
+                                              children: [
+                                                Text("Lütfen E-Posta adresinizi giriniz: "),
+                                                SizedBox(height: minSpace),
+                                                TextField(
+                                                  controller: txtForgetPassword,
+                                                  keyboardType: TextInputType.emailAddress,
+                                                  decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.all(maxSpace),
+                                                    filled: true,
+                                                    fillColor: Colors.white,
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(cardCurved),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
+                                          ),
+                                          actions: <Widget>[
+                                          Row(mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               MaterialButton(
+                                               color: primaryColor,
+                                               child: Text("Gönder",style: TextStyle(fontFamily: leadingFont,color: white)), // fotoğraf çekilmeye devam edilecek
+                                               onPressed: () async{
+                                                 final progressHUD = ProgressHUD.of(context);
+                                                 progressHUD!.show(); 
+                                                 final forgetPasswordData = await forgetPasswordJsnFunc(txtForgetPassword.text.trim());
+                                                 if(forgetPasswordData!.success == true){
+                                                   showToast(context, "Lütfen mail aresinizi kontrol ediniz !");
+                                                 }
+                                                 else{
+                                                   showToast(context, "Bir hata oluştu !");
+                                                 }
+                                                 Navigator.of(context).pop();
+                                                 progressHUD.dismiss();
+                                              }),
+                                            ]),
                                           ],
                                         ),
                                       ),
-                                      actions: <Widget>[
-                                      Row(mainAxisAlignment: MainAxisAlignment.center,
-                                         children: [
-                                           MaterialButton(
-                                           color: primaryColor,
-                                           child: Text("Gönder",style: TextStyle(fontFamily: leadingFont)), // fotoğraf çekilmeye devam edilecek
-                                           onPressed: () async{
-                                             Navigator.of(context).pop();
-                                          }),
-                                        ]),
-                                      ],
                                     );
                                   });
                                   }, 

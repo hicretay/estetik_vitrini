@@ -1,8 +1,7 @@
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:carousel_nullsafety/carousel_nullsafety.dart';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/JsnClass/contentStreamDetailJsn.dart';
 import 'package:estetikvitrini/JsnClass/likeJsn.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/widgets/webViewWidget.dart';
 import 'package:estetikvitrini/screens/makeAppointmentCalendarPage.dart';
@@ -15,21 +14,20 @@ import 'package:estetikvitrini/widgets/leadingRowWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class HomeDetailPage extends StatefulWidget {
-  final List homeDetailContent;
-  final int campaingId;
-  final int companyId;
-  final String companyLogo;
-  final String companyName;
-  final String contentTitle;
-  final String googleAdressLink;
-  final String companyPhone;
-  HomeDetailPage({Key key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.companyPhone}) : super(key: key);
+  final List? homeDetailContent;
+  final int? campaingId;
+  final int? companyId;
+  final String? companyLogo;
+  final String? companyName;
+  final String? contentTitle;
+  final String? googleAdressLink;
+  final String? companyPhone;
+  HomeDetailPage({Key? key, this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.companyPhone}) : super(key: key);
 
   @override
   _HomeDetailPageState createState() => _HomeDetailPageState(homeDetailContent: homeDetailContent, 
@@ -37,27 +35,27 @@ class HomeDetailPage extends StatefulWidget {
 }
 
 class _HomeDetailPageState extends State<HomeDetailPage> {
-  List homeDetailContent;
-  int campaingId;
-  int companyId ;
-  String companyLogo;
-  String companyName;
-  String contentTitle;
-  String googleAdressLink;
-  String companyPhone;
+  List? homeDetailContent;
+  int? campaingId;
+  int? companyId ;
+  String? companyLogo;
+  String? companyName;
+  String? contentTitle;
+  String? googleAdressLink;
+  String? companyPhone;
 
-  int userIdData;
+ late int userIdData;
 
   
   _HomeDetailPageState({this.homeDetailContent, this.campaingId, this.companyId, this.companyLogo, this.companyName, this.contentTitle, this.googleAdressLink, this.companyPhone});
   Future homeDetailRefresh() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-     userIdData = prefs.getInt("userIdData"); 
-   final ContentStreamDetailJsn detailNewList = await contentStreamDetailJsnFunc(companyId,campaingId,userIdData); 
+     userIdData = prefs.getInt("userIdData")!; 
+   final ContentStreamDetailJsn? detailNewList = await contentStreamDetailJsnFunc(companyId!,campaingId!,userIdData); 
    if (!mounted)
    return; 
    setState(() {
-      homeDetailContent = detailNewList.result;
+      homeDetailContent = detailNewList!.result;
    });
    }
 
@@ -66,12 +64,19 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
     final transformationController = TransformationController();
     //--------------------Slider Imageları-------------------
     List<dynamic> sliderImg = [];
-    for (var item in homeDetailContent.first.contentPictures) {
+    for (var item in homeDetailContent!.first.contentPictures) {
       //final transformationController = TransformationController();
       sliderImg.add(
-        Container(
-          child: Image.network(item.cPicture))
-       );
+        AspectRatio(
+          aspectRatio: 16/9,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: NetworkImage(item.cPicture)),
+              borderRadius: BorderRadius.all(Radius.circular(maxSpace))),),
+        )
+      );
     }   
     //-------------------------------------------------------                 
 
@@ -80,7 +85,6 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         body: ProgressHUD(
         child: Builder(builder: (context)=>
               BackGroundContainer(
-              colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
               child: Column(
               children: [
                 BackLeadingWidget(
@@ -91,16 +95,16 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                       children: [
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text("Kampanyalar", //Büyük Başlık
+                          child: Text("kampanyalar", //Büyük Başlık
                           style: Theme.of(context)
                               .textTheme
-                              .headline4
+                              .headline4!
                               .copyWith(color: white, fontFamily: leadingFont),
                             ),
                         ),
                         Align(
                           alignment: Alignment.topLeft,
-                          child: Text(companyName,  
+                          child: Text(companyName!,  
                           style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -111,10 +115,10 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                   Expanded(
                     child: Container(
                         decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
+                        color: passivePurple,//Theme.of(context).backgroundColor,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(cardCurved)),//Yalnızca dikeyde yuvarlatılmış
                       ),
-                      child: FutureBuilder<Object>(
+                      child: FutureBuilder<dynamic>(
                         future: homeDetailRefresh(),
                         builder: (context, snapshot) {
                           return SingleChildScrollView(
@@ -122,14 +126,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                   children: [
                                     SizedBox(height: maxSpace),
                                     LeadingRowWidget( 
-                                      companyName: companyName,  
-                                      companyLogo: companyLogo,  
+                                      companyName: companyName!,  
+                                      companyLogo: companyLogo!,  
                                       leadingColor: Theme.of(context).hintColor,
                                       starButton: Container(),
                                       logoOnTap: ()async{
                                       final progressUHD = ProgressHUD.of(context);
-                                      progressUHD.show(); 
-                                      final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(companyId);
+                                      progressUHD!.show(); 
+                                      final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(companyId!);
                                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                                       progressUHD.dismiss();
                                     },),//leading widgetı
@@ -149,7 +153,16 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                 transformationController.toScene(Offset.zero);
                                               });
                                             },
-                                            child: Image.network(homeDetailContent.first.contentPictures.first.cPicture)): //  ekli görsel sayısı 1den fazla ise carousel 
+                                            child: AspectRatio(
+                                              aspectRatio: 16/9,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.all(Radius.circular(maxSpace)),
+                                                  image: DecorationImage(
+                                                  fit: BoxFit.fitWidth,
+                                                  image: NetworkImage(homeDetailContent!.first.contentPictures.first.cPicture))),
+                                                ),
+                                            )): //  ekli görsel sayısı 1den fazla ise carousel 
                                           InteractiveViewer(
                                             panEnabled: false,
                                             clipBehavior: Clip.none,
@@ -162,7 +175,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                             child: Carousel(
                                             borderRadius: true,
                                             radius: Radius.circular(maxSpace),
-                                            boxFit: BoxFit.contain,
+                                            boxFit: BoxFit.fitWidth,
                                             autoplay: false,
                                             animationCurve: Curves.bounceInOut, // animasyon efekti
                                             animationDuration: Duration(milliseconds: 1000), // animasyon süresi
@@ -193,15 +206,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                           //-----------------------Beğeni iconButton'ı----------------------------
                                               child: CircleAvatar(//Beğeni butonunu kaplayan circleAvatar yapısı                                        
                                                 maxRadius      : deviceWidth(context)*0.05,
-                                                backgroundColor: homeDetailContent.first.liked ? primaryColor : white, // seçili ise koyu, değilse açık renk verildi
+                                                backgroundColor: homeDetailContent!.first.liked ? primaryColor : passivePurple, // seçili ise koyu, değilse açık renk verildi
                                                 child: 
-                                                IconButton( icon: homeDetailContent.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: primaryColor),
+                                                IconButton( icon: homeDetailContent!.first.liked ? Icon(LineIcons.heart, color: white) : Icon(LineIcons.heart, color: darkWhite),
                                                 onPressed: () async{
                                                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                  userIdData = prefs.getInt("userIdData"); 
+                                                  userIdData = prefs.getInt("userIdData")!; 
                                                   if(userIdData != 0){
-                                                  LikeJsn likePostData = await likeJsnFunc(userIdData, campaingId);
-                                                  print(likePostData.success);
+                                                  LikeJsn? likePostData = await likeJsnFunc(userIdData, campaingId!);
+                                                  print(likePostData!.success);
                                                   print(likePostData.result);
                                                   await homeDetailRefresh();
                                                   }
@@ -231,7 +244,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                     padding    : EdgeInsets.zero,
                                                     constraints: BoxConstraints(),
                                                     icon       : Icon(LineIcons.phone,
-                                                    color      : Theme.of(context).hintColor,
+                                                    color      : darkWhite,
                                                     size       : iconSize),
                                                     onPressed  : () async{  
                                                       dynamic number = companyPhone; // arama ekranına yönlendirme
@@ -246,12 +259,12 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                                     padding    : EdgeInsets.zero,
                                                     constraints: BoxConstraints(),
                                                     icon       : Icon(LineIcons.locationArrow,
-                                                    color      : Theme.of(context).hintColor,
+                                                    color      : darkWhite,
                                                     size       : iconSize),
                                                     onPressed  : () async{
                                                     final progressUHD = ProgressHUD.of(context);
-                                                    progressUHD.show();
-                                                    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: googleAdressLink)));
+                                                    progressUHD!.show();
+                                                    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=>WebViewWidget(locationUrl: googleAdressLink!)));
                                                     progressUHD.dismiss(); 
                                                   }),
                                             ),
@@ -260,18 +273,20 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         ),
                                         
                                       //-------------------------RANDEVU AL BUTONU----------------------------
+                                      homeDetailContent!.first.appointmentStatus == true ?
                                       Material(
                                       color: primaryColor,
                                       borderRadius: BorderRadius.circular(30.0),
                                       child: MaterialButton(
                                         minWidth: deviceWidth(context) * 0.4, //Buton minimum genişliği
-                                        onPressed: () async{
+                                        onPressed:
+                                         () async{
                                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                                           userIdData = prefs.getInt("userIdData");  
+                                           userIdData = prefs.getInt("userIdData")!;  
                                            if(userIdData != 0){                            
-                                            AppointmentObject appointment = AppointmentObject(companyId: companyId,userId: userIdData, companyNameS: companyName, campaignId: campaingId);
+                                            AppointmentObject appointment = AppointmentObject(companyId: companyId!,userId: userIdData, companyNameS: companyName!, campaignId: campaingId!);
                                             final progressHUD = ProgressHUD.of(context);
-                                            progressHUD.show(); 
+                                            progressHUD!.show(); 
                                             Navigator.push(context,MaterialPageRoute(builder: (context) => MakeAppointmentCalendarPage(appointment: appointment)));
                                             progressHUD.dismiss();
                                     
@@ -280,18 +295,20 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                            else{
                                               showNotMemberAlert(context);
                                            }
-                                        },
+                                        } ,
                                         child: Row(
                                           children: [
                                             //----------------------------Buton Metni------------------------------------------
-                                            Text("Randevu Al",style: Theme.of(context).textTheme.button.copyWith(color: white)),
+                                            Text("Randevu Al",style: Theme.of(context).textTheme.button!.copyWith(color: white)),
                                             //---------------------------------------------------------------------------------
                                             SizedBox(width: 10), //butondaki Text ve icon arası boşluk
-                                            Icon(LineIcons.arrowRight,color: lightWhite),
+                                            Icon(LineIcons.arrowRight,color: passivePurple),
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ): Container(
+                                      width:  deviceWidth(context) * 0.4,
+                                    ),
                                       ],
                                     ),
                                     SizedBox(height: maxSpace), // Alt Header ve beğeni metni arasındaki boşluk
@@ -300,9 +317,9 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         children: [
                                           Icon(Icons.favorite, // Beğeni İcon'ı
                                           size : iconSize,
-                                          color: Theme.of(context).hintColor),
+                                          color: darkWhite),
                                           SizedBox(width: minSpace),
-                                          Text("${homeDetailContent.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:Theme.of(context).hintColor)),
+                                          Text("${homeDetailContent!.first.likeCount} kişi tarafından beğenildi",style: TextStyle(color:darkWhite)),
                                           // counter ile gösterilecek beğeni sayısı
                                         ],
                                       ),
@@ -313,13 +330,13 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
                                         children: [
                                           Align(
                                             alignment: Alignment.bottomLeft,
-                                            child    : Text(contentTitle,
-                                            style    : TextStyle(fontSize: 22, color: Theme.of(context).hintColor),
+                                            child    : Text(contentTitle!,
+                                            style    : TextStyle(fontSize: 22, color: darkWhite),
                                             ),
                                           ),
                                           Align(
                                             alignment: Alignment.bottomLeft,
-                                            child: Html(data: homeDetailContent.first.campaingDetail)),//Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
+                                            child: Html(data: homeDetailContent!.first.campaingDetail)),//Text(homeDetailContent.first.campaingDetail, style: TextStyle(fontSize: 18, color: Theme.of(context).hintColor))),
                                         ],
                                       ),
                                     ),

@@ -6,10 +6,10 @@ import 'package:story_view/story_view.dart';
 
 class StoryWidget extends StatefulWidget {
   final dynamic company; //company list servisindeki id, companyName, companyLogo değişkenkleri
-  final PageController controller;
-  final int storyIndex; //company list servisindeki id değeri
-  final StoryContentJsn storyContent; // storyContentJsn servisindeki id, storyContentPicture,  storyContent değişkenkleri 
-  final int lastCompId;
+  final PageController? controller;
+  final int? storyIndex; //company list servisindeki id değeri
+  final StoryContentJsn? storyContent; // storyContentJsn servisindeki id, storyContentPicture,  storyContent değişkenkleri 
+  final int? lastCompId;
 
   const StoryWidget({
     @required this.company,
@@ -21,9 +21,9 @@ class StoryWidget extends StatefulWidget {
 }
 
 class _StoryWidgetState extends State<StoryWidget> {
-  StoryController controller;
-  int storyIndex;
-  int lastCompId;
+  StoryController? controller;
+  int? storyIndex;
+  int? lastCompId;
 
   _StoryWidgetState({this.storyIndex, this.lastCompId});
 
@@ -34,13 +34,13 @@ class _StoryWidgetState extends State<StoryWidget> {
 
 
   Future<List<StoryItem>> addStoryItems() async{ //storyItems listesine storyleri ekleyen fonk.
-  StoryContentJsn temp = await storyContentJsnFunc(widget.company.id);
-  List<dynamic>storyContent = temp.result;  
+  StoryContentJsn? temp = await storyContentJsnFunc(widget.company.id);
+  List<dynamic>storyContent = temp!.result!;  
         
   for (final itemS in storyContent) {    
         storyItems.add(StoryItem.pageImage(
         url: itemS.storyContentPicture,
-        controller: controller,
+        controller: controller!,
         caption: itemS.storyContent,
         duration: Duration(milliseconds: 5000),
       ));
@@ -57,12 +57,12 @@ class _StoryWidgetState extends State<StoryWidget> {
 
   @override
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 
   void handleCompleted() { // Story tamamlandığında olacakların fonk.
-      widget.controller.nextPage( // sonraki sayfa animasyonu
+      widget.controller!.nextPage( // sonraki sayfa animasyonu
       duration: Duration(milliseconds: 300),
       curve: Curves.easeIn,
     );
@@ -73,22 +73,22 @@ class _StoryWidgetState extends State<StoryWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Object>(
+    return FutureBuilder<List<StoryItem>>(
           future: addStoryItems(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(child: Text("Hata oluştu"),);
             }else if (snapshot.hasData) {
-              List<StoryItem> storyItems = snapshot.data;
+            List<StoryItem>? storyItems = snapshot.data;
             return Stack(
             children: <Widget>[
               Material(
                 type: MaterialType.transparency,
                 child: StoryView(
-                  storyItems: storyItems,
-                  controller: controller,
+                  storyItems: storyItems!,
+                  controller: controller!,
                   onComplete: handleCompleted,
-                  onVerticalSwipeComplete: (Direction direction) {
+                  onVerticalSwipeComplete: (Direction? direction) {
                     if ((direction == Direction.down) || (direction == Direction.up)) {
                       Navigator.pop(context);
                     }
@@ -110,13 +110,13 @@ class _StoryWidgetState extends State<StoryWidget> {
                       child: widget.company.companyLogo.isEmpty ?
                       circularBasic :
                       Image.network(widget.company.companyLogo ?? " ",
-                      loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                      loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) return child; // fotoğraf yüklenirken circular döndürme
                           return Center(
                           child: CircularProgressIndicator(
                           backgroundColor: primaryColor,valueColor: AlwaysStoppedAnimation<Color>(secondaryColor),
                           value: loadingProgress.expectedTotalBytes != null 
-                          ?  loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                          ?  loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
                           : null,
                         ));
                       }),

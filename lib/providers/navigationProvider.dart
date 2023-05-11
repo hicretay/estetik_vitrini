@@ -1,5 +1,6 @@
 import 'package:estetikvitrini/screens/favoritePage.dart';
 import 'package:estetikvitrini/screens/homePage.dart';
+import 'package:estetikvitrini/screens/likedCampaignPage.dart';
 import 'package:estetikvitrini/screens/loginPage.dart';
 import 'package:estetikvitrini/screens/registerPage.dart';
 import 'package:estetikvitrini/screens/reservationPage.dart';
@@ -19,7 +20,7 @@ const HOME_PAGE = 0;
 const FAVORITE_PAGE = 1;
 const RESERVATION_PAGE = 2;
 const SEARCH_PAGE = 3;
-const SETTINGS_PAGE = 4;
+const LIKED_PAGE = 4;
 
 
 class NavigationProvider extends ChangeNotifier {
@@ -52,7 +53,7 @@ class NavigationProvider extends ChangeNotifier {
       scrollController: ScrollController(),
       child: HomePage(),
       title: "",
-      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: iconCol),
+      icon: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: white),
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
         child: SvgPicture.asset("assets/icons/home.svg",height: 25,width: 25,color: primaryColor),
@@ -65,7 +66,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     FAVORITE_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/star.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -81,7 +82,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     RESERVATION_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/calendar.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -96,7 +97,7 @@ class NavigationProvider extends ChangeNotifier {
     ),
     SEARCH_PAGE: Screen(  
       scrollController: ScrollController(),  
-      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/search.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
@@ -109,26 +110,26 @@ class NavigationProvider extends ChangeNotifier {
             return MaterialPageRoute(builder: (_) => SearchPage());
       },
     ),
-    SETTINGS_PAGE: Screen(
+    LIKED_PAGE: Screen(
       scrollController: ScrollController(),
-      icon: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: iconCol),
+      icon: SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25, color: white),
       title: "",
       activeIcon: CircleAvatar(
         backgroundColor: secondaryColor,
-        child: SvgPicture.asset("assets/icons/settings.svg",height: 25,width: 25, color: primaryColor),
+        child: SvgPicture.asset("assets/icons/heart.svg",height: 25,width: 25, color: primaryColor),
       ),
       child: SettingsPage(),
       initialRoute: SettingsPage.route,
       navigatorState: GlobalKey<NavigatorState>(),
       onGenerateRoute: (_) {
-            return MaterialPageRoute(builder: (_) => SettingsPage());
+            return MaterialPageRoute(builder: (_) => LikedCampaignPage());
       },
     ),
   };
 
   List<Screen> get screens => _screens.values.toList();
 
-  Screen get currentScreen => _screens[_currentScreenIndex];
+  Screen? get currentScreen => _screens[_currentScreenIndex];
 
 //-----------------------Sayfa yönlendirme fonksiyonu---------------------
 //NavigationProvider.of(context).setTab(PAGENAME); şeklinde kullanılacak.
@@ -147,9 +148,10 @@ class NavigationProvider extends ChangeNotifier {
     void _scrollToStart() async{
     await Future.delayed(const Duration(milliseconds: 300));
     SchedulerBinding.instance?.addPostFrameCallback((_) {
-        if (currentScreen.scrollController != null) {
-        currentScreen.scrollController.animateTo(
-        currentScreen.scrollController.position.minScrollExtent,
+        // ignore: unnecessary_null_comparison
+        if (currentScreen!.scrollController != null) {
+        currentScreen!.scrollController.animateTo(
+        currentScreen!.scrollController.position.minScrollExtent,
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
       );
@@ -158,8 +160,8 @@ class NavigationProvider extends ChangeNotifier {
   }
 
   Future<bool> onWillPop(BuildContext context) async { 
-    final currentNavigatorState = currentScreen.navigatorState.currentState;
-    if (currentNavigatorState.canPop()) {
+    final currentNavigatorState = currentScreen!.navigatorState.currentState;
+    if (currentNavigatorState!.canPop()) {
       currentNavigatorState.pop();
       return false;
     } else {

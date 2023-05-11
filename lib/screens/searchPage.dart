@@ -1,18 +1,16 @@
 import 'package:estetikvitrini/JsnClass/companyListJsn.dart';
 import 'package:estetikvitrini/JsnClass/companyProfile.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/companyProfilePage.dart';
 import 'package:estetikvitrini/settings/consts.dart';
 import 'package:estetikvitrini/settings/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
    static const route = "searchPage";
-  SearchPage({Key key}) : super(key: key);
+  SearchPage({Key? key}) : super(key: key);
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -22,25 +20,25 @@ class _SearchPageState extends State<SearchPage> {
   List allCompanies = [];
   List selectedCompanies = [];
   bool isFirstTime = true;
-  FocusNode nodeFirst = FocusNode();
 
-   Future<CompanyListJsn> allCompaniesList() async{
-   final CompanyListJsn companyNewList = await companyListJsnFunc(); 
+   Future<CompanyListJsn?> allCompaniesList() async{
+   final CompanyListJsn? companyNewList = await companyListJsnFunc(); 
+   if(mounted)
    setState(() {
-      allCompanies = companyNewList.result;
+      allCompanies = companyNewList!.result!;
    });
    return companyNewList;
    }
 
-   @override
-   void initState() { 
-     super.initState();
-     allCompaniesList();    
-   }
+  //  @override
+  //  void initState() { 
+  //    super.initState();
+  //    allCompaniesList();    
+  //  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<CompanyListJsn>(
+    return FutureBuilder<CompanyListJsn?>(
       future: allCompaniesList(),
       builder: (context, snapshot) {
         if(snapshot.hasError){
@@ -59,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
               body: ProgressHUD(
                 child: Builder(builder: (context)=>
                   Container(
-                  color:  Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ?  secondaryColor: darkBg,
+                  color:  primaryColor,
                   child: Padding(
                     padding: EdgeInsets.only(top: deviceHeight(context)*0.03),
                     child: Column(
@@ -73,7 +71,6 @@ class _SearchPageState extends State<SearchPage> {
                                child: Row(
                                  children: [
                                   CircleAvatar(
-                                  //iconun çevresini saran yapı tasarımı
                                   maxRadius: 25,
                                   backgroundColor: Colors.transparent,
                                   child: IconButton(
@@ -144,9 +141,9 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.only(right: defaultPadding,left: defaultPadding, bottom: defaultPadding/2),
+                            padding: const EdgeInsets.only(right: maxSpace,left: maxSpace, bottom: maxSpace/2),
                             child: Container(
-                              decoration: BoxDecoration(color: lightWhite,borderRadius: BorderRadius.all(Radius.circular(20))),
+                              decoration: BoxDecoration(color: passivePurple,borderRadius: BorderRadius.all(Radius.circular(20))),
                               child: ListView.separated(
                                 padding: EdgeInsets.all(0),
                                 controller: NavigationProvider.of(context).screens[SEARCH_PAGE].scrollController, 
@@ -179,7 +176,7 @@ class _SearchPageState extends State<SearchPage> {
                                   image: NetworkImage(selectedCompanies.length == 0 ?
                                   allCompanies[index].companyLogo : selectedCompanies[index].companyLogo,
                                   ),
-                               ),
+                                ),
                               ),
                               ),
                         ),
@@ -193,7 +190,7 @@ class _SearchPageState extends State<SearchPage> {
                                   allCompanies[index].companyName : selectedCompanies[index].companyName,
                                   overflow: TextOverflow.fade,
                                   softWrap: false,
-                                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: primaryColor)
+                                  style: TextStyle(fontSize: 17, fontFamily: headerFont,color: darkWhite)
                               ),
                         ),
                       ],
@@ -203,9 +200,8 @@ class _SearchPageState extends State<SearchPage> {
                       ))),
                       onTap: ()async{
                         final progressUHD = ProgressHUD.of(context);
-                        progressUHD.show();
-                        final CompanyProfileJsn companyProfile = await companyListDetailJsnFunc(selectedCompanies[index].id);
-                        //Navigator.push(context, MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
+                        progressUHD!.show();
+                        final CompanyProfileJsn? companyProfile = await companyListDetailJsnFunc(selectedCompanies[index].id);
                         Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (context)=> CompanyProfilePage(companyProfile: companyProfile)));
                         progressUHD.dismiss();
                       },

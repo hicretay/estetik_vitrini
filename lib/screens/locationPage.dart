@@ -21,28 +21,28 @@ class LocationPage extends StatefulWidget{
 
 class _LocationPageState extends State<LocationPage> {
 
-  String selection;
+  String? selection;
   List cities = [];
   List counties = [];
   List checkedCounty = [];
   Map<dynamic,bool> countyMap = {};
-  int userIdData;
+  int? userIdData;
 
    Future cityList() async{
-   final CityJsn cityNewList = await cityJsnFunc(); 
+   final CityJsn? cityNewList = await cityJsnFunc(); 
    if (!mounted)
    return;
    setState(() {
-      cities = cityNewList.result;
+      cities = cityNewList!.result!;
    });
  }
    
    Future countyList() async{
-   final CountyJsn countiesNewList = await countyJsnFunc(selection ==null ? "İSTANBUL" : selection); 
+   final CountyJsn? countiesNewList = await countyJsnFunc(selection == null ? "İSTANBUL" : selection!); 
    if (!mounted)
    return;
    setState(() {     
-      counties = countiesNewList.result;
+      counties = countiesNewList!.result!;
       for (var temp in counties) {
         Map<dynamic,bool> newItem = {temp:false};
         countyMap.addEntries(newItem.entries);
@@ -71,7 +71,6 @@ class _LocationPageState extends State<LocationPage> {
         body  : ProgressHUD(
           child: Builder(builder: (context)=>
             BackGroundContainer(
-            colors: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? backGroundColor1 : backGroundColorDark,
             child : Column(
                 children: [
                   Padding(padding: const EdgeInsets.all(defaultPadding),
@@ -105,10 +104,10 @@ class _LocationPageState extends State<LocationPage> {
                                   ),
                                 ),
                                 SizedBox(width: maxSpace),
-                                Text("Estetik Vitrini",
+                                Text("estetik vitrini",
                                 style     : TextStyle(
                                 fontFamily: leadingFont, 
-                                fontSize  : 25, 
+                                fontSize  : 30, 
                                 color     : Colors.white),
                                 ),
                               ],
@@ -120,10 +119,10 @@ class _LocationPageState extends State<LocationPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Favori\nBölgeler", //Büyük Başlık
+                              Text("Favori Bölgeler", //Büyük Başlık
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline4
+                                    .headline3!
                                     .copyWith(color: white, fontFamily: leadingFont),
                                 maxLines: 2,
                               ),
@@ -146,7 +145,7 @@ class _LocationPageState extends State<LocationPage> {
                           child: Text("Lütfen en az bir tane bölge seçiniz.", // Alt Başlık
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle1
+                                .subtitle1!
                                 .copyWith(color: white),
                           ),
                         ),
@@ -159,7 +158,7 @@ class _LocationPageState extends State<LocationPage> {
                     child: Container(
                       // arkaplan containerı
                       decoration: BoxDecoration(
-                        color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? lightWhite : darkBg,
+                        color: Provider.of<ThemeDataProvider>(context, listen: true).isLightTheme ? passivePurple : darkBg,
                         borderRadius: BorderRadius.vertical( top: Radius.circular(maxSpace)),
                           //dikeyde yuvarlatılmış
                       ),
@@ -214,7 +213,7 @@ class _LocationPageState extends State<LocationPage> {
                                        setState(() {
                                          countyMap.clear();
                                          counties.clear();
-                                         selection = value;
+                                         selection = value as String?;
                                        });
                                        },
                                ),
@@ -295,7 +294,7 @@ class _LocationPageState extends State<LocationPage> {
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                                color: lightWhite,
+                                                color: passivePurple,
                                                 width: 4.5 ),// mor dairenin genişliği
                                           ),
                                         ),

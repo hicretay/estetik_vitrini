@@ -3,45 +3,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  final String hintText;
-  final TextEditingController textEditingController;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final List<TextInputFormatter> inputFormatters;
-  final String Function(String) validator;
+  final String? hintText;
+  final TextEditingController? textEditingController;
+  final TextInputType? keyboardType;
+  final bool? obscureText;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
+  final VoidCallback? onTap;
 
   const TextFieldWidget({
-    Key key,
+    Key? key,
     this.hintText,
     this.textEditingController,
     this.keyboardType,
     this.obscureText, 
     this.inputFormatters,
-    this.validator
+    this.validator, 
+    this.onTap
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: maxSpace,right: maxSpace,left: maxSpace),
+      padding: const EdgeInsets.only(top: minSpace,right: maxSpace,left: maxSpace),
       child: Container(
         height: deviceHeight(context)*0.07,
         width: deviceWidth(context),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: validator,
+          onTap: onTap,
           inputFormatters: inputFormatters,
           obscuringCharacter: "*",
           controller: textEditingController,
           keyboardType: keyboardType,
-          obscureText: obscureText,
+          obscureText: obscureText!,
           cursorColor: primaryColor,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(maxSpace),
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(cardCurved),
+              borderRadius: BorderRadius.circular(maxSpace),
             ),
             hintText: hintText,
             hintStyle: TextStyle(
@@ -49,7 +51,7 @@ class TextFieldWidget extends StatelessWidget {
               fontSize: 17,
               fontFamily: contentFont
             ),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(cardCurved)),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color:secondaryColor),borderRadius: BorderRadius.circular(maxSpace)),
           ),
         ),
       ),
