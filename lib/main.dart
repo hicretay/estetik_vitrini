@@ -1,10 +1,11 @@
-import 'package:estetikvitrini/providers/themeDataProvider.dart';
 import 'package:estetikvitrini/screens/splashPage.dart';
 import 'package:estetikvitrini/providers/navigationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+
+import 'providers/themeDataProvider.dart';
 
 Future main() async{ 
   WidgetsFlutterBinding.ensureInitialized(); // main de runApp'ten önce işlem yapılabilmesini sağlar
